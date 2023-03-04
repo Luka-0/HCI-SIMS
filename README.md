@@ -1,2 +1,2 @@
 # HCI-SIMS
-With power of friendship everything is possible!
+With power of friendship, everything is possible!
