@@ -5,7 +5,6 @@ using InitialProject.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using InitialProject.Data;
 
 namespace InitialProject
 {
@@ -70,9 +69,11 @@ namespace InitialProject
 
             switch (user.Type)
             {
-                case UserType.Korisnik:MessageBox.Show("Ulogovan korisnik!");
+                case UserType.Guest1:MessageBox.Show("Ulogovan korisnik1!");
                     break;
-                case UserType.Vodic: MessageBox.Show("Ulogovan vodic!");
+                case UserType.Guest2: MessageBox.Show("Ulogovan korisnik2!");
+                    break;
+                case UserType.Guide: MessageBox.Show("Ulogovan vodic!");
                     break;
                 case UserType.Admin: MessageBox.Show("Ulogovan admin!");
                     break;

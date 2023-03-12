@@ -2,7 +2,8 @@
 
 public enum UserType
 {
-    Guest,
+    Guest1,
+    Guest2,
     Guide,
     Admin
 }
