@@ -1,4 +1,5 @@
-﻿using InitialProject.Serializer;
+﻿using InitialProject.Enumeration;
+using InitialProject.Serializer;
 using System;
 
 namespace InitialProject.Model

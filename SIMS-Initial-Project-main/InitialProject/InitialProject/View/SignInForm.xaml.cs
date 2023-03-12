@@ -5,6 +5,7 @@ using InitialProject.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using InitialProject.Enumeration;
 
 namespace InitialProject
 {
@@ -69,15 +70,39 @@ namespace InitialProject
 
             switch (user.Type)
             {
-                case UserType.Guest1:MessageBox.Show("Ulogovan korisnik1!");
-                    break;
-                case UserType.Guest2: MessageBox.Show("Ulogovan korisnik2!");
-                    break;
-                case UserType.Guide: MessageBox.Show("Ulogovan vodic!");
-                    break;
-                case UserType.Admin: MessageBox.Show("Ulogovan admin!");
-                    break;
-                default: MessageBox.Show("Kuc kuc ko je!");
+                case UserType.Guest1:
+                    {
+                        if (user.Password == txtPassword.Password)
+                        {
+                            MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
+                        }
+                        break;
+                    }
+                case UserType.Guest2:
+                    {
+                        if (user.Password == txtPassword.Password)
+                        {
+                            MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
+                        }
+                        break;
+                    }
+                case UserType.Guide:
+                    {
+                        if (user.Password == txtPassword.Password)
+                        {
+                            MessageBox.Show("Guide: " + user.Username + " is  logged in.");
+                        }
+                        break;
+                    }
+                case UserType.Owner:
+                    {
+                        if (user.Password == txtPassword.Password)
+                        {
+                            MessageBox.Show("Owner: " + user.Username + " is  logged in.");
+                        }
+                        break;
+                    }
+                default: MessageBox.Show("Unexpected user type!");
                     break;
             }
         }
