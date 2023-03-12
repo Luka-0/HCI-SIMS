@@ -57,6 +57,46 @@ namespace InitialProject
                     CommentsOverview commentsOverview = new CommentsOverview(user);
                     commentsOverview.Show();
                     Close();
+
+                    switch (user.Type)
+                    {
+                        case UserType.Guest1:
+                            {
+                                if (user.Password == txtPassword.Password)
+                                {
+                                    MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
+                                }
+                                break;
+                            }
+                        case UserType.Guest2:
+                            {
+                                if (user.Password == txtPassword.Password)
+                                {
+                                    MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
+                                }
+                                break;
+                            }
+                        case UserType.Guide:
+                            {
+                                if (user.Password == txtPassword.Password)
+                                {
+                                    MessageBox.Show("Guide: " + user.Username + " is  logged in.");
+                                }
+                                break;
+                            }
+                        case UserType.Owner:
+                            {
+                                if (user.Password == txtPassword.Password)
+                                {
+                                    MessageBox.Show("Owner: " + user.Username + " is  logged in.");
+                                }
+                                break;
+                            }
+                        default:
+                            MessageBox.Show("Unexpected user type!");
+                            break;
+                    }
+
                 } 
                 else
                 {
@@ -66,45 +106,7 @@ namespace InitialProject
             else
             {
                 MessageBox.Show("Wrong username!");
-            }
-
-            switch (user.Type)
-            {
-                case UserType.Guest1:
-                    {
-                        if (user.Password == txtPassword.Password)
-                        {
-                            MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
-                        }
-                        break;
-                    }
-                case UserType.Guest2:
-                    {
-                        if (user.Password == txtPassword.Password)
-                        {
-                            MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
-                        }
-                        break;
-                    }
-                case UserType.Guide:
-                    {
-                        if (user.Password == txtPassword.Password)
-                        {
-                            MessageBox.Show("Guide: " + user.Username + " is  logged in.");
-                        }
-                        break;
-                    }
-                case UserType.Owner:
-                    {
-                        if (user.Password == txtPassword.Password)
-                        {
-                            MessageBox.Show("Owner: " + user.Username + " is  logged in.");
-                        }
-                        break;
-                    }
-                default: MessageBox.Show("Unexpected user type!");
-                    break;
-            }
+            }   
         }
 
         private void Create(object sender, RoutedEventArgs e)
