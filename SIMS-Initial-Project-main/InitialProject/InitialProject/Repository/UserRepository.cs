@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Serializer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +24,28 @@ namespace InitialProject.Repository
         {
             _users = _serializer.FromCSV(FilePath);
             return _users.FirstOrDefault(u => u.Username == username);
+        }
+        public static void AddUserToDbl(User user)
+        {
+            using var db = new UserContext();
+            db.Add(user);
+            db.SaveChanges();
+        }
+
+        public static User getUser(String username)
+        {
+            using (var db = new UserContext())
+            {
+                foreach (User user in db.users)
+                {
+                    if (user.Username == username)
+                    {
+                        return user;
+                    }
+                }
+
+            }
+            return null;
         }
     }
 }

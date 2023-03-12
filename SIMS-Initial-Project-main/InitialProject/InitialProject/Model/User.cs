@@ -9,10 +9,16 @@ namespace InitialProject.Model
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public User() { }
+        public UserType Type { get; set; }
+        public User()
+        {
+            Username = "default";
+            Password = "default";
+            Type = 0;
+        }
 
         public User(string username, string password)
-        {
+        {   
             Username = username;
             Password = password;
         }
