@@ -12,13 +12,12 @@ namespace InitialProject.Contexts
     {
         public DbSet<User> users { get; set; }
 
-        //public string path = @"C:\Users\Pavle\Desktop\simsoni\SIMS-Initial-Project-main\InitialProject\InitialProject\DemoDB.db";
 
         //Pavle:
-        public string path = @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\BazaSaUlogama.db";
+        public string path = @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database.db";
 
         //Aleksandra:
-        //public string path = @" F:\SIMS - PROJEKAT\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\BazaSaUlogama.db";
+        //public string path = @" F:\SIMS - PROJEKAT\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database.db";
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite($"Data Source={path}");
 
     }
