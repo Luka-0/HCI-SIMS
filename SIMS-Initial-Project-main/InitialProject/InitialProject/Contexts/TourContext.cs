@@ -8,8 +8,12 @@ namespace InitialProject.Contexts
         public DbSet<User> tours { get; set; }
 
         //public string path = @"C:\Users\Pavle\Desktop\simsoni\SIMS-Initial-Project-main\InitialProject\InitialProject\DemoDB.db";
+        //public string path =
+        //    @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Tour.db";
+
+        //Pele
         public string path =
-            @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Tour.db";
+            @"E:\JobGitRepos\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Tour.db";
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) =>
             options.UseSqlite($"Data Source={path}");
