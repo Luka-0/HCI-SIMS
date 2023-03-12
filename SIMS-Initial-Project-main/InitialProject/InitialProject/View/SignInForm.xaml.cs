@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using InitialProject.Enumeration;
+using InitialProject.View;
 
 namespace InitialProject
 {
@@ -56,7 +57,7 @@ namespace InitialProject
                 {
                     CommentsOverview commentsOverview = new CommentsOverview(user);
                     commentsOverview.Show();
-                    Close();
+                    Close(); //this.close();
 
                     switch (user.Type)
                     {
@@ -88,6 +89,12 @@ namespace InitialProject
                             {
                                 if (user.Password == txtPassword.Password)
                                 {
+                                    OwnerView ownerWindow = new OwnerView();
+
+                                    //this.Hide();
+
+                                    ownerWindow.Show();
+
                                     MessageBox.Show("Owner: " + user.Username + " is  logged in.");
                                 }
                                 break;
