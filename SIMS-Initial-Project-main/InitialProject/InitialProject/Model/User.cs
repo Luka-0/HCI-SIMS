@@ -35,5 +35,6 @@ namespace InitialProject.Model
             Username = values[1];
             Password = values[2];
         }
+
     }
 }
