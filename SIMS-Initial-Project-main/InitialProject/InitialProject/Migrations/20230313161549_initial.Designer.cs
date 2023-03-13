@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230313161549_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -47,74 +49,23 @@ namespace InitialProject.Migrations
                     b.ToTable("Accommodation");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.AccommodationReservation", b =>
+            modelBuilder.Entity("InitialProject.Model.Image", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ImageId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("AccommodationId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("BegginingDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("EndingDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("GuestId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("GuestNumber")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccommodationId");
-
-                    b.HasIndex("GuestId");
-
-                    b.ToTable("AccommodationReservation");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.GuestGrade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Obedience")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Tidiness")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GuestGrade");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("AccommodationId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("TourId")
+                    b.Property<int>("TourId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("ImageId");
 
                     b.HasIndex("AccommodationId");
 
@@ -224,37 +175,22 @@ namespace InitialProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.AccommodationReservation", b =>
-                {
-                    b.HasOne("InitialProject.Model.Accommodation", "Accommodation")
-                        .WithMany()
-                        .HasForeignKey("AccommodationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InitialProject.Model.User", "Guest")
-                        .WithMany()
-                        .HasForeignKey("GuestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Accommodation");
-
-                    b.Navigation("Guest");
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Image", b =>
                 {
                     b.HasOne("InitialProject.Model.Accommodation", "Accommodation")
                         .WithMany("images")
-                        .HasForeignKey("AccommodationId");
+                        .HasForeignKey("AccommodationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("InitialProject.Model.Tour", "Tour")
                         .WithMany("images")
-                        .HasForeignKey("TourId");
+                        .HasForeignKey("TourId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Accommodation");
 

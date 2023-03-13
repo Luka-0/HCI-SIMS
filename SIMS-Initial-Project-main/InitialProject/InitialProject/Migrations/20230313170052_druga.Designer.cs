@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230313170052_druga")]
+    partial class druga
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -53,26 +55,16 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AccommodationId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("BegginingDate")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("EndingDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("GuestId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("GuestNumber")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccommodationId");
-
-                    b.HasIndex("GuestId");
 
                     b.ToTable("AccommodationReservation");
                 });
@@ -225,25 +217,6 @@ namespace InitialProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.AccommodationReservation", b =>
-                {
-                    b.HasOne("InitialProject.Model.Accommodation", "Accommodation")
-                        .WithMany()
-                        .HasForeignKey("AccommodationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InitialProject.Model.User", "Guest")
-                        .WithMany()
-                        .HasForeignKey("GuestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Accommodation");
-
-                    b.Navigation("Guest");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Image", b =>

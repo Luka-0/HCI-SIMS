@@ -8,20 +8,24 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    [Table("Image")]
-    public class Image
+    [Table("GuestGrade")]
+    public class GuestGrade
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
-        public string Url { get; set; }
 
-        [ForeignKey("AccommodationId")]
-        public Accommodation? Accommodation { get; set; }
+        //For cistoca
+        [Range(1, 5)]
+        public int Tidiness { get; set; }
 
-        [ForeignKey("TourId")]
-        public Tour? Tour { get; set; }
+        //For postovanje pravila
+        [Range(1, 5)]
+        public int Obedience { get; set; }
+
+
+        public String Comment { get; set; }
+
 
     }
 }

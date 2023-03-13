@@ -11,7 +11,18 @@ namespace InitialProject.Contexts
     public class UserContext : DbContext
     {
         public DbSet<User> users { get; set; }
+        public DbSet<Location> location { get; set; }
+        public DbSet<Tour> tour { get; set; }
 
+        public DbSet<Accommodation> accommodation { get; set; }
+
+        public DbSet<Image> image { get; set; }
+
+        public DbSet<GuestGrade> guestGrade { get; set; }
+
+
+
+        public DbSet<AccommodationReservation> accommodationReservation { get; set; }
 
         //Pavle:
         //public string path = @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database.db";
@@ -23,8 +34,8 @@ namespace InitialProject.Contexts
         //public string path = @"C:\Users\Luka stajic\Documents\Projekat SiMS-HCI\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database.db";
 
 
-       //Pele:
-        public string path = @" E:\JobGitRepos\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database.db";
+        //Pele:
+        public string path = @" E:\JobGitRepos\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite($"Data Source={path}");
 

@@ -1,19 +1,26 @@
 ﻿using InitialProject.Enumeration;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InitialProject.Model
 {
+    [Table("Accommodation")]
     public class Accommodation
     {
-        //[Key]?
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        String Title { get; set; }
-        int GuestLimit { get; set; }
-        AccommodationType Type { get; set; }
-        int MinimumReservationDays { get; set; }
-        int CancellationDeadline { get; set; }
-        bool Available { get; set; }
+        public String Title { get; set; }
+        public int GuestLimit { get; set; }
+        public AccommodationType Type { get; set; }
+        public int MinimumReservationDays { get; set; }
+        public int CancellationDeadline { get; set; }
+        public bool Available { get; set; }
+
+        //Images are in Image table
+        public List<Image> images { get; set; }
 
         public Accommodation()
         {
