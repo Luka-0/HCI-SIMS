@@ -12,6 +12,8 @@ namespace InitialProject.Contexts
     {
         public DbSet<User> users { get; set; }
 
+        public DbSet<Accommodation> accommodation { get; set; }
+
 
         //Pavle:
         //public string path = @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database.db";
