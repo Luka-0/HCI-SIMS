@@ -123,7 +123,7 @@ namespace InitialProject
             user.Username = Username;
         
 
-            UserRepository.AddUserToDbl(user);
+            //UserRepository.AddUserToDbl(user);
         }
     }
 }

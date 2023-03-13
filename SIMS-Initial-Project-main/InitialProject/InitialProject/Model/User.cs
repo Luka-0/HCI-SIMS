@@ -1,11 +1,16 @@
 ﻿using InitialProject.Enumeration;
 using InitialProject.Serializer;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InitialProject.Model
 {
+    [Table("User")]
     public class User : ISerializable
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }

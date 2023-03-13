@@ -7,6 +7,7 @@ using InitialProject.Contexts;
 
 namespace InitialProject.Repository
 {
+    /*
     public class UserRepository
     {
         private const string FilePath = "../../../Resources/Data/users.csv";
@@ -49,4 +50,45 @@ namespace InitialProject.Repository
             return null;
         }
     }
+    */
+
+
+    public class UserRepository
+    {
+        public UserRepository() { }
+
+        public static User getUser(String username)
+        {
+            using (var db = new UserContext())
+            {
+                foreach (User user in db.users)
+                {
+                    if (user.Username == username)
+                    {
+                        return user;
+                    }
+                }
+
+            }
+            return null;
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
