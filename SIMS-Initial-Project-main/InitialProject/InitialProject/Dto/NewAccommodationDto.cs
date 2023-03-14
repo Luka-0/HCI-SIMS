@@ -20,7 +20,9 @@ namespace InitialProject.Dto
 
         public string CityName { get; set; }
 
-        public NewAccommodationDto(string title, int guestNumber, AccommodationType type, int minReservationDays, int cancellationDeadline, string city) { 
+        public List<String> Images { get; set; }
+
+        public NewAccommodationDto(string title, int guestNumber, AccommodationType type, int minReservationDays, int cancellationDeadline, string city, List<String> urls) { 
            
             Title = title;
             GuestLimit = guestNumber;
@@ -28,6 +30,7 @@ namespace InitialProject.Dto
             MinimumReservationDays = minReservationDays;
             CancellationDeadline = cancellationDeadline;
             CityName = city;
+            Images = urls;
         }
 
     }

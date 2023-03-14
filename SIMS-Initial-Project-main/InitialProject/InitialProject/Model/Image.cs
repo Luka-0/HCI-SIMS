@@ -23,5 +23,10 @@ namespace InitialProject.Model
         [ForeignKey("TourId")]
         public Tour? Tour { get; set; }
 
+        public Image(string url) {
+
+            this.Url = url;
+        }
+
     }
 }

@@ -13,16 +13,20 @@ namespace InitialProject.Service
 {
     class AccommodationServicecs
     {
-        public static void Save(NewAccommodationDto accommodationDto)
+        public static void Save(NewAccommodationDto record)
         {
-            Accommodation accommodation = new Accommodation(accommodationDto.Title, accommodationDto.GuestLimit, accommodationDto.Type, accommodationDto.MinimumReservationDays, accommodationDto.CancellationDeadline);
-            
+            //Saving new accommodation into databse
+            Accommodation accommodation = new Accommodation(record.Title, record.GuestLimit, record.Type, record.MinimumReservationDays, record.CancellationDeadline);
             AccommodationRepository.Save(accommodation);
 
             var db = new UserContext();
-            var tempRecord = db.accommodation.Find(accommodation.Id);
+            var tempRecord = db.accommodation.Find(accommodation.Id);   //Try creating method in Accommodation repository to return the same thing
 
-            tempRecord.Location = LocationRepository.getBy(accommodationDto.CityName);
+            //Updating foreign key value of new accommodation record
+            tempRecord.Location = LocationService.getBy(record.CityName);
+            
+            //saving all images refered to new accommodation.
+            ImageService.Save(record.Images, accommodation);
 
             db.SaveChanges();
         }

@@ -7,6 +7,7 @@ using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -48,10 +49,23 @@ namespace InitialProject.View
             string selectedLocation = locationPicker.SelectedItem.ToString();
             string cityName = SeparateCity(selectedLocation);
 
-            //Prepareing DTO for service
-            NewAccommodationDto accommodationDto = new NewAccommodationDto(title.Text, guestNumber, type, minReservationDays, cancellationDeadline, cityName);
-            //Passing DTO to be saved in the database
-            AccommodationServicecs.Save(accommodationDto);
+            List<String> imageUrls = Copy(urls.Items);
+
+            //Prepareing DTO for service, to be saved in the database
+            NewAccommodationDto record = new NewAccommodationDto(title.Text, guestNumber, type, minReservationDays, cancellationDeadline, cityName, imageUrls);
+            AccommodationServicecs.Save(record);
+        }
+
+        private List<string> Copy(ItemCollection urls)
+        {
+            List<String> imageUrls = new List<String>();
+
+            foreach (var url in urls) {
+
+                imageUrls.Add(url.ToString());
+            }
+
+            return imageUrls;
         }
 
         public void InitializeAccommodationType()
@@ -109,7 +123,8 @@ namespace InitialProject.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            List<Location> locations = LocationRepository.getAll();
+            List<Location> locations = LocationService.getAll();
+
             bool alreadyExists = false;
 
             foreach (Location l in locations)
@@ -125,13 +140,18 @@ namespace InitialProject.View
             }
             else {
 
-             Location location = new Location(city.Text, country.Text);
-             LocationRepository.Save(location);
+             NewLocationDto location = new NewLocationDto(city.Text, country.Text);
+             LocationService.Save(location);
 
              locationPicker.Items.Clear();
              InitializeLocationPicker();     
             }
 
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            urls.Items.Add(url.Text);
         }
     }
 }

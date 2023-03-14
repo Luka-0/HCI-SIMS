@@ -32,11 +32,11 @@
             </Label.RenderTransform>
         </Label>
         <TextBox x:Name="suspensionDays" HorizontalAlignment="Left" Height="42" Margin="675,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" FontSize="24"/>
-        <TextBox HorizontalAlignment="Left" Height="36" Margin="246,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="374" FontSize="24"/>
+        <TextBox x:Name="url" HorizontalAlignment="Left" Height="36" Margin="246,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="374" FontSize="24"/>
         <Label Content="Image URL: " HorizontalAlignment="Left" Height="53" Margin="20,374,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
         <Button Content="create" HorizontalAlignment="Left" Height="44" Margin="246,499,0,0" VerticalAlignment="Top" Width="734" FontSize="25" Click="Button_Click"/>
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="813,35,6,260"/>
-        <Button Content="add to list" HorizontalAlignment="Left" Height="35" Margin="642,381,0,0" VerticalAlignment="Top" Width="132" FontSize="20"/>
+        <ListBox x:Name="urls" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="813,35,6,260"/>
+        <Button Content="add to list" HorizontalAlignment="Left" Height="35" Margin="642,381,0,0" VerticalAlignment="Top" Width="132" FontSize="20" Click="Button_Click_2"/>
         <Label Content="Added URLs: " HorizontalAlignment="Left" Height="39" Margin="809,-2,0,0" VerticalAlignment="Top" Width="171" FontSize="20"/>
         <Button Content="add" HorizontalAlignment="Left" Height="42" Margin="700,118,0,0" VerticalAlignment="Top" Width="81" FontSize="24" Click="Button_Click_1"/>
         <TextBox x:Name="city" HorizontalAlignment="Left" Height="42" Margin="246,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="155" FontSize="20"/>
