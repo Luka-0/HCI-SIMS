@@ -4,7 +4,7 @@ namespace InitialProject.Enumeration
 {
     public enum AccommodationType
     {
-        Accommodation,
+        Apartment,
         House,
         Cottage,
     }

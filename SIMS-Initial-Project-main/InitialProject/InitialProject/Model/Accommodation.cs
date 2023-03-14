@@ -29,31 +29,23 @@ namespace InitialProject.Model
 
         public Accommodation()
         {
-            Title = "debugingTest";
-            CancellationDeadline = 1;
-            MinimumReservationDays = 1;
-            Type = AccommodationType.House;
-            GuestLimit = 1;
-            Available = true;
-           // this.Location = new Location("Beograd", "Serbia"); //postoji u bazi
-          //  this.Location = AccommodationRepository.getBy("Beograd");
-            // this.Location = new Location();
-           // this.Location.Id = 1;
-          //  this.Location.Country = "Serbia";
-         //   this.Location.City = "Subotica";
+            this.Title = "";
+            this.CancellationDeadline = 1;
+            this.MinimumReservationDays = 1;
+            this.Type = AccommodationType.House;
+            this.GuestLimit = 1;
+            this.Available = true;
         }
 
         
-
         public Accommodation(String title, int guestLimit, AccommodationType type, int minimumReservationDays, int cancellationDeadline)
         {
-            CancellationDeadline = 1;
-
-            Type = type;
-            MinimumReservationDays = minimumReservationDays;
-            CancellationDeadline = cancellationDeadline;
-            Title = title;
-            Available = true;
+            this.Title = title;
+            this.GuestLimit = guestLimit;
+            this.Type = type;
+            this.MinimumReservationDays = minimumReservationDays;
+            this.CancellationDeadline = cancellationDeadline;
+            this.Available = true;
 
         }
 

@@ -9,17 +9,16 @@
       Title="CreateAccommodationView">
 
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="33" Margin="246,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="542" FontSize="24"/>
+        <TextBox x:Name="title" HorizontalAlignment="Left" Height="33" Margin="246,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="542" FontSize="24"/>
         <Label Content="Title: " HorizontalAlignment="Left" Height="39" Margin="10,1,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
         <Label Content="Location: " HorizontalAlignment="Left" Height="39" Margin="10,57,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
         <Label Content="Guest Limit: " HorizontalAlignment="Left" Height="39" Margin="10,110,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
-        <ComboBox Name ="State" HorizontalAlignment="Left" Margin="246,58,0,0" VerticalAlignment="Top" Width="266" Height="39"/>
-        <ComboBox Name ="City" HorizontalAlignment="Left" Margin="533,58,0,0" VerticalAlignment="Top" Width="255" Height="39"/>
-        <TextBox HorizontalAlignment="Left" Height="33" Margin="246,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="542" FontSize="24"/>
-        <ComboBox HorizontalAlignment="Left" Margin="246,169,0,0" VerticalAlignment="Top" Width="542" Height="34"/>
+        <ComboBox x:Name ="locationPicker" HorizontalAlignment="Left" Margin="246,58,0,0" VerticalAlignment="Top" Width="542" Height="39" FontSize="21"/>
+        <TextBox x:Name="guestLimit" HorizontalAlignment="Left" Height="33" Margin="246,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="542" FontSize="24"/>
+        <ComboBox x:Name="typePicker" HorizontalAlignment="Left" Margin="246,169,0,0" VerticalAlignment="Top" Width="542" Height="34"  FontSize="21"/>
         <Label Content="Type: " HorizontalAlignment="Left" Height="48" Margin="10,168,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
         <Label Content="Minimal Duration: " HorizontalAlignment="Left" Height="53" Margin="10,223,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
-        <TextBox HorizontalAlignment="Left" Height="42" Margin="246,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119" FontSize="24"/>
+        <TextBox x:Name="minDuration" HorizontalAlignment="Left" Height="42" Margin="246,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119" FontSize="24"/>
         <Label Content="Cancellation Deadline:" HorizontalAlignment="Left" Height="52" Margin="397,223,0,0" VerticalAlignment="Top" Width="268" FontSize="26" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
@@ -30,7 +29,7 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <TextBox HorizontalAlignment="Left" Height="42" Margin="675,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" FontSize="24"/>
+        <TextBox x:Name="suspensionDays" HorizontalAlignment="Left" Height="42" Margin="675,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" FontSize="24"/>
         <TextBox HorizontalAlignment="Left" Height="36" Margin="246,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="374" FontSize="24"/>
         <Label Content="Image URL: " HorizontalAlignment="Left" Height="53" Margin="10,298,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
         <Button Content="create" HorizontalAlignment="Left" Height="44" Margin="246,437,0,0" VerticalAlignment="Top" Width="734" FontSize="25" Click="Button_Click"/>
