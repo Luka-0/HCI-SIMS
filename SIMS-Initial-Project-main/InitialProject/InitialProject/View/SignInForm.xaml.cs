@@ -89,11 +89,11 @@ namespace InitialProject
                             {
                                 if (user.Password == txtPassword.Password)
                                 {
-                                    OwnerView ownerWindow = new OwnerView();
+                                    Owner owner = new Owner();
 
                                     //this.Hide();
 
-                                    ownerWindow.Show();
+                                    owner.Show();
 
                                     MessageBox.Show("Owner: " + user.Username + " is  logged in.");
                                 }

@@ -38,5 +38,13 @@ namespace InitialProject.Repository
             }
             return locations;
         }
+
+        public static void Save(Location location)
+        {
+            using var db = new UserContext();
+
+            db.Add(location);
+            db.SaveChanges();
+        }
     }
 }

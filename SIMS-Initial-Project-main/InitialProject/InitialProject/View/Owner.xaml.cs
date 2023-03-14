@@ -10,19 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace InitialProject.View
 {
     /// <summary>
-    /// Interaction logic for RateGuestsView.xaml
+    /// Interaction logic for OwnerView.xaml
     /// </summary>
-    public partial class RateGuestsView : Page
+    public partial class Owner : Window
     {
-        public RateGuestsView()
+        public Owner()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new AccommodationRegister();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new GuestReview();
         }
     }
 }

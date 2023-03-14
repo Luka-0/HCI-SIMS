@@ -22,9 +22,9 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for CreateAccommodationView.xaml
     /// </summary>
-    public partial class CreateAccommodationView : Page
+    public partial class AccommodationRegister : Page
     {
-        public CreateAccommodationView()
+        public AccommodationRegister()
         {
             InitializeComponent();
 
@@ -111,6 +111,33 @@ namespace InitialProject.View
             string cityName = locationParts[1];
 
             return cityName;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            List<Location> locations = LocationRepository.getAll();
+            bool alreadyExists = false;
+
+            foreach (Location l in locations)
+            {
+                if (city.Text.Equals(l.City)) {
+                    alreadyExists = true;
+                }
+            }
+
+            if (alreadyExists) {
+
+                MessageBox.Show("Location already exists.\nTry to find it in the drop-down menu again.");
+            }
+            else {
+
+                Location location = new Location(city.Text, country.Text);
+                LocationRepository.Save(location);
+
+                locationPicker.Items.Clear();
+                InitializeLocationPicker();     
+            }
+
         }
     }
 }
