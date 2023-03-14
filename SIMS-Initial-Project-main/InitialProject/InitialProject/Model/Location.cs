@@ -17,6 +17,6 @@ namespace InitialProject.Model
         [Required]
         public string City { get; set; }
         [Required]
-        public string Contry { get; set;  }
+        public string Country { get; set;  }
     }
 }

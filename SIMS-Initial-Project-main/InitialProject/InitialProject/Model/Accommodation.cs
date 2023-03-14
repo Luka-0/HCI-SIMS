@@ -19,6 +19,10 @@ namespace InitialProject.Model
         public int CancellationDeadline { get; set; }
         public bool Available { get; set; }
 
+        //changes
+        [ForeignKey("locationID")]
+        public Location? Location { get; set; }
+
         //Images are in Image table
         public List<Image> images { get; set; }
 
