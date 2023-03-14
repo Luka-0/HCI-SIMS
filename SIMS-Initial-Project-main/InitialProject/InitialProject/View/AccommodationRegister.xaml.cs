@@ -1,7 +1,9 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Dto;
 using InitialProject.Enumeration;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,23 +43,15 @@ namespace InitialProject.View
             int minReservationDays = Int32.Parse(minDuration.Text);
             int cancellationDeadline = Int32.Parse(suspensionDays.Text);
 
-            //creating new accommodation instance and saving it into the database
-            Accommodation record = new Accommodation(title.Text, guestNumber, type, minReservationDays, cancellationDeadline);
-            AccommodationRepository.Save(record);
-
-            //finding the name of selected city from owner's GUI
+            //calling method for finding the name of selected city
+            //from owner's GUI fro Accommodation's location
             string selectedLocation = locationPicker.SelectedItem.ToString();
             string cityName = SeparateCity(selectedLocation);
 
-            //MessageBox.Show(cityName); //logic test
-
-            //Setting a foreign key - location id in accommodation table
-            var db = new UserContext();
-            var tempRecord = db.accommodation.Find(record.Id);
-            tempRecord.Location = LocationRepository.getBy(cityName);
-
-            db.SaveChanges();
-
+            //Prepareing DTO for service
+            NewAccommodationDto accommodationDto = new NewAccommodationDto(title.Text, guestNumber, type, minReservationDays, cancellationDeadline, cityName);
+            //Passing DTO to be saved in the database
+            AccommodationServicecs.Save(accommodationDto);
         }
 
         public void InitializeAccommodationType()
@@ -131,11 +125,11 @@ namespace InitialProject.View
             }
             else {
 
-                Location location = new Location(city.Text, country.Text);
-                LocationRepository.Save(location);
+             Location location = new Location(city.Text, country.Text);
+             LocationRepository.Save(location);
 
-                locationPicker.Items.Clear();
-                InitializeLocationPicker();     
+             locationPicker.Items.Clear();
+             InitializeLocationPicker();     
             }
 
         }

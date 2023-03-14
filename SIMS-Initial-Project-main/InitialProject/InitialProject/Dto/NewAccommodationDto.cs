@@ -18,7 +18,17 @@ namespace InitialProject.Dto
 
         public int CancellationDeadline { get; set; }
 
+        public string CityName { get; set; }
 
+        public NewAccommodationDto(string title, int guestNumber, AccommodationType type, int minReservationDays, int cancellationDeadline, string city) { 
+           
+            Title = title;
+            GuestLimit = guestNumber;
+            Type = type;
+            MinimumReservationDays = minReservationDays;
+            CancellationDeadline = cancellationDeadline;
+            CityName = city;
+        }
 
     }
 }
