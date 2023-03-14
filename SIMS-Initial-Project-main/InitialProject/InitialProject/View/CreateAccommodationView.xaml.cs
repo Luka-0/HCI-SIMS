@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Model;
+using InitialProject.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,14 @@ namespace InitialProject.View
         public CreateAccommodationView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Accommodation acc = new Accommodation();
+
+            AccommodationRepository.Save(acc);
+
         }
     }
 }

@@ -28,8 +28,13 @@ namespace InitialProject.Model
 
         public Accommodation()
         {
+            Title = "debugingTest";
             CancellationDeadline = 1;
+            MinimumReservationDays = 1;
+            Type = AccommodationType.House;
+            GuestLimit = 1;
             Available = true;
+            this.Location = new Location(1, "Subotica", "Serbia"); //postoji u bazi
         }
         public Accommodation(String title, int guestLimit, AccommodationType type, int minimumReservationDays, int cancellationDeadline)
         {

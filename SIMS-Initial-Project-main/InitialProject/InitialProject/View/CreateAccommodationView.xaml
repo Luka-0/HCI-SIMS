@@ -33,7 +33,7 @@
         <TextBox HorizontalAlignment="Left" Height="42" Margin="675,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" FontSize="24"/>
         <TextBox HorizontalAlignment="Left" Height="36" Margin="246,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="374" FontSize="24"/>
         <Label Content="Image URL: " HorizontalAlignment="Left" Height="53" Margin="10,298,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
-        <Button Content="create" HorizontalAlignment="Left" Height="44" Margin="246,437,0,0" VerticalAlignment="Top" Width="734" FontSize="25"/>
+        <Button Content="create" HorizontalAlignment="Left" Height="44" Margin="246,437,0,0" VerticalAlignment="Top" Width="734" FontSize="25" Click="Button_Click"/>
         <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="809,35,10,260"/>
         <Button Content="add to list" HorizontalAlignment="Left" Height="35" Margin="642,305,0,0" VerticalAlignment="Top" Width="132" FontSize="20"/>
         <Label Content="Added URLs: " HorizontalAlignment="Left" Height="39" Margin="809,-2,0,0" VerticalAlignment="Top" Width="171" FontSize="20"/>
