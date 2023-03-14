@@ -35,25 +35,23 @@ namespace InitialProject.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
- 
+            //preparing fields to be in right format
             int guestNumber = Int32.Parse(guestLimit.Text);
             AccommodationType type = Convert(typePicker.SelectedIndex);
             int minReservationDays = Int32.Parse(minDuration.Text);
             int cancellationDeadline = Int32.Parse(suspensionDays.Text);
 
+            //creating new accommodation instance and saving it into the database
             Accommodation acc = new Accommodation(title.Text, guestNumber, type, minReservationDays, cancellationDeadline);
-
             AccommodationRepository.Save(acc);
 
+            //finding the name of selected city from owner's GUI
+            string selectedLocation = locationPicker.SelectedItem.ToString();
+            string cityName = SeparateCity(selectedLocation);
 
-            char[] delimiter = { '-' };
+            //MessageBox.Show(cityName); //logic test
 
-            string[] locationParts = locationPicker.SelectedItem.ToString().Split(delimiter);
-
-            string cityName = locationParts[1];
-
-            MessageBox.Show(cityName);
-
+            //Setting a foreign key - location id in accommodation table
             var db = new UserContext();
             var newAcc = db.accommodation.Find(acc.Id);
             newAcc.Location = LocationRepository.getBy(cityName);
@@ -102,6 +100,17 @@ namespace InitialProject.View
                 type = AccommodationType.Cottage;
             }
             return type;
+        }
+
+        public string SeparateCity(string selectedLocation) {
+
+            char[] delimiter = { '-' };
+
+            string[] locationParts = selectedLocation.Split(delimiter);
+
+            string cityName = locationParts[1];
+
+            return cityName;
         }
     }
 }
