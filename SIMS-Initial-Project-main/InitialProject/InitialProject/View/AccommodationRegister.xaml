@@ -6,16 +6,16 @@
       xmlns:local="clr-namespace:InitialProject.View"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="990"
-      Title="CreateAccommodationView">
+      Title="AccommodationRegister">
 
     <Grid>
-        <GroupBox HorizontalAlignment="Left" Height="127" Header="Location:" Margin="10,46,0,0" VerticalAlignment="Top" Width="794" FontSize="26"/>
+        <GroupBox HorizontalAlignment="Left" Height="132" Header="Location:" Margin="10,46,0,0" VerticalAlignment="Top" Width="794" FontSize="26" BorderThickness="2"/>
 
 
         <TextBox x:Name="title" HorizontalAlignment="Left" Height="33" Margin="246,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="542" FontSize="24"/>
         <Label Content="Title: " HorizontalAlignment="Left" Height="39" Margin="15,2,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
         <Label Content="Guest Limit: " HorizontalAlignment="Left" Height="39" Margin="14,190,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
-        <ComboBox x:Name ="locationPicker" HorizontalAlignment="Left" Margin="246,72,0,0" VerticalAlignment="Top" Width="542" Height="39" FontSize="21"/>
+        <ComboBox x:Name ="locationPicker" HorizontalAlignment="Left" Margin="246,76,0,0" VerticalAlignment="Top" Width="542" Height="39" FontSize="21"/>
         <TextBox x:Name="guestLimit" HorizontalAlignment="Left" Height="33" Margin="246,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="542" FontSize="24"/>
         <ComboBox x:Name="typePicker" HorizontalAlignment="Left" Margin="246,245,0,0" VerticalAlignment="Top" Width="542" Height="34"  FontSize="21"/>
         <Label Content="Type: " HorizontalAlignment="Left" Height="48" Margin="16,242,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
@@ -34,15 +34,15 @@
         <TextBox x:Name="suspensionDays" HorizontalAlignment="Left" Height="42" Margin="675,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" FontSize="24"/>
         <TextBox x:Name="url" HorizontalAlignment="Left" Height="36" Margin="246,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="374" FontSize="24"/>
         <Label Content="Image URL: " HorizontalAlignment="Left" Height="53" Margin="20,374,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
-        <Button Content="create" HorizontalAlignment="Left" Height="44" Margin="246,499,0,0" VerticalAlignment="Top" Width="734" FontSize="25" Click="Button_Click"/>
+        <Button x:Name="RegisterAccommodation" Content="create" HorizontalAlignment="Left" Height="44" Margin="246,499,0,0" VerticalAlignment="Top" Width="734" FontSize="25" Click="RegisterAccommodation_Click"/>
         <ListBox x:Name="urls" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="813,35,6,260"/>
-        <Button Content="add to list" HorizontalAlignment="Left" Height="35" Margin="642,381,0,0" VerticalAlignment="Top" Width="132" FontSize="20" Click="Button_Click_2"/>
+        <Button x:Name="AddUrl" Content="add to list" HorizontalAlignment="Left" Height="35" Margin="642,381,0,0" VerticalAlignment="Top" Width="132" FontSize="20" Click="AddUrl_Click"/>
         <Label Content="Added URLs: " HorizontalAlignment="Left" Height="39" Margin="809,-2,0,0" VerticalAlignment="Top" Width="171" FontSize="20"/>
-        <Button Content="add" HorizontalAlignment="Left" Height="42" Margin="700,118,0,0" VerticalAlignment="Top" Width="81" FontSize="24" Click="Button_Click_1"/>
-        <TextBox x:Name="city" HorizontalAlignment="Left" Height="42" Margin="246,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="155" FontSize="20"/>
-        <TextBox x:Name="country" HorizontalAlignment="Left" Height="42" Margin="525,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="161" FontSize="20"/>
-        <Label Content="City:" HorizontalAlignment="Left" Height="60" Margin="157,118,0,0" VerticalAlignment="Top" Width="98" FontSize="26"/>
-        <Label Content="Country:" HorizontalAlignment="Left" Height="58" Margin="410,115,0,0" VerticalAlignment="Top" Width="160" FontSize="26"/>
+        <Button x:Name="AddLocation" Content="add" HorizontalAlignment="Left" Height="42" Margin="700,124,0,0" VerticalAlignment="Top" Width="81" FontSize="24" Click="AddLocation_Click"/>
+        <TextBox x:Name="city" HorizontalAlignment="Left" Height="42" Margin="246,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="155" FontSize="20"/>
+        <TextBox x:Name="country" HorizontalAlignment="Left" Height="42" Margin="525,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="161" FontSize="20"/>
+        <Label Content="City:" HorizontalAlignment="Left" Height="60" Margin="148,123,0,0" VerticalAlignment="Top" Width="98" FontSize="26"/>
+        <Label Content="Country:" HorizontalAlignment="Left" Height="58" Margin="410,121,0,0" VerticalAlignment="Top" Width="160" FontSize="26"/>
 
 
     </Grid>
