@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using InitialProject.Enumeration;
-using InitialProject.View;
 
 namespace InitialProject
 {
@@ -57,46 +56,30 @@ namespace InitialProject
                 {
                     CommentsOverview commentsOverview = new CommentsOverview(user);
                     commentsOverview.Show();
-                    Close(); //this.close();
+                    Close();
 
                     switch (user.Type)
                     {
                         case UserType.Guest1:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
                                 break;
                             }
                         case UserType.Guest2:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
                                 break;
                             }
                         case UserType.Guide:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guide: " + user.Username + " is  logged in.");
-                                }
+                                CreateTourForm createTourForm= new CreateTourForm();
+                                createTourForm.Show();
+                                Close();
                                 break;
                             }
                         case UserType.Owner:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    OwnerView ownerWindow = new OwnerView();
-
-                                    //this.Hide();
-
-                                    ownerWindow.Show();
-
-                                    MessageBox.Show("Owner: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Owner: " + user.Username + " is  logged in.");
                                 break;
                             }
                         default:
@@ -123,7 +106,7 @@ namespace InitialProject
             user.Username = Username;
         
 
-            //UserRepository.AddUserToDbl(user);
+            UserRepository.AddUserToDbl(user);
         }
     }
 }
