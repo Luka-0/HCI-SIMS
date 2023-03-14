@@ -42,8 +42,8 @@ namespace InitialProject.View
             int cancellationDeadline = Int32.Parse(suspensionDays.Text);
 
             //creating new accommodation instance and saving it into the database
-            Accommodation acc = new Accommodation(title.Text, guestNumber, type, minReservationDays, cancellationDeadline);
-            AccommodationRepository.Save(acc);
+            Accommodation record = new Accommodation(title.Text, guestNumber, type, minReservationDays, cancellationDeadline);
+            AccommodationRepository.Save(record);
 
             //finding the name of selected city from owner's GUI
             string selectedLocation = locationPicker.SelectedItem.ToString();
@@ -53,8 +53,8 @@ namespace InitialProject.View
 
             //Setting a foreign key - location id in accommodation table
             var db = new UserContext();
-            var newAcc = db.accommodation.Find(acc.Id);
-            newAcc.Location = LocationRepository.getBy(cityName);
+            var tempRecord = db.accommodation.Find(record.Id);
+            tempRecord.Location = LocationRepository.getBy(cityName);
 
             db.SaveChanges();
 
