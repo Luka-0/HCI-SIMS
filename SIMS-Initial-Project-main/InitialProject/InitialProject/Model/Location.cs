@@ -25,8 +25,7 @@ namespace InitialProject.Model
 
         }
 
-        public Location(int id, string city, string country) {
-            this.Id = id;
+        public Location(string city, string country) {
             this.City = city;
             this.Country = country;
         }

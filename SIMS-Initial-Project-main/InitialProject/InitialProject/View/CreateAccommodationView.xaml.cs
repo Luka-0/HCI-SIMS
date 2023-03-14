@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Contexts;
+using InitialProject.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,11 @@ namespace InitialProject.View
             Accommodation acc = new Accommodation();
 
             AccommodationRepository.Save(acc);
+
+            var db = new UserContext();
+            var newAcc = db.accommodation.Find(acc.Id);
+            newAcc.Location = AccommodationRepository.getBy("Beograd");
+            db.SaveChanges();
 
         }
     }

@@ -17,5 +17,23 @@ namespace InitialProject.Repository
             db.Add(accommodation);
             db.SaveChanges();
         }
+
+        public static Location getBy(string city)
+        {
+
+
+            using (var db = new UserContext())
+            {
+                foreach (Location location in db.location)
+                {
+                    if (location.City.Equals(city))
+                    {
+
+                        return location;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }

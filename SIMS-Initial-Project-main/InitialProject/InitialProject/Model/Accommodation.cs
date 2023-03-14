@@ -1,4 +1,5 @@
 ﻿using InitialProject.Enumeration;
+using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,8 +35,16 @@ namespace InitialProject.Model
             Type = AccommodationType.House;
             GuestLimit = 1;
             Available = true;
-            this.Location = new Location(1, "Subotica", "Serbia"); //postoji u bazi
+           // this.Location = new Location("Beograd", "Serbia"); //postoji u bazi
+          //  this.Location = AccommodationRepository.getBy("Beograd");
+            // this.Location = new Location();
+           // this.Location.Id = 1;
+          //  this.Location.Country = "Serbia";
+         //   this.Location.City = "Subotica";
         }
+
+        
+
         public Accommodation(String title, int guestLimit, AccommodationType type, int minimumReservationDays, int cancellationDeadline)
         {
             CancellationDeadline = 1;
