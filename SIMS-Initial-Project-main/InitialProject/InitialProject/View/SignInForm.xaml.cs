@@ -62,34 +62,24 @@ namespace InitialProject
                     {
                         case UserType.Guest1:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
                                 break;
                             }
                         case UserType.Guest2:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
                                 break;
                             }
                         case UserType.Guide:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guide: " + user.Username + " is  logged in.");
-                                }
+                                CreateTourForm createTourForm= new CreateTourForm();
+                                createTourForm.Show();
+                                Close();
                                 break;
                             }
                         case UserType.Owner:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Owner: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Owner: " + user.Username + " is  logged in.");
                                 break;
                             }
                         default:
