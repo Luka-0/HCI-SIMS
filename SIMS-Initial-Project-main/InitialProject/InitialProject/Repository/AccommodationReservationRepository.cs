@@ -29,6 +29,7 @@ namespace InitialProject.Repository
             db.Add(accommodationReservation);
             db.SaveChanges();
 
+            return true;
         }
     }
 }

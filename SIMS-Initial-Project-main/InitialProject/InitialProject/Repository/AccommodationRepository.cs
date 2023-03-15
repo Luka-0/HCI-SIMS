@@ -17,6 +17,15 @@ namespace InitialProject.Repository
     {
         public AccommodationRepository() { }
 
+        public static void Save(Accommodation accommodation)
+        {
+            using var db = new UserContext();
+
+            db.Add(accommodation);
+            db.SaveChanges();
+
+        }
+
         public static List<Accommodation> GetAll()
         {
             List<Accommodation> retVal = new();
@@ -63,7 +72,7 @@ namespace InitialProject.Repository
             using var db = new UserContext();
             foreach (Accommodation accommodation in db.accommodation)
             {
-                if (accommodation.location.Equals(location))    //TODO: proveriti da li se radi sa equals ili ==
+                if (accommodation.Location.Equals(location))    //TODO: proveriti da li se radi sa equals ili ==
                 {
                     retVal.Add(accommodation);
                 }
