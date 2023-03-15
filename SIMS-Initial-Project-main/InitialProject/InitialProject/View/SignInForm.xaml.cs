@@ -49,54 +49,53 @@ namespace InitialProject
         private void SignIn(object sender, RoutedEventArgs e)
         {
            // User user = _repository.GetByUsername(Username);
-            User user = UserRepository.getUser(Username);
+            User user = UserRepository.GetUser(Username);
 
             if (user != null)
             {
                 if(user.Password == txtPassword.Password)
                 {
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
-                    Close(); //this.close();
+                    //CommentsOverview commentsOverview = new CommentsOverview(user);
+                    //commentsOverview.Show();
+                    //Close(); //this.close();
 
                     switch (user.Type)
                     {
                         case UserType.Guest1:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
+                                Close();
+
+                                Guest1View guest1View = new ();
+                                guest1View.Show();
+
                                 break;
                             }
                         case UserType.Guest2:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
+
+                                Close();
                                 break;
                             }
                         case UserType.Guide:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guide: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guide: " + user.Username + " is  logged in.");
+
+                                Close();
                                 break;
                             }
                         case UserType.Owner:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    OwnerView ownerWindow = new OwnerView();
+                                OwnerView ownerWindow = new OwnerView();
 
-                                    //this.Hide();
+                                //this.Hide();
 
-                                    ownerWindow.Show();
+                                ownerWindow.Show();
 
-                                    MessageBox.Show("Owner: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Owner: " + user.Username + " is  logged in.");
+
+                                Close();
                                 break;
                             }
                         default:
