@@ -5,6 +5,7 @@ using InitialProject.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using InitialProject.Dto;
 using InitialProject.Enumeration;
 
 
@@ -19,6 +20,7 @@ namespace InitialProject
 
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public NewTourDto NewTourDto; 
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -29,11 +31,16 @@ namespace InitialProject
         {
             InitializeComponent();
             DataContext = this;
+
+
+
         }
 
 
         private void Create(object sender, RoutedEventArgs e)
         {
+            NewTourDto tourDto = new NewTourDto(NewTourDto);
+            //fja ka servisu de je logika
         }
     }
 }

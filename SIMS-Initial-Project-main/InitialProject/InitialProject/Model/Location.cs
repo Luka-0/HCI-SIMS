@@ -17,6 +17,17 @@ namespace InitialProject.Model
         [Required]
         public string City { get; set; }
         [Required]
-        public string Contry { get; set;  }
+        public string Country { get; set;  }
+
+        public Location() { }
+
+        public Location(int id, string city, string country)
+        {
+            Id = id;
+            City = city;
+            Country = country;
+        }
     }
+
+
 }
