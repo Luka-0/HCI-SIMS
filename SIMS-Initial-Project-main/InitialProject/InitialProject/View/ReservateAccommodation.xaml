@@ -8,11 +8,6 @@
         Title="ReservateAccommodation" Height="250" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
 
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="150"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
-        </Grid.RowDefinitions>
 
     </Grid>
 </Window>

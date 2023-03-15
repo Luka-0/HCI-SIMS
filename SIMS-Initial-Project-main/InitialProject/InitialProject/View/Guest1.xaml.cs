@@ -17,11 +17,20 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for Guest1View.xaml
     /// </summary>
-    public partial class Guest1View : Window
+    public partial class Guest1 : Window
     {
-        public Guest1View()
+        public Guest1()
         {
             InitializeComponent();
+        }
+
+        private void Open_ReservateAccommodationWindow(object sender, RoutedEventArgs e)
+        {
+
+            ReservateAccommodation reservateAccommodation = new ReservateAccommodation();
+            reservateAccommodation.Show();
+
+            this.Close();
         }
     }
 }

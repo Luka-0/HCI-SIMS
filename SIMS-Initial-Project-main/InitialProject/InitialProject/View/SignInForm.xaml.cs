@@ -63,40 +63,33 @@ namespace InitialProject
                     {
                         case UserType.Guest1:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
+
+                                Guest1 guest1 = new Guest1();
+                                guest1.Show();
+
+                                this.Close();
                                 break;
                             }
                         case UserType.Guest2:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
                                 break;
                             }
                         case UserType.Guide:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guide: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guide: " + user.Username + " is  logged in.");
                                 break;
                             }
                         case UserType.Owner:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    Owner owner = new Owner();
+                                Owner owner = new Owner();
 
-                                    //this.Hide();
+                                //this.Hide();
 
-                                    owner.Show();
+                                owner.Show();
 
-                                    MessageBox.Show("Owner: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Owner: " + user.Username + " is  logged in.");
                                 break;
                             }
                         default:
@@ -122,8 +115,10 @@ namespace InitialProject
             user.Password = txtPassword.Password;
             user.Username = Username;
 
+            UserRepository.AddUser(user);
 
-            //UserRepository.AddUserToDbl(user);
+            MessageBox.Show("Successfully added user");
+            this.Close();
         }
     }
 }
