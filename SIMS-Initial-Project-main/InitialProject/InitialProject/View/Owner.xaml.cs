@@ -17,21 +17,21 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for OwnerView.xaml
     /// </summary>
-    public partial class OwnerView : Window
+    public partial class Owner : Window
     {
-        public OwnerView()
+        public Owner()
         {
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OperationsContainer.Content = new CreateAccommodationView();
+            OperationsContainer.Content = new AccommodationRegister();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            OperationsContainer.Content = new RateGuestsView();
+            OperationsContainer.Content = new GuestReview();
         }
     }
 }

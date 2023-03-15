@@ -48,54 +48,55 @@ namespace InitialProject
 
         private void SignIn(object sender, RoutedEventArgs e)
         {
-           // User user = _repository.GetByUsername(Username);
+            // User user = _repository.GetByUsername(Username);
             User user = UserRepository.GetUser(Username);
 
             if (user != null)
             {
-                if(user.Password == txtPassword.Password)
+                if (user.Password == txtPassword.Password)
                 {
-                    //CommentsOverview commentsOverview = new CommentsOverview(user);
-                    //commentsOverview.Show();
-                    //Close(); //this.close();
+                    CommentsOverview commentsOverview = new CommentsOverview(user);
+                    commentsOverview.Show();
+                    Close(); //this.close();
 
                     switch (user.Type)
                     {
                         case UserType.Guest1:
                             {
-                                MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
-                                Close();
-
-                                Guest1View guest1View = new ();
-                                guest1View.Show();
-
+                                if (user.Password == txtPassword.Password)
+                                {
+                                    MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
+                                }
                                 break;
                             }
                         case UserType.Guest2:
                             {
-                                MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
-
-                                Close();
+                                if (user.Password == txtPassword.Password)
+                                {
+                                    MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
+                                }
                                 break;
                             }
                         case UserType.Guide:
                             {
-                                MessageBox.Show("Guide: " + user.Username + " is  logged in.");
-
-                                Close();
+                                if (user.Password == txtPassword.Password)
+                                {
+                                    MessageBox.Show("Guide: " + user.Username + " is  logged in.");
+                                }
                                 break;
                             }
                         case UserType.Owner:
                             {
-                                OwnerView ownerWindow = new OwnerView();
+                                if (user.Password == txtPassword.Password)
+                                {
+                                    Owner owner = new Owner();
 
-                                //this.Hide();
+                                    //this.Hide();
 
-                                ownerWindow.Show();
+                                    owner.Show();
 
-                                MessageBox.Show("Owner: " + user.Username + " is  logged in.");
-
-                                Close();
+                                    MessageBox.Show("Owner: " + user.Username + " is  logged in.");
+                                }
                                 break;
                             }
                         default:
@@ -103,7 +104,7 @@ namespace InitialProject
                             break;
                     }
 
-                } 
+                }
                 else
                 {
                     MessageBox.Show("Wrong password!");
@@ -112,7 +113,7 @@ namespace InitialProject
             else
             {
                 MessageBox.Show("Wrong username!");
-            }   
+            }
         }
 
         private void Create(object sender, RoutedEventArgs e)
@@ -120,7 +121,7 @@ namespace InitialProject
             User user = new User();
             user.Password = txtPassword.Password;
             user.Username = Username;
-        
+
 
             //UserRepository.AddUserToDbl(user);
         }

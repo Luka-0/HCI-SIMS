@@ -85,20 +85,4 @@ namespace InitialProject.Repository
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

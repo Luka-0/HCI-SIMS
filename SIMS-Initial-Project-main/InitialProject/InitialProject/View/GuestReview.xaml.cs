@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace InitialProject.View
 {
     /// <summary>
-    /// Interaction logic for CreateAccommodationView.xaml
+    /// Interaction logic for RateGuestsView.xaml
     /// </summary>
-    public partial class CreateAccommodationView : Page
+    public partial class GuestReview : Page
     {
-        public CreateAccommodationView()
+        public GuestReview()
         {
             InitializeComponent();
         }

@@ -1,4 +1,5 @@
 ﻿using InitialProject.Enumeration;
+using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -28,18 +29,23 @@ namespace InitialProject.Model
 
         public Accommodation()
         {
-            CancellationDeadline = 1;
-            Available = true;
+            this.Title = "";
+            this.CancellationDeadline = 1;
+            this.MinimumReservationDays = 1;
+            this.Type = AccommodationType.House;
+            this.GuestLimit = 1;
+            this.Available = true;
         }
+
+        
         public Accommodation(String title, int guestLimit, AccommodationType type, int minimumReservationDays, int cancellationDeadline)
         {
-            CancellationDeadline = 1;
-
-            Type = type;
-            MinimumReservationDays = minimumReservationDays;
-            CancellationDeadline = cancellationDeadline;
-            Title = title;
-            Available = true;
+            this.Title = title;
+            this.GuestLimit = guestLimit;
+            this.Type = type;
+            this.MinimumReservationDays = minimumReservationDays;
+            this.CancellationDeadline = cancellationDeadline;
+            this.Available = true;
 
         }
 
