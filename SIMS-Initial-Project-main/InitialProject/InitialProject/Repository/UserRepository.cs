@@ -57,7 +57,7 @@ namespace InitialProject.Repository
     {
         public UserRepository() { }
 
-        public static User getUser(String username)
+        public static User GetUser(String username)
         {
             using (var db = new UserContext())
             {
@@ -71,6 +71,16 @@ namespace InitialProject.Repository
 
             }
             return null;
+        }
+
+        public static Boolean AddUser(User user)
+        {
+
+            using var db = new UserContext();
+            db.Add(user);
+            db.SaveChanges();
+
+            return true;
         }
 
     }

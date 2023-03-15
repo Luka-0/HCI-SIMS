@@ -31,7 +31,7 @@ namespace InitialProject.Contexts
         public string path = @" F:\SIMS - PROJEKAT\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";
 
         //Stajic:
-        //public string path = @"C:\Users\Luka stajic\Documents\Projekat SiMS-HCI\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database.db";
+        public string path = @"C:\Users\Luka stajic\Documents\Projekat SiMS-HCI\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";
 
 
         //Pele:
