@@ -23,6 +23,18 @@ namespace InitialProject.Repository
             return Tours;
         }
 
+        public static Tour GetById(int id)
+        {
+            Tour tour = new Tour();
+
+            using (var dbContext = new UserContext())
+            {
+                tour = (Tour)dbContext.tour
+                                 .Where(t => t.Id == id);
+            }
+            return tour;
+        }
+
         public static List<Tour> GetBy(Location location)
         {
             List<Tour> Tours = new List<Tour>();

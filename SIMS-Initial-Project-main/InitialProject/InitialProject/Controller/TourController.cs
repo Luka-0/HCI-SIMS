@@ -72,5 +72,13 @@ namespace InitialProject.Controller
             return getTourDtos;
         }
 
+        public static Tour Reserve(Tour tour, int guestNumber)
+        {
+            Tour chosenTour = TourService.GetById(tour.Id);
+
+            //TODO: ispravi ovo
+            return null;
+        }
+
     }
 }

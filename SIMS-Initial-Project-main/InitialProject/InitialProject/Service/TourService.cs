@@ -13,27 +13,31 @@ namespace InitialProject.Service
         TourRepository TourRepository = new TourRepository();
         public TourService() { }
 
-        public List<Tour> GetAll()
+        public static List<Tour> GetAll()
         {
             return TourRepository.GetAll();
         }
 
-        public List<Tour> GetBy(Location location)
+        public static Tour GetById(int id)
+        {
+            return TourRepository.GetById(id);
+        }
+        public static List<Tour> GetBy(Location location)
         {
             return TourRepository.GetBy(location);
         }
 
-        public List<Tour> GetBy(TimeOnly duration)
+        public static List<Tour> GetBy(TimeOnly duration)
         {
             return TourRepository.GetBy(duration);
         }
 
-        public List<Tour> GetBy(string language)
+        public static List<Tour> GetBy(string language)
         {
             return TourRepository.GetBy(language);
         }
 
-        public List<Tour> GetBy(int guestNumber)
+        public static List<Tour> GetBy(int guestNumber)
         {
             return TourRepository.GetBy(guestNumber);
         }
