@@ -22,10 +22,8 @@ namespace InitialProject.Service
             return LocationRepository.getAll();
         }
 
-        public static void Save(NewLocationDto record)
+        public static void Save(Location location)
         {
-            Location location = new Location(record.City, record.Country);
-
             LocationRepository.Save(location);
         }
 

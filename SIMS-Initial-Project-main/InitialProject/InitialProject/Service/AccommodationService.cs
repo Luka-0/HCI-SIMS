@@ -11,22 +11,21 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
-    class AccommodationServicecs
+    class AccommodationService
     {
-        public static void Save(NewAccommodationDto record)
+        public static void Save(Accommodation accommodation, string cityName, List<String> images)
         {
             //Saving new accommodation into databse
-            Accommodation accommodation = new Accommodation(record.Title, record.GuestLimit, record.Type, record.MinimumReservationDays, record.CancellationDeadline);
             AccommodationRepository.Save(accommodation);
 
             var db = new UserContext();
             var tempRecord = db.accommodation.Find(accommodation.Id);   //Try creating method in Accommodation repository to return the same thing
 
             //Updating foreign key value of new accommodation record
-            tempRecord.Location = LocationService.getBy(record.CityName);
+            tempRecord.Location = LocationService.getBy(cityName);
             
             //saving all images refered to new accommodation.
-            ImageService.Save(record.Images, accommodation);
+            ImageService.Save(images, accommodation);
 
             db.SaveChanges();
         }
