@@ -22,5 +22,20 @@ namespace InitialProject.Service
         {
             return TourRepository.GetBy(location);
         }
+
+        public List<Tour> GetBy(TimeOnly duration)
+        {
+            return TourRepository.GetBy(duration);
+        }
+
+        public List<Tour> GetBy(string language)
+        {
+            return TourRepository.GetBy(language);
+        }
+
+        public List<Tour> GetBy(int guestNumber)
+        {
+            return TourRepository.GetBy(guestNumber);
+        }
     }
 }

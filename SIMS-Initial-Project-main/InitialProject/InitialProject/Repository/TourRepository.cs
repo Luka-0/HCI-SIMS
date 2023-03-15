@@ -12,7 +12,7 @@ namespace InitialProject.Repository
     {
         public TourRepository() { }
 
-        public  List<Tour> GetAll()
+        public static List<Tour> GetAll()
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -23,7 +23,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public List<Tour> GetBy(Location location)
+        public static List<Tour> GetBy(Location location)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -31,6 +31,45 @@ namespace InitialProject.Repository
             {
                 Tours = dbContext.tour
                                  .Where(t => t.Location == location)
+                                 .ToList();
+            }
+            return Tours;
+        }
+
+        public static List<Tour> GetBy(TimeOnly duration)
+        {
+            List<Tour> Tours = new List<Tour>();
+
+            using (var dbContext = new UserContext())
+            {
+                Tours = dbContext.tour
+                                 .Where(t => t.Duration == duration)
+                                 .ToList();
+            }
+            return Tours;
+        }
+
+        public static List<Tour> GetBy(string language)
+        {
+            List<Tour> Tours = new List<Tour>();
+
+            using (var dbContext = new UserContext())
+            {
+                Tours = dbContext.tour
+                                 .Where(t => t.Language == language)
+                                 .ToList();
+            }
+            return Tours;
+        }
+
+        public static List<Tour> GetBy(int guestNumber)
+        {
+            List<Tour> Tours = new List<Tour>();
+
+            using (var dbContext = new UserContext())
+            {
+                Tours = dbContext.tour
+                                 .Where(t => t.GuestLimit >= guestNumber)
                                  .ToList();
             }
             return Tours;

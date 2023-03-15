@@ -1,4 +1,6 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Controller;
+using InitialProject.Dto;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using System;
@@ -31,7 +33,7 @@ namespace InitialProject.View
 
         private void mojButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Tour> Tours = TourService.GetAll();
+            List<GetTourDto> Tours = TourController.GetAll();
             if(Tours.Count > 0)
             {
                 MessageBox.Show("Nisam prazna");
@@ -55,7 +57,7 @@ namespace InitialProject.View
             
 
 
-            foreach (Tour t in Tours)
+            foreach (GetTourDto t in Tours)
             {
                 s += t.ToString();
                 
