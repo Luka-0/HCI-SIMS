@@ -18,8 +18,10 @@ namespace InitialProject.Model
         public Tour Tour { get; set; }
 
         [Required]
-        public int GuestNumber { get; set; }
+        public int GuestNumber { get; set; }    //for how many guests is booked
 
+        [Required]
+        public User BookingGuest { get; set; }
 
 
     }

@@ -10,7 +10,7 @@ namespace InitialProject.Service
 {
     public class TourService
     {
-        TourRepository TourRepository = new TourRepository();
+
         public TourService() { }
 
         public static List<Tour> GetAll()
@@ -41,5 +41,8 @@ namespace InitialProject.Service
         {
             return TourRepository.GetBy(guestNumber);
         }
+
+        
+
     }
 }
