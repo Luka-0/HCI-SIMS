@@ -24,11 +24,11 @@ namespace InitialProject.View
             InitializeComponent();
         }
 
-        private void Open_ReservateAccommodationWindow(object sender, RoutedEventArgs e)
+        private void ShowAccommodationReservate(object sender, RoutedEventArgs e)
         {
 
-            ReservateAccommodation reservateAccommodation = new ReservateAccommodation();
-            reservateAccommodation.Show();
+            AccommodationReservate accommodationReservate = new AccommodationReservate();
+            accommodationReservate.Show();
 
             this.Close();
         }

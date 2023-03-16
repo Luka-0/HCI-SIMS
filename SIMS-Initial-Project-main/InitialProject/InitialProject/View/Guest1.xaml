@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Guest1 Main Window" Height="450" Width="800">
     <Grid>
-        <Button Content="ReservateAccommodation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="28" Width="165" Click="Open_ReservateAccommodationWindow"/>
+        <Button Content="Reservate Accommodation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="28" Width="165" Click="ShowAccommodationReservate"/>
+        <Button Content="View Accommodations" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Height="28" Width="165"/>
 
     </Grid>
 </Window>

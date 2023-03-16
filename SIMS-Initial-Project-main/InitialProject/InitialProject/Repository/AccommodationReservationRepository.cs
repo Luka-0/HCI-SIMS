@@ -12,7 +12,7 @@ namespace InitialProject.Repository
     {
         public AccommodationReservationRepository() { }
 
-        public static bool AddAccommodationReservation(AccommodationReservation accommodationReservation)
+        public static bool Add(AccommodationReservation accommodationReservation)
         {
             using var db = new UserContext();
 

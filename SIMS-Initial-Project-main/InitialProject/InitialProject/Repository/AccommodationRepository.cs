@@ -36,11 +36,6 @@ namespace InitialProject.Repository
                 retVal.Add(accommodation);
             }
 
-            if(retVal == null)  //TODO
-            {
-
-            }
-
             return retVal;
         }
 
