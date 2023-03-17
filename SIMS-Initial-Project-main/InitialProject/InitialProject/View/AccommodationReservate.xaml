@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="AccommodationReservate" Height="450" Width="800">
     <Grid Margin="10,0,0,0">
-        <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding Path = accommodationsToShow}" Height="Auto" Width="Auto" Margin="161,0,161,0" VerticalAlignment="Top" 
-                  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="AccommodationsGrid_SelectionChanged">
+        <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding accommodationsToShow}" Height="Auto" Width="Auto" Margin="161,0,161,0" VerticalAlignment="Top" 
+                  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
                 <DataGridTextColumn Header="Guest Limit" Binding="{Binding GuestLimit}"/>

@@ -21,32 +21,31 @@ namespace InitialProject.View
 {
     public partial class AccommodationReservate : Window
     {
-        private ObservableCollection<AccommodationDto> accommodationsToShow { get; set; } 
-
+        public ObservableCollection<Accommodation> accommodationsToShow { get; set; } 		
+        
         public AccommodationReservate()
         {
             InitializeComponent();
-            this.DataContext = this;
-
-            accommodationsToShow = new ObservableCollection<AccommodationDto>();
+            DataContext = this;
 
             List<Accommodation> allAccommodations = AccommodationRepository.GetAll();
-            if (allAccommodations == null)
+            if(allAccommodations == null)
             {
                 MessageBox.Show("There are currently no Accommodations to look at :(");
                 this.Close();
-
-                return;
             }
 
+            accommodationsToShow = new ObservableCollection<Accommodation>();
+            AccommodationsGrid.ItemsSource = accommodationsToShow;
             foreach (Accommodation a in allAccommodations)
             {
-                AccommodationDto tmp = new AccommodationDto(a.Title, a.GuestLimit, a.Type, a.Location);
+                Accommodation tmp = new Accommodation(a.Title, a.GuestLimit, a.Type, 0, 0);
+                tmp.Location = a.Location;
                 accommodationsToShow.Add(tmp);
             }
 
-            AccommodationsGrid.ItemsSource = accommodationsToShow;
         }
+
 
         private void AccommodationsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
