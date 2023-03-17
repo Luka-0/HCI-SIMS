@@ -18,6 +18,14 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
+        public static void update(Image image, Tour tour)
+        {
+            using var db = new UserContext();
+            image.Tour = tour;
+            db.Update(image);
+            db.SaveChanges();
+        }
+
 
     }
 }

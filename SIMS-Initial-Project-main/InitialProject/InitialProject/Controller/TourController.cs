@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using InitialProject.Contexts;
 using InitialProject.Dto;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
@@ -15,7 +17,7 @@ public class TourController
 
     private LocationService locationService = new LocationService();
     private ImageService imageService = new ImageService();
-
+    
 
 
     public void add(TourToControllerDto dto)
@@ -28,7 +30,19 @@ public class TourController
             dto.GuestLimit, tourKeyPoints, dto.StartDateAndTime, 
             dto.Duration, images);
 
-        tourService.save(tour);
+        var db = new UserContext();
+        tour = tourService.save(tour);
+
+        //int tourId = tourService.get(tour.Id);
+        tourKeyPointService.update(tourKeyPoints, tour);
+        tour.Location = locationService.getBy(dto.Country, dto.City);
+
+        imageService.setTourId(images, tour);
+
+        db.SaveChanges();
+
+
+
     }
 
 }

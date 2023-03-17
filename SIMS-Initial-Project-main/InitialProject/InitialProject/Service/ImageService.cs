@@ -41,26 +41,26 @@ namespace InitialProject.Service
                 Image image = new Image(url);
                 ImageRepository.Save(image);
                 images.Add(image);
-                var db = new UserContext();
-                var tempRecord = db.image.Find(image.Id);
-
-                db.SaveChanges();
+                // var db = new UserContext();
+                // var tempRecord = db.image.Find(image.Id);
+                //
+                // db.SaveChanges();
             }
 
             return images;
         }
 
-        public void setTourId(List<Image> images, int tourID)
+        public void setTourId(List<Image> images, Tour tour)
         {
-            using (var db = new UserContext())
+            using ( var db = new UserContext())
             {
                 foreach (var image in images)
                 {
-                    image.Tour.Id = tourID;
+                    ImageRepository.update(image, tour);
 
                 }
 
-                db.SaveChanges();
+                
             }
             
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.IO.Packaging;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
@@ -19,14 +20,15 @@ public class Tour
 
     //Tour Location as a ForeignKey to Location table
     [ForeignKey("locationID")]
-    public Location Location { get; set; }
+    [AllowNull]
+    public Location? Location { get; set; }
 
     public string Description { get; set; }
     public string Language { get; set; }
     public int GuestLimit { get; set; }
 
     //KeyPoints are in TourKeyPoints Table
-    public List<TourKeyPoint> TourKeyPoints { get; set; }
+    public List<TourKeyPoint>? TourKeyPoints { get; set; }
 
     [DataType(DataType.DateTime)]
     public DateTime StartDateAndTime{ get;set; }
@@ -35,7 +37,7 @@ public class Tour
     public TimeSpan Duration { get; set; }
 
     //Images are in Image table
-    public List<Image> images { get; set; }
+    public List<Image>? images { get; set; }
     public Boolean Started { get; set; }
 
     public Tour()

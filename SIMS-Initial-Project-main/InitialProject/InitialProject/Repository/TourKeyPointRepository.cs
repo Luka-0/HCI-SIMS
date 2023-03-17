@@ -16,7 +16,9 @@ public class TourKeyPointRepository
             foreach (TourKeyPoint tourKeyPoint in db.tourKeyPoints)
             {
                 tourKeyPoints.Add(tourKeyPoint);
+                
             }
+            db.SaveChanges();
         }
         return tourKeyPoints;
     }
@@ -41,7 +43,7 @@ public class TourKeyPointRepository
 
     }
 
-    public static List<TourKeyPoint> save(List<string> tourKeyPointNames)
+    /*public static List<TourKeyPoint> save(List<string> tourKeyPointNames)
     {
         List<TourKeyPoint> tourKeyPoints = new List<TourKeyPoint>();
         using var db = new UserContext();
@@ -51,8 +53,29 @@ public class TourKeyPointRepository
             TourKeyPoint tourKeyPoint = new TourKeyPoint(name);
             db.tourKeyPoints.Add(tourKeyPoint);
             tourKeyPoints.Add(tourKeyPoint);
+
         }
+
+        db.SaveChanges();
         return tourKeyPoints;
+    }*/
+    public static void Save(TourKeyPoint tourKeyPoint)
+    {
+        using var db = new UserContext();
+
+        db.Add(tourKeyPoint);
+        db.SaveChanges();
+    }
+
+    public static void update(TourKeyPoint tourKeyPoint, Tour tour)
+    {
+        using (var db =new UserContext())
+        {
+            var tempRecord = db.tourKeyPoints.Find(tourKeyPoint.Id);   //Try creating method in Accommodation repository to return the same thing
+            tempRecord.Tour = tour;
+
+            db.SaveChanges();
+        }
     }
 
     

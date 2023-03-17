@@ -17,7 +17,7 @@ public class TourKeyPoint
     //Relationship between tour and keyPoints
     [ForeignKey("tourID")]
     [AllowNull]
-    public Tour Tour { get; set; }
+    public Tour? Tour { get; set; }
 
     [Required]
     public TourKeyPointType Type { get; set; }
