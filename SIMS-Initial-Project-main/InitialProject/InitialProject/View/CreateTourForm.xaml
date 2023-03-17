@@ -10,10 +10,11 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="100" ></ColumnDefinition>
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" HorizontalAlignment="Right">
+        <Grid Grid.Column="1" HorizontalAlignment="Right">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -41,7 +42,7 @@
             <Label Grid.Row="9" Height="25">Insert Image URLs:</Label>
             <Label Grid.Row="10" Height="25">Description:</Label>
         </Grid>
-        <Grid Grid.Column="1" >
+        <Grid Grid.Column="2"  DataContext="{Binding NewTourDto}">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -56,24 +57,24 @@
                 <RowDefinition></RowDefinition>
 
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" Text="{Binding Path=NewTourDto.Name, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="1" Text="{Binding Path=NewTourDto.Country, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="2" Text="{Binding Path=NewTourDto.City, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="3" Text="{Binding Path=NewTourDto.Language, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="4" Text="{Binding Path=NewTourDto.GuestLimit, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="5" Text="{Binding Path=NewTourDto.TourKeyPoints, UpdateSourceTrigger=PropertyChanged}"   Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <DatePicker Grid.Row="6" Text="{Binding Path=NewTourDto.StartDate, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Height="25" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="0" x:Name ="Name"  Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" x:Name ="Country"  Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="2" x:Name ="City" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="3" x:Name ="Language" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="4" x:Name ="GuestLimit" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="5" x:Name ="TourKeyPoints"   Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <DatePicker Grid.Row="6" x:Name ="StartDate"  Grid.Column="1" Height="25" VerticalAlignment="Center"/>
             <!--
             <TextBox Grid.Row="6" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
             -->
-            <TextBox Grid.Row="7" Text="{Binding Path=NewTourDto.StartTime, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="8" Text="{Binding Path=NewTourDto.Duration, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="9" Text="{Binding Path=NewTourDto.ImageURLs, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"  TextWrapping="Wrap"/>
-            <TextBox Grid.Row="9" Text="{Binding Path=NewTourDto.Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"  TextWrapping="Wrap"/>
+            <TextBox Grid.Row="7" x:Name ="StartTime" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="8" x:Name ="Duration"  Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="9" x:Name ="ImageURLs" Grid.Column="1"  TextWrapping="Wrap"/>
+            <TextBox Grid.Row="10" x:Name ="Description" Grid.Column="1"  TextWrapping="Wrap"/>
 
 
         </Grid>
-        <Button Grid.Row="9" Click="Create"  Content="Create" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button Grid.Column="0" Grid.Row="9" Click="Create"  Content="Create" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
     </Grid>
 

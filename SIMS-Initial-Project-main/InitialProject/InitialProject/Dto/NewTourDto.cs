@@ -13,19 +13,19 @@ public class NewTourDto
     public string City;
     public string Description;
     public string Language;
-    public int GuestLimit;
+    public string GuestLimit;
     //public List<TourKeyPoint> TourKeyPoints;
-    public List<int> TourKeyPoints;
-    public DateAndTime StartDate;
+    public string TourKeyPointNames;
+    public string StartDate;
     public string StartTime;
-    public TimeOnly Duration;
-    public List<string> ImageURLs;
+    public string Duration;
+    public string ImageURLs;
 
 
 
     public NewTourDto(){}
 
-    public NewTourDto(string name, string country, string city, string description, string language, int guestLimit, List<int> tourKeyPoints, DateAndTime startDate, string startTime, TimeOnly duration, List<string> imageURLs)
+    public NewTourDto(string name, string country, string city, string description, string language, string guestLimit, string tourKeyPointNames,  string startDate, string startTime,  string duration, string imageURLs)
     {
         Name = name;
         Country = country;
@@ -33,7 +33,7 @@ public class NewTourDto
         Description = description;
         Language = language;
         GuestLimit = guestLimit;
-        TourKeyPoints = tourKeyPoints;
+        TourKeyPointNames = tourKeyPointNames;
         StartDate = startDate;
         StartTime = startTime;
         Duration = duration;
@@ -48,7 +48,7 @@ public class NewTourDto
         this.Description = newTourDto.Description;
         this.Language = newTourDto.Language;
         this.GuestLimit = newTourDto.GuestLimit;
-        this.TourKeyPoints= newTourDto.TourKeyPoints;
+        this.TourKeyPointNames= newTourDto.TourKeyPointNames;
         this.StartDate = newTourDto.StartDate;
         this.StartTime = newTourDto.StartTime;
         this.Duration = newTourDto.Duration;

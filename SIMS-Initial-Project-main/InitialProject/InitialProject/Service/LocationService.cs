@@ -12,6 +12,7 @@ namespace InitialProject.Service
 {
     public class LocationService
     {
+
         public static Location getBy(string city)
         {
             return LocationRepository.getBy(city);
@@ -27,6 +28,11 @@ namespace InitialProject.Service
             Location location = new Location(record.City, record.Country);
 
             LocationRepository.Save(location);
+        }
+
+        public  Location getBy(String country, String city)
+        {
+            return LocationRepository.getBy(country, city);
         }
 
     }

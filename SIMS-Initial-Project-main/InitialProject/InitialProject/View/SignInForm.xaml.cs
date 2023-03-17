@@ -55,9 +55,9 @@ namespace InitialProject
             {
                 if (user.Password == txtPassword.Password)
                 {
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
-                    Close(); //this.close();
+                    // CommentsOverview commentsOverview = new CommentsOverview(user);
+                    // commentsOverview.Show();
+                    // Close(); //this.close();
 
                     switch (user.Type)
                     {
@@ -79,10 +79,9 @@ namespace InitialProject
                             }
                         case UserType.Guide:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guide: " + user.Username + " is  logged in.");
-                                }
+                                CreateTourForm createTourForm= new CreateTourForm(user);
+                                createTourForm.Show();
+                                Close(); //this.close();
                                 break;
                             }
                         case UserType.Owner:

@@ -32,7 +32,7 @@ public class Tour
     public DateTime StartDateAndTime{ get;set; }
 
     [DataType(DataType.Time)]
-    public TimeOnly Duration { get; set; }
+    public TimeSpan Duration { get; set; }
 
     //Images are in Image table
     public List<Image> images { get; set; }
@@ -46,6 +46,35 @@ public class Tour
     public Tour(String name, String language, int guestLimit, List<TourKeyPoint> tourKeyPoints)
     {
         Started = false;
+    }
+
+    public Tour(String name, Location location, string description, string language, int guestLimit,
+        List<TourKeyPoint> keyPoints, DateTime start, TimeSpan duration, List<Image> images)
+    {
+        this.Name = name;
+        this.Location = location;
+        this.Description = description;
+        this.Language = language;
+        this.GuestLimit = guestLimit;
+        this.TourKeyPoints = keyPoints;
+        this.StartDateAndTime = start;
+        this.Duration = duration;
+        this.images = images;
+        this.Started = false;
+    }
+    public Tour(String name, string description, string language, int guestLimit,
+        List<TourKeyPoint> keyPoints, DateTime start, TimeSpan duration, List<Image> images)
+    {
+        this.Name = name;
+        this.Location = null;
+        this.Description = description;
+        this.Language = language;
+        this.GuestLimit = guestLimit;
+        this.TourKeyPoints = keyPoints;
+        this.StartDateAndTime = start;
+        this.Duration = duration;
+        this.images = images;
+        this.Started = false;
     }
 
 

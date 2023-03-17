@@ -14,7 +14,8 @@ namespace InitialProject.Service
     {
         public static void Save(List<String> urlsDto, Accommodation accommodation)
         {
-            foreach (string url in urlsDto) {
+            foreach (string url in urlsDto)
+            {
 
                 Image image = new Image(url);
                 ImageRepository.Save(image);
@@ -27,7 +28,41 @@ namespace InitialProject.Service
 
                 db.SaveChanges();
             }
-          
+
+
+        }
+
+        public List<Image> save(List<String> urlsDto)
+        {
+            List<Image> images = new List<Image>();
+            foreach (string url in urlsDto)
+            {
+
+                Image image = new Image(url);
+                ImageRepository.Save(image);
+                images.Add(image);
+                var db = new UserContext();
+                var tempRecord = db.image.Find(image.Id);
+
+                db.SaveChanges();
+            }
+
+            return images;
+        }
+
+        public void setTourId(List<Image> images, int tourID)
+        {
+            using (var db = new UserContext())
+            {
+                foreach (var image in images)
+                {
+                    image.Tour.Id = tourID;
+
+                }
+
+                db.SaveChanges();
+            }
+            
         }
     }
 }

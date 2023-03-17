@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
@@ -20,7 +21,7 @@ public class TourKeyPoint
 
     [Required]
     public TourKeyPointType Type { get; set; }
-    public bool Reached { get; set; }
+    public Boolean Reached { get; set; }
 
     public TourKeyPoint(int Id, string name, TourKeyPointType tourKeyPointType)
     {
@@ -29,6 +30,13 @@ public class TourKeyPoint
         this.Reached = false;
     }
 
+    public TourKeyPoint(string name)
+    {
+        this.Name = name;
+        this.Tour = null;
+        this.Type = TourKeyPointType.Mid;
+        this.Reached = false;
+    }
     public TourKeyPoint(string name, TourKeyPointType type)
     {
         this.Tour = null;
