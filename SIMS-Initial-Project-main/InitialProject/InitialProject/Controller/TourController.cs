@@ -12,9 +12,10 @@ namespace InitialProject.Controller
 {
     public class TourController
     {
-        public static List<GetTourDto> GetAll()
+        private TourService tourService = new TourService();
+        public List<GetTourDto> GetAll()
         {
-            List<Tour> allTours = TourRepository.GetAll();
+            List<Tour> allTours = tourService.GetAll();
             List<GetTourDto> getTourDtos = new List<GetTourDto>();
 
             foreach (Tour tour in allTours)
@@ -24,9 +25,9 @@ namespace InitialProject.Controller
             return getTourDtos;
         }
 
-        public static List<GetTourDto> GetBy(Location location)
+        public List<GetTourDto> GetBy(Location location)
         {
-            List<Tour> allTours = TourRepository.GetBy(location);
+            List<Tour> allTours = tourService.GetBy(location);
             List<GetTourDto> getTourDtos = new List<GetTourDto>();
 
             foreach (Tour tour in allTours)
@@ -36,9 +37,9 @@ namespace InitialProject.Controller
             return getTourDtos;
         }
 
-        public static List<GetTourDto> GetBy(TimeOnly duration)
+        public List<GetTourDto> GetBy(TimeOnly duration)
         {
-            List<Tour> allTours = TourRepository.GetBy(duration);
+            List<Tour> allTours = tourService.GetBy(duration);
             List<GetTourDto> getTourDtos = new List<GetTourDto>();
 
             foreach (Tour tour in allTours)
@@ -48,9 +49,9 @@ namespace InitialProject.Controller
             return getTourDtos;
         }
 
-        public static List<GetTourDto> GetBy(string language)
+        public List<GetTourDto> GetBy(string language)
         {
-            List<Tour> allTours = TourRepository.GetBy(language);
+            List<Tour> allTours = tourService.GetBy(language);
             List<GetTourDto> getTourDtos = new List<GetTourDto>();
 
             foreach (Tour tour in allTours)
@@ -60,9 +61,9 @@ namespace InitialProject.Controller
             return getTourDtos;
         }
 
-        public static List<GetTourDto> GetBy(int guestNumber)
+        public List<GetTourDto> GetBy(int guestNumber)
         {
-            List<Tour> allTours = TourRepository.GetBy(guestNumber);
+            List<Tour> allTours = tourService.GetBy(guestNumber);
             List<GetTourDto> getTourDtos = new List<GetTourDto>();
 
             foreach (Tour tour in allTours)
@@ -72,9 +73,9 @@ namespace InitialProject.Controller
             return getTourDtos;
         }
 
-        public static Tour Reserve(Tour tour, int guestNumber)
+        public Tour Reserve(Tour tour, int guestNumber)
         {
-            Tour chosenTour = TourService.GetById(tour.Id);
+            Tour chosenTour = tourService.GetById(tour.Id);
 
             //TODO: ispravi ovo
             return null;

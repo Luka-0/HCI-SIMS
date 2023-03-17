@@ -10,36 +10,36 @@ namespace InitialProject.Service
 {
     public class TourService
     {
+        public TourRepository repository = new TourRepository();
+       
 
-        public TourService() { }
-
-        public static List<Tour> GetAll()
+        public List<Tour> GetAll()
         {
-            return TourRepository.GetAll();
+            return repository.GetAll();
         }
 
-        public static Tour GetById(int id)
+        public Tour GetById(int id)
         {
-            return TourRepository.GetById(id);
+            return repository.GetById(id);
         }
-        public static List<Tour> GetBy(Location location)
+        public List<Tour> GetBy(Location location)
         {
-            return TourRepository.GetBy(location);
-        }
-
-        public static List<Tour> GetBy(TimeOnly duration)
-        {
-            return TourRepository.GetBy(duration);
+            return repository.GetBy(location);
         }
 
-        public static List<Tour> GetBy(string language)
+        public List<Tour> GetBy(TimeOnly duration)
         {
-            return TourRepository.GetBy(language);
+            return repository.GetBy(duration);
         }
 
-        public static List<Tour> GetBy(int guestNumber)
+        public List<Tour> GetBy(string language)
         {
-            return TourRepository.GetBy(guestNumber);
+            return repository.GetBy(language);
+        }
+
+        public List<Tour> GetBy(int guestNumber)
+        {
+            return repository.GetBy(guestNumber);
         }
 
         

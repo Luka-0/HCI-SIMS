@@ -12,7 +12,7 @@ namespace InitialProject.Repository
     {
         public TourReservationRepository() { }
 
-        public static List<TourReservation> GetAll()
+        public List<TourReservation> GetAll()
         {
             List<TourReservation> reservations = new List<TourReservation>();
 
@@ -23,7 +23,7 @@ namespace InitialProject.Repository
             return reservations;
         }
 
-        public static TourReservation GetById(int id)
+        public TourReservation GetById(int id)
         {
             TourReservation reservation = new TourReservation();
 
@@ -36,7 +36,7 @@ namespace InitialProject.Repository
         }
 
         //CountBy given tour/tourId
-        public static int CountBy(Tour tour)
+        public int CountBy(Tour tour)
         {
             int count = 0;
 

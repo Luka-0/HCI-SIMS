@@ -10,9 +10,9 @@ namespace InitialProject.Repository
 {
     public class TourRepository
     {
-        public TourRepository() { }
+        //public TourRepository() { }
 
-        public static List<Tour> GetAll()
+        public List<Tour> GetAll()
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -23,7 +23,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public static Tour GetById(int id)
+        public Tour GetById(int id)
         {
             Tour tour = new Tour();
 
@@ -35,7 +35,7 @@ namespace InitialProject.Repository
             return tour;
         }
 
-        public static List<Tour> GetBy(Location location)
+        public List<Tour> GetBy(Location location)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -48,7 +48,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public static List<Tour> GetBy(TimeOnly duration)
+        public List<Tour> GetBy(TimeOnly duration)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -61,7 +61,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public static List<Tour> GetBy(string language)
+        public List<Tour> GetBy(string language)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -74,7 +74,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public static List<Tour> GetBy(int guestNumber)
+        public List<Tour> GetBy(int guestNumber)
         {
             List<Tour> Tours = new List<Tour>();
 
