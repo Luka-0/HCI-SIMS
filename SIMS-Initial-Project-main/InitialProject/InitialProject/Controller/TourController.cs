@@ -27,8 +27,8 @@ public class TourController
         List<Image> images = imageService.save(dto.ImageURLs);
 
         Tour tour = new Tour(dto.Name, dto.Description, dto.Language, 
-            dto.GuestLimit, tourKeyPoints, dto.StartDateAndTime, 
-            dto.Duration, images);
+            dto.GuestLimit, dto.StartDateAndTime, 
+            dto.Duration);
 
         var db = new UserContext();
         tour = tourService.save(tour);

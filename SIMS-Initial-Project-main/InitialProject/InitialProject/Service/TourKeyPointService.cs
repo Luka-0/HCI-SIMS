@@ -26,6 +26,9 @@ public class TourKeyPointService
 
             TourKeyPoint tourKeyPoint= new TourKeyPoint(name);
             TourKeyPointRepository.Save(tourKeyPoint);
+            TourKeyPoint keyPointFromDb = TourKeyPointRepository.getBy(tourKeyPoint.Id);
+            tourKeyPoints.Add(keyPointFromDb);
+
         }
 
         return tourKeyPoints;

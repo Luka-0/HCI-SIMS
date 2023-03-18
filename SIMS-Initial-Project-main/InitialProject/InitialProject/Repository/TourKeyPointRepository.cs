@@ -78,5 +78,13 @@ public class TourKeyPointRepository
         }
     }
 
+    public static TourKeyPoint getBy(int id)
+    {
+        using (var db = new UserContext())
+        {
+            return db.tourKeyPoints.Find(id);
+        }
+    }
+
     
 }
