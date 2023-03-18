@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Packaging;
+using System.Runtime.Serialization;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
@@ -37,6 +38,7 @@ public class Tour
     public TimeSpan Duration { get; set; }
 
     //Images are in Image table
+    [IgnoreDataMember]
     public List<Image>? images { get; set; }
     public Boolean Started { get; set; }
 
