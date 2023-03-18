@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Packaging;
+using System.Linq;
+using System.Windows;
 using InitialProject.Contexts;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -18,6 +23,24 @@ public class TourKeyPointService
         return TourKeyPointRepository.getBy(names);
     }
 
+    public TourKeyPointType getTypesByIndex(List<String> names, String currentName)
+    {
+        String first= names.First();
+        String last = names.Last();
+
+        if (currentName.Equals(first))
+        {
+            return TourKeyPointType.Start;
+        }
+
+        if (currentName.Equals(last))
+        {
+            return TourKeyPointType.End;
+        }
+        return TourKeyPointType.Mid;
+    }
+    
+
     public  List<TourKeyPoint> save(List<string> keyPointNames)
     {
         List<TourKeyPoint> tourKeyPoints= new List<TourKeyPoint>();
@@ -25,7 +48,8 @@ public class TourKeyPointService
         {
 
             TourKeyPoint tourKeyPoint= new TourKeyPoint(name);
-            TourKeyPointRepository.Save(tourKeyPoint);
+            TourKeyPointType type = getTypesByIndex(keyPointNames, name);
+            TourKeyPointRepository.Save(tourKeyPoint, type);
             TourKeyPoint keyPointFromDb = TourKeyPointRepository.getBy(tourKeyPoint.Id);
             tourKeyPoints.Add(keyPointFromDb);
 
@@ -37,10 +61,19 @@ public class TourKeyPointService
     public void update(List<TourKeyPoint> tourKeyPoints, Tour tour)
     {
         {
-            foreach (var KeyPoint in tourKeyPoints)
+            foreach (var keyPoint in tourKeyPoints)
             {
-                TourKeyPointRepository.update(KeyPoint,tour);
+                TourKeyPointRepository.update(keyPoint,tour);
             }
         }
     }
+
+    public void setTypes(List<TourKeyPoint> tourKeyPoints)
+    {
+        TourKeyPoint start = tourKeyPoints.First();
+        TourKeyPoint end = tourKeyPoints.Last();
+        TourKeyPointRepository.setType(start.Id, end.Id);
+
+    }
+
 }

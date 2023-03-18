@@ -35,6 +35,7 @@ public class TourController
 
         //int tourId = tourService.get(tour.Id);
         tourKeyPointService.update(tourKeyPoints, tour);
+       // tourKeyPointService.setTypes(tourKeyPoints);
         tour.Location = locationService.getBy(dto.Country, dto.City);
 
         imageService.setTourId(images, tour);

@@ -19,14 +19,12 @@ public class TourKeyPoint
     [AllowNull]
     public Tour? Tour { get; set; }
 
-    [Required]
     public TourKeyPointType Type { get; set; }
     public Boolean Reached { get; set; }
 
     public TourKeyPoint(int Id, string name, TourKeyPointType tourKeyPointType)
     {
         this.Name = "default";
-        this.Type = TourKeyPointType.Mid;
         this.Reached = false;
     }
 
@@ -34,7 +32,6 @@ public class TourKeyPoint
     {
         this.Name = name;
         this.Tour = null;
-        this.Type = TourKeyPointType.Mid;
         this.Reached = false;
     }
     public TourKeyPoint(string name, TourKeyPointType type)

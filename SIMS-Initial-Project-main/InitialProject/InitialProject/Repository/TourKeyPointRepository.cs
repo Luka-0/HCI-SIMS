@@ -59,8 +59,9 @@ public class TourKeyPointRepository
         db.SaveChanges();
         return tourKeyPoints;
     }*/
-    public static void Save(TourKeyPoint tourKeyPoint)
+    public static void Save(TourKeyPoint tourKeyPoint, TourKeyPointType type)
     {
+        tourKeyPoint.Type = type;
         using var db = new UserContext();
 
         db.Add(tourKeyPoint);
@@ -83,6 +84,19 @@ public class TourKeyPointRepository
         using (var db = new UserContext())
         {
             return db.tourKeyPoints.Find(id);
+        }
+    }
+
+    public static void setType(int  startId, int endId)
+    {
+        using (var db = new UserContext())
+        {
+            var tempRecord = db.tourKeyPoints.Find(startId);
+            tempRecord.Type = TourKeyPointType.Start;
+            var tempRecord2 = db.tourKeyPoints.Find(endId);
+            tempRecord2.Type = TourKeyPointType.End;
+
+            db.SaveChanges();
         }
     }
 
