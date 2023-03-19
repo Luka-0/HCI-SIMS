@@ -44,5 +44,10 @@ namespace InitialProject.Service
 
             return processedDate;
         }
+
+        public static AccommodationReservation GetBy(int id) {
+
+            return AccommodationReservationRepository.GetBy(id);
+        }
     }
 }

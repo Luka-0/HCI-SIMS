@@ -55,9 +55,9 @@ namespace InitialProject
             {
                 if(user.Password == txtPassword.Password)
                 {
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
-                    Close(); //this.close();
+                    //CommentsOverview commentsOverview = new CommentsOverview(user);
+                   // commentsOverview.Show();
+                   //Close(); //this.close();
 
                     switch (user.Type)
                     {
@@ -94,8 +94,9 @@ namespace InitialProject
                                     //this.Hide();
 
                                     owner.Show();
-
                                     MessageBox.Show("Owner: " + user.Username + " is  logged in.");
+                                    this.Close();
+                                    
                                 }
                                 break;
                             }

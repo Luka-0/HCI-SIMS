@@ -11,7 +11,7 @@ namespace InitialProject.Dto
 {
     public class ExpiredReservationDto
     {
-   
+        public int ReservationId { get; set; }
         public DateTime BegginingDate { get; set; }
         public DateTime EndingDate { get; set; }
         public int GuestId { get; set; }
@@ -29,6 +29,7 @@ namespace InitialProject.Dto
             this.GuestNumber = reservation.GuestNumber;
             this.BegginingDate = reservation.BegginingDate;
             this.EndingDate = reservation.EndingDate;
+            this.ReservationId = reservation.Id;
         }
 
     }

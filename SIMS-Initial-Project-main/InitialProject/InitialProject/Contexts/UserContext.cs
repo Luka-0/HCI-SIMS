@@ -18,7 +18,7 @@ namespace InitialProject.Contexts
 
         public DbSet<Image> image { get; set; }
 
-        public DbSet<GuestGrade> guestGrade { get; set; }
+        public DbSet<GuestReview> guestReview { get; set; }
 
         public DbSet<AccommodationReservation> accommodationReservation { get; set; }
 

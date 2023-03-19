@@ -32,7 +32,7 @@ namespace InitialProject.View
         public void LoadNotifications() {
 
             List<ExpiredReservationDto> records = new List<ExpiredReservationDto>();
-            records = AccommodationReservationController.LoadExpiredReservations();
+            records = GuestReviewController.LoadExpiredReservations();
 
             if (records.Count == 0) {
                 notifications.Items.Clear();
@@ -51,16 +51,16 @@ namespace InitialProject.View
         public string PrepareMessage(ExpiredReservationDto record) {
 
             DateTime todaysDate = DateTime.UtcNow.Date;
-            int daysLeft = todaysDate.Day - record.EndingDate.Day;
+            int daysLeft = 5 - (todaysDate.Day - record.EndingDate.Day);
 
             string message;
             if (daysLeft == 1)
             {
-                message = "Reservation has expired: \n   " + daysLeft.ToString() + " day left to rate guest: " + record.GuestUsername;
+                message = "Reservation "+ record.ReservationId +" has expired: \n   " + daysLeft.ToString() + " day left to rate guest: " + record.GuestUsername;
             }
             else {
 
-                message = "Reservation has expired: \n   " + daysLeft.ToString() + " days left to rate guest: " + record.GuestUsername;
+                message = "Reservation "+ record.ReservationId +" has expired: \n   " + daysLeft.ToString() + " days left to rate guest: " + record.GuestUsername;
             }
 
             return message;

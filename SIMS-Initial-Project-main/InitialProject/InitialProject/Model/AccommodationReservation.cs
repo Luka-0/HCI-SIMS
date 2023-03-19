@@ -33,10 +33,10 @@ namespace InitialProject.Model
 
         public AccommodationReservation() {
 
-            this.Accommodation = new Accommodation();
-            this.Guest = new User();
+           // this.Accommodation = new Accommodation();
+           // this.Guest = new User();
         }
 
-
+        
     }
 }

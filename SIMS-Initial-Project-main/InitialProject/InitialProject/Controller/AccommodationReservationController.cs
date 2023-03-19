@@ -11,7 +11,7 @@ namespace InitialProject.Controller
 {
     internal class AccommodationReservationController
     {
-        public static List<ExpiredReservationDto> LoadExpiredReservations() {
+       /* public static List<ExpiredReservationDto> LoadExpiredReservations() {
 
             DateTime todaysDate = DateTime.UtcNow.Date;
 
@@ -28,6 +28,6 @@ namespace InitialProject.Controller
 
             return expiredReservations;
         }
-
+       */
     }
 }

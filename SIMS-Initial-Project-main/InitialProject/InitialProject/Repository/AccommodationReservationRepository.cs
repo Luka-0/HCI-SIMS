@@ -57,5 +57,18 @@ namespace InitialProject.Repository
             }
             return guest;
         }
+
+        public static AccommodationReservation GetBy(int id)
+        {
+
+            AccommodationReservation reservation = new AccommodationReservation();
+
+            using (var dbContext = new UserContext())
+            {
+                reservation = (AccommodationReservation)dbContext.accommodationReservation
+                                 .Where(a => a.Id == id).First();
+            }
+            return reservation;
+        }
     }
 }
