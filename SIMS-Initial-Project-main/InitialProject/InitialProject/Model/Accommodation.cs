@@ -38,7 +38,7 @@ namespace InitialProject.Model
         }
 
         
-        public Accommodation(String title, int guestLimit, AccommodationType type, int minimumReservationDays, int cancellationDeadline)
+        public Accommodation(String title, int guestLimit, AccommodationType type, int minimumReservationDays, int cancellationDeadline, Location location = null)
         {
             this.Title = title;
             this.GuestLimit = guestLimit;
@@ -46,7 +46,7 @@ namespace InitialProject.Model
             this.MinimumReservationDays = minimumReservationDays;
             this.CancellationDeadline = cancellationDeadline;
             this.Available = true;
-
+            this.Location = location;
         }
 
 

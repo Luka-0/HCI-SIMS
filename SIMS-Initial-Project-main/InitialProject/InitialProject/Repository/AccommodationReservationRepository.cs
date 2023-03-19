@@ -12,24 +12,28 @@ namespace InitialProject.Repository
     {
         public AccommodationReservationRepository() { }
 
-        public static bool Add(AccommodationReservation accommodationReservation)
+        public static void Add(AccommodationReservation accommodationReservation)
         {
             using var db = new UserContext();
 
-            /*if(accommodationReservation.Accommodation.MinimumReservationDays > )
-            {
-
-            }*/
-
-            if(accommodationReservation.Accommodation.GuestLimit < accommodationReservation.GuestNumber)
-            {
-                return false;
-            }
-
             db.Add(accommodationReservation);
             db.SaveChanges();
+        }
 
-            return true;
+        public static List<AccommodationReservation> GetByAccommodationId(int id)
+        {
+            List<AccommodationReservation> retVal = new();
+
+            using var db = new UserContext();
+            foreach (AccommodationReservation ar in db.accommodationReservation)
+            {
+                if (ar.Accommodation.Id == id)
+                {
+                    retVal.Add(ar);
+                }
+            }
+
+            return retVal;
         }
     }
 }

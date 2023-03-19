@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AccommodationReservate" Height="450" Width="800">
     <Grid Margin="10,0,0,0">
-        <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding accommodationsToShow}" Height="Auto" Width="Auto" Margin="161,0,161,0" VerticalAlignment="Top" 
+        <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding accommodationsToShow}" Height="Auto" Width="Auto" Margin="312,0,10,0" VerticalAlignment="Top" 
                   AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
@@ -17,5 +17,23 @@
                 <DataGridTextColumn Header="City" Binding="{Binding City}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Grid Margin="0,0,483,222" DataContext="{Binding ElementName=AccommodationsGrid, Path=SelectedItem}">
+            <DatePicker x:Name="StartingDatePicker" HorizontalAlignment="Left" Margin="154,11,0,0" VerticalAlignment="Top"/>
+            <DatePicker x:Name="EndingDatePicker" HorizontalAlignment="Left" Margin="154,55,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="GuestNumberTB" HorizontalAlignment="Left" Margin="154,110,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" TextAlignment="Center" Width="51"/>
+            <Button Content="Reservate" HorizontalAlignment="Left" Margin="109,160,0,0" VerticalAlignment="Top" Click="ReservateAccommodation"/>
+            <Label Content="Select starting date:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Content="Select ending date:" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top"/>
+            <Label Content="Enter guest count:" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Margin="0,217,483,0" >
+            <ComboBox x:Name="FilterComboBox" HorizontalAlignment="Left" Margin="154,10,0,0" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="10,57,0,0" TextWrapping="Wrap" Text="Enter name here" VerticalAlignment="Top" Width="Auto"/>
+            <Button x:Name="ApplyFilterButton" Content="Apply filter" HorizontalAlignment="Center" Margin="0,166,0,0" VerticalAlignment="Top" Click="ApplyFilter"/>
+            <Label Content="Choose what to filter with:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="AccommodationTypeComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Margin="154,0,0,0"/>
+            <Label Content="Accommodation type:" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
+
+        </Grid>
     </Grid>
 </Window>

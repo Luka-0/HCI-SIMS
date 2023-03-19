@@ -39,7 +39,7 @@ namespace InitialProject.Repository
             return retVal;
         }
 
-        public static List<Accommodation> GetByName(string name)
+        public static List<Accommodation> GetBy(string name)
         {
             List<Accommodation> retVal = new();
 
@@ -50,11 +50,6 @@ namespace InitialProject.Repository
                 {
                     retVal.Add(accommodation);
                 }
-            }
-
-            if(retVal == null)  // TODO
-            {
-
             }
 
             return retVal;
@@ -73,15 +68,10 @@ namespace InitialProject.Repository
                 }
             }
 
-            if (retVal == null)  // TODO
-            {
-
-            }
-
             return retVal;
         }
 
-        public static List<Accommodation> GetByType(AccommodationType accommodationType)
+        public static List<Accommodation> GetBy(AccommodationType accommodationType)
         {
             List<Accommodation> retVal = new();
 
@@ -92,11 +82,6 @@ namespace InitialProject.Repository
                 {
                     retVal.Add(accommodation);
                 }
-            }
-
-            if (retVal == null) //TODO
-            {
-
             }
 
             return retVal;
@@ -115,11 +100,6 @@ namespace InitialProject.Repository
                 }
             }
 
-            if (retVal == null) //TODO
-            {
-
-            }
-
             return retVal;
         }
 
@@ -134,11 +114,6 @@ namespace InitialProject.Repository
                 {
                     retVal.Add(accommodation);
                 }
-            }
-
-            if(retVal == null)  //TODO
-            {
-
             }
 
             return retVal;

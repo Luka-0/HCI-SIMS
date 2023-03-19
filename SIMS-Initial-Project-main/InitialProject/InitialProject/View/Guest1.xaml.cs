@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace InitialProject.View
 {
-    /// <summary>
-    /// Interaction logic for Guest1View.xaml
-    /// </summary>
     public partial class Guest1 : Window
     {
         public Guest1()
