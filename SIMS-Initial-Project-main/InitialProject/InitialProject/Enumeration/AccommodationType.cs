@@ -4,11 +4,8 @@ namespace InitialProject.Enumeration
 {
     public enum AccommodationType
     {
-<<<<<<< Updated upstream
         Apartment,
-=======
-        Accommodation,
->>>>>>> Stashed changes
+    Accommodation,
         House,
         Cottage,
     }

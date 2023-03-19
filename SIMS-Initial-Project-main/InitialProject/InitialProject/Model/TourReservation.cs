@@ -14,9 +14,11 @@ namespace InitialProject.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [ForeignKey("TourId")] public Tour Tour { get; set; }
+        [ForeignKey("TourId")]
+        public Tour Tour { get; set; }
 
-        [Required] public int GuestNumber { get; set; }
+        [Required]
+        public int GuestNumber { get; set; }
 
         public TourReservation(){}
 
