@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.IO.Packaging;
+using System.Runtime.Serialization;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
@@ -19,23 +21,25 @@ public class Tour
 
     //Tour Location as a ForeignKey to Location table
     [ForeignKey("locationID")]
-    public Location Location { get; set; }
+    [AllowNull]
+    public Location? Location { get; set; }
 
     public string Description { get; set; }
     public string Language { get; set; }
     public int GuestLimit { get; set; }
 
     //KeyPoints are in TourKeyPoints Table
-    public List<TourKeyPoint> TourKeyPoints { get; set; }
+    public List<TourKeyPoint>? TourKeyPoints { get; set; }
 
     [DataType(DataType.DateTime)]
     public DateTime StartDateAndTime{ get;set; }
 
     [DataType(DataType.Time)]
-    public TimeOnly Duration { get; set; }
+    public TimeSpan Duration { get; set; }
 
     //Images are in Image table
-    public List<Image> images { get; set; }
+    
+    public List<Image>? images { get; set; }
     public Boolean Started { get; set; }
 
     public Tour()
@@ -47,6 +51,49 @@ public class Tour
     {
         Started = false;
     }
+
+    public Tour(String name, Location location, string description, string language, int guestLimit,
+        List<TourKeyPoint> keyPoints, DateTime start, TimeSpan duration, List<Image> images)
+    {
+        this.Name = name;
+        this.Location = location;
+        this.Description = description;
+        this.Language = language;
+        this.GuestLimit = guestLimit;
+        this.TourKeyPoints = keyPoints;
+        this.StartDateAndTime = start;
+        this.Duration = duration;
+        this.images = images;
+        this.Started = false;
+    }
+    
+    public Tour(String name, string description, string language, int guestLimit,
+        List<TourKeyPoint> keyPoints, DateTime start, TimeSpan duration)
+    {
+        this.Name = name;
+        this.Location = null;
+        this.Description = description;
+        this.Language = language;
+        this.GuestLimit = guestLimit;
+        this.TourKeyPoints = keyPoints;
+        this.StartDateAndTime = start;
+        this.Duration = duration;
+        this.Started = false;
+    }
+    public Tour(String name, string description, string language, int guestLimit,
+         DateTime start, TimeSpan duration)
+    {
+        this.Name = name;
+        this.Location = null;
+        this.Description = description;
+        this.Language = language;
+        this.GuestLimit = guestLimit;
+        this.StartDateAndTime = start;
+        this.Duration = duration;
+        this.Started = false;
+    }
+
+
 
 
 

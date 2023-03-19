@@ -12,7 +12,8 @@ namespace InitialProject.Contexts
     {
         public DbSet<User> users { get; set; }
         public DbSet<Location> location { get; set; }
-        public DbSet<Tour> tour { get; set; }
+        public DbSet<Tour> tours { get; set; }
+        public DbSet<TourKeyPoint> tourKeyPoints { get; set; }
 
         public DbSet<Accommodation> accommodation { get; set; }
 
@@ -25,7 +26,7 @@ namespace InitialProject.Contexts
         public DbSet<AccommodationReservation> accommodationReservation { get; set; }
 
         //Pavle:
-        //public string path = @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database.db";
+        public string path = @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";
 
         //Aleksandra:
         //public string path = @" F:\SIMS - PROJEKAT\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";

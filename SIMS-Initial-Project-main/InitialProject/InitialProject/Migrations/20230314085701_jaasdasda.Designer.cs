@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230314085701_jaasdasda")]
+    partial class jaasdasda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -42,12 +44,7 @@ namespace InitialProject.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("locationID")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("locationID");
 
                     b.ToTable("Accommodation");
                 });
@@ -138,7 +135,7 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Country")
+                    b.Property<string>("Contry")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -157,7 +154,7 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<TimeSpan>("Duration")
+                    b.Property<TimeOnly>("Duration")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("GuestLimit")
@@ -177,7 +174,7 @@ namespace InitialProject.Migrations
                     b.Property<bool>("Started")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("locationID")
+                    b.Property<int>("locationID")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -197,13 +194,10 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Reached")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("tourID")
+                    b.Property<int>("tourID")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -233,15 +227,6 @@ namespace InitialProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.Accommodation", b =>
-                {
-                    b.HasOne("InitialProject.Model.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("locationID");
-
-                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("InitialProject.Model.AccommodationReservation", b =>
@@ -282,7 +267,9 @@ namespace InitialProject.Migrations
                 {
                     b.HasOne("InitialProject.Model.Location", "Location")
                         .WithMany()
-                        .HasForeignKey("locationID");
+                        .HasForeignKey("locationID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Location");
                 });
@@ -291,7 +278,9 @@ namespace InitialProject.Migrations
                 {
                     b.HasOne("InitialProject.Model.Tour", "Tour")
                         .WithMany("TourKeyPoints")
-                        .HasForeignKey("tourID");
+                        .HasForeignKey("tourID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Tour");
                 });
