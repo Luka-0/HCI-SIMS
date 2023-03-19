@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Controller;
+using InitialProject.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,13 @@ namespace InitialProject.View
         public GuestReview()
         {
             InitializeComponent();
+
+            List<ExpiredReservationDto> records = new List<ExpiredReservationDto>();
+            records = AccommodationReservationController.LoadExpiredReservations();
+            ExpiredReservations.ItemsSource = records;
+ 
         }
+
+     
     }
 }

@@ -49,6 +49,17 @@ namespace InitialProject.Model
 
         }
 
+        public Accommodation(Accommodation accommodation)
+        {
+            this.Title = accommodation.Title;
+            this.GuestLimit = accommodation.GuestLimit;
+            this.Type = accommodation.Type;
+            this.MinimumReservationDays = accommodation.MinimumReservationDays;
+            this.CancellationDeadline = accommodation.CancellationDeadline;
+            this.Available = accommodation.Available;
+
+        }
+
 
     }
 }

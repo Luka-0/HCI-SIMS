@@ -20,8 +20,6 @@ namespace InitialProject.Contexts
 
         public DbSet<GuestGrade> guestGrade { get; set; }
 
-
-
         public DbSet<AccommodationReservation> accommodationReservation { get; set; }
 
         //Pavle:

@@ -23,9 +23,11 @@ namespace InitialProject.Model
         [Range(1, 5)]
         public int Obedience { get; set; }
 
-
         public String Comment { get; set; }
 
+        //changes
+        [ForeignKey("GuestId")]
+        public User Guest { get; set; }
 
     }
 }

@@ -46,7 +46,7 @@ namespace InitialProject.View
             int cancellationDeadline = Int32.Parse(suspensionDays.Text);
 
             //calling method for finding the name of selected city
-            //from owner's GUI fro Accommodation's location
+            //from owner's GUI for Accommodation's location
             string selectedLocation = locationPicker.SelectedItem.ToString();
             string cityName = SeparateCity(selectedLocation);
 
