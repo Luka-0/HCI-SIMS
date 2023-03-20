@@ -5,15 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject"
         mc:Ignorable="d"
-        Title="Tours" Height="720" Width="1080" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Today's tours" Height="720" Width="1080" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        
-       
-    </Grid>
-
-
+        <DataGrid x:Name="dataGridTours" ItemsSource="{Binding Path=BasicTours}" AutoGenerateColumns="True" 
+                  SelectionMode="Single" IsReadOnly="True" AutoGeneratingColumn="generateColumns" HorizontalAlignment="Left" 
+                  Margin="10,47,0,0" VerticalAlignment="Top"/>
+        </Grid>
 </Window>

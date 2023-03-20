@@ -14,6 +14,18 @@
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <Grid Grid.Column="0" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button  Grid.Row="0" Click="Create"  Content="Create" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button  Grid.Row="1" Click="ViewAllTours"  Content="View all tours" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+
+        </Grid>
+
+
         <Grid Grid.Column="1" HorizontalAlignment="Right">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
@@ -74,7 +86,6 @@
 
 
         </Grid>
-        <Button Grid.Column="0" Grid.Row="9" Click="Create"  Content="Create" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
     </Grid>
 

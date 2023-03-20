@@ -65,17 +65,16 @@ namespace InitialProject
         }
         private DateTime SetDateAndTime(String dateString, String timeString)
         {
-
             DateAndTime date1;
             String[] temp = SeparateForDate(dateString);
             String format = temp[1] + "-" + temp[0] + "-" + temp[2] + " " + timeString;
 
             //date = DateAndTime.DateValue(format);
             //Myb put it in try catch 
-            DateTime dateTime = DateTime.ParseExact(format, "d-M-yyyy HH:mm:ss" , CultureInfo.InvariantCulture);
+            DateTime dateTime = DateTime.ParseExact(format, "d-M-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
 
 
-            return dateTime ;
+            return dateTime;
         }
 
         private TimeSpan SetDuration(String timeInHours)
@@ -107,6 +106,12 @@ namespace InitialProject
             tourToControllerDto.ImageURLs = Separate(newTourDto.ImageURLs);
             tourController.add(tourToControllerDto);
         }
-        
+
+        private void ViewAllTours(object sender, RoutedEventArgs e)
+        {
+             ShowTours showTours = new ShowTours();
+             showTours.Show();
+             Close(); //this.close();
+        }
     }
 }

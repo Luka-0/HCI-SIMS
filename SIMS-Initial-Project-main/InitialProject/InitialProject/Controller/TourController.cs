@@ -41,9 +41,21 @@ public class TourController
         imageService.setTourId(images, tour);
 
         db.SaveChanges();
+        
+    }
 
+    public List<Tour> getAll()
+    {
+        return tourService.getAll();
+    }
 
-
+    public List<TourBasicInfoDto> getAllBasicInfo()
+    {
+        return tourService.getBasicInfo();
+    }
+    public List<TourBasicInfoDto> GetTodaysToursBasicInfo()
+    {
+        return tourService.getTodaysToursBasicInfo();
     }
 
 }
