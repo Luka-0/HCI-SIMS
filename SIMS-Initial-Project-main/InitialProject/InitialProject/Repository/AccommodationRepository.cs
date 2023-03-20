@@ -45,7 +45,7 @@ namespace InitialProject.Repository
 
             using var db = new UserContext();
             foreach(Accommodation accommodation in db.accommodation)
-            {
+            {  
                 if (accommodation.Title.Contains(name))
                 {
                     retVal.Add(accommodation);
@@ -62,7 +62,27 @@ namespace InitialProject.Repository
             using var db = new UserContext();
             foreach (Accommodation accommodation in db.accommodation)
             {
-                if (accommodation.Location.Equals(location))    //TODO: proveriti da li se radi sa equals ili ==
+                if (accommodation.Location.Id == location.Id)
+                {
+                    retVal.Add(accommodation);
+                }
+            }
+
+            return retVal;
+        }
+
+        public static List<Accommodation> GetByCity(string city)
+        {
+            List<Accommodation> retVal = new();
+
+            using var db = new UserContext();
+            foreach (Accommodation accommodation in db.accommodation)
+            {
+                if(accommodation.Location == null)
+                {
+                    continue;
+                }
+                if (accommodation.Location.City == city)
                 {
                     retVal.Add(accommodation);
                 }

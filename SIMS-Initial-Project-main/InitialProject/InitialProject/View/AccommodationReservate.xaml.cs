@@ -31,10 +31,11 @@ namespace InitialProject.View
             InitializeComponent();
             InitializeFilterComboBox();
             InitializeAccommodationTypeComboBox();
+            InitializeLocationComboBox();
             DataContext = this;
 
             List<Accommodation> allAccommodations = AccommodationRepository.GetAll();
-            if(allAccommodations == null)
+            if(allAccommodations.Count == 0)
             {
                 MessageBox.Show("There are currently no Accommodations to look at :(");
                 this.Close();
@@ -45,12 +46,13 @@ namespace InitialProject.View
 
         private void InitializeFilterComboBox()
         {
-            FilterComboBox.Items.Add("Name");                   //0
-            FilterComboBox.Items.Add("Location");               //1
-            FilterComboBox.Items.Add("Accommodation type");     //2
-            FilterComboBox.Items.Add("Guest number");           //3
-            FilterComboBox.Items.Add("Days for reservation");   //4
-            FilterComboBox.Items.Add("Reset");                  //5
+            FilterComboBox.Items.Add("--Select--");             //0
+            FilterComboBox.Items.Add("Name");                   //1
+            FilterComboBox.Items.Add("Location");               //2
+            FilterComboBox.Items.Add("Accommodation type");     //3
+            FilterComboBox.Items.Add("Guest number");           //4
+            FilterComboBox.Items.Add("Days for reservation");   //5
+            FilterComboBox.Items.Add("Reset");                  //6
 
             FilterComboBox.SelectedIndex = 0;
         }
@@ -65,7 +67,20 @@ namespace InitialProject.View
 
         }
 
-        private void ReservateAccommodation(object sender, RoutedEventArgs e)
+        private void InitializeLocationComboBox()
+        {
+            LocationCBFilter.Items.Add("--Chose--");
+
+            List<Location> locations = LocationRepository.getAll();
+            foreach(Location location in locations)
+            { 
+                LocationCBFilter.Items.Add(location.Country.ToString() + "-" +  location.City.ToString());
+            }
+
+            LocationCBFilter.SelectedIndex = 0;
+        }
+
+        private void ReservateAccommodation_Click(object sender, RoutedEventArgs e)
         {
             string startingDate = StartingDatePicker.Text.ToString();
             string endingDate = EndingDatePicker.Text.ToString();
@@ -88,29 +103,61 @@ namespace InitialProject.View
             }
         }
 
-        private void ApplyFilter(object sender, RoutedEventArgs e)
+        private void ApplyFilter_Click(object sender, RoutedEventArgs e)
         {
-            if (FilterComboBox.SelectedIndex == 0)
+            switch (FilterComboBox.SelectedIndex)
             {
-                ApplyByName(NameTextBox.Text.ToString());
-            }
-            else if(FilterComboBox.SelectedIndex == 2)
-            {
-                ApplyByType((AccommodationType)AccommodationTypeComboBox.SelectedIndex);
-            }
-            else if(FilterComboBox.SelectedIndex == 5)
-            {
-                List<Accommodation> accommodations = AccommodationRepository.GetAll();
-                RefreshDataGrid(accommodations);
+                case 1:
+                    ApplyByName(NameTextBox.Text.ToString());
+                    break;
+                case 2:
+                    if(LocationCBFilter.SelectedIndex == 0)
+                    {
+                        MessageBox.Show("Please select a proper location");
+                        return;
+                    }
+
+                    string city = ExtractCity(LocationCBFilter.SelectedItem.ToString());
+                    ApplyByCity(city);
+
+                    break;
+                case 3:
+                    ApplyByType((AccommodationType)AccommodationTypeComboBox.SelectedIndex);
+
+                    break;
+                case 4:
+                    ApplyByGuestNumber(int.Parse(GuestNumberTBFilter.Text.ToString()));         //TODO proveriti da li je ovde potrebno ToString()
+
+                    break;
+                case 5:
+                    ApplyByReservationDays(int.Parse(GuestNumberTBFilter.Text.ToString()));
+
+                    break;
+                case 6:
+                {
+                    List<Accommodation> accommodations = AccommodationRepository.GetAll();
+                    RefreshDataGrid(accommodations);
+
+                    break;
+                }
+                default:
+                    MessageBox.Show("Please select a proper filter type");
+                    break;
             }
 
 
+        }
+
+        private string ExtractCity(string location)
+        {
+            string[] separeted = location.Split('-');
+            return separeted[1];
         }
 
         private void ApplyByName(string name)
         {
             List<Accommodation> accommodations = AccommodationRepository.GetBy(name);
-            if (accommodations == null)
+            if (accommodations.Count == 0)
             {
                 MessageBox.Show("There are currently no Accommodations with that name");
                 return;
@@ -118,17 +165,50 @@ namespace InitialProject.View
 
             RefreshDataGrid(accommodations);
         }
-
         private void ApplyByType(AccommodationType accommodationType)
         {
             List<Accommodation> accommodations = AccommodationRepository.GetBy(accommodationType);
-            if (accommodations == null)
+            if (accommodations.Count == 0)
             {
-                MessageBox.Show("There are currently no Accommodations with that name");
+                MessageBox.Show("There are currently no Accommodations with that type");
                 return;
             }
 
             RefreshDataGrid(accommodations);
+        }
+        private void ApplyByGuestNumber(int guestNumber)
+        {
+            List<Accommodation> accommodations = AccommodationRepository.GetByGuestNumber(guestNumber);
+            if (accommodations.Count == 0)
+            {
+                MessageBox.Show("There are currently no Accommodations that can accept that many guests");
+                return;
+            }
+
+            RefreshDataGrid(accommodations);
+        }
+        private void ApplyByReservationDays(int reservationDays)
+        {
+            List<Accommodation> accommodations = AccommodationRepository.GetByReservationDays(reservationDays);
+            if (accommodations.Count == 0)
+            {
+                MessageBox.Show("There are currently no Accommodations that can be reservated that shortly");
+                return;
+            }
+
+            RefreshDataGrid(accommodations);
+        }
+        private void ApplyByCity(string city)
+        {
+            List<Accommodation> accommodations = AccommodationRepository.GetByCity(city);
+            if (accommodations.Count == 0)
+            {
+                MessageBox.Show("There are currently no Accommodations that are in selected location");
+                return;
+            }
+
+            RefreshDataGrid(accommodations);
+
         }
     }
 }
