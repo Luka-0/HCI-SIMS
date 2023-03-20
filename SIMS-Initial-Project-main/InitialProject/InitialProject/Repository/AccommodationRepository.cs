@@ -82,7 +82,7 @@ namespace InitialProject.Repository
                 {
                     continue;
                 }
-                if (accommodation.Location.City == city)
+                if (accommodation.Location.City.Equals(city))
                 {
                     retVal.Add(accommodation);
                 }

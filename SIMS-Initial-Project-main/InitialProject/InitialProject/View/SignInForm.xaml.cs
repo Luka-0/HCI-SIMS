@@ -48,7 +48,6 @@ namespace InitialProject
 
         private void SignIn(object sender, RoutedEventArgs e)
         {
-            // User user = _repository.GetByUsername(Username);
             User user = UserRepository.GetUser(Username);
 
             if (user != null)
@@ -57,7 +56,7 @@ namespace InitialProject
                 {
                     CommentsOverview commentsOverview = new CommentsOverview(user);
                     commentsOverview.Show();
-                    Close(); //this.close();
+                    Close();
 
                     switch (user.Type)
                     {

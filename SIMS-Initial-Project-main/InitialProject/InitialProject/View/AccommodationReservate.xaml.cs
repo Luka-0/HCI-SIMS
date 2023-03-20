@@ -82,11 +82,48 @@ namespace InitialProject.View
 
         private void ReservateAccommodation_Click(object sender, RoutedEventArgs e)
         {
-            string startingDate = StartingDatePicker.Text.ToString();
-            string endingDate = EndingDatePicker.Text.ToString();
-            int guestNumber = int.Parse(GuestNumberTB.Text);
 
-            if(!AccommodationReservationService.Reservate((Accommodation)AccommodationsGrid.SelectedItem, guestNumber, startingDate, endingDate))
+            string startingDate = StartingDatePicker.Text.ToString();
+            if(startingDate.Equals(""))
+            {
+                MessageBox.Show("Please select a starting date");
+                return;
+
+            }
+
+            string endingDate = EndingDatePicker.Text.ToString();
+            if (endingDate.Equals(""))
+            {
+                MessageBox.Show("Please select an ending date");
+                return;
+
+            }
+
+            int guestNumber = int.Parse(GuestNumberTB.Text);
+            if(guestNumber <= 0)
+            {
+                MessageBox.Show("Please enter a proper guest number");
+                return;
+
+            }
+
+            Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
+            if(accommodation == null)
+            {
+                MessageBox.Show("Please select an accommodation");
+                return;
+            }
+
+            DateTime startDate = StartingDatePicker.SelectedDate.Value;
+            DateTime endDate = EndingDatePicker.SelectedDate.Value;
+
+            if(startDate > endDate)
+            {
+                MessageBox.Show("Selected starting date is after ending date, please select valid dates");
+                return;
+            }
+
+            if (!AccommodationReservationService.Reservate(accommodation, guestNumber, startDate, endDate))
             {
                 MessageBox.Show("Reservation was unsuccessful");
             }
@@ -148,7 +185,7 @@ namespace InitialProject.View
 
         }
 
-        private string ExtractCity(string location)
+        private static string ExtractCity(string location)
         {
             string[] separeted = location.Split('-');
             return separeted[1];
