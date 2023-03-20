@@ -39,7 +39,6 @@ namespace InitialProject.Service
             List<AccommodationReservation> gradedReservations = GuestReviewService.GetGradedReservations();
 
 
-
             List<AccommodationReservation> nonGradedExpired = new List<AccommodationReservation>();
 
             foreach (AccommodationReservation r in expiredReservations)
@@ -56,9 +55,7 @@ namespace InitialProject.Service
                     nonGradedExpired.Add(r);
                 }
             }
-
             return nonGradedExpired;
         }
-
     }
 }

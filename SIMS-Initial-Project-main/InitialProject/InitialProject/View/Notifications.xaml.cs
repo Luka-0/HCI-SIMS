@@ -54,17 +54,13 @@ namespace InitialProject.View
             int daysLeft = 5 - (todaysDate.Day - record.EndingDate.Day);
 
             string message;
+
             if (daysLeft == 1)
             {
-                message = "Reservation "+ record.ReservationId +" has expired: \n   " + daysLeft.ToString() + " day left to rate guest: " + record.GuestUsername;
-            }
-            else {
-
-                message = "Reservation "+ record.ReservationId +" has expired: \n   " + daysLeft.ToString() + " days left to rate guest: " + record.GuestUsername;
+                return message = "Reservation "+ record.ReservationId +" has expired: \n   " + daysLeft.ToString() + " day left to rate guest: " + record.GuestUsername;
             }
 
-            return message;
-
+            return message = "Reservation "+ record.ReservationId +" has expired: \n   " + daysLeft.ToString() + " days left to rate guest: " + record.GuestUsername;
         }
     }
 }

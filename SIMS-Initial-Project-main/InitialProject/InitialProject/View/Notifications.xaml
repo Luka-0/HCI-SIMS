@@ -10,7 +10,7 @@
 
     <Grid>
         <Label Content="Notifications :" HorizontalAlignment="Left" Height="75" Margin="31,16,0,0" VerticalAlignment="Top" Width="361" FontSize="40"/>
-        <ListBox x:Name="notifications" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,109,30,194" FontSize="30" BorderThickness="5"/>
+        <ListBox x:Name="notifications" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,109,30,194" FontSize="26" BorderThickness="5"/>
 
     </Grid>
 </Page>
