@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace InitialProject.Controller
 {
@@ -18,6 +20,15 @@ namespace InitialProject.Controller
             List<Tour> allTours = tourService.GetAll();
             List<GetTourDto> getTourDtos = new List<GetTourDto>();
 
+            string s = "";
+            foreach (Tour t in allTours)
+            {
+                s += t.ToString();
+
+            }
+            MessageBox.Show(s);
+
+            Location tourLocation = new Location();
             foreach (Tour tour in allTours)
             {
                 getTourDtos.Add(new GetTourDto(tour.Name, tour.Description, tour.Location, tour.Language, tour.GuestLimit, tour.Duration, tour.StartDateAndTime, tour.TourKeyPoints, tour.images));

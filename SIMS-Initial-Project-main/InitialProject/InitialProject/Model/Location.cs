@@ -18,5 +18,10 @@ namespace InitialProject.Model
         public string City { get; set; }
         [Required]
         public string Country { get; set;  }
+
+        public override string ToString()
+        {
+            return $"{City}, {Country}\n";
+        }
     }
 }

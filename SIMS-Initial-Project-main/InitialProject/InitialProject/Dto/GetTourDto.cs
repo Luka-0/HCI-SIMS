@@ -21,20 +21,21 @@ namespace InitialProject.Dto
 
         public GetTourDto(string name, string description, Location location, string language, int guestLimit, TimeOnly duration, DateTime startDateAndTime, List<TourKeyPoint> tourKeyPoints, List<Image> images)
         {
-            Name = name;
-            Description = description;
-            Location = location;
-            Language = language;
-            GuestLimit = guestLimit;
-            Duration = duration;
-            StartDateAndTime = startDateAndTime;
-            TourKeyPoints = tourKeyPoints;
-            Images = images;
+            this.Name = name;
+            this.Description = description;
+            this.Location = location;
+            this.Language = language;
+            this.GuestLimit = guestLimit;
+            this.Duration = duration;
+            this.StartDateAndTime = startDateAndTime;
+            this.TourKeyPoints = tourKeyPoints;
+            this.Images = images;
         }
 
         public override string ToString()
         {
-            return $"{Name}\n{Description}\n{Location}\n";
+            //return $"{Name}\n{Description}\n{Location.ToString()}\n{Language}\n{GuestLimit}\n{Duration}\n{StartDateAndTime}\n{TourKeyPoints}\n{Images}\n";
+            return Location.ToString();
         }
 
     }

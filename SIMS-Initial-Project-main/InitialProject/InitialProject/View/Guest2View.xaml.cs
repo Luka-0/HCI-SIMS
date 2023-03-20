@@ -5,6 +5,7 @@ using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -25,15 +26,34 @@ namespace InitialProject.View
     /// </summary>
     public partial class Guest2View : Window
     {
+        TourController tourController = new TourController();   
+
         TourService TourService = new TourService();
+
+        public List<GetTourDto> Tours
+        {
+            get;
+            set;
+        }
+
         public Guest2View()
         {
             InitializeComponent();
+            ShowAllTours();
+
+
+        }
+
+        public void ShowAllTours()
+        {
+          //  this.DataContext = Tours;
+            Tours = tourController.GetAll();
+            TourShowGrid.ItemsSource = Tours;
         }
 
         private void mojButton_Click(object sender, RoutedEventArgs e)
         {
-            List<GetTourDto> Tours = TourController.GetAll();
+            
             if(Tours.Count > 0)
             {
                 MessageBox.Show("Nisam prazna");
@@ -44,15 +64,7 @@ namespace InitialProject.View
             }
             String s = "";
 
-            DataTable dt = new DataTable();
-
-            dt.Columns.Add("Column1", typeof(string));
-            dt.Columns.Add("Column2", typeof(int));
-            dt.Columns.Add("Column3", typeof(DateTime));
-
-            dt.Rows.Add("Row1", 1, DateTime.Now);
-            dt.Rows.Add("Row2", 2, DateTime.Now.AddDays(1));
-            dt.Rows.Add("Row3", 3, DateTime.Now.AddDays(2));
+           
 
             
 
@@ -64,7 +76,7 @@ namespace InitialProject.View
             }
             MessageBox.Show(s);
 
-
+            
 
         }
     }

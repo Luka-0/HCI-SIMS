@@ -8,7 +8,7 @@
         Title="Guest2View" Height="450" Width="800">
     <Grid>
         <Button Name="mojButton" Height="75" Width="100" Margin="621,333,79,26" Click="mojButton_Click">Klikni me</Button>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Height="200" Width="700"/>
+        <DataGrid x:Name = "TourShowGrid"  Height="200" Width="700" />
 
     </Grid>
 </Window>

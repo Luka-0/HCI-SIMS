@@ -1,5 +1,6 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace InitialProject.Repository
 
             using (var dbContext = new UserContext())
             {
-                Tours = dbContext.tour.ToList();
+                Tours = dbContext.tour.Include(t => t.Location).ToList();
             }
             return Tours;
         }
