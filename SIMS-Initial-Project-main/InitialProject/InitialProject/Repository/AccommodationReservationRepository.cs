@@ -20,17 +20,13 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
-        public static List<AccommodationReservation> GetByAccommodationId(int id)
+        public static List<AccommodationReservation> GetByAccommodation(int id)
         {
             List<AccommodationReservation> retVal = new();
 
-            using var db = new UserContext();
-            foreach (AccommodationReservation ar in db.accommodationReservation)
+            using(UserContext db = new())
             {
-                if (ar.Accommodation.Id == id)
-                {
-                    retVal.Add(ar);
-                }
+                retVal = db.accommodationReservation.Where(t => t.Id == id).ToList();
             }
 
             return retVal;
