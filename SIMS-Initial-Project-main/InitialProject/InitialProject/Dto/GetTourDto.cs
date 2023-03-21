@@ -14,12 +14,12 @@ namespace InitialProject.Dto
         public Location Location { get; set; }  
         public string Language { get; set; }
         public int GuestLimit { get; set; }
-        public TimeOnly Duration { get; set; }
+        public TimeSpan Duration { get; set; }
         public DateTime StartDateAndTime { get; set; }
         public List<TourKeyPoint> TourKeyPoints { get; set; }
         public List<Image> Images { get; set; }
 
-        public GetTourDto(string name, string description, Location location, string language, int guestLimit, TimeOnly duration, DateTime startDateAndTime, List<TourKeyPoint> tourKeyPoints, List<Image> images)
+        public GetTourDto(string name, string description, Location location, string language, int guestLimit, TimeSpan duration, DateTime startDateAndTime, List<TourKeyPoint> tourKeyPoints, List<Image> images)
         {
             this.Name = name;
             this.Description = description;

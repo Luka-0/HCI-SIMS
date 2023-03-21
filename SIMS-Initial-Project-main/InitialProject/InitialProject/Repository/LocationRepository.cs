@@ -36,56 +36,43 @@ namespace InitialProject.Repository
                     {
                         return location;
                     }
-                    
+
                 }
             }
 
             return null;
-
-        public static Location getBy(int id)
-        {
-            Location location = new Location();
-
-            using (var dbContext = new UserContext())
-            {
-                location = (Location)dbContext.location
-                                 .Where(l => l.Id == id);
-            }
-            return location;
         }
-
-        public static Location getBy(string city, string country)
-        {
-            Location location = new Location();
-
-            using (var dbContext = new UserContext())
+            public static Location getBy(int id)
             {
-                location = dbContext.location
-                                 .Where(l => l.Country == country && l.City == city).First();
-            }
-            return location;
-        }
+                Location location = new Location();
 
-        public static List<Location> getAll()
-        {
-            List<Location> locations = new List<Location>();
-
-            using (var db = new UserContext())
-            {
-                foreach (Location location in db.location)
+                using (var dbContext = new UserContext())
                 {
-                    locations.Add(location);
+                    location = (Location)dbContext.location
+                                     .Where(l => l.Id == id);
                 }
+                return location;
             }
-            return locations;
-        }
+            public static List<Location> getAll()
+            {
+                List<Location> locations = new List<Location>();
 
-        public static void Save(Location location)
-        {
-            using var db = new UserContext();
+                using (var db = new UserContext())
+                {
+                    foreach (Location location in db.location)
+                    {
+                        locations.Add(location);
+                    }
+                }
+                return locations;
+            }
 
-            db.Add(location);
-            db.SaveChanges();
-        }
+            public static void Save(Location location)
+            {
+                using var db = new UserContext();
+
+                db.Add(location);
+                db.SaveChanges();
+            }
     }
 }

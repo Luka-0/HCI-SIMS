@@ -93,7 +93,7 @@ namespace InitialProject.View
                 string city = inputField.Text;
                 string country = inputField2.Text;
 
-                Location location = LocationService.getBy(city, country);
+                Location location = LocationService.getBy(country, city);
 
                 Tours = tourController.GetBy(location);
                 TourShowGrid.ItemsSource = Tours;
@@ -123,8 +123,8 @@ namespace InitialProject.View
             try
             {
                 string duration1 = inputField.Text;
-                TimeOnly duration;
-                TimeOnly.TryParse(inputField.Text, out duration);
+                TimeSpan duration;
+                TimeSpan.TryParse(inputField.Text, out duration);
                 MessageBox.Show(duration.ToString());
                 Tours = tourController.GetBy(duration);
                 TourShowGrid.ItemsSource = Tours;

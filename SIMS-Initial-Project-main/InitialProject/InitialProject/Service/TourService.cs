@@ -28,7 +28,7 @@ public class TourService
     public List<TourBasicInfoDto> getBasicInfo()
     {
         List<TourBasicInfoDto> basicInfoDtos = new List<TourBasicInfoDto>();
-        List<Tour> tours = getAll();
+        List<Tour> tours = GetAll();
 
         foreach (var tour in tours)
         {
@@ -61,30 +61,30 @@ public class TourService
 
         public List<Tour> GetAll()
         {
-            return repository.GetAll();
+            return tourRepository.GetAll();
         }
 
         public Tour GetById(int id)
         {
-            return repository.GetById(id);
+            return tourRepository.GetById(id);
         }
         public List<Tour> GetBy(Location location)
         {
-            return repository.GetBy(location);
+            return tourRepository.GetBy(location);
         }
 
-        public List<Tour> GetBy(TimeOnly duration)
+        public List<Tour> GetBy(TimeSpan duration)
         {
-            return repository.GetBy(duration);
+            return tourRepository.GetBy(duration);
         }
 
         public List<Tour> GetBy(string language)
         {
-            return repository.GetBy(language);
+            return tourRepository.GetBy(language);
         }
 
         public List<Tour> GetBy(int guestNumber)
         {
-            return repository.GetBy(guestNumber);
+            return tourRepository.GetBy(guestNumber);
         }
 }

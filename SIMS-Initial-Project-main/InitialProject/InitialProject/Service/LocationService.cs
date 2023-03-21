@@ -34,7 +34,7 @@ namespace InitialProject.Service
             LocationRepository.Save(location);
         }
 
-        public  Location getBy(String country, String city)
+        public static Location getBy(String country, String city)
         {
             return LocationRepository.getBy(country, city);
         }

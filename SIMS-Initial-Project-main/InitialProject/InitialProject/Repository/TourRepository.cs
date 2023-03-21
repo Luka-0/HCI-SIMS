@@ -36,7 +36,7 @@ namespace InitialProject.Repository
             db.Add(tour);
             db.SaveChanges();
         
-            return db.tours.Find(tour.Id);
+            return db.tour.Find(tour.Id);
             //Try creating method in Accommodation repository to return the same thing
         }
 
@@ -78,7 +78,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public List<Tour> GetBy(TimeOnly duration)
+        public List<Tour> GetBy(TimeSpan duration)
         {
             List<Tour> Tours = new List<Tour>();
 

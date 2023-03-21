@@ -26,10 +26,11 @@ namespace InitialProject.Model
 
         }
 
-        public Location(string city, string country) {
+        public Location(string city, string country)
+        {
             this.City = city;
             this.Country = country;
-
+        }
         public override string ToString()
         {
             return $"{City}, {Country}\n";
