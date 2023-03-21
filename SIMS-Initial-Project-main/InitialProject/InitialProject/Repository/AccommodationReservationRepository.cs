@@ -91,7 +91,7 @@ namespace InitialProject.Repository
 
             using (UserContext db = new())
             {
-                retVal = db.accommodationReservation.Where(t => t.Id == id).ToList();
+                retVal = db.accommodationReservation.Where(t => t.Accommodation.Id == id).ToList();
             }
 
             return retVal;

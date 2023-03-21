@@ -81,11 +81,15 @@ namespace InitialProject.Service
         {
             List<AccommodationReservation> accommodationReservations = AccommodationReservationRepository.GetByAccommodation(id);
 
-            foreach (AccommodationReservation ar in accommodationReservations)   // Checks if chosen date is between some other days that are already reservated
+            foreach (AccommodationReservation ar in accommodationReservations)
             {
-                if (startingDate > ar.BegginingDate && endingDate < ar.EndingDate)
+                if ((startingDate < ar.BegginingDate && endingDate < ar.BegginingDate) || (startingDate > ar.EndingDate && endingDate > ar.EndingDate))
                 {
-                    MessageBox.Show("Chosen accommodation is already registered during those days");
+                    continue;
+                }
+                else
+                {
+                    MessageBox.Show("Accommodation is already registered for those days");
                     return false;
                 }
             }
@@ -95,7 +99,7 @@ namespace InitialProject.Service
 
         public static bool IsViolatingMinReservatingDays(int minimumReservationDays, DateTime startingDate, DateTime endingDate)
         {
-            return (endingDate - startingDate).Days + 1 < minimumReservationDays;
+            return endingDate.Day - startingDate.Day + 1 < minimumReservationDays;
         }
     }
 }

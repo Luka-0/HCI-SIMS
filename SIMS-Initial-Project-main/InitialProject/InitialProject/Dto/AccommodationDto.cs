@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Dto
 {
-    class AccommodationDto
+    public class AccommodationDto
     {
-        private string Title;
-        private int GuestLimit;
-        private AccommodationType Type;
-        private Location Location;
+        public string Title;
+        public int GuestLimit;
+        public AccommodationType Type;
+        public Location Location;
 
         public AccommodationDto() { }
 

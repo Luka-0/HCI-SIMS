@@ -46,7 +46,7 @@ namespace InitialProject.Repository
 
             using(UserContext db = new())
             {
-                retVal = db.accommodation.Where(t => t.Title.Equals(name)).ToList();
+                retVal = db.accommodation.Where(t => t.Title.Contains(name)).ToList();
             }
 
             return retVal;

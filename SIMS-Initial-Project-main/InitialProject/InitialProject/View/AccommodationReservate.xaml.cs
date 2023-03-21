@@ -127,7 +127,8 @@ namespace InitialProject.View
 
             if (!AccommodationReservationService.Reservate(accommodation, User, guestNumber, startDate, endDate))
             {
-                MessageBox.Show("Reservation was unsuccessful");
+                MessageBox.Show("Reservation was UNsuccessful");
+                return;
             }
             MessageBox.Show("Reservation was successful");
 
@@ -139,9 +140,7 @@ namespace InitialProject.View
             AccommodationsGrid.ItemsSource = accommodationsToShow;
             foreach (Accommodation a in accommodations)
             {
-                Accommodation tmp = new Accommodation(a.Title, a.GuestLimit, a.Type, 0, 0);
-                tmp.Location = a.Location;
-                accommodationsToShow.Add(tmp);
+                accommodationsToShow.Add(a);
             }
         }
 
