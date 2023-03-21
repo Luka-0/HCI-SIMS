@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Controller;
+using InitialProject.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,38 @@ namespace InitialProject.View
         public GuestReview()
         {
             InitializeComponent();
+
+            List<ExpiredReservationDto> records = new List<ExpiredReservationDto>();
+            records = GuestReviewController.LoadExpiredReservations();
+            ExpiredReservations.ItemsSource = records;
+ 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ExpiredReservationDto record = ExpiredReservations.SelectedItem as ExpiredReservationDto;
+            int tidinessGrade = Int32.Parse(tidiness.Text);
+            int obedienceGrade = Int32.Parse(obedience.Text);
+
+            NewGuestReviewDto guestReviewDto = new NewGuestReviewDto(tidinessGrade, obedienceGrade, comment.Text, record.ReservationId);
+            GuestReviewController.Save(guestReviewDto);
+        }
+
+        private void obedience_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Int32.Parse(obedience.Text) > 5 || Int32.Parse(obedience.Text) < 1) {
+
+                MessageBox.Show("Unsupported grade value!");
+            }
+        }
+
+        private void tidiness_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Int32.Parse(tidiness.Text) > 5 || Int32.Parse(tidiness.Text) < 1)
+            {
+
+                MessageBox.Show("Unsupported grade value!");
+            }
         }
     }
 }

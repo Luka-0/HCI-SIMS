@@ -1,4 +1,5 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Controller;
 using InitialProject.Dto;
 using InitialProject.Enumeration;
 using InitialProject.Model;
@@ -45,7 +46,7 @@ namespace InitialProject.View
             int cancellationDeadline = Int32.Parse(suspensionDays.Text);
 
             //calling method for finding the name of selected city
-            //from owner's GUI fro Accommodation's location
+            //from owner's GUI for Accommodation's location
             string selectedLocation = locationPicker.SelectedItem.ToString();
             string cityName = SeparateCity(selectedLocation);
 
@@ -53,7 +54,7 @@ namespace InitialProject.View
 
             //Prepareing DTO for service, to be saved in the database
             NewAccommodationDto record = new NewAccommodationDto(title.Text, guestNumber, type, minReservationDays, cancellationDeadline, cityName, imageUrls);
-            AccommodationServicecs.Save(record);
+            AccommodationController.Register(record);
 
             urls.Items.Clear();
         }
@@ -83,9 +84,9 @@ namespace InitialProject.View
         public void InitializeLocationPicker()
         {
 
-            List<Location> locations = LocationRepository.getAll();
+            List<LocationDto> locations = LocationController.Load();
 
-            foreach (Location l in locations)
+            foreach (LocationDto l in locations)
             {
                 locationPicker.Items.Add(l.Country + "-" + l.City);
             }
@@ -125,11 +126,11 @@ namespace InitialProject.View
 
         private void AddLocation_Click(object sender, RoutedEventArgs e)
         {
-            List<Location> locations = LocationService.getAll();
+            List<LocationDto> locations = LocationController.Load();
 
             bool alreadyExists = false;
 
-            foreach (Location l in locations)
+            foreach (LocationDto l in locations)
             {
                 if (city.Text.Equals(l.City)) {
                     alreadyExists = true;
@@ -142,8 +143,8 @@ namespace InitialProject.View
             }
             else {
 
-             NewLocationDto location = new NewLocationDto(city.Text, country.Text);
-             LocationService.Save(location);
+             LocationDto location = new LocationDto(city.Text, country.Text);
+             LocationController.AddNew(location);
 
              locationPicker.Items.Clear();
              InitializeLocationPicker();     

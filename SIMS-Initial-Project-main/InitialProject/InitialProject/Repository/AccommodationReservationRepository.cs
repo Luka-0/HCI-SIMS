@@ -5,31 +5,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InitialProject.Repository
 {
-    class AccommodationReservationRepository
+    internal class AccommodationReservationRepository
     {
-        public AccommodationReservationRepository() { }
-
-        public static bool AddAccommodationReservation(AccommodationReservation accommodationReservation)
+        public static List<AccommodationReservation> GetAllExpiredBy(int day, int month, int year)
         {
-            using var db = new UserContext();
+            List<AccommodationReservation> expiredReservations = new List<AccommodationReservation>();
 
-            /*if(accommodationReservation.Accommodation.MinimumReservationDays > )
+            using (var dbContext = new UserContext())
             {
-
-            }*/
-
-            if(accommodationReservation.Accommodation.GuestLimit < accommodationReservation.GuestNumber)
-            {
-                return false;
+                expiredReservations = dbContext.accommodationReservation
+                                 .Where(ar => ((ar.EndingDate.Day >= (day - 5)) && (ar.EndingDate.Day <= day))
+                                            && (ar.EndingDate.Month == month)
+                                            && (ar.EndingDate.Year == year)
+                                 )
+                                 .ToList();
             }
 
-            db.Add(accommodationReservation);
-            db.SaveChanges();
+            foreach (var reservation in expiredReservations)
+            {
 
-            return true;
+                reservation.Accommodation = GetAccommodation(reservation.Id);
+                reservation.Guest = GetUser(reservation.Id);
+            }
+            return expiredReservations;
+        }
+
+        public static Accommodation GetAccommodation(int reservationId)
+        {
+
+            Accommodation accommodation = new Accommodation();
+
+            using (var dbContext = new UserContext())
+            {
+                accommodation = (Accommodation)dbContext.accommodationReservation
+                                 .Where(a => a.Id == reservationId).Select(a => a.Accommodation).First();
+            }
+            return accommodation;
+        }
+
+        public static User GetUser(int reservationId)
+        {
+
+            User guest = new User();
+
+            using (var dbContext = new UserContext())
+            {
+                guest = (User)dbContext.accommodationReservation
+                                 .Where(a => a.Id == reservationId).Select(a => a.Guest).First();
+            }
+            return guest;
+        }
+
+        public static AccommodationReservation GetBy(int id)
+        {
+
+            AccommodationReservation reservation = new AccommodationReservation();
+
+            using (var dbContext = new UserContext())
+            {
+                reservation = (AccommodationReservation)dbContext.accommodationReservation
+                                 .Where(a => a.Id == id).First();
+            }
+            return reservation;
         }
     }
 }

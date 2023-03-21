@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    [Table("GuestGrade")]
-    public class GuestGrade
+    [Table("GuestReview")]
+    public class GuestReview
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -23,9 +23,21 @@ namespace InitialProject.Model
         [Range(1, 5)]
         public int Obedience { get; set; }
 
-
         public String Comment { get; set; }
 
+        //changes
+        [ForeignKey("ReservationId")]
+        public AccommodationReservation? Reservation { get; set; }
 
+        public GuestReview(int tidiness, int obedience, string comment) {
+            this.Tidiness = tidiness;
+            this.Obedience = obedience;
+            this.Comment = comment;
+        }
+
+        public static explicit operator GuestReview(List<AccommodationReservation?> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

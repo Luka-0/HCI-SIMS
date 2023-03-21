@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Dto
 {
-    public class NewLocationDto
+    public class LocationDto
     {
         public string City { get; set; }
         public string Country { get; set; }
 
-        public NewLocationDto(string city, string country) {
+        public LocationDto(string city, string country) {
 
             this.City = city; ;
             this.Country = country;

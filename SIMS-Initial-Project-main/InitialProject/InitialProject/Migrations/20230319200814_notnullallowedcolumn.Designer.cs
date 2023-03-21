@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230319200814_notnullallowedcolumn")]
+    partial class notnullallowedcolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -162,7 +164,7 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<TimeSpan>("Duration")
+                    b.Property<TimeOnly>("Duration")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("GuestLimit")
@@ -182,7 +184,7 @@ namespace InitialProject.Migrations
                     b.Property<bool>("Started")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("locationID")
+                    b.Property<int>("locationID")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -202,13 +204,10 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Reached")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("tourID")
+                    b.Property<int>("tourID")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -296,7 +295,9 @@ namespace InitialProject.Migrations
                 {
                     b.HasOne("InitialProject.Model.Location", "Location")
                         .WithMany()
-                        .HasForeignKey("locationID");
+                        .HasForeignKey("locationID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Location");
                 });
@@ -305,7 +306,9 @@ namespace InitialProject.Migrations
                 {
                     b.HasOne("InitialProject.Model.Tour", "Tour")
                         .WithMany("TourKeyPoints")
-                        .HasForeignKey("tourID");
+                        .HasForeignKey("tourID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Tour");
                 });

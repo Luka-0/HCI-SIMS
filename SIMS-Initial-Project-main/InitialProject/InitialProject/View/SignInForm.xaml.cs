@@ -79,7 +79,7 @@ namespace InitialProject
                             }
                         case UserType.Guide:
                             {
-                                CreateTourForm createTourForm= new CreateTourForm(user);
+                                CreateTourForm createTourForm = new CreateTourForm(user);
                                 createTourForm.Show();
                                 Close(); //this.close();
                                 break;
@@ -93,8 +93,8 @@ namespace InitialProject
                                     //this.Hide();
 
                                     owner.Show();
-
                                     MessageBox.Show("Owner: " + user.Username + " is  logged in.");
+                                    this.Close();
                                 }
                                 break;
                             }

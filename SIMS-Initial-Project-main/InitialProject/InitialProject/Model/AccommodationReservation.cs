@@ -31,7 +31,12 @@ namespace InitialProject.Model
         [DataType(DataType.DateTime)]
         public DateTime EndingDate { get; set; }
 
+        public AccommodationReservation() {
 
+           // this.Accommodation = new Accommodation();
+           // this.Guest = new User();
+        }
 
+        
     }
 }
