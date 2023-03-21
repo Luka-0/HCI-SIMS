@@ -36,7 +36,8 @@ namespace InitialProject
             InitializeComponent();
             this.DataContext = this;
             BasicTours = new ObservableCollection<TourBasicInfoDto>();
-            List<TourBasicInfoDto> basicTours= tourController.GetTodaysToursBasicInfo();
+            //List<TourBasicInfoDto> basicTours= tourController.GetTodaysToursBasicInfo();
+            List<TourBasicInfoDto> basicTours = tourController.getAllBasicInfo();
             int counter = 0;
             foreach (TourBasicInfoDto tour in basicTours)
             {
@@ -59,5 +60,9 @@ namespace InitialProject
                 e.Column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
+        private void ViewSpecificTour(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

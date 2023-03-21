@@ -14,7 +14,6 @@ public class NewTourDto
     public string Description;
     public string Language;
     public string GuestLimit;
-    //public List<TourKeyPoint> TourKeyPoints;
     public string TourKeyPointNames;
     public string StartDate;
     public string StartTime;

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Navigation;
+using Microsoft.EntityFrameworkCore;
 
 namespace InitialProject.Repository;
 
@@ -22,11 +23,17 @@ public class TourRepository
 
     public List<Tour> getAll()
     {
-        using var db = new UserContext();
-        return db.tours.ToList();
+        List<Tour> tours = new List<Tour>();
+        using (var db = new UserContext())
+        {
+            tours = db.tours.Include(t => t.Location).ToList();
+        }
+        return tours;
+
+
     }
 
-    public Location getLocationByTourId(int id)
+    /*public Location getLocationByTourId(int id)
     {
         Location location = new Location();
         using (var db = new UserContext())
@@ -35,4 +42,5 @@ public class TourRepository
             return location;
         }
     }
+    */
 }

@@ -10,5 +10,8 @@
         <DataGrid x:Name="dataGridTours" ItemsSource="{Binding Path=BasicTours}" AutoGenerateColumns="True" 
                   SelectionMode="Single" IsReadOnly="True" AutoGeneratingColumn="generateColumns" HorizontalAlignment="Left" 
                   Margin="10,47,0,0" VerticalAlignment="Top"/>
-        </Grid>
+
+        <Button  Click="ViewSpecificTour"  Content="Zapocni" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+    </Grid>
 </Window>

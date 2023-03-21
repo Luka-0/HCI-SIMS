@@ -32,10 +32,11 @@ public class TourService
         return tourRepository.getAll();
     }
 
-    public Location getLocationByTourId(int id)
+    /*public Location getLocationByTourId(int id)
     {
        return tourRepository.getLocationByTourId(id);
     }
+    */
     public List<TourBasicInfoDto> getBasicInfo()
     {
         List<TourBasicInfoDto> basicInfoDtos = new List<TourBasicInfoDto>();
@@ -44,9 +45,9 @@ public class TourService
         foreach (var tour in tours)
         {
             
-            Location location = getLocationByTourId(tour.Id);
+            //Location location = getLocationByTourId(tour.Id);
             TourBasicInfoDto basicInfo = new TourBasicInfoDto(tour.Id, tour.Name,
-                location.Country, location.City, tour.Language, tour.GuestLimit,tour.StartDateAndTime );
+                tour.Location.Country, tour.Location.City, tour.Language, tour.GuestLimit,tour.StartDateAndTime );
             basicInfoDtos.Add(basicInfo);
         }
         return basicInfoDtos;
