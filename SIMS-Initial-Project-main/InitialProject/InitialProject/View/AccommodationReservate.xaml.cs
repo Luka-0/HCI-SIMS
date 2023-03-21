@@ -139,7 +139,8 @@ namespace InitialProject.View
             AccommodationsGrid.ItemsSource = accommodationsToShow;
             foreach (Accommodation a in accommodations)
             {
-                Accommodation tmp = new Accommodation(a.Title, a.GuestLimit, a.Type, 0, 0, a.Location);
+                Accommodation tmp = new Accommodation(a.Title, a.GuestLimit, a.Type, 0, 0);
+                tmp.Location = a.Location;
                 accommodationsToShow.Add(tmp);
             }
         }
