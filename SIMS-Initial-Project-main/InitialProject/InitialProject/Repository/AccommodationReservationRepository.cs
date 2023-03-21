@@ -1,5 +1,6 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,11 @@ namespace InitialProject.Repository
 
         public static void Add(AccommodationReservation accommodationReservation)
         {
-            using var db = new UserContext();
+            using UserContext db = new();
 
-            db.Add(accommodationReservation);
+            db.ChangeTracker.TrackGraph(accommodationReservation, node =>
+            node.Entry.State = !node.Entry.IsKeySet ? EntityState.Added : EntityState.Unchanged);
+
             db.SaveChanges();
         }
 

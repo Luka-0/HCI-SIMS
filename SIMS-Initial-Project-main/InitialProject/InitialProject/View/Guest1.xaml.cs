@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,15 +17,18 @@ namespace InitialProject.View
 {
     public partial class Guest1 : Window
     {
-        public Guest1()
+        private User User { get; set; }
+
+        public Guest1(User user)
         {
             InitializeComponent();
+            User = user;
         }
 
         private void ShowAccommodationReservate(object sender, RoutedEventArgs e)
         {
 
-            AccommodationReservate accommodationReservate = new AccommodationReservate();
+            AccommodationReservate accommodationReservate = new(User);
             accommodationReservate.Show();
 
             this.Close();

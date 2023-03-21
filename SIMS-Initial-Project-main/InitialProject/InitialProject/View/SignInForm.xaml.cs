@@ -64,7 +64,7 @@ namespace InitialProject
                             {
                                 MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
 
-                                Guest1 guest1 = new Guest1();
+                                Guest1 guest1 = new(user);
                                 guest1.Show();
 
                                 this.Close();

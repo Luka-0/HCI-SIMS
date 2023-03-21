@@ -24,14 +24,16 @@ namespace InitialProject.View
 {
     public partial class AccommodationReservate : Window
     {
-        public ObservableCollection<Accommodation> accommodationsToShow { get; set; } 		
+        public ObservableCollection<Accommodation> accommodationsToShow { get; set; }
+        private User User { get; set; }
         
-        public AccommodationReservate()
+        public AccommodationReservate(User user)
         {
             InitializeComponent();
             InitializeFilterComboBox();
             InitializeAccommodationTypeComboBox();
             InitializeLocationComboBox();
+            User = user;
             DataContext = this;
 
             List<Accommodation> allAccommodations = AccommodationRepository.GetAll();
@@ -123,10 +125,12 @@ namespace InitialProject.View
                 return;
             }
 
-            if (!AccommodationReservationService.Reservate(accommodation, guestNumber, startDate, endDate))
+            if (!AccommodationReservationService.Reservate(accommodation, User, guestNumber, startDate, endDate))
             {
                 MessageBox.Show("Reservation was unsuccessful");
             }
+            MessageBox.Show("Reservation was successful");
+
         }
 
         private void RefreshDataGrid(List<Accommodation> accommodations)

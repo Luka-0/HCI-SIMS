@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using System.Windows;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.View;
 
 namespace InitialProject.Service
 {
     class AccommodationReservationService
     {
-        public static bool Reservate(Accommodation accommodation, int guestNumber, DateTime startingDate, DateTime endingDate)
+        public static bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
         {
             AccommodationReservation ar = new AccommodationReservation();
 
-            if(accommodation.GuestLimit < guestNumber || IsViolatingMinReservatingDays(accommodation, startingDate, endingDate))
+            if(accommodation.GuestLimit < guestNumber || IsViolatingMinReservatingDays(accommodation.MinimumReservationDays, startingDate, endingDate))
             {
                 return false;
             }
@@ -26,6 +27,7 @@ namespace InitialProject.Service
                 ar.BegginingDate = startingDate;
                 ar.EndingDate = endingDate;
                 ar.GuestNumber = guestNumber;
+                ar.Guest = user;
 
                 AccommodationReservationRepository.Add(ar);
                 return true;
@@ -36,7 +38,7 @@ namespace InitialProject.Service
 
         public static bool IsAvailable(int id, DateTime startingDate, DateTime endingDate)
         {
-            List<AccommodationReservation> accommodationReservations = AccommodationReservationRepository.GetByAccommodationId(id);
+            List<AccommodationReservation> accommodationReservations = AccommodationReservationRepository.GetByAccommodation(id);
 
             foreach(AccommodationReservation ar in accommodationReservations)   // Checks if chosen date is between some other days that are already reservated
             {
@@ -50,13 +52,9 @@ namespace InitialProject.Service
             return true;
         }
 
-        public static bool IsViolatingMinReservatingDays(Accommodation accommodation, DateTime startingDate, DateTime endingDate)
+        public static bool IsViolatingMinReservatingDays(int minimumReservationDays, DateTime startingDate, DateTime endingDate)
         {
-            if((endingDate - startingDate).Days + 1 < accommodation.MinimumReservationDays)
-            {
-                return true;
-            }
-            return false;
+            return (endingDate - startingDate).Days + 1 < minimumReservationDays;
         }
     }
 }
