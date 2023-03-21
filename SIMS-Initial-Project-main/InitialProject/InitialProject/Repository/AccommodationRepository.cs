@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -31,15 +32,9 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
-            /*using(var db = new UserContext())
+            using(UserContext db = new())
             {
-                retVal = db.accommodation.Include(t => t.Location).ToList();
-            }*/
-
-            using var db = new UserContext();
-            foreach (Accommodation accommodation in db.accommodation)
-            {
-                retVal.Add(accommodation);
+                retVal = db.accommodation.ToList();
             }
 
             return retVal;
@@ -49,13 +44,9 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
-            using var db = new UserContext();
-            foreach(Accommodation accommodation in db.accommodation)
-            {  
-                if (accommodation.Title.Contains(name))
-                {
-                    retVal.Add(accommodation);
-                }
+            using(UserContext db = new())
+            {
+                retVal = db.accommodation.Where(t => t.Title.Equals(name)).ToList();
             }
 
             return retVal;
@@ -65,18 +56,9 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
-            /*using(var db = new UserContext())
-{
-            retVal = db.accommodation.Include(t => t.Location).ToList();
-            }*/
-
-            using var db = new UserContext();
-            foreach (Accommodation accommodation in db.accommodation)
+            using(UserContext db = new())
             {
-                if (accommodation.Location == location)
-                {
-                    retVal.Add(accommodation);
-                }
+                retVal = db.accommodation.Where(t => t.Location == location).ToList();
             }
 
             return retVal;
@@ -99,13 +81,9 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
-            using var db = new UserContext();
-            foreach (Accommodation accommodation in db.accommodation)
+            using(UserContext db = new())
             {
-                if (accommodation.Type == accommodationType)
-                {
-                    retVal.Add(accommodation);
-                }
+                retVal = db.accommodation.Where(t => t.Type == accommodationType).ToList();
             }
 
             return retVal;
@@ -115,13 +93,9 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
-            using var db = new UserContext();
-            foreach(Accommodation accommodation in db.accommodation)
+            using(UserContext db = new())
             {
-                if(accommodation.GuestLimit >= guestNumber)
-                {
-                    retVal.Add(accommodation);
-                }
+                retVal = db.accommodation.Where(t => t.GuestLimit >= guestNumber).ToList();
             }
 
             return retVal;
@@ -131,13 +105,9 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
-            using var db = new UserContext();
-            foreach(Accommodation accommodation in db.accommodation)
+            using(UserContext db = new())
             {
-                if(accommodation.MinimumReservationDays < reservationDays)
-                {
-                    retVal.Add(accommodation);
-                }
+                retVal = db.accommodation.Where(t => t.MinimumReservationDays <= reservationDays).ToList();
             }
 
             return retVal;
