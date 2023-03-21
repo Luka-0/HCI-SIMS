@@ -2,6 +2,7 @@
 using InitialProject.Enumeration;
 using InitialProject.Migrations;
 using InitialProject.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,6 +30,11 @@ namespace InitialProject.Repository
         public static List<Accommodation> GetAll()
         {
             List<Accommodation> retVal = new();
+
+            /*using(var db = new UserContext())
+            {
+                retVal = db.accommodation.Include(t => t.Location).ToList();
+            }*/
 
             using var db = new UserContext();
             foreach (Accommodation accommodation in db.accommodation)
@@ -59,10 +65,15 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
+            /*using(var db = new UserContext())
+{
+            retVal = db.accommodation.Include(t => t.Location).ToList();
+            }*/
+
             using var db = new UserContext();
             foreach (Accommodation accommodation in db.accommodation)
             {
-                if (accommodation.Location.Id == location.Id)
+                if (accommodation.Location == location)
                 {
                     retVal.Add(accommodation);
                 }
@@ -75,17 +86,10 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
-            using var db = new UserContext();
-            foreach (Accommodation accommodation in db.accommodation)
+            using(var db = new UserContext())
             {
-                if(accommodation.Location == null)
-                {
-                    continue;
-                }
-                if (accommodation.Location.City.Equals(city))
-                {
-                    retVal.Add(accommodation);
-                }
+
+                retVal = db.accommodation.Where(t => t.Location.City.Equals(city)).ToList();
             }
 
             return retVal;
