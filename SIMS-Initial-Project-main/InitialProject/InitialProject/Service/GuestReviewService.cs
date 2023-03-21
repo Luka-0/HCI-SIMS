@@ -34,7 +34,7 @@ namespace InitialProject.Service
 
             DateTime todaysDate = DateTime.UtcNow.Date;
 
-            List<AccommodationReservation> expiredReservations = AccommodationReservationService.getAlExpiredlBy(todaysDate);
+            List<AccommodationReservation> expiredReservations = AccommodationReservationService.getAllExpiredlBy(todaysDate);
 
             List<AccommodationReservation> gradedReservations = GuestReviewService.GetGradedReservations();
 

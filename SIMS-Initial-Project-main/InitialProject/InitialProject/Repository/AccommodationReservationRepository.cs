@@ -48,15 +48,6 @@ namespace InitialProject.Repository
             return accommodation;
         }
 
-            db.ChangeTracker.TrackGraph(accommodationReservation, node =>
-            node.Entry.State = !node.Entry.IsKeySet ? EntityState.Added : EntityState.Unchanged);
-
-            db.SaveChanges();
-        }
-
-        public static List<AccommodationReservation> GetByAccommodation(int id)
-        {
-            List<AccommodationReservation> retVal = new();
         public static User GetUser(int reservationId)
         {
 
@@ -81,6 +72,29 @@ namespace InitialProject.Repository
                                  .Where(a => a.Id == id).First();
             }
             return reservation;
+        }
+
+        // Stajic
+        public static void Add(AccommodationReservation accommodationReservation)
+        {
+            using UserContext db = new();
+
+            db.ChangeTracker.TrackGraph(accommodationReservation, node =>
+            node.Entry.State = !node.Entry.IsKeySet ? EntityState.Added : EntityState.Unchanged);
+
+            db.SaveChanges();
+        }
+
+        public static List<AccommodationReservation> GetByAccommodation(int id)
+        {
+            List<AccommodationReservation> retVal = new();
+
+            using (UserContext db = new())
+            {
+                retVal = db.accommodationReservation.Where(t => t.Id == id).ToList();
+            }
+
+            return retVal;
         }
     }
 }

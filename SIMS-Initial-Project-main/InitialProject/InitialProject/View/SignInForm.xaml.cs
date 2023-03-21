@@ -73,6 +73,7 @@ namespace InitialProject
                         case UserType.Guest2:
                             {
                                 MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
+
                                 Guest2View view = new Guest2View(); 
                                 view.Show();
 
@@ -83,21 +84,17 @@ namespace InitialProject
                                 CreateTourForm createTourForm = new CreateTourForm(user);
                                 createTourForm.Show();
                                 Close(); //this.close();
-                                }
+                                
                                 break;
                             }
                         case UserType.Owner:
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    Owner owner = new Owner();
+                            { 
                                 Owner owner = new Owner();
                                //this.Hide();
-                                    //this.Hide();
-                                    owner.Show();
-                                    MessageBox.Show("Owner: " + user.Username + " is  logged in.");
-                                    this.Close();
-                                }
-                                }
+                                owner.Show();
+                                MessageBox.Show("Owner: " + user.Username + " is  logged in.");
+                                this.Close();
+                                
                                 break;
                             }
                         default:
@@ -122,9 +119,10 @@ namespace InitialProject
             User user = new User();
             user.Password = txtPassword.Password;
             user.Username = Username;
+
             UserRepository.AddUser(user);
+
             MessageBox.Show("Successfully added user");
-            this.Close();
             this.Close();
         }
     }
