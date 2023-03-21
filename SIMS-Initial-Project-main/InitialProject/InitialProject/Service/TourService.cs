@@ -20,18 +20,6 @@ public class TourService
 
     }
 
-    public int getBy(int id)
-    {
-        var db = new UserContext();
-        var tempRecord = db.tours.Find(id);   //Try creating method in Accommodation repository to return the same thing
-        return tempRecord.Id;
-    }
-
-    public List<Tour> getAll()
-    {
-        return tourRepository.getAll();
-    }
-
     /*public Location getLocationByTourId(int id)
     {
        return tourRepository.getLocationByTourId(id);
@@ -70,4 +58,33 @@ public class TourService
         return todaysTours;
 
     }
+
+        public List<Tour> GetAll()
+        {
+            return repository.GetAll();
+        }
+
+        public Tour GetById(int id)
+        {
+            return repository.GetById(id);
+        }
+        public List<Tour> GetBy(Location location)
+        {
+            return repository.GetBy(location);
+        }
+
+        public List<Tour> GetBy(TimeOnly duration)
+        {
+            return repository.GetBy(duration);
+        }
+
+        public List<Tour> GetBy(string language)
+        {
+            return repository.GetBy(language);
+        }
+
+        public List<Tour> GetBy(int guestNumber)
+        {
+            return repository.GetBy(guestNumber);
+        }
 }

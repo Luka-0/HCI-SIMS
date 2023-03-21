@@ -63,18 +63,15 @@ namespace InitialProject
                     {
                         case UserType.Guest1:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
                                 break;
                             }
                         case UserType.Guest2:
                             {
-                                if (user.Password == txtPassword.Password)
-                                {
-                                    MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
-                                }
+                                MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
+                                Guest2View view = new Guest2View(); 
+                                view.Show();
+
                                 break;
                             }
                         case UserType.Guide:
@@ -90,7 +87,7 @@ namespace InitialProject
                                 {
                                     Owner owner = new Owner();
 
-                                    //this.Hide();
+                               //this.Hide();
 
                                     owner.Show();
                                     MessageBox.Show("Owner: " + user.Username + " is  logged in.");

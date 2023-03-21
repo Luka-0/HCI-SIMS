@@ -1,5 +1,6 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,29 @@ namespace InitialProject.Repository
             }
 
             return null;
+
+        public static Location getBy(int id)
+        {
+            Location location = new Location();
+
+            using (var dbContext = new UserContext())
+            {
+                location = (Location)dbContext.location
+                                 .Where(l => l.Id == id);
+            }
+            return location;
+        }
+
+        public static Location getBy(string city, string country)
+        {
+            Location location = new Location();
+
+            using (var dbContext = new UserContext())
+            {
+                location = dbContext.location
+                                 .Where(l => l.Country == country && l.City == city).First();
+            }
+            return location;
         }
 
         public static List<Location> getAll()

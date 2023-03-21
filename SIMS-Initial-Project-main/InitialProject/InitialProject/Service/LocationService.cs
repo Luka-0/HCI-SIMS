@@ -1,6 +1,7 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Dto;
 using InitialProject.Model;
+﻿using InitialProject.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,11 @@ namespace InitialProject.Service
         public static Location getBy(string city)
         {
             return LocationRepository.getBy(city);
+        }
+
+        public static Location getBy(int id)
+        {
+            return LocationRepository.getBy(id);
         }
 
         public static List<Location> getAll()
