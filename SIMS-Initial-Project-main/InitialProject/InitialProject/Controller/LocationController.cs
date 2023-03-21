@@ -23,7 +23,7 @@ namespace InitialProject.Controller
         public static List<LocationDto> Load()
         {
             List<LocationDto> locations = new List<LocationDto>();
-            List<Location> records = LocationService.getAll();
+            List<Location> records = LocationService.GetAll();
 
             foreach (Location record in records) {
 

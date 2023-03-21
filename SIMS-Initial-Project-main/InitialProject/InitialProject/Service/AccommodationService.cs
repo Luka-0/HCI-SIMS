@@ -22,7 +22,7 @@ namespace InitialProject.Service
             var tempRecord = db.accommodation.Find(accommodation.Id);   //Try creating method in Accommodation repository to return the same thing
 
             //Updating foreign key value of new accommodation record
-            tempRecord.Location = LocationService.getBy(cityName);
+            tempRecord.Location = LocationService.GetBy(cityName);
             
             //saving all images refered to new accommodation.
             ImageService.Save(images, accommodation);
