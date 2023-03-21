@@ -31,6 +31,7 @@ namespace InitialProject.Repository
             using (var dbContext = new UserContext())
             {
                 tour = (Tour)dbContext.tour
+                                .Include(t => t.Location)
                                  .Where(t => t.Id == id);
             }
             return tour;
@@ -43,6 +44,7 @@ namespace InitialProject.Repository
             using (var dbContext = new UserContext())
             {
                 Tours = dbContext.tour
+                                 .Include(t => t.Location)   
                                  .Where(t => t.Location == location)
                                  .ToList();
             }
@@ -56,6 +58,7 @@ namespace InitialProject.Repository
             using (var dbContext = new UserContext())
             {
                 Tours = dbContext.tour
+                                 .Include(t => t.Location)
                                  .Where(t => t.Duration == duration)
                                  .ToList();
             }
@@ -69,20 +72,22 @@ namespace InitialProject.Repository
             using (var dbContext = new UserContext())
             {
                 Tours = dbContext.tour
+                                 .Include(t => t.Location)
                                  .Where(t => t.Language == language)
                                  .ToList();
             }
             return Tours;
         }
 
-        public List<Tour> GetBy(int guestNumber)
+        public List<Tour> GetBy(int guestLimit)
         {
             List<Tour> Tours = new List<Tour>();
 
             using (var dbContext = new UserContext())
             {
                 Tours = dbContext.tour
-                                 .Where(t => t.GuestLimit >= guestNumber)
+                                 .Include(t => t.Location)
+                                 .Where(t => t.GuestLimit >= guestLimit)
                                  .ToList();
             }
             return Tours;

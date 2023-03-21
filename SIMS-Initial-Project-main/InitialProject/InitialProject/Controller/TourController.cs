@@ -15,18 +15,11 @@ namespace InitialProject.Controller
     public class TourController
     {
         private TourService tourService = new TourService();
+        private TourReservationService reservationService = new TourReservationService();
         public List<GetTourDto> GetAll()
         {
             List<Tour> allTours = tourService.GetAll();
             List<GetTourDto> getTourDtos = new List<GetTourDto>();
-
-            string s = "";
-            foreach (Tour t in allTours)
-            {
-                s += t.ToString();
-
-            }
-            MessageBox.Show(s);
 
             Location tourLocation = new Location();
             foreach (Tour tour in allTours)
@@ -74,15 +67,19 @@ namespace InitialProject.Controller
 
         public List<GetTourDto> GetBy(int guestNumber)
         {
-            List<Tour> allTours = tourService.GetBy(guestNumber);
+            List<Tour> allTours = tourService.GetAll();
             List<GetTourDto> getTourDtos = new List<GetTourDto>();
 
             foreach (Tour tour in allTours)
             {
-                getTourDtos.Add(new GetTourDto(tour.Name, tour.Description, tour.Location, tour.Language, tour.GuestLimit, tour.Duration, tour.StartDateAndTime, tour.TourKeyPoints, tour.images));
+                if(reservationService.IsReserved(tour))
+                if(reservationService.CountGuestsBy(tour) <= guestNumber)
+                    getTourDtos.Add(new GetTourDto(tour.Name, tour.Description, tour.Location, tour.Language, tour.GuestLimit, tour.Duration, tour.StartDateAndTime, tour.TourKeyPoints, tour.images));
             }
             return getTourDtos;
         }
+
+        
 
         public Tour Reserve(Tour tour, int guestNumber)
         {

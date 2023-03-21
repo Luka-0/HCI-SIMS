@@ -11,8 +11,8 @@ namespace InitialProject.Controller
 {
     public class TourReservationControler
     {
-        private static TourReservationService service;
-        public static TourReservationResponseDto Reserve(Tour tour, int guestNumber)
+        private  TourReservationService service = new TourReservationService();
+        public TourReservationResponseDto Reserve(Tour tour, int guestNumber)
         {
             TourReservationResponseDto responseDto;
 
@@ -23,5 +23,12 @@ namespace InitialProject.Controller
 
             return responseDto;
         }
+
+        public List<TourReservation> GetAll()
+        {
+            return service.GetAll();
+        }
+
+
     }
 }

@@ -11,12 +11,21 @@ namespace InitialProject.Service
 {
     public class TourReservationService
     {
-        private static TourReservationRepository repository;
-        public TourReservationService() { }
+        private TourReservationRepository repository = new TourReservationRepository();
 
         public List<TourReservation> GetAll()
         {
             return repository.GetAll();
+        }
+
+        public List<TourReservation> GetBy(Tour tour)
+        {
+            return repository.GetBy(tour);
+        }
+
+        public bool IsReserved(Tour tour)
+        {
+            return repository.IsReserved(tour);
         }
 
         public TourReservation GetById(int id)
@@ -24,14 +33,14 @@ namespace InitialProject.Service
             return repository.GetById(id);
         }
 
-        public int CountBy(Tour tour)
+        public int CountGuestsBy(Tour tour)
         {
-            return repository.CountBy(tour);
+            return repository.CountGuestsBy(tour);
         }
 
         public bool IsFull(Tour tour)
         {
-            if(tour.GuestLimit == CountBy(tour))
+            if(tour.GuestLimit == CountGuestsBy(tour))
                 return true;
             else 
                 return false;
@@ -39,7 +48,7 @@ namespace InitialProject.Service
 
         public int GetAvaliableSpace(Tour tour)
         {
-            return tour.GuestLimit - CountBy(tour);
+            return tour.GuestLimit - CountGuestsBy(tour);
         }
     }
 }

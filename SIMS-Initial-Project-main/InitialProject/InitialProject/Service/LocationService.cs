@@ -15,6 +15,11 @@ namespace InitialProject.Service
             return LocationRepository.getBy(city);
         }
 
+        public static Location getBy(string city, string country)
+        {
+            return LocationRepository.getBy(city, country);
+        }
+
         public static Location getBy(int id)
         {
             return LocationRepository.getBy(id);
