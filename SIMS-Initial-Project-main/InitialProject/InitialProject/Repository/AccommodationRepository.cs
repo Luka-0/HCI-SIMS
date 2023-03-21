@@ -2,9 +2,11 @@
 using InitialProject.Enumeration;
 using InitialProject.Migrations;
 using InitialProject.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -30,36 +32,21 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
-            using var db = new UserContext();
-            foreach (Accommodation accommodation in db.accommodation)
+            using(UserContext db = new())
             {
-                retVal.Add(accommodation);
-            }
-
-            if(retVal == null)  //TODO
-            {
-
+                retVal = db.accommodation.ToList();
             }
 
             return retVal;
         }
 
-        public static List<Accommodation> GetByName(string name)
+        public static List<Accommodation> GetBy(string name)
         {
             List<Accommodation> retVal = new();
 
-            using var db = new UserContext();
-            foreach(Accommodation accommodation in db.accommodation)
+            using(UserContext db = new())
             {
-                if (accommodation.Title.Contains(name))
-                {
-                    retVal.Add(accommodation);
-                }
-            }
-
-            if(retVal == null)  // TODO
-            {
-
+                retVal = db.accommodation.Where(t => t.Title.Equals(name)).ToList();
             }
 
             return retVal;
@@ -69,39 +56,34 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
-            using var db = new UserContext();
-            foreach (Accommodation accommodation in db.accommodation)
+            using(UserContext db = new())
             {
-                if (accommodation.Location.Equals(location))    //TODO: proveriti da li se radi sa equals ili ==
-                {
-                    retVal.Add(accommodation);
-                }
-            }
-
-            if (retVal == null)  // TODO
-            {
-
+                retVal = db.accommodation.Where(t => t.Location == location).ToList();
             }
 
             return retVal;
         }
 
-        public static List<Accommodation> GetByType(AccommodationType accommodationType)
+        public static List<Accommodation> GetByCity(string city)
         {
             List<Accommodation> retVal = new();
 
-            using var db = new UserContext();
-            foreach (Accommodation accommodation in db.accommodation)
+            using(var db = new UserContext())
             {
-                if (accommodation.Type == accommodationType)
-                {
-                    retVal.Add(accommodation);
-                }
+
+                retVal = db.accommodation.Where(t => t.Location.City.Equals(city)).ToList();
             }
 
-            if (retVal == null) //TODO
-            {
+            return retVal;
+        }
 
+        public static List<Accommodation> GetBy(AccommodationType accommodationType)
+        {
+            List<Accommodation> retVal = new();
+
+            using(UserContext db = new())
+            {
+                retVal = db.accommodation.Where(t => t.Type == accommodationType).ToList();
             }
 
             return retVal;
@@ -111,18 +93,9 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
-            using var db = new UserContext();
-            foreach(Accommodation accommodation in db.accommodation)
+            using(UserContext db = new())
             {
-                if(accommodation.GuestLimit >= guestNumber)
-                {
-                    retVal.Add(accommodation);
-                }
-            }
-
-            if (retVal == null) //TODO
-            {
-
+                retVal = db.accommodation.Where(t => t.GuestLimit >= guestNumber).ToList();
             }
 
             return retVal;
@@ -132,18 +105,9 @@ namespace InitialProject.Repository
         {
             List<Accommodation> retVal = new();
 
-            using var db = new UserContext();
-            foreach(Accommodation accommodation in db.accommodation)
+            using(UserContext db = new())
             {
-                if(accommodation.MinimumReservationDays < reservationDays)
-                {
-                    retVal.Add(accommodation);
-                }
-            }
-
-            if(retVal == null)  //TODO
-            {
-
+                retVal = db.accommodation.Where(t => t.MinimumReservationDays <= reservationDays).ToList();
             }
 
             return retVal;

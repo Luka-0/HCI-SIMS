@@ -59,16 +59,13 @@ namespace InitialProject.Repository
 
         public static User GetUser(String username)
         {
-            using (var db = new UserContext())
+            using var db = new UserContext();
+            foreach (User user in db.users)
             {
-                foreach (User user in db.users)
+                if (user.Username.Equals(username))
                 {
-                    if (user.Username == username)
-                    {
-                        return user;
-                    }
+                    return user;
                 }
-
             }
             return null;
         }

@@ -48,7 +48,6 @@ namespace InitialProject
 
         private void SignIn(object sender, RoutedEventArgs e)
         {
-            // User user = _repository.GetByUsername(Username);
             User user = UserRepository.GetUser(Username);
 
             if (user != null)
@@ -64,6 +63,11 @@ namespace InitialProject
                         case UserType.Guest1:
                             {
                                 MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
+
+                                Guest1 guest1 = new(user);
+                                guest1.Show();
+
+                                this.Close();
                                 break;
                             }
                         case UserType.Guest2:
@@ -79,19 +83,20 @@ namespace InitialProject
                                 CreateTourForm createTourForm = new CreateTourForm(user);
                                 createTourForm.Show();
                                 Close(); //this.close();
+                                }
                                 break;
                             }
                         case UserType.Owner:
-                            {
                                 if (user.Password == txtPassword.Password)
                                 {
                                     Owner owner = new Owner();
-
+                                Owner owner = new Owner();
                                //this.Hide();
-
+                                    //this.Hide();
                                     owner.Show();
                                     MessageBox.Show("Owner: " + user.Username + " is  logged in.");
                                     this.Close();
+                                }
                                 }
                                 break;
                             }
@@ -117,9 +122,10 @@ namespace InitialProject
             User user = new User();
             user.Password = txtPassword.Password;
             user.Username = Username;
-
-
-            //UserRepository.AddUserToDbl(user);
+            UserRepository.AddUser(user);
+            MessageBox.Show("Successfully added user");
+            this.Close();
+            this.Close();
         }
     }
 }

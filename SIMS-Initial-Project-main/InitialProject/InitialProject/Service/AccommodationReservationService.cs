@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.View;
 
 namespace InitialProject.Service
 {
@@ -24,11 +27,11 @@ namespace InitialProject.Service
 
             return expiredReservations;
             
-        }
+            }
 
 
         public static ProcessedDate SeparateDate(DateTime date)
-        {
+            {
             ProcessedDate processedDate = new ProcessedDate();  
 
             string formattedDate = date.ToString("dd-MM-yyyy");
@@ -43,7 +46,7 @@ namespace InitialProject.Service
             processedDate.Year = Int32.Parse(parts[2]);
 
             return processedDate;
-        }
+            }
 
         public static AccommodationReservation GetBy(int id) {
 
