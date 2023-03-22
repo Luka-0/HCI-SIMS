@@ -29,9 +29,11 @@ namespace InitialProject.View
         TourController tourController = new TourController();   
 
         TourService TourService = new TourService();
-        TourReservationControler reservationControler = new TourReservationControler(); 
+        TourReservationControler reservationControler = new TourReservationControler();
 
-        public List<GetTourDto> Tours
+        public ObservableCollection<Tour> toursToShow { get; set; }
+
+        public List<Tour> Tours
         {
             get;
             set;
@@ -47,43 +49,36 @@ namespace InitialProject.View
         {
             InitializeComponent();
             ShowAllTours();
-           // ShowReservations();
+          //  ShowReservations();
+            this.ResizeMode = ResizeMode.NoResize;
+            // ShowReservations();
 
         }
 
         public void ShowReservations()
         {
             Reservations = reservationControler.GetAll();
-            TourShowGrid.ItemsSource = Tours;
+            foreach(TourReservation tour in Reservations)
+            {
+                MessageBox.Show(tour.ToString());
+            }
+        }
+
+        private void RefreshDataGrid(List<Tour> tours)
+        {
+            toursToShow = new ObservableCollection<Tour>();
+            TourShowGrid.ItemsSource = toursToShow;
+            foreach (Tour t in tours)
+            {
+                toursToShow.Add(t);
+            }
         }
 
         public void ShowAllTours()
         {
-          //  this.DataContext = Tours;
-            Tours = tourController.GetAll();
-            TourShowGrid.ItemsSource = Tours;
-        }
-
-        private void mojButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            if(Tours.Count > 0)
-            {
-                MessageBox.Show("Nisam prazna");
-            }
-            else
-            {
-                MessageBox.Show("Prazna sam");
-            }
-            String s = "";
-
-
-            foreach (GetTourDto t in Tours)
-            {
-                s += t.ToString();
-                
-            }
-            MessageBox.Show(s);
+            this.DataContext = this;
+            List<Tour> allTours = TourService.GetAll();
+            RefreshDataGrid(allTours);
         }
 
         private void ShowByLocation_Click(object sender, RoutedEventArgs e)
@@ -95,8 +90,8 @@ namespace InitialProject.View
 
                 Location location = LocationService.getBy(country, city);
 
-                Tours = tourController.GetBy(location);
-                TourShowGrid.ItemsSource = Tours;
+                Tours = TourService.GetBy(location);
+                RefreshDataGrid(Tours);
             }
             catch 
             {
@@ -109,8 +104,8 @@ namespace InitialProject.View
             try
             {
                 string language = inputField.Text;
-                Tours = tourController.GetBy(language);
-                TourShowGrid.ItemsSource = Tours;
+                Tours = TourService.GetBy(language);
+                RefreshDataGrid(Tours);
             }
             catch
             {
@@ -126,8 +121,8 @@ namespace InitialProject.View
                 TimeSpan duration;
                 TimeSpan.TryParse(inputField.Text, out duration);
                 MessageBox.Show(duration.ToString());
-                Tours = tourController.GetBy(duration);
-                TourShowGrid.ItemsSource = Tours;
+                Tours = TourService.GetBy(duration);
+                RefreshDataGrid(Tours);
             }
             catch
             {
@@ -140,13 +135,58 @@ namespace InitialProject.View
             try
             {
                 int guestNumber = Int32.Parse(inputField.Text);
-                Tours = tourController.GetBy(guestNumber);
-                TourShowGrid.ItemsSource = Tours;
+                Tours = TourService.GetBy(guestNumber);
+                RefreshDataGrid(Tours);
             }
             catch
             {
                 MessageBox.Show("Greska");
             }
+        }
+
+        private void ReserveTourButton_Click(object sender, RoutedEventArgs e)
+        {
+           try
+            {
+                Tour tour = (Tour)TourShowGrid.SelectedItem;
+                int guestNumber = int.Parse(SelectedGuestNumber.Text);
+
+                TourReservationResponseDto response = reservationControler.Reserve(tour, guestNumber);
+
+                if (response.IsFull && response.AvaliableSpace == 0)        //nemoguce rezervisati
+                {
+                    List<Tour> newTours = TourService.GetBy(tour.Location);
+                    MessageBox.Show("Tura je popunjena. Pogledajte ture sa iste lokacije.");
+                    RefreshDataGrid(newTours);
+                }else
+                    if(response.AvaliableSpace < guestNumber)
+                {
+                    MessageBox.Show("Nema mesta za uneti broj gostiju. Smanjite broj i pokusajte ponovo!");
+                }
+
+                if(!response.IsFull)
+                {
+                    TourReservation newTourReservation = new TourReservation();
+                    reservationControler.Save(newTourReservation, tour, UserRepository.GetUser("Perica"), guestNumber);
+                    MessageBox.Show("Uspesno sacuvana rezervacija!");
+                    ShowAllTours();
+                }
+
+                FreeSpacesLabel.Content = "Broj slobodnih mesta: " + response.AvaliableSpace.ToString();
+
+
+                MessageBox.Show(response.ToString());
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
+
+        }
+
+        private void CancelReservationButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAllTours();
         }
     }
 }

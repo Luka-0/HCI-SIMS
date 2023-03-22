@@ -21,6 +21,7 @@ namespace InitialProject.Repository
             {
                 reservations = dbContext.tourReservations
                                         .Include(t => t.Tour)
+                                        .ThenInclude(l => l.Location)
                                         .ToList();
             }
             return reservations;
@@ -72,6 +73,7 @@ namespace InitialProject.Repository
             using (var dbContext = new UserContext())
             {
                 reservations = dbContext.tourReservations
+                                 .Include(t => t.Tour)
                                  .Where(t => t.Tour.Id == tour.Id)
                                  .ToList();
             }
@@ -90,6 +92,29 @@ namespace InitialProject.Repository
             return false;
         }
 
+        public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber)
+        {
+            var db = new UserContext();
+
+            var existingTour = db.tour.Find(tour.Id);
+            var existingLocation = db.location.Find(tour.Location.Id);
+            var existingGuest = db.users.Find(guest.Id);
+
+            reservation.Tour = existingTour;
+            reservation.Tour.Location = existingLocation;
+            reservation.BookingGuest = existingGuest;
+            reservation.GuestNumber = guestNumber;
+
+            db.tour.Attach(existingTour);
+            db.location.Attach(existingLocation);
+            db.users.Attach(existingGuest);
+
+            db.Add(reservation);
+
+            db.SaveChanges();
+
+
+        }
 
 
 

@@ -31,6 +31,8 @@ public class TourController
         return getTourDtos;
     }
 
+
+
     public List<GetTourDto> GetBy(Location location)
     {
         List<Tour> allTours = tourService.GetBy(location);
@@ -75,7 +77,7 @@ public class TourController
         foreach (Tour tour in allTours)
         {
             if (reservationService.IsReserved(tour))
-                if (reservationService.CountGuestsBy(tour) <= guestNumber)
+                if (reservationService.CountGuestsBy(tour) == guestNumber)
                     getTourDtos.Add(new GetTourDto(tour.Name, tour.Description, tour.Location, tour.Language, tour.GuestLimit, tour.Duration, tour.StartDateAndTime, tour.TourKeyPoints, tour.images));
         }
         return getTourDtos;

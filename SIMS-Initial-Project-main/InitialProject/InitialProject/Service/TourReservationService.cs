@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Contexts;
+using InitialProject.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace InitialProject.Service
     public class TourReservationService
     {
         private TourReservationRepository repository = new TourReservationRepository();
-
+        private TourRepository tourRepository = new TourRepository();
         public List<TourReservation> GetAll()
         {
             return repository.GetAll();
@@ -49,6 +50,11 @@ namespace InitialProject.Service
         public int GetAvaliableSpace(Tour tour)
         {
             return tour.GuestLimit - CountGuestsBy(tour);
+        }
+
+        public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber)
+        {
+            repository.Save(reservation, tour, guest, guestNumber);
         }
     }
 }

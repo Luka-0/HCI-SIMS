@@ -42,5 +42,10 @@ namespace InitialProject.Model
             Password = values[2];
         }
 
+        public override string ToString()
+        {
+            return Username + "\n";
+        }
+
     }
 }

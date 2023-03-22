@@ -15,15 +15,25 @@ namespace InitialProject.Model
         public int Id { get; set; }
 
         [ForeignKey("TourId")]
-        public Tour Tour { get; set; }
+        public Tour? Tour { get; set; }
 
         [Required]
         public int GuestNumber { get; set; }    //for how many guests is booked
 
         public TourReservation(){}
         [Required]
-        public User BookingGuest { get; set; }
+        public User? BookingGuest { get; set; }
 
+        public TourReservation(Tour tour, int guestNumber, User bookingGuest)
+        {
+            Tour = tour;
+            GuestNumber = guestNumber;
+            BookingGuest = bookingGuest;
+        }
 
+        public override string ToString()
+        {
+            return Id.ToString() + " " + Tour.ToString() + " " + GuestNumber.ToString() + "\n";
+        }
     }
 }

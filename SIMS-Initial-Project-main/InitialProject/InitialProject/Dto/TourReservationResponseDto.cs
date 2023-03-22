@@ -17,5 +17,10 @@ namespace InitialProject.Dto
             AvaliableSpace = avaliableSpace;
         }
         public TourReservationResponseDto() { }
+
+        public override string ToString()
+        {
+            return IsFull + " " + AvaliableSpace;
+        }
     }
 }
