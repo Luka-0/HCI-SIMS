@@ -93,37 +93,37 @@ public class TourController
         return null;
     }
 
-    public void add(TourToControllerDto dto)
+    public void Add(TourToControllerDto dto)
     {
-        Location location = LocationService.getBy(dto.Country, dto.City);
-        List<TourKeyPoint> tourKeyPoints = tourKeyPointService.save(dto.TourKeyPointNames);
-        List<Image> images = imageService.save(dto.ImageURLs);
+        Location location = LocationService.GetBy(dto.Country, dto.City);
+        List<TourKeyPoint> tourKeyPoints = tourKeyPointService.Save(dto.TourKeyPointNames);
+        List<Image> images = imageService.Save(dto.ImageURLs);
 
         Tour tour = new Tour(dto.Name, dto.Description, dto.Language, 
             dto.GuestLimit, dto.StartDateAndTime, 
             dto.Duration);
 
         var db = new UserContext();
-        tour = tourService.save(tour);
+        tour = tourService.Save(tour);
 
         //int tourId = tourService.get(tour.Id);
-        tourKeyPointService.update(tourKeyPoints, tour);
-       // tourKeyPointService.setTypes(tourKeyPoints);
-        tour.Location = LocationService.getBy(dto.Country, dto.City);
+        tourKeyPointService.Update(tourKeyPoints, tour);
+       // tourKeyPointService.SetTypes(tourKeyPoints);
+        tour.Location = LocationService.GetBy(dto.Country, dto.City);
 
-        imageService.setTourId(images, tour);
+        imageService.SetTourId(images, tour);
 
         db.SaveChanges();
         
     }
 
-    public List<TourBasicInfoDto> getAllBasicInfo()
+    public List<TourBasicInfoDto> Get()
     {
-        return tourService.getBasicInfo();
+        return tourService.Get();
     }
-    public List<TourBasicInfoDto> GetTodaysToursBasicInfo()
+    public List<TourBasicInfoDto> GetTodays()
     {
-        return tourService.getTodaysToursBasicInfo();
+        return tourService.GetTodays();
     }
 
 }

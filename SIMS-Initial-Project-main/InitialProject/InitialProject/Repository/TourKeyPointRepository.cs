@@ -7,7 +7,7 @@ namespace InitialProject.Repository;
 
 public class TourKeyPointRepository
 {
-    public static List<TourKeyPoint> getAll()
+    public static List<TourKeyPoint> GetAll()
     {
         List<TourKeyPoint> tourKeyPoints= new List<TourKeyPoint>();
 
@@ -23,9 +23,9 @@ public class TourKeyPointRepository
         return tourKeyPoints;
     }
 
-    public static List<TourKeyPoint> getBy(List<string> TourKeyPointNames) 
+    public static List<TourKeyPoint> GetBy(List<string> TourKeyPointNames) 
     {
-        List<TourKeyPoint> allTourKeyPoints = getAll();
+        List<TourKeyPoint> allTourKeyPoints = GetAll();
         List<TourKeyPoint> tourKeyPoints = new List<TourKeyPoint>();
         using var db = new UserContext();
 
@@ -43,7 +43,7 @@ public class TourKeyPointRepository
 
     }
 
-    /*public static List<TourKeyPoint> save(List<string> tourKeyPointNames)
+    /*public static List<TourKeyPoint> Save(List<string> tourKeyPointNames)
     {
         List<TourKeyPoint> tourKeyPoints = new List<TourKeyPoint>();
         using var db = new UserContext();
@@ -68,7 +68,7 @@ public class TourKeyPointRepository
         db.SaveChanges();
     }
 
-    public static void update(TourKeyPoint tourKeyPoint, Tour tour)
+    public static void Update(TourKeyPoint tourKeyPoint, Tour tour)
     {
         using (var db =new UserContext())
         {
@@ -79,7 +79,7 @@ public class TourKeyPointRepository
         }
     }
 
-    public static TourKeyPoint getBy(int id)
+    public static TourKeyPoint GetBy(int id)
     {
         using (var db = new UserContext())
         {
@@ -87,7 +87,7 @@ public class TourKeyPointRepository
         }
     }
 
-    public static void setType(int  startId, int endId)
+    public static void SetType(int  startId, int endId)
     {
         using (var db = new UserContext())
         {

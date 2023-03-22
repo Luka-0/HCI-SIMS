@@ -86,7 +86,7 @@ namespace InitialProject.View
                 string city = inputField.Text;
                 string country = inputField2.Text;
 
-                Location location = LocationService.getBy(country, city);
+                Location location = LocationService.GetBy(country, city);
 
                 Tours = TourService.GetBy(location);
                 RefreshDataGrid(Tours);

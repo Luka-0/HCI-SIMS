@@ -32,7 +32,7 @@ namespace InitialProject.Service
 
         }
 
-        public List<Image> save(List<String> urlsDto)
+        public List<Image> Save(List<String> urlsDto)
         {
             List<Image> images = new List<Image>();
             foreach (string url in urlsDto)
@@ -50,13 +50,13 @@ namespace InitialProject.Service
             return images;
         }
 
-        public void setTourId(List<Image> images, Tour tour)
+        public void SetTourId(List<Image> images, Tour tour)
         {
             using ( var db = new UserContext())
             {
                 foreach (var image in images)
                 {
-                    ImageRepository.update(image, tour);
+                    ImageRepository.Update(image, tour);
 
                 }
 

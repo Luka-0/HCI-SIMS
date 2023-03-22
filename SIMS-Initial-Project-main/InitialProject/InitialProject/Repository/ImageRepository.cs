@@ -18,7 +18,7 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
-        public static void update(Image image, Tour tour)
+        public static void Update(Image image, Tour tour)
         {
             using var db = new UserContext();
             image.Tour = tour;

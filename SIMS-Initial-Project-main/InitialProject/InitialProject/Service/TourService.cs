@@ -12,10 +12,10 @@ namespace InitialProject.Service;
 public class TourService
 {
     TourRepository tourRepository = new TourRepository();
-    public Tour save(Tour tour)
+    public Tour Save(Tour tour)
     {
         
-           tour =  tourRepository.save(tour);
+           tour =  tourRepository.Save(tour);
             return tour;
 
     }
@@ -25,7 +25,7 @@ public class TourService
        return tourRepository.getLocationByTourId(id);
     }
     */
-    public List<TourBasicInfoDto> getBasicInfo()
+    public List<TourBasicInfoDto> Get()
     {
         List<TourBasicInfoDto> basicInfoDtos = new List<TourBasicInfoDto>();
         List<Tour> tours = GetAll();
@@ -41,11 +41,11 @@ public class TourService
         return basicInfoDtos;
     }
 
-    public List<TourBasicInfoDto> getTodaysToursBasicInfo()
+    public List<TourBasicInfoDto> GetTodays()
     {
         List<TourBasicInfoDto> todaysTours = new List<TourBasicInfoDto>();
         List<TourBasicInfoDto> tours = new List<TourBasicInfoDto>();
-        tours = getBasicInfo();
+        tours = Get();
         foreach (var tour in tours)
         {
             DateTime date = tour.StartDateAndTime.Date;

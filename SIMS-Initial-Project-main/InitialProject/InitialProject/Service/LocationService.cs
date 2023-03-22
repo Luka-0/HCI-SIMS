@@ -19,9 +19,9 @@ namespace InitialProject.Service
             return LocationRepository.GetBy(city);
         }
 
-        public static Location getBy(int id)
+        public static Location GetBy(int id)
         {
-            return LocationRepository.getBy(id);
+            return LocationRepository.GetBy(id);
         }
 
         public static List<Location> GetAll()
@@ -34,9 +34,9 @@ namespace InitialProject.Service
             LocationRepository.Save(location);
         }
 
-        public static Location getBy(String country, String city)
+        public static Location GetBy(String country, String city)
         {
-            return LocationRepository.getBy(country, city);
+            return LocationRepository.GetBy(country, city);
         }
 
     }
