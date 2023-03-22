@@ -18,10 +18,10 @@ namespace InitialProject.Controller
         {
             TourReservationResponseDto responseDto;
 
-            if(service.GetAvaliableSpace(tour) < guestNumber)
-                responseDto = new TourReservationResponseDto(true, service.GetAvaliableSpace(tour));
+            if(service.GetAvailableSpace(tour) < guestNumber)
+                responseDto = new TourReservationResponseDto(true, service.GetAvailableSpace(tour));
             else
-                responseDto = new TourReservationResponseDto(false, service.GetAvaliableSpace(tour));
+                responseDto = new TourReservationResponseDto(false, service.GetAvailableSpace(tour));
 
             return responseDto;
         }
