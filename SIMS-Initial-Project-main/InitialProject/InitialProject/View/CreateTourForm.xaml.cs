@@ -25,7 +25,6 @@ namespace InitialProject
 
         public User LoggedInUser { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
-        public NewTourDto NewTourDto { get; set; } = new NewTourDto();
         public TourController tourController { get; set; }= new TourController();
 
         
@@ -65,11 +64,9 @@ namespace InitialProject
         }
         private DateTime SetDateAndTime(String dateString, String timeString)
         {
-            DateAndTime date1;
             String[] temp = SeparateForDate(dateString);
             String format = temp[1] + "-" + temp[0] + "-" + temp[2] + " " + timeString;
 
-            //date = DateAndTime.DateValue(format);
             //Myb put it in try catch 
             DateTime dateTime = DateTime.ParseExact(format, "d-M-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
 
@@ -87,31 +84,27 @@ namespace InitialProject
 
         private void Create(object sender, RoutedEventArgs e)
         {
-            NewTourDto newTourDto = new NewTourDto(Name.Text, Country.Text, City.Text,
-                Description.Text, Language.Text, GuestLimit.Text, TourKeyPoints.Text, StartDate.Text, StartTime.Text, Duration.Text, ImageURLs.Text);
-
-
 
             TourToControllerDto tourToControllerDto = new TourToControllerDto();
-            tourToControllerDto.Name = newTourDto.Name;
-            tourToControllerDto.Country = newTourDto.Country;
-            tourToControllerDto.City = newTourDto.City;
-            tourToControllerDto.Description = newTourDto.Description;
-            tourToControllerDto.Language = newTourDto.Language;
-            tourToControllerDto.TourKeyPointNames = Separate(newTourDto.TourKeyPointNames);
-            tourToControllerDto.ImageURLs = Separate(newTourDto.ImageURLs);
-            tourToControllerDto.GuestLimit = int.Parse(newTourDto.GuestLimit);
-            tourToControllerDto.StartDateAndTime = SetDateAndTime(newTourDto.StartDate, newTourDto.StartTime);
-            tourToControllerDto.Duration = SetDuration(newTourDto.Duration);
-            tourToControllerDto.ImageURLs = Separate(newTourDto.ImageURLs);
-            tourController.add(tourToControllerDto);
+            tourToControllerDto.Name = Name.Text;
+            tourToControllerDto.Country = Country.Text;
+            tourToControllerDto.City = City.Text;
+            tourToControllerDto.Description = Description.Text;
+            tourToControllerDto.Language = Language.Text;
+            tourToControllerDto.TourKeyPointNames = Separate(TourKeyPoints.Text);
+            tourToControllerDto.ImageURLs = Separate(ImageURLs.Text);
+            tourToControllerDto.GuestLimit = int.Parse(GuestLimit.Text);
+            tourToControllerDto.StartDateAndTime = SetDateAndTime(StartDate.Text, StartTime.Text);
+            tourToControllerDto.Duration = SetDuration(Duration.Text);
+            tourToControllerDto.ImageURLs = Separate(ImageURLs.Text);
+            tourController.Add(tourToControllerDto);
         }
 
-        private void ViewAllTours(object sender, RoutedEventArgs e)
+        private void ViewTodaysTours(object sender, RoutedEventArgs e)
         {
              ShowTours showTours = new ShowTours();
              showTours.Show();
-             Close(); //this.close();
+             Close(); 
         }
     }
 }

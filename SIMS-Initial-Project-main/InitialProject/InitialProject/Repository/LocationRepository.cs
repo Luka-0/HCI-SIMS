@@ -11,7 +11,7 @@ namespace InitialProject.Repository
 {
     public class LocationRepository
     {
-        public static Location getBy(string city)
+        public static Location GetBy(string city)
         {
             using (var db = new UserContext())
             {
@@ -26,7 +26,7 @@ namespace InitialProject.Repository
             return null;
         }
 
-        public static Location getBy(string country, string city)
+        public static Location GetBy(string country, string city)
         {
             using (var db = new UserContext())
             {
@@ -42,7 +42,7 @@ namespace InitialProject.Repository
 
             return null;
         }
-            public static Location getBy(int id)
+            public static Location GetBy(int id)
             {
                 Location location = new Location();
 
@@ -53,7 +53,7 @@ namespace InitialProject.Repository
                 }
                 return location;
             }
-            public static List<Location> getAll()
+            public static List<Location> GetAll()
             {
                 List<Location> locations = new List<Location>();
 

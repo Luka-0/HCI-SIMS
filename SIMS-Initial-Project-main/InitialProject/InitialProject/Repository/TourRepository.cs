@@ -30,7 +30,7 @@ namespace InitialProject.Repository
     
 
 
-        public Tour save(Tour tour)
+        public Tour Save(Tour tour)
         {
             using var db = new UserContext();
             db.Add(tour);

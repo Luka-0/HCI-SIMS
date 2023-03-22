@@ -73,7 +73,7 @@ namespace InitialProject.View
         {
             LocationCBFilter.Items.Add("--Chose--");
 
-            List<Location> locations = LocationRepository.getAll();
+            List<Location> locations = LocationRepository.GetAll();
             foreach(Location location in locations)
             { 
                 LocationCBFilter.Items.Add(location.Country.ToString() + "-" +  location.City.ToString());

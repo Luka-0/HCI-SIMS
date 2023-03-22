@@ -46,7 +46,7 @@ namespace InitialProject.Service
                 return false;
         }
 
-        public int GetAvaliableSpace(Tour tour)
+        public int GetAvailableSpace(Tour tour)
         {
             return tour.GuestLimit - CountGuestsBy(tour);
         }

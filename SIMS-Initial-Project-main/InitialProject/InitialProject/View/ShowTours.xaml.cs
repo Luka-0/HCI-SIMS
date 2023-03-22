@@ -36,12 +36,10 @@ namespace InitialProject
             InitializeComponent();
             this.DataContext = this;
             BasicTours = new ObservableCollection<TourBasicInfoDto>();
-            //List<TourBasicInfoDto> basicTours= tourController.GetTodaysToursBasicInfo();
-            List<TourBasicInfoDto> basicTours = tourController.getAllBasicInfo();
-            int counter = 0;
+            List<TourBasicInfoDto> basicTours= tourController.GetTodays();
+            //List<TourBasicInfoDto> basicTours = tourController.getAllBasicInfo();
             foreach (TourBasicInfoDto tour in basicTours)
             {
-                counter++;
                 BasicTours.Add(tour);    
             }
 
