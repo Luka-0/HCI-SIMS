@@ -36,5 +36,10 @@ namespace InitialProject.Controller
             service.Save(reservation, tour, guest, guestNumber);
         }
 
+        public int CountGuestsBy(Tour tour)
+        {
+            return service.CountGuestsBy(tour);
+        }
+
     }
 }

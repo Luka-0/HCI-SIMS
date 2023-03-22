@@ -49,9 +49,7 @@ namespace InitialProject.View
         {
             InitializeComponent();
             ShowAllTours();
-          //  ShowReservations();
             this.ResizeMode = ResizeMode.NoResize;
-            // ShowReservations();
 
         }
 
@@ -135,8 +133,19 @@ namespace InitialProject.View
             try
             {
                 int guestNumber = Int32.Parse(inputField.Text);
-                Tours = TourService.GetBy(guestNumber);
-                RefreshDataGrid(Tours);
+                Tours = TourService.GetAll();
+
+                List<Tour> tours = new List<Tour>();
+
+                foreach (Tour t in Tours)
+                {
+                    if(reservationControler.CountGuestsBy(t) == guestNumber)
+                    {
+                        tours.Add(t);
+                    }
+                }
+
+                RefreshDataGrid(tours);
             }
             catch
             {
@@ -157,11 +166,14 @@ namespace InitialProject.View
                 {
                     List<Tour> newTours = TourService.GetBy(tour.Location);
                     MessageBox.Show("Tura je popunjena. Pogledajte ture sa iste lokacije.");
+                    FreeSpacesLabel.Content = "";
+                    SelectedGuestNumber.Text = "";
                     RefreshDataGrid(newTours);
                 }else
                     if(response.AvaliableSpace < guestNumber)
                 {
                     MessageBox.Show("Nema mesta za uneti broj gostiju. Smanjite broj i pokusajte ponovo!");
+                    FreeSpacesLabel.Content = "Broj slobodnih mesta: " + response.AvaliableSpace.ToString();
                 }
 
                 if(!response.IsFull)
@@ -169,13 +181,10 @@ namespace InitialProject.View
                     TourReservation newTourReservation = new TourReservation();
                     reservationControler.Save(newTourReservation, tour, UserRepository.GetUser("Perica"), guestNumber);
                     MessageBox.Show("Uspesno sacuvana rezervacija!");
+                    FreeSpacesLabel.Content = "";
+                    SelectedGuestNumber.Text = "";
                     ShowAllTours();
                 }
-
-                FreeSpacesLabel.Content = "Broj slobodnih mesta: " + response.AvaliableSpace.ToString();
-
-
-                MessageBox.Show(response.ToString());
             }
             catch
             {
@@ -187,6 +196,8 @@ namespace InitialProject.View
         private void CancelReservationButton_Click(object sender, RoutedEventArgs e)
         {
             ShowAllTours();
+            FreeSpacesLabel.Content = "";
+            SelectedGuestNumber.Text = "";
         }
     }
 }
