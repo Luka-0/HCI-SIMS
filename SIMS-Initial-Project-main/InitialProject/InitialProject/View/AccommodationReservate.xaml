@@ -1,0 +1,48 @@
+﻿<Window x:Class="InitialProject.View.AccommodationReservate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="AccommodationReservate" Height="560" Width="800">
+    <Grid Margin="10,0,0,0">
+        <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding accommodationsToShow}" Height="Auto" Width="Auto" Margin="312,0,10,0" VerticalAlignment="Top" 
+                  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+                <DataGridTextColumn Header="Guest Limit" Binding="{Binding GuestLimit}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Country}"/>
+                <DataGridTextColumn Header="City" Binding="{Binding City}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Margin="0,0,483,272" DataContext="{Binding ElementName=AccommodationsGrid, Path=SelectedItem}">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,54"/>
+            <DatePicker x:Name="StartingDatePicker" HorizontalAlignment="Left" Margin="154,11,0,0" VerticalAlignment="Top"/>
+            <DatePicker x:Name="EndingDatePicker" HorizontalAlignment="Left" Margin="154,55,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="GuestNumberTB" HorizontalAlignment="Left" Margin="154,110,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" TextAlignment="Center" Width="51"/>
+            <Button Content="Reservate" HorizontalAlignment="Left" Margin="109,160,0,0" VerticalAlignment="Top" Click="ReservateAccommodation_Click"/>
+            <Label Content="Select starting date:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Content="Select ending date:" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top"/>
+            <Label Content="Enter guest count:" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Margin="0,217,483,0" >
+            <Border BorderBrush="Black" BorderThickness="1"/>
+            <ComboBox x:Name="FilterComboBox" HorizontalAlignment="Left" Margin="154,10,0,0" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="154,116,0,0" TextWrapping="Wrap" Text="--Here--" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="ApplyFilterButton" Content="Apply filter" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Click="ApplyFilter_Click"/>
+            <Label Content="Choose what to filter with:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="AccommodationTypeComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="154,161,0,0"/>
+            <Label Content="Accommodation type:" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="GuestNumberTBFilter" HorizontalAlignment="Center" Margin="0,230,0,0" TextWrapping="Wrap" Text="--Here--" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+            <Label Content="Enter name here:" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top"/>
+            <Label HorizontalAlignment="Center" Margin="0,199,0,0" VerticalAlignment="Top" >
+                Enter guest number or days for reservation:
+            </Label>
+            <ComboBox x:Name="LocationCBFilter" HorizontalAlignment="Left" Margin="154,66,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
+            <Label Content="Choose location:" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+        </Grid>
+
+    </Grid>
+</Window>

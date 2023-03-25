@@ -1,0 +1,36 @@
+﻿<Window x:Class="InitialProject.View.Guest2View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="Guest2View" Height="580" Width="970">
+    <Grid>
+        <DataGrid x:Name = "TourShowGrid" ItemsSource="{Binding toursToShow}" Height="200" Width="700" Margin="13,9,187,321" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="GuestLimit" Binding="{Binding GuestLimit}"/>
+                <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
+                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}"/>
+                <DataGridTextColumn Header="Start Date And Time" Binding="{Binding StartDateAndTime}"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBox x:Name="inputField" Height="35"  Width="150" Margin="19,226,731,269"/>
+        <TextBox x:Name="inputField2" Height="35"  Width="150" Margin="185,226,565,269" />
+        <Button x:Name="ShowByLocation" Height="30"  Width="150"  Margin="21,279,729,221" Click="ShowByLocation_Click" >Pretrazi po lokaciji</Button>
+        <Button x:Name="ShowByLenght" Height="30"  Width="150" Margin="345,279,405,221" Click="ShowByLenght_Click" >Pretrazi po trajanju</Button>
+        <Button x:Name="ShowByLanguagee" Height="30" Width="150" Margin="187,279,563,221" Click="ShowByLanguagee_Click" >Pretrazi po jeziku</Button>
+        <Button x:Name="ShowByGuestNumber" Height="30" Width="150" Margin="501,279,249,221" Click="ShowByGuestNumber_Click" >Pretrazi po broju ljudi</Button>
+
+        <Label Margin="22,382,778,117">Za rezervaciju</Label>
+        <Label x:Name="FreeSpacesLabel"  Margin="184,386,510,112">Broj slobodnih mesta:</Label>
+        <TextBox x:Name="SelectedGuestNumber" Margin="22,422,730,79"/>
+        <Button x:Name="ReserveTourButton" Width="100" Margin="234,422,616,79" Click="ReserveTourButton_Click">Rezervisi</Button>
+        <Button x:Name="CancelReservationButton" Width="100" Margin="345,422,505,79" Click="CancelReservationButton_Click">Odustani</Button>
+    </Grid>
+</Window>
