@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
+    [Table("TourReservations")]
     public class TourReservation
     {
         [Key]

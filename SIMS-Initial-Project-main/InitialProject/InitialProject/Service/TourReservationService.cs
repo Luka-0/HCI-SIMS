@@ -12,36 +12,53 @@ namespace InitialProject.Service
 {
     public class TourReservationService
     {
-        private TourReservationRepository repository = new TourReservationRepository();
+        private TourReservationRepository tourReservationRepository = new TourReservationRepository();
         private TourRepository tourRepository = new TourRepository();
         public List<TourReservation> GetAll()
         {
-            return repository.GetAll();
+            return tourReservationRepository.GetAll();
         }
 
-        public List<TourReservation> GetBy(Tour tour)
+        public List<TourReservation> GetByTour(Tour tour)
         {
-            return repository.GetBy(tour);
-        }
-
-        public bool IsReserved(Tour tour)
-        {
-            return repository.IsReserved(tour);
+            return tourReservationRepository.GetByTour(tour);
         }
 
         public TourReservation GetById(int id)
         {
-            return repository.GetById(id);
+            return tourReservationRepository.GetById(id);
         }
 
-        public int CountGuestsBy(Tour tour)
+        public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber)
         {
-            return repository.CountGuestsBy(tour);
+            tourReservationRepository.Save(reservation, tour, guest, guestNumber);
+        }
+
+        //TODO ispravi
+        public bool IsReserved(Tour tour)
+        {
+            List<TourReservation> reservations = tourReservationRepository.GetByTour(tour);
+            if(reservations.Find(r => r.Tour.Id == tour.Id) != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public int CountGuestsOnTour(Tour tour)
+        {
+            List<TourReservation> reservations = tourReservationRepository.GetByTour(tour);
+            return reservations.Where(r => r.Tour.Id == tour.Id).Sum(r => r.GuestNumber);
+        }
+
+        public int CountTourReservations(Tour tour)
+        {
+            return tourReservationRepository.GetByTour(tour).Count();
         }
 
         public bool IsFull(Tour tour)
         {
-            if(tour.GuestLimit == CountGuestsBy(tour))
+            if(tour.GuestLimit == CountGuestsOnTour(tour))
                 return true;
             else 
                 return false;
@@ -49,12 +66,9 @@ namespace InitialProject.Service
 
         public int GetAvailableSpace(Tour tour)
         {
-            return tour.GuestLimit - CountGuestsBy(tour);
+            return tour.GuestLimit - CountGuestsOnTour(tour);
         }
 
-        public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber)
-        {
-            repository.Save(reservation, tour, guest, guestNumber);
-        }
+        
     }
 }

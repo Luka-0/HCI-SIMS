@@ -48,7 +48,7 @@ namespace InitialProject
 
         private void SignIn(object sender, RoutedEventArgs e)
         {
-            User user = UserRepository.GetUser(Username);
+            User user = UserRepository.Get(Username);
 
             if (user != null)
             {
@@ -120,7 +120,7 @@ namespace InitialProject
             user.Password = txtPassword.Password;
             user.Username = Username;
 
-            UserRepository.AddUser(user);
+            UserRepository.Add(user);
 
             MessageBox.Show("Successfully added user");
             this.Close();

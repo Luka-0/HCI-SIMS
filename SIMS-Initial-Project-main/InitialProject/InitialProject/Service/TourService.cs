@@ -25,6 +25,7 @@ public class TourService
        return tourRepository.getLocationByTourId(id);
     }
     */
+    //TODO Pavle ispravi
     public List<TourBasicInfoDto> Get()
     {
         List<TourBasicInfoDto> basicInfoDtos = new List<TourBasicInfoDto>();
@@ -41,6 +42,7 @@ public class TourService
         return basicInfoDtos;
     }
 
+    //TODO Pavle ispravi
     public List<TourBasicInfoDto> GetTodays()
     {
         List<TourBasicInfoDto> todaysTours = new List<TourBasicInfoDto>();
@@ -68,23 +70,23 @@ public class TourService
         {
             return tourRepository.GetById(id);
         }
-        public List<Tour> GetBy(Location location)
+        public List<Tour> GetByLocation(Location location)
         {
-            return tourRepository.GetBy(location);
+            return tourRepository.GetByLocation(location);
         }
 
-        public List<Tour> GetBy(TimeSpan duration)
+        public List<Tour> GetByDuration(TimeSpan duration)
         {
-            return tourRepository.GetBy(duration);
+            return tourRepository.GetByDuration(duration);
         }
 
-        public List<Tour> GetBy(string language)
+        public List<Tour> GetByLanguage(string language)
         {
-            return tourRepository.GetBy(language);
+            return tourRepository.GetByLanguage(language);
         }
 
-        public List<Tour> GetBy(int guestNumber)
+        public List<Tour> GetByGuestLimit(int guestNumber)
         {
-            return tourRepository.GetBy(guestNumber);
+            return tourRepository.GetByGuestLimit(guestNumber);
         }
 }

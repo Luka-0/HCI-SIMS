@@ -11,8 +11,6 @@ namespace InitialProject.Repository
 {
     public class TourReservationRepository
     {
-       // public TourReservationRepository() { }
-
         public List<TourReservation> GetAll()
         {
             List<TourReservation> reservations = new List<TourReservation>();
@@ -39,34 +37,7 @@ namespace InitialProject.Repository
             return reservation;
         }
 
-        //CountBy given tour/tourId
-        public int CountReservationsBy(Tour tour)
-        {
-            int count = 0;
-
-            using (var dbContext = new UserContext())
-            {
-                count = dbContext.tourReservations
-                                 .Where(t => t.Tour.Id == tour.Id)
-                                 .Count();
-            }
-            return count;
-        }
-
-        public int CountGuestsBy(Tour tour)
-        {
-            int count = 0;
-
-            using (var dbContext = new UserContext())
-            {
-                count = dbContext.tourReservations
-                                 .Where(t => t.Tour.Id == tour.Id)
-                                 .Sum(t => t.GuestNumber);
-            }
-            return count;
-        }
-
-        public List<TourReservation> GetBy(Tour tour)
+        public List<TourReservation> GetByTour(Tour tour)
         {
             List<TourReservation> reservations = new List<TourReservation>();
 
@@ -78,18 +49,6 @@ namespace InitialProject.Repository
                                  .ToList();
             }
             return reservations;
-        }
-
-        public bool IsReserved(Tour tour) 
-        {
-            List<TourReservation> reservations = GetAll();
-
-            foreach(var reservation in reservations)
-            {
-                if(reservation.Tour.Id == tour.Id) 
-                    return true;
-            }
-            return false;
         }
 
         public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber)
@@ -112,13 +71,7 @@ namespace InitialProject.Repository
             db.Add(reservation);
 
             db.SaveChanges();
-
-
         }
-
-
-
-
 
 
 

@@ -27,9 +27,6 @@ namespace InitialProject.Repository
     }
     */
     
-    
-
-
         public Tour Save(Tour tour)
         {
             using var db = new UserContext();
@@ -64,7 +61,7 @@ namespace InitialProject.Repository
             return tour;
         }
 
-        public List<Tour> GetBy(Location location)
+        public List<Tour> GetByLocation(Location location)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -78,7 +75,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public List<Tour> GetBy(TimeSpan duration)
+        public List<Tour> GetByDuration(TimeSpan duration)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -92,7 +89,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public List<Tour> GetBy(string language)
+        public List<Tour> GetByLanguage(string language)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -106,7 +103,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public List<Tour> GetBy(int guestLimit)
+        public List<Tour> GetByGuestLimit(int guestLimit)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -114,7 +111,7 @@ namespace InitialProject.Repository
             {
                 Tours = dbContext.tour
                                  .Include(t => t.Location)
-                                 .Where(t => t.GuestLimit >= guestLimit)
+                                 .Where(t => t.GuestLimit == guestLimit)
                                  .ToList();
             }
             return Tours;

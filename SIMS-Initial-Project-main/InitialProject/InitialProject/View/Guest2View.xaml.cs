@@ -88,7 +88,7 @@ namespace InitialProject.View
 
                 Location location = LocationService.GetBy(country, city);
 
-                Tours = TourService.GetBy(location);
+                Tours = tourController.GetByLocation(location);
                 RefreshDataGrid(Tours);
             }
             catch 
@@ -102,7 +102,7 @@ namespace InitialProject.View
             try
             {
                 string language = inputField.Text;
-                Tours = TourService.GetBy(language);
+                Tours = tourController.GetByLanguage(language);
                 RefreshDataGrid(Tours);
             }
             catch
@@ -119,7 +119,7 @@ namespace InitialProject.View
                 TimeSpan duration;
                 TimeSpan.TryParse(inputField.Text, out duration);
                 MessageBox.Show(duration.ToString());
-                Tours = TourService.GetBy(duration);
+                Tours = tourController.GetByDuration(duration);
                 RefreshDataGrid(Tours);
             }
             catch
@@ -132,18 +132,10 @@ namespace InitialProject.View
         {
             try
             {
-                int guestNumber = Int32.Parse(inputField.Text);
-                Tours = TourService.GetAll();
+                int guestLimit = Int32.Parse(inputField.Text);
 
-                List<Tour> tours = new List<Tour>();
+                List<Tour> tours = tourController.GetByGuestLimit(guestLimit);
 
-                foreach (Tour t in Tours)
-                {
-                    if(reservationControler.CountGuestsBy(t) == guestNumber)
-                    {
-                        tours.Add(t);
-                    }
-                }
 
                 RefreshDataGrid(tours);
             }
@@ -164,7 +156,7 @@ namespace InitialProject.View
 
                 if (response.IsFull && response.AvaliableSpace == 0)        //nemoguce rezervisati
                 {
-                    List<Tour> newTours = TourService.GetBy(tour.Location);
+                    List<Tour> newTours = tourController.GetByLocation(tour.Location);
                     MessageBox.Show("Tura je popunjena. Pogledajte ture sa iste lokacije.");
                     FreeSpacesLabel.Content = "";
                     SelectedGuestNumber.Text = "";
@@ -179,7 +171,7 @@ namespace InitialProject.View
                 if(!response.IsFull)
                 {
                     TourReservation newTourReservation = new TourReservation();
-                    reservationControler.Save(newTourReservation, tour, UserRepository.GetUser("Perica"), guestNumber);
+                    reservationControler.Save(newTourReservation, tour, UserRepository.Get("Perica"), guestNumber);
                     MessageBox.Show("Uspesno sacuvana rezervacija!");
                     FreeSpacesLabel.Content = "";
                     SelectedGuestNumber.Text = "";
@@ -198,6 +190,19 @@ namespace InitialProject.View
             ShowAllTours();
             FreeSpacesLabel.Content = "";
             SelectedGuestNumber.Text = "";
+        }
+
+        private void testDugme_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Tour tour = (Tour)TourShowGrid.SelectedItem;
+                MessageBox.Show(reservationControler.CountTourReservations(tour).ToString());
+            }
+            catch
+            {
+                MessageBox.Show("ne smaraj me\n");
+            }
         }
     }
 }

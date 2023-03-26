@@ -32,5 +32,6 @@
         <TextBox x:Name="SelectedGuestNumber" Margin="22,422,730,79"/>
         <Button x:Name="ReserveTourButton" Width="100" Margin="234,422,616,79" Click="ReserveTourButton_Click">Rezervisi</Button>
         <Button x:Name="CancelReservationButton" Width="100" Margin="345,422,505,79" Click="CancelReservationButton_Click">Odustani</Button>
+        <Button x:Name="testDugme" Width="100" Margin="485,422,385,79"  Content="Test dugme" Click="testDugme_Click"/>
     </Grid>
 </Window>

@@ -13,32 +13,42 @@ namespace InitialProject.Controller
 {
     public class TourReservationControler
     {
-        private  TourReservationService service = new TourReservationService();
+        private  TourReservationService tourReservationService = new TourReservationService();
         public TourReservationResponseDto Reserve(Tour tour, int guestNumber)
         {
             TourReservationResponseDto responseDto;
 
-            if(service.GetAvailableSpace(tour) < guestNumber)
-                responseDto = new TourReservationResponseDto(true, service.GetAvailableSpace(tour));
+            if(tourReservationService.GetAvailableSpace(tour) < guestNumber)
+                responseDto = new TourReservationResponseDto(true, tourReservationService.GetAvailableSpace(tour));
             else
-                responseDto = new TourReservationResponseDto(false, service.GetAvailableSpace(tour));
+                responseDto = new TourReservationResponseDto(false, tourReservationService.GetAvailableSpace(tour));
 
             return responseDto;
         }
 
         public List<TourReservation> GetAll()
         {
-            return service.GetAll();
+            return tourReservationService.GetAll();
+        }
+
+        public List<TourReservation> GetByTour(Tour tour)
+        {
+            return tourReservationService.GetByTour(tour);
         }
 
         public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber)
         {
-            service.Save(reservation, tour, guest, guestNumber);
+            tourReservationService.Save(reservation, tour, guest, guestNumber);
         }
 
-        public int CountGuestsBy(Tour tour)
+        public int CountGuestsOnTour(Tour tour)
         {
-            return service.CountGuestsBy(tour);
+            return tourReservationService.CountGuestsOnTour(tour);
+        }
+
+        public int CountTourReservations(Tour tour)
+        {
+            return tourReservationService.CountTourReservations(tour);
         }
 
     }
