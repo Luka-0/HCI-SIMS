@@ -83,7 +83,11 @@ namespace InitialProject.Service
 
             foreach (AccommodationReservation ar in accommodationReservations)
             {
-                if ((startingDate < ar.BegginingDate && endingDate < ar.BegginingDate) || (startingDate > ar.EndingDate && endingDate > ar.EndingDate))
+                if (startingDate < ar.BegginingDate && endingDate < ar.BegginingDate)
+                {
+                    continue;
+                }
+                else if (startingDate > ar.EndingDate && endingDate > ar.EndingDate)
                 {
                     continue;
                 }

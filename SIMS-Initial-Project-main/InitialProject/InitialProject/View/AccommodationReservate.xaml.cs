@@ -84,21 +84,9 @@ namespace InitialProject.View
 
         private void ReservateAccommodation_Click(object sender, RoutedEventArgs e)
         {
-
-            string startingDate = StartingDatePicker.Text.ToString();
-            if(startingDate.Equals(""))
+            if (!ValidateSelectedDates())
             {
-                MessageBox.Show("Please select a starting date");
                 return;
-
-            }
-
-            string endingDate = EndingDatePicker.Text.ToString();
-            if (endingDate.Equals(""))
-            {
-                MessageBox.Show("Please select an ending date");
-                return;
-
             }
 
             int guestNumber = int.Parse(GuestNumberTB.Text);
@@ -133,6 +121,23 @@ namespace InitialProject.View
             MessageBox.Show("Reservation was successful");
 
         }
+
+        private bool ValidateSelectedDates()
+        {
+            if (StartingDatePicker.Text.ToString().Equals(""))
+            {
+                MessageBox.Show("Please select a starting date");
+                return false;
+            }
+
+            if (EndingDatePicker.Text.ToString().Equals(""))
+            {
+                MessageBox.Show("Please select an ending date");
+                return false;
+            }
+
+            return true;
+        } 
 
         private void RefreshDataGrid(List<Accommodation> accommodations)
         {
