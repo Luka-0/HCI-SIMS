@@ -30,87 +30,87 @@ namespace InitialProject.Repository
 
         public static List<Accommodation> GetAll()
         {
-            List<Accommodation> retVal = new();
+            List<Accommodation> accommodations = new();
 
             using(UserContext db = new())
             {
-                retVal = db.accommodation.ToList();
+                accommodations = db.accommodation.Include(t => t.Location).ToList();
             }
 
-            return retVal;
+            return accommodations;
         }
 
         public static List<Accommodation> GetBy(string name)
         {
-            List<Accommodation> retVal = new();
+            List<Accommodation> accommodations = new();
 
             using(UserContext db = new())
             {
-                retVal = db.accommodation.Where(t => t.Title.Contains(name)).ToList();
+                accommodations = db.accommodation.Include(t => t.Location).Where(t => t.Title.Contains(name)).ToList();
             }
 
-            return retVal;
+            return accommodations;
         }
 
         public static List<Accommodation> GetBy(Location location)
         {
-            List<Accommodation> retVal = new();
+            List<Accommodation> accommodations = new();
 
             using(UserContext db = new())
             {
-                retVal = db.accommodation.Where(t => t.Location == location).ToList();
+                accommodations = db.accommodation.Include(t => t.Location).Where(t => t.Location == location).ToList();
             }
 
-            return retVal;
+            return accommodations;
         }
 
         public static List<Accommodation> GetByCity(string city)
         {
-            List<Accommodation> retVal = new();
+            List<Accommodation> accommodations = new();
 
             using(var db = new UserContext())
             {
 
-                retVal = db.accommodation.Where(t => t.Location.City.Equals(city)).ToList();
+                accommodations = db.accommodation.Include(t => t.Location).Where(t => t.Location.City.Equals(city)).ToList();
             }
 
-            return retVal;
+            return accommodations;
         }
 
         public static List<Accommodation> GetBy(AccommodationType accommodationType)
         {
-            List<Accommodation> retVal = new();
+            List<Accommodation> accommodations = new();
 
             using(UserContext db = new())
             {
-                retVal = db.accommodation.Where(t => t.Type == accommodationType).ToList();
+                accommodations = db.accommodation.Include(t => t.Location).Where(t => t.Type == accommodationType).ToList();
             }
 
-            return retVal;
+            return accommodations;
         }
 
         public static List<Accommodation> GetByGuestNumber(int guestNumber)
         {
-            List<Accommodation> retVal = new();
+            List<Accommodation> accommodations = new();
 
             using(UserContext db = new())
             {
-                retVal = db.accommodation.Where(t => t.GuestLimit >= guestNumber).ToList();
+                accommodations = db.accommodation.Include(t => t.Location).Where(t => t.GuestLimit >= guestNumber).ToList();
             }
 
-            return retVal;
+            return accommodations;
         }
 
         public static List<Accommodation> GetByReservationDays(int reservationDays)
         {
-            List<Accommodation> retVal = new();
+            List<Accommodation> accommodations = new();
 
             using(UserContext db = new())
             {
-                retVal = db.accommodation.Where(t => t.MinimumReservationDays <= reservationDays).ToList();
+                accommodations = db.accommodation.Include(t => t.Location).Where(t => t.MinimumReservationDays <= reservationDays).ToList();
             }
 
-            return retVal;
+            return accommodations;
         }
     }
 }

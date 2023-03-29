@@ -13,8 +13,8 @@
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
                 <DataGridTextColumn Header="Guest Limit" Binding="{Binding GuestLimit}"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
-                <DataGridTextColumn Header="Country" Binding="{Binding Country}"/>
-                <DataGridTextColumn Header="City" Binding="{Binding City}" Width="*"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}"/>
+                <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Margin="0,0,483,272" DataContext="{Binding ElementName=AccommodationsGrid, Path=SelectedItem}">

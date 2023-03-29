@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Guest1 Main Window" Height="450" Width="800">
+        Title="Guest1 Main Window" Height="1080" Width="1920">
     <Grid>
         <Button Content="Reservate Accommodation" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="164" Click="ShowAccommodationReservate"/>
+        <Button Content="Edit Reservations" HorizontalAlignment="Left" Margin="609,312,0,0" VerticalAlignment="Top" Click="EditReservation_Click"/>
     </Grid>
 </Window>

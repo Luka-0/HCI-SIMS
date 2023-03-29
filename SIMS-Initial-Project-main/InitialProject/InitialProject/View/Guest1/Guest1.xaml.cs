@@ -33,5 +33,13 @@ namespace InitialProject.View
 
             this.Close();
         }
+
+        private void EditReservation_Click(object sender, RoutedEventArgs e)
+        {
+            EditReservation editReservation = new(User);
+            editReservation.Show();
+
+            this.Close();
+        }
     }
 }

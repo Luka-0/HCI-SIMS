@@ -87,14 +87,29 @@ namespace InitialProject.Repository
 
         public static List<AccommodationReservation> GetByAccommodation(int id)
         {
-            List<AccommodationReservation> retVal = new();
+            List<AccommodationReservation> reservations = new();
 
             using (UserContext db = new())
             {
-                retVal = db.accommodationReservation.Where(t => t.Accommodation.Id == id).ToList();
+                reservations = db.accommodationReservation.Where(t => t.Accommodation.Id == id).ToList();
             }
 
-            return retVal;
+            return reservations;
+        }
+
+        public static List<AccommodationReservation> GetBy(User user)
+        {
+            List<AccommodationReservation> reservations = new();
+
+            using (UserContext db = new())
+            {
+                reservations = db.accommodationReservation.Include(t => t.Accommodation)
+                                                          .Include(t => t.Accommodation.Location)
+                                                          .Where(t => t.Guest.Id == user.Id).ToList();
+            }
+
+            return reservations;
+
         }
     }
 }
