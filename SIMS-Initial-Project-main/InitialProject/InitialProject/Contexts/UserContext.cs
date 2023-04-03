@@ -22,9 +22,11 @@ namespace InitialProject.Contexts
         public DbSet<GuestReview> guestReview { get; set; }
        // public DbSet<GuestGrade> guestGrade { get; set; }
 
-        public DbSet<TourReservation> tourReservations { get; set; } 
+        public DbSet<TourReservation> tourReservation { get; set; } 
 
         public DbSet<AccommodationReservation> accommodationReservation { get; set; }
+
+        public DbSet<Voucher> voucher { get; set; }
 
         //Pavle:
        // public string path = @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";

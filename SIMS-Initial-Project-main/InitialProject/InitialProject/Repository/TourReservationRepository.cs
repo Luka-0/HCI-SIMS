@@ -17,7 +17,7 @@ namespace InitialProject.Repository
 
             using (var dbContext = new UserContext())
             {
-                reservations = dbContext.tourReservations
+                reservations = dbContext.tourReservation
                                         .Include(t => t.Tour)
                                         .ThenInclude(l => l.Location)
                                         .ToList();
@@ -31,7 +31,7 @@ namespace InitialProject.Repository
 
             using (var dbContext = new UserContext())
             {
-                reservation = (TourReservation)dbContext.tourReservations
+                reservation = (TourReservation)dbContext.tourReservation
                                  .Where(t => t.Id == id);
             }
             return reservation;
@@ -43,7 +43,7 @@ namespace InitialProject.Repository
 
             using (var dbContext = new UserContext())
             {
-                reservations = dbContext.tourReservations
+                reservations = dbContext.tourReservation
                                  .Include(t => t.Tour)
                                  .Where(t => t.Tour.Id == tour.Id)
                                  .ToList();
