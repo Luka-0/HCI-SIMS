@@ -23,7 +23,7 @@ namespace InitialProject
     {
 
 
-        public User LoggedInUser { get; set; }
+        public User LoggedInGuide { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public TourController tourController { get; set; }= new TourController();
 
@@ -37,14 +37,14 @@ namespace InitialProject
         {
             InitializeComponent();
             DataContext = this;
-            LoggedInUser = user;
+            LoggedInGuide = user;
 
 
         }
 
         private List<String> Separate(String names)
         {
-            
+
             String[] delimiters = { ",", ";", "." };
             List<String> separateNames = new List<String>();
             String[] result = names.Split(delimiters, StringSplitOptions.None);
@@ -97,6 +97,7 @@ namespace InitialProject
             tourToControllerDto.StartDateAndTime = SetDateAndTime(StartDate.Text, StartTime.Text);
             tourToControllerDto.Duration = SetDuration(Duration.Text);
             tourToControllerDto.ImageURLs = Separate(ImageURLs.Text);
+            tourToControllerDto.Guide = LoggedInGuide;
             tourController.Add(tourToControllerDto);
         }
 

@@ -30,14 +30,12 @@ namespace InitialProject.Repository
         {
             using (var db = new UserContext())
             {
-                foreach (Location location in db.location)
-                {
-                    if (location.Country.Equals(country) && location.City.Equals(city))
-                    {
-                        return location;
-                    }
 
-                }
+                Location location = (Location)db.location
+                    .Where(l => l.Country == country && l.City == city)
+                    .FirstOrDefault();
+
+                return location;
             }
 
             return null;

@@ -17,6 +17,7 @@ public class TourController
 
     //private LocationService locationService = new LocationService();
     private ImageService imageService = new ImageService();
+    private UserService userService = new UserService();
 
     public List<Tour> GetAll()
     {
@@ -57,29 +58,42 @@ public class TourController
         return getTourDtos;
     }
 
-    //TODO Krstic ispravlja
-    public void Add(TourToControllerDto dto)
+
+    public Tour Create(TourToControllerDto dto)
+    {
+        
+
+        Tour tour = new Tour(dto.Name, dto.Description, dto.Language,
+            dto.GuestLimit, dto.StartDateAndTime,
+            dto.Duration);
+        return tour;
+    }
+
+    public void UpdateTourProperties(Tour tour, TourToControllerDto dto)
     {
         Location location = LocationService.GetBy(dto.Country, dto.City);
         List<TourKeyPoint> tourKeyPoints = tourKeyPointService.Save(dto.TourKeyPointNames);
         List<Image> images = imageService.Save(dto.ImageURLs);
 
-        Tour tour = new Tour(dto.Name, dto.Description, dto.Language, 
-            dto.GuestLimit, dto.StartDateAndTime, 
-            dto.Duration);
 
-        var db = new UserContext();
-        tour = tourService.Save(tour);
-
+        
+        tour.Guide = dto.Guide;
         //int tourId = tourService.get(tour.Id);
         tourKeyPointService.Update(tourKeyPoints, tour);
-       // tourKeyPointService.SetTypes(tourKeyPoints);
+        // tourKeyPointService.SetTypes(tourKeyPoints);
         tour.Location = LocationService.GetBy(dto.Country, dto.City);
 
         imageService.SetTourId(images, tour);
 
-        db.SaveChanges();
-        
+    }
+
+    //TODO Krstic ispravlja lel
+    public void Add(TourToControllerDto dto)
+    {
+        Tour newTour= Create(dto);
+        Tour tour = tourService.Save(newTour);
+        UpdateTourProperties(tour, dto);     //Mzd mogu da pozivam ove fje na kraju svake prethodne i onda u ovoj imam samo 1 poziv?
+
     }
 
     public List<TourBasicInfoDto> Get()

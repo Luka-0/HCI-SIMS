@@ -2,8 +2,10 @@
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
+using System.IO.Enumeration;
 using System.Linq;
 using InitialProject.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace InitialProject.Repository
 {
@@ -33,6 +35,14 @@ namespace InitialProject.Repository
 
             return true;
         }
+        public static User GetBy(int id)
+        {
+            using var db = new UserContext();
+            List<User> users = db.users.ToList();
+            return users.Find(user => user.Id == id);
+
+        }
+
 
     }
 

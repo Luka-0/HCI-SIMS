@@ -13,10 +13,6 @@ namespace InitialProject.Service;
 public class TourKeyPointService
 {   
 
-    public static List<TourKeyPoint> GetAll()
-    {
-        return TourKeyPointRepository.GetAll();
-    }
     public static List<TourKeyPoint> GetBy(List<string> names)
     {
 

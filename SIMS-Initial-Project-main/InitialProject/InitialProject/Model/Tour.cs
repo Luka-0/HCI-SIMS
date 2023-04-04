@@ -23,6 +23,10 @@ public class Tour
     [ForeignKey("locationID")]
     [AllowNull]
     public Location? Location { get; set; }
+    
+    [ForeignKey("guideID")]
+    [AllowNull]
+    public User? Guide { get; set; }
 
     public string Description { get; set; }
     public string Language { get; set; }
@@ -68,13 +72,14 @@ public class Tour
     }
     
     public Tour(String name, string description, string language, int guestLimit,
-        List<TourKeyPoint> keyPoints, DateTime start, TimeSpan duration)
+        List<TourKeyPoint> keyPoints, DateTime start, TimeSpan duration, User guide)
     {
         this.Name = name;
         this.Location = null;
         this.Description = description;
         this.Language = language;
         this.GuestLimit = guestLimit;
+        this.Guide = guide;
         this.TourKeyPoints = keyPoints;
         this.StartDateAndTime = start;
         this.Duration = duration;

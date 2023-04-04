@@ -2,43 +2,25 @@
 using InitialProject.Contexts;
 using InitialProject.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace InitialProject.Repository;
 
 public class TourKeyPointRepository
 {
-    public static List<TourKeyPoint> GetAll()
-    {
-        List<TourKeyPoint> tourKeyPoints= new List<TourKeyPoint>();
-
-        using (var db = new UserContext())
-        {
-            foreach (TourKeyPoint tourKeyPoint in db.tourKeyPoints)
-            {
-                tourKeyPoints.Add(tourKeyPoint);
-                
-            }
-            db.SaveChanges();
-        }
-        return tourKeyPoints;
-    }
-
+    
     public static List<TourKeyPoint> GetBy(List<string> TourKeyPointNames) 
     {
-        List<TourKeyPoint> allTourKeyPoints = GetAll();
-        List<TourKeyPoint> tourKeyPoints = new List<TourKeyPoint>();
         using var db = new UserContext();
+        List<TourKeyPoint> allTourKeyPoints = db.tourKeyPoints.ToList();
+        List<TourKeyPoint> tourKeyPoints = new List<TourKeyPoint>();
+        
 
-        foreach (TourKeyPoint tourKeyPoint in allTourKeyPoints)
+        foreach (TourKeyPoint keyPoint in allTourKeyPoints)
         {
-            foreach (string name in TourKeyPointNames)
-            {
-                if (tourKeyPoint.Name.Equals(name))
-                {
-                    tourKeyPoints.Add(tourKeyPoint);
-                }
-            }
+            tourKeyPoints.Add(allTourKeyPoints.Find(i => i.Name == keyPoint.Name));
         }
+        
         return tourKeyPoints;
 
     }

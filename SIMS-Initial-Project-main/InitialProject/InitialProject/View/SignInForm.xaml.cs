@@ -83,7 +83,7 @@ namespace InitialProject
                             {
                                 CreateTourForm createTourForm = new CreateTourForm(user);
                                 createTourForm.Show();
-                                Close(); //this.close();
+                                Close();
                                 
                                 break;
                             }
