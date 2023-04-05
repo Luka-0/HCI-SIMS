@@ -22,6 +22,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class GuestReview : Page
     {
+        GuestReviewController GuestReviewController =  new GuestReviewController();
         public GuestReview()
         {
             InitializeComponent();

@@ -10,12 +10,22 @@ using System.Windows;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View;
+using InitialProject.Interface;
 
 namespace InitialProject.Service
 {
     internal class AccommodationReservationService
     {
-        public static List<AccommodationReservation> getAllExpiredlBy(DateTime date) {
+        private IAccommodationReservationRepository iAccommodationreservationRepository;
+
+        //AccommodationService() { }
+
+        public AccommodationReservationService(IAccommodationReservationRepository iAccommodationreservationRepository)
+        {
+            this.iAccommodationreservationRepository = iAccommodationreservationRepository;
+        }
+
+        public List<AccommodationReservation> getAllExpiredlBy(DateTime date) {
 
             ProcessedDate processedDate = new ProcessedDate();
 
@@ -23,13 +33,13 @@ namespace InitialProject.Service
 
             List<AccommodationReservation> expiredReservations = new List<AccommodationReservation>();
 
-            expiredReservations = AccommodationReservationRepository.GetAllExpiredBy(processedDate.Day, processedDate.Month, processedDate.Year);
+            expiredReservations = iAccommodationreservationRepository.GetAllExpiredBy(processedDate.Day, processedDate.Month, processedDate.Year);
 
             return expiredReservations;
             
             }
 
-        public static ProcessedDate SeparateDate(DateTime date)
+        public ProcessedDate SeparateDate(DateTime date)
             {
             ProcessedDate processedDate = new ProcessedDate();  
 
@@ -47,13 +57,13 @@ namespace InitialProject.Service
             return processedDate;
             }
 
-        public static AccommodationReservation GetBy(int id) {
+        public AccommodationReservation GetBy(int id) {
 
-            return AccommodationReservationRepository.GetBy(id);
+            return iAccommodationreservationRepository.GetBy(id);
         }
 
         // Stajic
-        public static bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
+        public bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
         {
             AccommodationReservation ar = new AccommodationReservation();
 
@@ -70,16 +80,16 @@ namespace InitialProject.Service
                 ar.GuestNumber = guestNumber;
                 ar.Guest = user;
 
-                AccommodationReservationRepository.Add(ar);
+                iAccommodationreservationRepository.Add(ar);
                 return true;
             }
 
             return false;
         }
 
-        public static bool IsAvailable(int id, DateTime startingDate, DateTime endingDate)
+        public bool IsAvailable(int id, DateTime startingDate, DateTime endingDate)
         {
-            List<AccommodationReservation> accommodationReservations = AccommodationReservationRepository.GetByAccommodation(id);
+            List<AccommodationReservation> accommodationReservations = iAccommodationreservationRepository.GetByAccommodation(id);
 
             foreach (AccommodationReservation ar in accommodationReservations)
             {
@@ -101,9 +111,25 @@ namespace InitialProject.Service
             return true;
         }
 
-        public static bool IsViolatingMinReservatingDays(int minimumReservationDays, DateTime startingDate, DateTime endingDate)
+        public bool IsViolatingMinReservatingDays(int minimumReservationDays, DateTime startingDate, DateTime endingDate)
         {
             return endingDate.Day - startingDate.Day + 1 < minimumReservationDays;
         }
+
+        public void Add(AccommodationReservation accommodationReservation)
+        {
+            iAccommodationreservationRepository.Add(accommodationReservation);
+        }
+
+        public List<AccommodationReservation> GetByAccommodation(int id)
+        {
+            return iAccommodationreservationRepository.GetByAccommodation(id);
+        }
+
+        public List<AccommodationReservation> GetBy(User user)
+        {
+            return iAccommodationreservationRepository.GetBy(user);
+        }
+
     }
 }

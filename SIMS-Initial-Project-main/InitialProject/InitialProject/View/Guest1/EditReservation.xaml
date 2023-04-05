@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="EditReservation" Height="1080" Width="1920">
+        Title="EditReservation" Height="720" Width="1280">
     <Grid>
-        <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding reservationsToShow}" Height="Auto" Width="Auto" Margin="1136,10,10,0" VerticalAlignment="Top" 
+        <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding reservationsToShow}" Height="Auto" Width="Auto" Margin="815,10,10,0" VerticalAlignment="Top" 
                   AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Accommodation.Title}"/>

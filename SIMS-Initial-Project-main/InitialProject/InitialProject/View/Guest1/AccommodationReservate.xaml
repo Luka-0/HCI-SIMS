@@ -30,18 +30,21 @@
         <Grid Margin="0,217,483,0" >
             <Border BorderBrush="Black" BorderThickness="1"/>
             <ComboBox x:Name="FilterComboBox" HorizontalAlignment="Left" Margin="154,10,0,0" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="154,116,0,0" TextWrapping="Wrap" Text="--Here--" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="154,133,0,0" TextWrapping="Wrap" Text="--Here--" VerticalAlignment="Top" Width="120"/>
             <Button x:Name="ApplyFilterButton" Content="Apply filter" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Click="ApplyFilter_Click"/>
             <Label Content="Choose what to filter with:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top"/>
             <ComboBox x:Name="AccommodationTypeComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="154,161,0,0"/>
             <Label Content="Accommodation type:" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="GuestNumberTBFilter" HorizontalAlignment="Center" Margin="0,230,0,0" TextWrapping="Wrap" Text="--Here--" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
-            <Label Content="Enter name here:" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top"/>
+            <Label Content="Enter name here:" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
             <Label HorizontalAlignment="Center" Margin="0,199,0,0" VerticalAlignment="Top" >
                 Enter guest number or days for reservation:
             </Label>
-            <ComboBox x:Name="LocationCBFilter" HorizontalAlignment="Left" Margin="154,66,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
-            <Label Content="Choose location:" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="CountryComboBox" HorizontalAlignment="Left" Margin="154,66,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
+            <ComboBox x:Name="CityComboBox" HorizontalAlignment="Left" Margin="154,66,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
+            <Label Content="Choose country:" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+            <Label Content="Choose city:" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="LocationCBFilter_Copy" HorizontalAlignment="Left" Margin="154,102,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
         </Grid>
 
     </Grid>

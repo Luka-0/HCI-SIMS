@@ -1,4 +1,5 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Interface;
 using InitialProject.Model;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class GuestReviewRepository
+    public class GuestReviewRepository : IGuestReviewRepository
     {
-        public static void Save(GuestReview guestReview)
+        public void Save(GuestReview guestReview)
         {
             using var db = new UserContext();
 
@@ -19,7 +20,7 @@ namespace InitialProject.Repository
         }
 
 
-        public static List<AccommodationReservation> GetGradedReservations()
+        public List<AccommodationReservation> GetGradedReservations()
         {
             List<AccommodationReservation> reservation = new List<AccommodationReservation>();
 

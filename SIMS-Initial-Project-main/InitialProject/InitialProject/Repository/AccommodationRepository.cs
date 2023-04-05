@@ -1,5 +1,6 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Enumeration;
+using InitialProject.Interface;
 using InitialProject.Migrations;
 using InitialProject.Model;
 using Microsoft.EntityFrameworkCore;
@@ -15,11 +16,11 @@ using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {
-    public class AccommodationRepository
+    public class AccommodationRepository : IAccommodationRepository
     {
         public AccommodationRepository() { }
 
-        public static void Save(Accommodation accommodation)
+        public void Save(Accommodation accommodation)
         {
             using var db = new UserContext();
 
@@ -28,7 +29,7 @@ namespace InitialProject.Repository
 
         }
 
-        public static List<Accommodation> GetAll()
+        public List<Accommodation> GetAll()
         {
             List<Accommodation> accommodations = new();
 
@@ -40,7 +41,7 @@ namespace InitialProject.Repository
             return accommodations;
         }
 
-        public static List<Accommodation> GetBy(string name)
+        public List<Accommodation> GetBy(string name)
         {
             List<Accommodation> accommodations = new();
 
@@ -52,7 +53,7 @@ namespace InitialProject.Repository
             return accommodations;
         }
 
-        public static List<Accommodation> GetBy(Location location)
+        public List<Accommodation> GetBy(Location location)
         {
             List<Accommodation> accommodations = new();
 
@@ -64,7 +65,7 @@ namespace InitialProject.Repository
             return accommodations;
         }
 
-        public static List<Accommodation> GetByCity(string city)
+        public List<Accommodation> GetByCity(string city)
         {
             List<Accommodation> accommodations = new();
 
@@ -77,7 +78,7 @@ namespace InitialProject.Repository
             return accommodations;
         }
 
-        public static List<Accommodation> GetBy(AccommodationType accommodationType)
+        public List<Accommodation> GetBy(AccommodationType accommodationType)
         {
             List<Accommodation> accommodations = new();
 
@@ -89,7 +90,7 @@ namespace InitialProject.Repository
             return accommodations;
         }
 
-        public static List<Accommodation> GetByGuestNumber(int guestNumber)
+        public List<Accommodation> GetByGuestNumber(int guestNumber)
         {
             List<Accommodation> accommodations = new();
 
@@ -101,7 +102,7 @@ namespace InitialProject.Repository
             return accommodations;
         }
 
-        public static List<Accommodation> GetByReservationDays(int reservationDays)
+        public List<Accommodation> GetByReservationDays(int reservationDays)
         {
             List<Accommodation> accommodations = new();
 

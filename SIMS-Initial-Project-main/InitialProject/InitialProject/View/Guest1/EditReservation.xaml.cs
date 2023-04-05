@@ -1,5 +1,7 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Controller;
+using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +24,8 @@ namespace InitialProject.View
     /// </summary>
     public partial class EditReservation : Window
     {
+        AccommodationReservationController AccommodationReservationController = new();
+
         public ObservableCollection<AccommodationReservation> reservationsToShow { get; set; }
 
         private User User { get; set; }
@@ -32,7 +36,7 @@ namespace InitialProject.View
             DataContext = this;
             User = user;
 
-            List<AccommodationReservation> allReservations = AccommodationReservationRepository.GetBy(User);
+            List<AccommodationReservation> allReservations = AccommodationReservationController.GetBy(User);
             if(allReservations.Count == 0)
             {
                 MessageBox.Show("There are currently no reservations to show");

@@ -1,5 +1,7 @@
 ﻿using InitialProject.Dto;
+using InitialProject.Interface;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -11,23 +13,26 @@ namespace InitialProject.Controller
 {
     internal class AccommodationReservationController
     {
-       /* public static List<ExpiredReservationDto> LoadExpiredReservations() {
+        private AccommodationReservationService AccommodationReservationService = new(new AccommodationReservationRepository());
 
-            DateTime todaysDate = DateTime.UtcNow.Date;
-
-            List<AccommodationReservation> reservations = AccommodationReservationService.getAlExpiredlBy(todaysDate);
-
-            List<ExpiredReservationDto> expiredReservations = new List<ExpiredReservationDto>();
-
-            foreach (AccommodationReservation r in reservations) {
-
-                ExpiredReservationDto item = new ExpiredReservationDto(r);
-
-                expiredReservations.Add(item);
-            }
-
-            return expiredReservations;
+        public bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
+        {
+            return AccommodationReservationService.Reservate(accommodation, user, guestNumber, startingDate, endingDate);
         }
-       */
+
+        public void Add(AccommodationReservation accommodationReservation)
+        {
+            AccommodationReservationService.Add(accommodationReservation);
+        }
+
+        public List<AccommodationReservation> GetByAccommodation(int id)
+        {
+            return AccommodationReservationService.GetByAccommodation(id);
+        }
+
+        public List<AccommodationReservation> GetBy(User user)
+        {
+            return AccommodationReservationService.GetBy(user);
+        }
     }
 }
