@@ -25,7 +25,7 @@ namespace InitialProject.View
 {
     public partial class AccommodationReservate : Window
     {
-        //AccommodationRepository accommodationRepository = new();
+        AccommodationReservationController AccommodationReservationController = new();
         AccommodationController AccommodationController = new();
 
         public ObservableCollection<Accommodation> accommodationsToShow { get; set; }
@@ -122,7 +122,7 @@ namespace InitialProject.View
                 return;
             }
 
-            if (!AccommodationReservationService.Reservate(accommodation, User, guestNumber, startDate, endDate))
+            if (!AccommodationReservationController.Reservate(accommodation, User, guestNumber, startDate, endDate))
             {
                 MessageBox.Show("Reservation was UNsuccessful");
                 return;

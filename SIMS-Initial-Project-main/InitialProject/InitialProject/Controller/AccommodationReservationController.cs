@@ -1,4 +1,5 @@
 ﻿using InitialProject.Dto;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -12,8 +13,26 @@ namespace InitialProject.Controller
 {
     internal class AccommodationReservationController
     {
-        private AccommodationReservationService _service = new(new AccommodationReservationRepository());
+        private AccommodationReservationService AccommodationReservationService = new(new AccommodationReservationRepository());
 
-       
+        public bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
+        {
+            return AccommodationReservationService.Reservate(accommodation, user, guestNumber, startingDate, endingDate);
+        }
+
+        public void Add(AccommodationReservation accommodationReservation)
+        {
+            AccommodationReservationService.Add(accommodationReservation);
+        }
+
+        public List<AccommodationReservation> GetByAccommodation(int id)
+        {
+            return AccommodationReservationService.GetByAccommodation(id);
+        }
+
+        public List<AccommodationReservation> GetBy(User user)
+        {
+            return AccommodationReservationService.GetBy(user);
+        }
     }
 }

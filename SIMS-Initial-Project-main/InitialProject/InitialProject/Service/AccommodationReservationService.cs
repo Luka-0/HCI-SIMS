@@ -115,5 +115,21 @@ namespace InitialProject.Service
         {
             return endingDate.Day - startingDate.Day + 1 < minimumReservationDays;
         }
+
+        public void Add(AccommodationReservation accommodationReservation)
+        {
+            iAccommodationreservationRepository.Add(accommodationReservation);
+        }
+
+        public List<AccommodationReservation> GetByAccommodation(int id)
+        {
+            return iAccommodationreservationRepository.GetByAccommodation(id);
+        }
+
+        public List<AccommodationReservation> GetBy(User user)
+        {
+            return iAccommodationreservationRepository.GetBy(user);
+        }
+
     }
 }
