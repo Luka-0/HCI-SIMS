@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Ink;
 
 namespace InitialProject.Service
 {
@@ -31,6 +32,33 @@ namespace InitialProject.Service
         {
             voucherRepository.Delete(voucher);
         }
+
+        public bool IsAvailable(Voucher voucher)
+        {
+            if(voucher.ExpirationDate >= DateTime.Now)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public List<Voucher> GetAllAvailable()
+        {
+            List<Voucher> vouchers = new List<Voucher>();
+
+            foreach(Voucher v in vouchers)
+            {
+                if(IsAvailable(v))
+                    vouchers.Add(v);
+            }
+            return vouchers;
+        }
+        
+
+
+
+
 
     }
 }
