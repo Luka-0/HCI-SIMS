@@ -1,6 +1,7 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Dto;
 using InitialProject.Enumeration;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 using System;
@@ -8,15 +9,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace InitialProject.Service
 {
     class AccommodationService
     {
-        public static void Save(Accommodation accommodation, string cityName, List<String> images)
+        private IAccommodationRepository iAccommodationRepository;
+
+        //AccommodationService() { }
+
+        public AccommodationService(IAccommodationRepository iAccommodationRepository)
+        {
+            this.iAccommodationRepository = iAccommodationRepository;
+        }
+
+        public void Save(Accommodation accommodation, string cityName, List<String> images)
         {
             //Saving new accommodation into databse
-            AccommodationRepository.Save(accommodation);
+            this.iAccommodationRepository.Save(accommodation);
 
             var db = new UserContext();
             var tempRecord = db.accommodation.Find(accommodation.Id);   //Try creating method in Accommodation repository to return the same thing
@@ -30,5 +41,45 @@ namespace InitialProject.Service
             db.SaveChanges();
         }
 
+        // Stajic
+        public void Save(Accommodation accommodation)
+        {
+            iAccommodationRepository.Save(accommodation);
+        }
+
+        public List<Accommodation> GetAll()
+        {
+            return iAccommodationRepository.GetAll();
+        }
+
+        public List<Accommodation> GetBy(string name)
+        {
+            return iAccommodationRepository.GetBy(name);
+        }
+
+        public List<Accommodation> GetBy(Location location)
+        {
+            return iAccommodationRepository.GetBy(location);
+        }
+
+        public List<Accommodation> GetByCity(string city)
+        {
+            return iAccommodationRepository.GetByCity(city);
+        }
+
+        public List<Accommodation> GetBy(AccommodationType accommodationType)
+        {
+            return iAccommodationRepository.GetBy(accommodationType);
+        }
+
+        public List<Accommodation> GetByGuestNumber(int guestNumber)
+        {
+            return iAccommodationRepository.GetByGuestNumber(guestNumber);
+        }
+
+        public List<Accommodation> GetByReservationDays(int reservationDays)
+        {
+            return iAccommodationRepository.GetByReservationDays(reservationDays);
+        }
     }
 }

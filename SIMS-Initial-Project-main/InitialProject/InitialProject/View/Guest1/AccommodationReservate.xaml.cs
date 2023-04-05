@@ -1,4 +1,5 @@
-﻿using InitialProject.Dto;
+﻿using InitialProject.Controller;
+using InitialProject.Dto;
 using InitialProject.Enumeration;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -24,6 +25,9 @@ namespace InitialProject.View
 {
     public partial class AccommodationReservate : Window
     {
+        //AccommodationRepository accommodationRepository = new();
+        AccommodationController AccommodationController = new();
+
         public ObservableCollection<Accommodation> accommodationsToShow { get; set; }
         private User User { get; set; }
         
@@ -32,11 +36,11 @@ namespace InitialProject.View
             InitializeComponent();
             InitializeFilterComboBox();
             InitializeAccommodationTypeComboBox();
-            InitializeLocationComboBox();
+            InitializeCountryComboBox();
             User = user;
             DataContext = this;
 
-            List<Accommodation> allAccommodations = AccommodationRepository.GetAll();
+            List<Accommodation> allAccommodations = AccommodationController.GetAll();
             if(allAccommodations.Count == 0)
             {
                 MessageBox.Show("There are currently no Accommodations to look at :(");
@@ -69,17 +73,22 @@ namespace InitialProject.View
 
         }
 
-        private void InitializeLocationComboBox()
+        private void InitializeCountryComboBox()
         {
-            LocationCBFilter.Items.Add("--Chose--");
+            CountryComboBox.Items.Add("--Chose--");
 
-            List<Location> locations = LocationRepository.GetAll();
-            foreach(Location location in locations)
-            { 
-                LocationCBFilter.Items.Add(location.Country.ToString() + "-" +  location.City.ToString());
+            List<Location> countries = LocationRepository.GetAll();
+            foreach(Location location in countries)
+            {
+                CountryComboBox.Items.Add(location.Country.ToString());
             }
 
-            LocationCBFilter.SelectedIndex = 0;
+            CountryComboBox.SelectedIndex = 0;
+        }
+
+        private void InitializeCityComboBox()
+        {
+
         }
 
         private void ReservateAccommodation_Click(object sender, RoutedEventArgs e)
@@ -157,13 +166,13 @@ namespace InitialProject.View
                     ApplyByName(NameTextBox.Text.ToString());
                     break;
                 case 2:
-                    if(LocationCBFilter.SelectedIndex == 0)
+                    if(CountryComboBox.SelectedIndex == 0)
                     {
                         MessageBox.Show("Please select a proper location");
                         return;
                     }
 
-                    string city = ExtractCity(LocationCBFilter.SelectedItem.ToString());
+                    string city = ExtractCity(CountryComboBox.SelectedItem.ToString());
                     ApplyByCity(city);
 
                     break;
@@ -181,7 +190,7 @@ namespace InitialProject.View
                     break;
                 case 6:
                 {
-                    List<Accommodation> accommodations = AccommodationRepository.GetAll();
+                    List<Accommodation> accommodations = AccommodationController.GetAll();
                     RefreshDataGrid(accommodations);
 
                     break;
@@ -202,7 +211,7 @@ namespace InitialProject.View
 
         private void ApplyByName(string name)
         {
-            List<Accommodation> accommodations = AccommodationRepository.GetBy(name);
+            List<Accommodation> accommodations = AccommodationController.GetBy(name);
             if (accommodations.Count == 0)
             {
                 MessageBox.Show("There are currently no Accommodations with that name");
@@ -213,7 +222,7 @@ namespace InitialProject.View
         }
         private void ApplyByType(AccommodationType accommodationType)
         {
-            List<Accommodation> accommodations = AccommodationRepository.GetBy(accommodationType);
+            List<Accommodation> accommodations = AccommodationController.GetBy(accommodationType);
             if (accommodations.Count == 0)
             {
                 MessageBox.Show("There are currently no Accommodations with that type");
@@ -224,7 +233,7 @@ namespace InitialProject.View
         }
         private void ApplyByGuestNumber(int guestNumber)
         {
-            List<Accommodation> accommodations = AccommodationRepository.GetByGuestNumber(guestNumber);
+            List<Accommodation> accommodations = AccommodationController.GetByGuestNumber(guestNumber);
             if (accommodations.Count == 0)
             {
                 MessageBox.Show("There are currently no Accommodations that can accept that many guests");
@@ -235,7 +244,7 @@ namespace InitialProject.View
         }
         private void ApplyByReservationDays(int reservationDays)
         {
-            List<Accommodation> accommodations = AccommodationRepository.GetByReservationDays(reservationDays);
+            List<Accommodation> accommodations = AccommodationController.GetByReservationDays(reservationDays);
             if (accommodations.Count == 0)
             {
                 MessageBox.Show("There are currently no Accommodations that can be reservated that shortly");
@@ -246,7 +255,7 @@ namespace InitialProject.View
         }
         private void ApplyByCity(string city)
         {
-            List<Accommodation> accommodations = AccommodationRepository.GetByCity(city);
+            List<Accommodation> accommodations = AccommodationController.GetByCity(city);
             if (accommodations.Count == 0)
             {
                 MessageBox.Show("There are currently no Accommodations that are in selected location");

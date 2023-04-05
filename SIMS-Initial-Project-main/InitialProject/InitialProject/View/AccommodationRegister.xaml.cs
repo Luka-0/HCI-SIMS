@@ -28,6 +28,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class AccommodationRegister : Page
     {
+        AccommodationController accommodationController = new AccommodationController();
         public AccommodationRegister()
         {
             InitializeComponent();
@@ -39,6 +40,8 @@ namespace InitialProject.View
 
         private void RegisterAccommodation_Click(object sender, RoutedEventArgs e)
         {
+         
+
             //preparing fields to be in right format
             int guestNumber = Int32.Parse(guestLimit.Text);
             AccommodationType type = Convert(typePicker.SelectedIndex);
@@ -54,7 +57,7 @@ namespace InitialProject.View
 
             //Prepareing DTO for service, to be saved in the database
             NewAccommodationDto record = new NewAccommodationDto(title.Text, guestNumber, type, minReservationDays, cancellationDeadline, cityName, imageUrls);
-            AccommodationController.Register(record);
+            accommodationController.Register(record);
 
             urls.Items.Clear();
         }

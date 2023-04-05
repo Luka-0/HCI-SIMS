@@ -1,4 +1,5 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Interface;
 using InitialProject.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,9 +11,9 @@ using System.Windows;
 
 namespace InitialProject.Repository
 {
-    internal class AccommodationReservationRepository
+    public class AccommodationReservationRepository : IAccommodationReservationRepository
     {
-        public static List<AccommodationReservation> GetAllExpiredBy(int day, int month, int year)
+        public List<AccommodationReservation> GetAllExpiredBy(int day, int month, int year)
         {
             List<AccommodationReservation> expiredReservations = new List<AccommodationReservation>();
 
@@ -35,7 +36,7 @@ namespace InitialProject.Repository
             return expiredReservations;
         }
 
-        public static Accommodation GetAccommodation(int reservationId)
+        public Accommodation GetAccommodation(int reservationId)
         {
 
             Accommodation accommodation = new Accommodation();
@@ -48,7 +49,7 @@ namespace InitialProject.Repository
             return accommodation;
         }
 
-        public static User GetUser(int reservationId)
+        public User GetUser(int reservationId)
         {
 
             User guest = new User();
@@ -61,7 +62,7 @@ namespace InitialProject.Repository
             return guest;
         }
 
-        public static AccommodationReservation GetBy(int id)
+        public AccommodationReservation GetBy(int id)
         {
 
             AccommodationReservation reservation = new AccommodationReservation();
@@ -75,7 +76,7 @@ namespace InitialProject.Repository
         }
 
         // Stajic
-        public static void Add(AccommodationReservation accommodationReservation)
+        public void Add(AccommodationReservation accommodationReservation)
         {
             using UserContext db = new();
 
@@ -85,7 +86,7 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
-        public static List<AccommodationReservation> GetByAccommodation(int id)
+        public List<AccommodationReservation> GetByAccommodation(int id)
         {
             List<AccommodationReservation> reservations = new();
 
@@ -97,7 +98,7 @@ namespace InitialProject.Repository
             return reservations;
         }
 
-        public static List<AccommodationReservation> GetBy(User user)
+        public List<AccommodationReservation> GetBy(User user)
         {
             List<AccommodationReservation> reservations = new();
 

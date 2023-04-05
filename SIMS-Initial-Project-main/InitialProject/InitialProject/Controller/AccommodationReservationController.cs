@@ -1,5 +1,6 @@
 ﻿using InitialProject.Dto;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -11,23 +12,8 @@ namespace InitialProject.Controller
 {
     internal class AccommodationReservationController
     {
-       /* public static List<ExpiredReservationDto> LoadExpiredReservations() {
+        private AccommodationReservationService _service = new(new AccommodationReservationRepository());
 
-            DateTime todaysDate = DateTime.UtcNow.Date;
-
-            List<AccommodationReservation> reservations = AccommodationReservationService.getAlExpiredlBy(todaysDate);
-
-            List<ExpiredReservationDto> expiredReservations = new List<ExpiredReservationDto>();
-
-            foreach (AccommodationReservation r in reservations) {
-
-                ExpiredReservationDto item = new ExpiredReservationDto(r);
-
-                expiredReservations.Add(item);
-            }
-
-            return expiredReservations;
-        }
-       */
+       
     }
 }

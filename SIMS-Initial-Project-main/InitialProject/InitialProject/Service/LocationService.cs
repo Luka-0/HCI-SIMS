@@ -16,7 +16,7 @@ namespace InitialProject.Service
 
         public static Location GetBy(string city)
         {
-            return LocationRepository.GetBy(city);
+            return LocationRepository.GetByCity(city);
         }
 
         public static Location GetBy(int id)

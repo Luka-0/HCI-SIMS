@@ -11,7 +11,7 @@ namespace InitialProject.Repository
 {
     public class LocationRepository
     {
-        public static Location GetBy(string city)
+        public static Location GetByCity(string city)
         {
             using (var db = new UserContext())
             {
@@ -24,6 +24,18 @@ namespace InitialProject.Repository
                 }
             }
             return null;
+        }
+
+        public static List<Location> GetByCountry(string country)
+        {
+            List<Location> locations = new();
+
+            using (var db = new UserContext())
+            {
+                locations = db.location.Where(t => t.Country.Equals(country)).ToList();
+            }
+
+            return locations;
         }
 
         public static Location GetBy(string country, string city)
