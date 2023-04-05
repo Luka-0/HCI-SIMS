@@ -27,8 +27,8 @@ namespace InitialProject.View
     public partial class Guest2View : Window
     {
         TourController tourController = new TourController();   
-
-        TourService TourService = new TourService();
+       
+        TourService TourService = new TourService(new TourRepository());
         TourReservationControler reservationControler = new TourReservationControler();
 
         public ObservableCollection<Tour> toursToShow { get; set; }

@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 using Microsoft.EntityFrameworkCore;
+using InitialProject.Interface;
 
 namespace InitialProject.Repository
 {
-    public class TourRepository
+    public class TourRepository : ITourRepository
     {
         //public TourRepository() { }
 

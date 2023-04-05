@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using InitialProject.Contexts;
 using InitialProject.Dto;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -11,9 +12,11 @@ namespace InitialProject.Controller;
 
 public class TourController
 {
+   // private TourRepository tourRepository = new TourRepository();
     private TourKeyPointService tourKeyPointService = new TourKeyPointService();
-    private TourReservationService reservationService = new TourReservationService();
-    private TourService tourService = new TourService();
+    private TourReservationService reservationService = new TourReservationService(new TourReservationRepository());
+
+    private TourService tourService = new TourService(new TourRepository());
 
     //private LocationService locationService = new LocationService();
     private ImageService imageService = new ImageService();

@@ -1,4 +1,5 @@
 ﻿using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace InitialProject.Controller
 {
     public class VoucherController
     {
-        VoucherService voucherService = new VoucherService();
+        VoucherService voucherService = new VoucherService(new VoucherRepository());
 
         public List<Voucher> GetAll()
         {

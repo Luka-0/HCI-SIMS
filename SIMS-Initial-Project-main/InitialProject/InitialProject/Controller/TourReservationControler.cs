@@ -13,7 +13,7 @@ namespace InitialProject.Controller
 {
     public class TourReservationControler
     {
-        private  TourReservationService tourReservationService = new TourReservationService();
+        private  TourReservationService tourReservationService = new TourReservationService(new TourReservationRepository());
         public TourReservationResponseDto Reserve(Tour tour, int guestNumber)
         {
             TourReservationResponseDto responseDto;

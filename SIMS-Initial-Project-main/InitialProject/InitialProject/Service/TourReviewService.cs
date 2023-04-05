@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Interface;
+using InitialProject.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,27 @@ namespace InitialProject.Service
 {
     public class TourReviewService
     {
-        TourReviewRepository tourReviewRepository = new TourReviewRepository();
+        private readonly ITourReviewRepository _tourReviewRepository;
+
+        public TourReviewService(ITourReviewRepository repository)
+        {
+            _tourReviewRepository = repository;
+        }
 
         public List<TourReview> GetAll()
         {
-            return tourReviewRepository.GetAll();
+            return _tourReviewRepository.GetAll();
         }
 
         public TourReview GetById(int id)
         {
-            return tourReviewRepository.GetById(id); 
+            return _tourReviewRepository.GetById(id);  
         }
 
-
+        public void Save(TourReview tourReview)
+        {
+            _tourReviewRepository.Save(tourReview);
+        }
 
 
     }

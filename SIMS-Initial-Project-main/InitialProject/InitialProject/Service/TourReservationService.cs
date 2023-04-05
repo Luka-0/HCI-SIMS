@@ -1,4 +1,5 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 using System;
@@ -12,6 +13,13 @@ namespace InitialProject.Service
 {
     public class TourReservationService
     {
+        private readonly ITourReservationRepository _tourReservationRepository;
+
+        public TourReservationService(ITourReservationRepository repository)
+        {
+            _tourReservationRepository = repository;
+        }
+
         private TourReservationRepository tourReservationRepository = new TourReservationRepository();
         private TourRepository tourRepository = new TourRepository();
         public List<TourReservation> GetAll()

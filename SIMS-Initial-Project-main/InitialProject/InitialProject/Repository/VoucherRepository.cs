@@ -1,4 +1,5 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Interface;
 using InitialProject.Model;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows.Navigation;
 
 namespace InitialProject.Repository
 {
-    public class VoucherRepository
+    public class VoucherRepository:IVoucherRepository
     {
         public List<Voucher> GetAll()
         {

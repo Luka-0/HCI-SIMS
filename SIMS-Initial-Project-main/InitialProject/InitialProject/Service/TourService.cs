@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using InitialProject.Contexts;
 using InitialProject.Dto;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
@@ -11,20 +12,20 @@ namespace InitialProject.Service;
 
 public class TourService
 {
-    TourRepository tourRepository = new TourRepository();
+    private readonly ITourRepository _tourRepository;
+
+    public TourService(ITourRepository repository)
+    {
+        _tourRepository = repository;
+    }
     public Tour Save(Tour tour)
     {
         
-           tour =  tourRepository.Save(tour);
+           tour = _tourRepository.Save(tour);
             return tour;
 
     }
 
-    /*public Location getLocationByTourId(int id)
-    {
-       return tourRepository.getLocationByTourId(id);
-    }
-    */
     //TODO Pavle ispravi
     public List<TourBasicInfoDto> Get()
     {
@@ -63,30 +64,30 @@ public class TourService
 
         public List<Tour> GetAll()
         {
-            return tourRepository.GetAll();
+            return _tourRepository.GetAll();
         }
 
         public Tour GetById(int id)
         {
-            return tourRepository.GetById(id);
+            return _tourRepository.GetById(id);
         }
         public List<Tour> GetByLocation(Location location)
         {
-            return tourRepository.GetByLocation(location);
+            return _tourRepository.GetByLocation(location);
         }
 
         public List<Tour> GetByDuration(TimeSpan duration)
         {
-            return tourRepository.GetByDuration(duration);
+            return _tourRepository.GetByDuration(duration);
         }
 
         public List<Tour> GetByLanguage(string language)
         {
-            return tourRepository.GetByLanguage(language);
+            return _tourRepository.GetByLanguage(language);
         }
 
         public List<Tour> GetByGuestLimit(int guestNumber)
         {
-            return tourRepository.GetByGuestLimit(guestNumber);
+            return _tourRepository.GetByGuestLimit(guestNumber);
         }
 }
