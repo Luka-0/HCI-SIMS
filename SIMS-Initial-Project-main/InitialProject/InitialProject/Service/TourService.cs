@@ -12,6 +12,7 @@ namespace InitialProject.Service;
 
 public class TourService
 {
+    private readonly TourReservationService tourReservationService = new TourReservationService(new TourReservationRepository());
     private readonly ITourRepository _tourRepository;
 
     public TourService(ITourRepository repository)
@@ -20,9 +21,9 @@ public class TourService
     }
     public Tour Save(Tour tour)
     {
-        
-           tour = _tourRepository.Save(tour);
-            return tour;
+
+        tour = _tourRepository.Save(tour);
+        return tour;
 
     }
 
@@ -34,10 +35,10 @@ public class TourService
 
         foreach (var tour in tours)
         {
-            
+
             //Location location = getLocationByTourId(tour.Id);
             TourBasicInfoDto basicInfo = new TourBasicInfoDto(tour.Id, tour.Name,
-                tour.Location.Country, tour.Location.City, tour.Language, tour.GuestLimit,tour.StartDateAndTime );
+                tour.Location.Country, tour.Location.City, tour.Language, tour.GuestLimit, tour.StartDateAndTime);
             basicInfoDtos.Add(basicInfo);
         }
         return basicInfoDtos;
@@ -62,32 +63,80 @@ public class TourService
 
     }
 
-        public List<Tour> GetAll()
+    public List<Tour> GetAll()
+    {
+        return _tourRepository.GetAll();
+    }
+
+    public Tour GetById(int id)
+    {
+        return _tourRepository.GetById(id);
+    }
+    public List<Tour> GetByLocation(Location location)
+    {
+        return _tourRepository.GetByLocation(location);
+    }
+
+    public List<Tour> GetByDuration(TimeSpan duration)
+    {
+        return _tourRepository.GetByDuration(duration);
+    }
+
+    public List<Tour> GetByLanguage(string language)
+    {
+        return _tourRepository.GetByLanguage(language);
+    }
+
+    public List<Tour> GetByGuestLimit(int guestNumber)
+    {
+        return _tourRepository.GetByGuestLimit(guestNumber);
+    }
+
+    public bool IsActive(Tour tour)
+    {
+        return tour.Started;
+    }
+
+    public List<Tour> GetAllActive()
+    {
+        List<Tour> tours = _tourRepository.GetAll();
+        List<Tour> activeTours = new List<Tour>();
+
+        foreach (Tour tour in tours)
         {
-            return _tourRepository.GetAll();
+            if (IsActive(tour))
+                activeTours.Add(tour);
+        }
+        return activeTours;
+    }
+
+    public bool IsTourInCollection(Tour tour, ICollection<Tour> collection)
+    {
+        foreach(Tour t in collection)
+        {
+            if(tour.Id == t.Id)
+                return true;
         }
 
-        public Tour GetById(int id)
+        return false;
+    }
+
+    public List<Tour> GetAllActiveByGuest(User user)
+    {
+        List<Tour> activeToursByGuest = new List<Tour>();
+
+        List<Tour> activeTours = GetAllActive();
+        List<TourReservation> tourReservations = tourReservationService.GetByGuest(user);
+
+        
+
+        foreach(TourReservation reservation in tourReservations)
         {
-            return _tourRepository.GetById(id);
-        }
-        public List<Tour> GetByLocation(Location location)
-        {
-            return _tourRepository.GetByLocation(location);
+            if (IsTourInCollection(reservation.Tour, activeTours))
+                activeToursByGuest.Add(reservation.Tour);
         }
 
-        public List<Tour> GetByDuration(TimeSpan duration)
-        {
-            return _tourRepository.GetByDuration(duration);
-        }
 
-        public List<Tour> GetByLanguage(string language)
-        {
-            return _tourRepository.GetByLanguage(language);
-        }
-
-        public List<Tour> GetByGuestLimit(int guestNumber)
-        {
-            return _tourRepository.GetByGuestLimit(guestNumber);
-        }
+        return activeToursByGuest;
+    }
 }

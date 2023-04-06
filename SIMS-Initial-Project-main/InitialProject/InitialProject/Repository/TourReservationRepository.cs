@@ -52,6 +52,20 @@ namespace InitialProject.Repository
             return reservations;
         }
 
+        public List<TourReservation> GetByGuest(User user)
+        {
+            List<TourReservation> reservations = new List<TourReservation>();
+
+            using (var dbContext = new UserContext())
+            {
+                reservations = dbContext.tourReservation
+                                 .Include(t => t.Tour)
+                                 .Where(t => t.BookingGuest.Id == user.Id)
+                                 .ToList();
+            }
+            return reservations;
+        }
+
         public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber)
         {
             var db = new UserContext();

@@ -48,5 +48,14 @@ namespace InitialProject.Controller
             tourKeyPointService.SetTypes(tourKeyPoints);    
         }
 
+        public List<TourKeyPoint> GetByGuestAndActiveTour(User user)
+        {
+            List<TourKeyPoint> keyPoints = new List<TourKeyPoint>();
+
+
+
+            return keyPoints;
+        }
+
     }
 }

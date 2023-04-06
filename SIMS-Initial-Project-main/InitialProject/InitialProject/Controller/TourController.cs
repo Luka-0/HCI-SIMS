@@ -14,7 +14,7 @@ public class TourController
 {
 
    // private TourRepository tourRepository = new TourRepository();
-    private TourKeyPointService tourKeyPointService = new TourKeyPointService();
+    private TourKeyPointService tourKeyPointService = new TourKeyPointService(new TourKeyPointRepository());
     private TourReservationService reservationService = new TourReservationService(new TourReservationRepository());
 
     private TourService tourService = new TourService(new TourRepository());

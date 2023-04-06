@@ -13,6 +13,7 @@ namespace InitialProject.Service;
 
 public class TourKeyPointService
 {
+    private readonly TourService tourService = new TourService(new TourRepository());
     private readonly ITourKeyPointRepository _tourKeyPointsRepository;
 
     public List<TourKeyPoint> GetAll()
@@ -20,6 +21,10 @@ public class TourKeyPointService
         return _tourKeyPointsRepository.GetAll();
     }
 
+    public List<TourKeyPoint> GetByTour(Tour tour)
+    {
+        return _tourKeyPointsRepository.GetByTour(tour);
+    }
     public TourKeyPointService(ITourKeyPointRepository repository)
     {
         _tourKeyPointsRepository = repository;
@@ -91,5 +96,7 @@ public class TourKeyPointService
         _tourKeyPointsRepository.SetType(start.Id, end.Id);
 
     }
+
+    
 
 }

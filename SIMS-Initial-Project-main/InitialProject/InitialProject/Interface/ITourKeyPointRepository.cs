@@ -15,6 +15,7 @@ namespace InitialProject.Interface
         public TourKeyPoint GetById(int id);
         public void SetType(int startId, int endId);
         public List<TourKeyPoint> GetAll();
+        public List<TourKeyPoint> GetByTour(Tour tour);
 
     }
 }

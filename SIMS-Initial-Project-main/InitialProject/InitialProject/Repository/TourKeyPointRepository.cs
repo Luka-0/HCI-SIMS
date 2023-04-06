@@ -21,6 +21,19 @@ public class TourKeyPointRepository:ITourKeyPointRepository
         return keyPoints;
     }
 
+    public List<TourKeyPoint> GetByTour(Tour tour)
+    {
+        List<TourKeyPoint> keyPoints = new List<TourKeyPoint>();
+
+        using (var dbContext = new UserContext())
+        {
+            keyPoints = dbContext.tourKeyPoints.Include(t => t.Tour)
+                                               .Where(t  => t.Tour.Id == tour.Id) 
+                                               .ToList();
+        }
+        return keyPoints;
+    }
+
     public List<TourKeyPoint> GetByTourKeyPointNames(List<string> TourKeyPointNames) 
     {
         using var db = new UserContext();
