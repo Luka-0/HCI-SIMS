@@ -12,6 +12,7 @@ namespace InitialProject.Interface
         public List<TourReservation> GetAll();
         public TourReservation GetById(int id);
         public List<TourReservation> GetByTour(Tour tour);
+        public List<TourReservation> GetByGuest(User user);
         public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber);
     }
 }

@@ -5,18 +5,39 @@ using System.IO.Packaging;
 using System.Linq;
 using System.Windows;
 using InitialProject.Contexts;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 
 namespace InitialProject.Service;
 
 public class TourKeyPointService
-{   
+{
+    private readonly TourService tourService = new TourService(new TourRepository());
+    private readonly ITourKeyPointRepository _tourKeyPointsRepository;
 
-    public static List<TourKeyPoint> GetBy(List<string> names)
+    public List<TourKeyPoint> GetAll()
+    {
+        return _tourKeyPointsRepository.GetAll();
+    }
+
+    public List<TourKeyPoint> GetByTour(Tour tour)
+    {
+        return _tourKeyPointsRepository.GetByTour(tour);
+    }
+    public TourKeyPointService(ITourKeyPointRepository repository)
+    {
+        _tourKeyPointsRepository = repository;
+    }
+
+    public TourKeyPoint GetById(int id)
+    {
+        return _tourKeyPointsRepository.GetById(id);
+    }
+    public List<TourKeyPoint> GetByTourKeyPointNames(List<string> names)
     {
 
-        return TourKeyPointRepository.GetBy(names);
+        return _tourKeyPointsRepository.GetByTourKeyPointNames(names);
     }
 
     public TourKeyPointType GetTypesByIndex(List<String> names, String currentName)
@@ -35,7 +56,11 @@ public class TourKeyPointService
         }
         return TourKeyPointType.Mid;
     }
-    
+
+    public void Save(TourKeyPoint tourKeyPoint, TourKeyPointType type)
+    {
+        _tourKeyPointsRepository.Save(tourKeyPoint, type);
+    }
 
     public  List<TourKeyPoint> Save(List<string> keyPointNames)
     {
@@ -45,8 +70,8 @@ public class TourKeyPointService
 
             TourKeyPoint tourKeyPoint= new TourKeyPoint(name);
             TourKeyPointType type = GetTypesByIndex(keyPointNames, name);
-            TourKeyPointRepository.Save(tourKeyPoint, type);
-            TourKeyPoint keyPointFromDb = TourKeyPointRepository.GetBy(tourKeyPoint.Id);
+            _tourKeyPointsRepository.Save(tourKeyPoint, type);
+            TourKeyPoint keyPointFromDb = _tourKeyPointsRepository.GetById(tourKeyPoint.Id);
             tourKeyPoints.Add(keyPointFromDb);
 
         }
@@ -59,7 +84,7 @@ public class TourKeyPointService
         {
             foreach (var keyPoint in tourKeyPoints)
             {
-                TourKeyPointRepository.Update(keyPoint,tour);
+                _tourKeyPointsRepository.Update(keyPoint,tour);
             }
         }
     }
@@ -68,8 +93,10 @@ public class TourKeyPointService
     {
         TourKeyPoint start = tourKeyPoints.First();
         TourKeyPoint end = tourKeyPoints.Last();
-        TourKeyPointRepository.SetType(start.Id, end.Id);
+        _tourKeyPointsRepository.SetType(start.Id, end.Id);
 
     }
+
+    
 
 }

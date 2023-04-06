@@ -5,6 +5,7 @@ using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,13 @@ namespace InitialProject.Service
         {
             return tourReservationRepository.GetByTour(tour);
         }
+
+        public List<TourReservation> GetByGuest(User user)
+        {
+            return _tourReservationRepository.GetByGuest(user);
+        }
+
+        
 
         public TourReservation GetById(int id)
         {
