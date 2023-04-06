@@ -16,7 +16,7 @@ namespace InitialProject.Service
 {
     internal class AccommodationReservationService
     {
-        private IAccommodationReservationRepository iAccommodationreservationRepository;
+        private readonly IAccommodationReservationRepository iAccommodationreservationRepository;
 
         //AccommodationService() { }
 

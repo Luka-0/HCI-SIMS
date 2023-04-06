@@ -15,54 +15,54 @@ namespace InitialProject.Controller
 {
     public class AccommodationController
     {
-        private AccommodationService _service = new (new AccommodationRepository());
+        private readonly AccommodationService AccommodationService = new (new AccommodationRepository());
 
         public void Register(NewAccommodationDto record) {
 
             Accommodation accommodation = new Accommodation(record.Title, record.GuestLimit, record.Type, record.MinimumReservationDays, record.CancellationDeadline);
 
-            this._service.Save(accommodation, record.CityName, record.Images);
+            this.AccommodationService.Save(accommodation, record.CityName, record.Images);
 
         }
 
         public void Save(Accommodation accommodation)
         {
-            _service.Save(accommodation);
+            AccommodationService.Save(accommodation);
         }
 
         public List<Accommodation> GetAll()
         {
-            return _service.GetAll();
+            return AccommodationService.GetAll();
         }
 
         public List<Accommodation> GetBy(string name)
         {
-            return _service.GetBy(name);
+            return AccommodationService.GetBy(name);
         }
 
         public List<Accommodation> GetBy(Location location)
         {
-            return _service.GetBy(location);
+            return AccommodationService.GetBy(location);
         }
 
         public List<Accommodation> GetByCity(string city)
         {
-            return _service.GetByCity(city);
+            return AccommodationService.GetByCity(city);
         }
 
         public List<Accommodation> GetBy(AccommodationType accommodationType)
         {
-            return _service.GetBy(accommodationType);
+            return AccommodationService.GetBy(accommodationType);
         }
 
         public List<Accommodation> GetByGuestNumber(int guestNumber)
         {
-            return _service.GetByGuestNumber(guestNumber);
+            return AccommodationService.GetByGuestNumber(guestNumber);
         }
 
         public List<Accommodation> GetByReservationDays(int reservationDays)
         {
-            return _service.GetByReservationDays(reservationDays);
+            return AccommodationService.GetByReservationDays(reservationDays);
         }
     }
 }
