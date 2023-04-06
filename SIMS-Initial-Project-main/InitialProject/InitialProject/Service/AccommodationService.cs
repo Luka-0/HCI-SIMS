@@ -15,7 +15,7 @@ namespace InitialProject.Service
 {
     class AccommodationService
     {
-        private IAccommodationRepository iAccommodationRepository;
+        private readonly IAccommodationRepository iAccommodationRepository;
 
         //AccommodationService() { }
 

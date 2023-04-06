@@ -13,7 +13,7 @@ namespace InitialProject.Controller
 {
     internal class AccommodationReservationController
     {
-        private AccommodationReservationService AccommodationReservationService = new(new AccommodationReservationRepository());
+        private readonly AccommodationReservationService AccommodationReservationService = new(new AccommodationReservationRepository());
 
         public bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
         {
