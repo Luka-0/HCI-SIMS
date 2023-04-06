@@ -12,15 +12,14 @@ namespace InitialProject.Controller;
 
 public class TourController
 {
-    private LocationController LocationController = new();
 
-   // private TourRepository tourRepository = new TourRepository();
+    // private TourRepository tourRepository = new TourRepository();
     private TourKeyPointService tourKeyPointService = new TourKeyPointService();
     private TourReservationService reservationService = new TourReservationService(new TourReservationRepository());
 
     private TourService tourService = new TourService(new TourRepository());
 
-    //private LocationService locationService = new LocationService();
+    private LocationService locationService = new(new LocationRepository());
     private ImageService imageService = new ImageService();
     private UserService userService = new UserService();
 
@@ -46,7 +45,7 @@ public class TourController
 
     public List<Tour> GetByGuestLimit(int guestLimit)
     {
-        return tourService.GetByGuestLimit(guestLimit); 
+        return tourService.GetByGuestLimit(guestLimit);
     }
 
     public List<GetTourDto> GetBy(int guestNumber)
@@ -66,7 +65,7 @@ public class TourController
 
     public Tour Create(TourToControllerDto dto)
     {
-        
+
 
         Tour tour = new Tour(dto.Name, dto.Description, dto.Language,
             dto.GuestLimit, dto.StartDateAndTime,
@@ -76,17 +75,17 @@ public class TourController
 
     public void UpdateTourProperties(Tour tour, TourToControllerDto dto)
     {
-        Location location = LocationController.GetBy(dto.Country, dto.City);
+        Location location = locationService.GetBy(dto.Country, dto.City);
         List<TourKeyPoint> tourKeyPoints = tourKeyPointService.Save(dto.TourKeyPointNames);
         List<Image> images = imageService.Save(dto.ImageURLs);
 
 
-        
+
         tour.Guide = dto.Guide;
         //int tourId = tourService.get(tour.Id);
         tourKeyPointService.Update(tourKeyPoints, tour);
         // tourKeyPointService.SetTypes(tourKeyPoints);
-        tour.Location = LocationController.GetBy(dto.Country, dto.City);
+        tour.Location = locationService.GetBy(dto.Country, dto.City);
 
         imageService.SetTourId(images, tour);
 
@@ -95,7 +94,7 @@ public class TourController
     //TODO Krstic ispravlja lel
     public void Add(TourToControllerDto dto)
     {
-        Tour newTour= Create(dto);
+        Tour newTour = Create(dto);
         Tour tour = tourService.Save(newTour);
         UpdateTourProperties(tour, dto);     //Mzd mogu da pozivam ove fje na kraju svake prethodne i onda u ovoj imam samo 1 poziv?
 

@@ -16,7 +16,7 @@ namespace InitialProject.Interface
         public AccommodationReservation GetBy(int id);
 
         // Stajic
-        public void Add(AccommodationReservation accommodationReservation);
+        public void Save(AccommodationReservation accommodationReservation);
         public List<AccommodationReservation> GetByAccommodation(int id);
         public List<AccommodationReservation> GetBy(User user);
 

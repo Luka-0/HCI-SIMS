@@ -78,7 +78,7 @@ namespace InitialProject.Service
                 ar.GuestNumber = guestNumber;
                 ar.Guest = user;
 
-                iAccommodationreservationRepository.Add(ar);
+                iAccommodationreservationRepository.Save(ar);
                 return true;
             }
 
@@ -116,7 +116,7 @@ namespace InitialProject.Service
 
         public void Add(AccommodationReservation accommodationReservation)
         {
-            iAccommodationreservationRepository.Add(accommodationReservation);
+            iAccommodationreservationRepository.Save(accommodationReservation);
         }
 
         public List<AccommodationReservation> GetByAccommodation(int id)

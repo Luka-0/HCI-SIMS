@@ -76,7 +76,7 @@ namespace InitialProject.Repository
         }
 
         // Stajic
-        public void Add(AccommodationReservation accommodationReservation)
+        public void Save(AccommodationReservation accommodationReservation)
         {
             using UserContext db = new();
 

@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="RateAccommodation" Height="450" Width="800">
+        Title="RateAccommodation" Height="560" Width="800">
     <Grid>
-        
+        <Label Content="Tidiness: " HorizontalAlignment="Left" Margin="66,96,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="TidinessComboBox" HorizontalAlignment="Left" Margin="183,96,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Owner's correctness: " HorizontalAlignment="Left" Margin="66,144,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="CorrectnessComboBox" HorizontalAlignment="Left" Margin="208,144,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Image links: " HorizontalAlignment="Left" Margin="66,309,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="165,317,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="104,211,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="205" Height="74"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="320,317,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button Content="Submit" HorizontalAlignment="Left" Margin="183,380,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+
     </Grid>
 </Window>
