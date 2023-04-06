@@ -25,6 +25,17 @@ namespace InitialProject.Model
 
         //TODO jedno polje za KeyPointove
 
+        public TourReview() { }
+        public TourReview(int id, int guideKnowledge, int guideLanguage, int interestLevel, string images, TourReservation reservation)
+        {
+            Id = id;
+            GuideKnowledge = guideKnowledge;
+            GuideLanguage = guideLanguage;
+            InterestLevel = interestLevel;
+            Images = images;
+            Reservation = reservation;
+        }
+
         public override string ToString()
         {
             return GuideKnowledge.ToString() + " " + GuideLanguage.ToString() + " " + InterestLevel.ToString();
