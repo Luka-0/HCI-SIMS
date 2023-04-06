@@ -18,8 +18,6 @@ namespace InitialProject.Service
     {
         private readonly IAccommodationReservationRepository iAccommodationreservationRepository;
 
-        //AccommodationService() { }
-
         public AccommodationReservationService(IAccommodationReservationRepository iAccommodationreservationRepository)
         {
             this.iAccommodationreservationRepository = iAccommodationreservationRepository;

@@ -29,6 +29,8 @@ namespace InitialProject.View
     public partial class AccommodationRegister : Page
     {
         AccommodationController accommodationController = new AccommodationController();
+        LocationController LocationController = new();
+
         public AccommodationRegister()
         {
             InitializeComponent();

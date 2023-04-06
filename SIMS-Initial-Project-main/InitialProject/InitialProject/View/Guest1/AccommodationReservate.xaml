@@ -41,10 +41,9 @@
                 Enter guest number or days for reservation:
             </Label>
             <ComboBox x:Name="CountryComboBox" HorizontalAlignment="Left" Margin="154,66,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
-            <ComboBox x:Name="CityComboBox" HorizontalAlignment="Left" Margin="154,66,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
+            <ComboBox x:Name="CityComboBox" MouseLeave="InitializeCityComboBox" HorizontalAlignment="Left" Margin="154,104,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
             <Label Content="Choose country:" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
             <Label Content="Choose city:" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="LocationCBFilter_Copy" HorizontalAlignment="Left" Margin="154,102,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
         </Grid>
 
     </Grid>

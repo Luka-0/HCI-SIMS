@@ -25,10 +25,11 @@ namespace InitialProject.View
 {
     public partial class AccommodationReservate : Window
     {
-        AccommodationReservationController AccommodationReservationController = new();
-        AccommodationController AccommodationController = new();
+        private AccommodationReservationController AccommodationReservationController = new();
+        private AccommodationController AccommodationController = new();
+        private LocationController LocationController = new();
 
-        public ObservableCollection<Accommodation> accommodationsToShow { get; set; }
+        public ObservableCollection<Accommodation> AccommodationsToShow { get; set; }
         private User User { get; set; }
         
         public AccommodationReservate(User user)
@@ -77,7 +78,7 @@ namespace InitialProject.View
         {
             CountryComboBox.Items.Add("--Chose--");
 
-            List<Location> countries = LocationRepository.GetAll();
+            List<Location> countries = LocationController.GetAll();
             foreach(Location location in countries)
             {
                 CountryComboBox.Items.Add(location.Country.ToString());
@@ -86,9 +87,12 @@ namespace InitialProject.View
             CountryComboBox.SelectedIndex = 0;
         }
 
-        private void InitializeCityComboBox()
+        private void InitializeCityComboBox(object sender, MouseEventArgs e)
         {
+            if (CountryComboBox.SelectedIndex != 0)
+            {
 
+            }
         }
 
         private void ReservateAccommodation_Click(object sender, RoutedEventArgs e)
@@ -150,11 +154,11 @@ namespace InitialProject.View
 
         private void RefreshDataGrid(List<Accommodation> accommodations)
         {
-            accommodationsToShow = new ObservableCollection<Accommodation>();   
-            AccommodationsGrid.ItemsSource = accommodationsToShow;
+            AccommodationsToShow = new ObservableCollection<Accommodation>();   
+            AccommodationsGrid.ItemsSource = AccommodationsToShow;
             foreach (Accommodation a in accommodations)
             {
-                accommodationsToShow.Add(a);
+                AccommodationsToShow.Add(a);
             }
         }
 

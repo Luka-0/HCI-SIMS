@@ -1,4 +1,5 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Controller;
 using InitialProject.Dto;
 using InitialProject.Enumeration;
 using InitialProject.Interface;
@@ -16,8 +17,7 @@ namespace InitialProject.Service
     class AccommodationService
     {
         private readonly IAccommodationRepository iAccommodationRepository;
-
-        //AccommodationService() { }
+        LocationController LocationController = new();
 
         public AccommodationService(IAccommodationRepository iAccommodationRepository)
         {
@@ -33,7 +33,7 @@ namespace InitialProject.Service
             var tempRecord = db.accommodation.Find(accommodation.Id);   //Try creating method in Accommodation repository to return the same thing
 
             //Updating foreign key value of new accommodation record
-            tempRecord.Location = LocationService.GetBy(cityName);
+            tempRecord.Location = LocationController.GetByCity(cityName);
             
             //saving all images refered to new accommodation.
             ImageService.Save(images, accommodation);

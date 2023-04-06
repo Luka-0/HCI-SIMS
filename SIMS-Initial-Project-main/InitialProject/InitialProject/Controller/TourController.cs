@@ -12,6 +12,8 @@ namespace InitialProject.Controller;
 
 public class TourController
 {
+    private LocationController LocationController = new();
+
    // private TourRepository tourRepository = new TourRepository();
     private TourKeyPointService tourKeyPointService = new TourKeyPointService();
     private TourReservationService reservationService = new TourReservationService(new TourReservationRepository());
@@ -74,7 +76,7 @@ public class TourController
 
     public void UpdateTourProperties(Tour tour, TourToControllerDto dto)
     {
-        Location location = LocationService.GetBy(dto.Country, dto.City);
+        Location location = LocationController.GetBy(dto.Country, dto.City);
         List<TourKeyPoint> tourKeyPoints = tourKeyPointService.Save(dto.TourKeyPointNames);
         List<Image> images = imageService.Save(dto.ImageURLs);
 
@@ -84,7 +86,7 @@ public class TourController
         //int tourId = tourService.get(tour.Id);
         tourKeyPointService.Update(tourKeyPoints, tour);
         // tourKeyPointService.SetTypes(tourKeyPoints);
-        tour.Location = LocationService.GetBy(dto.Country, dto.City);
+        tour.Location = LocationController.GetBy(dto.Country, dto.City);
 
         imageService.SetTourId(images, tour);
 

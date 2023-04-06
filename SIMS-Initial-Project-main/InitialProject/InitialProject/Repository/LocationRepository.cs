@@ -1,4 +1,5 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Interface;
 using InitialProject.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,9 +10,11 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class LocationRepository
+    public class LocationRepository : ILocationRepository
     {
-        public static Location GetByCity(string city)
+        public LocationRepository() { }
+
+        public Location GetByCity(string city)
         {
             using (var db = new UserContext())
             {
@@ -26,7 +29,7 @@ namespace InitialProject.Repository
             return null;
         }
 
-        public static List<Location> GetByCountry(string country)
+        public List<Location> GetByCountry(string country)
         {
             List<Location> locations = new();
 
@@ -38,7 +41,7 @@ namespace InitialProject.Repository
             return locations;
         }
 
-        public static Location GetBy(string country, string city)
+        public Location GetBy(string country, string city)
         {
             using (var db = new UserContext())
             {
@@ -49,10 +52,8 @@ namespace InitialProject.Repository
 
                 return location;
             }
-
-            return null;
         }
-            public static Location GetBy(int id)
+            public Location GetBy(int id)
             {
                 Location location = new Location();
 
@@ -63,7 +64,7 @@ namespace InitialProject.Repository
                 }
                 return location;
             }
-            public static List<Location> GetAll()
+            public List<Location> GetAll()
             {
                 List<Location> locations = new List<Location>();
 
@@ -77,7 +78,7 @@ namespace InitialProject.Repository
                 return locations;
             }
 
-            public static void Save(Location location)
+            public void Save(Location location)
             {
                 using var db = new UserContext();
 

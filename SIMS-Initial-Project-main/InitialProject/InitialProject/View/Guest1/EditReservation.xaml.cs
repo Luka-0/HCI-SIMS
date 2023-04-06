@@ -24,7 +24,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class EditReservation : Window
     {
-        AccommodationReservationController AccommodationReservationController = new();
+        private AccommodationReservationController AccommodationReservationController = new();
 
         public ObservableCollection<AccommodationReservation> reservationsToShow { get; set; }
 

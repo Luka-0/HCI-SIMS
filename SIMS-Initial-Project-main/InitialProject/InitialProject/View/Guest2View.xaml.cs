@@ -26,7 +26,8 @@ namespace InitialProject.View
     /// </summary>
     public partial class Guest2View : Window
     {
-        TourController tourController = new TourController();   
+        private TourController tourController = new TourController();
+        private LocationController LocationController = new();
        
         TourService TourService = new TourService(new TourRepository());
         TourReservationControler reservationControler = new TourReservationControler();
@@ -86,7 +87,7 @@ namespace InitialProject.View
                 string city = inputField.Text;
                 string country = inputField2.Text;
 
-                Location location = LocationService.GetBy(country, city);
+                Location location = LocationController.GetBy(country, city);
 
                 Tours = tourController.GetByLocation(location);
                 RefreshDataGrid(Tours);
