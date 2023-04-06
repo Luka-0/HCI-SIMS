@@ -3,13 +3,25 @@ using InitialProject.Contexts;
 using InitialProject.Model;
 using System.Collections.Generic;
 using System.Linq;
+using InitialProject.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace InitialProject.Repository;
 
-public class TourKeyPointRepository
+public class TourKeyPointRepository:ITourKeyPointRepository
 {
-    
-    public static List<TourKeyPoint> GetBy(List<string> TourKeyPointNames) 
+    public List<TourKeyPoint> GetAll()
+    {
+        List<TourKeyPoint> keyPoints = new List<TourKeyPoint>();
+
+        using (var dbContext = new UserContext())
+        {
+            keyPoints = dbContext.tourKeyPoints.Include(t => t.Tour).ToList();
+        }
+        return keyPoints;
+    }
+
+    public List<TourKeyPoint> GetByTourKeyPointNames(List<string> TourKeyPointNames) 
     {
         using var db = new UserContext();
         List<TourKeyPoint> allTourKeyPoints = db.tourKeyPoints.ToList();
@@ -25,23 +37,7 @@ public class TourKeyPointRepository
 
     }
 
-    /*public static List<TourKeyPoint> Save(List<string> tourKeyPointNames)
-    {
-        List<TourKeyPoint> tourKeyPoints = new List<TourKeyPoint>();
-        using var db = new UserContext();
-
-        foreach (String name in tourKeyPointNames)
-        {
-            TourKeyPoint tourKeyPoint = new TourKeyPoint(name);
-            db.tourKeyPoints.Add(tourKeyPoint);
-            tourKeyPoints.Add(tourKeyPoint);
-
-        }
-
-        db.SaveChanges();
-        return tourKeyPoints;
-    }*/
-    public static void Save(TourKeyPoint tourKeyPoint, TourKeyPointType type)
+    public void Save(TourKeyPoint tourKeyPoint, TourKeyPointType type)
     {
         tourKeyPoint.Type = type;
         using var db = new UserContext();
@@ -50,7 +46,7 @@ public class TourKeyPointRepository
         db.SaveChanges();
     }
 
-    public static void Update(TourKeyPoint tourKeyPoint, Tour tour)
+    public void Update(TourKeyPoint tourKeyPoint, Tour tour)
     {
         using (var db =new UserContext())
         {
@@ -61,7 +57,7 @@ public class TourKeyPointRepository
         }
     }
 
-    public static TourKeyPoint GetBy(int id)
+    public TourKeyPoint GetById(int id)
     {
         using (var db = new UserContext())
         {
@@ -69,7 +65,7 @@ public class TourKeyPointRepository
         }
     }
 
-    public static void SetType(int  startId, int endId)
+    public void SetType(int  startId, int endId)
     {
         using (var db = new UserContext())
         {
