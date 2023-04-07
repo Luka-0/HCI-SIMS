@@ -19,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace InitialProject.View
 {
-    /// <summary>
-    /// Interaction logic for EditReservation.xaml
-    /// </summary>
     public partial class EditReservation : Window
     {
         private AccommodationReservationController AccommodationReservationController = new();

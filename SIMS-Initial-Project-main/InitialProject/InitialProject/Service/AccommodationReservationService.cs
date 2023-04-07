@@ -16,11 +16,11 @@ namespace InitialProject.Service
 {
     internal class AccommodationReservationService
     {
-        private readonly IAccommodationReservationRepository iAccommodationreservationRepository;
+        private readonly IAccommodationReservationRepository IAccommodationreservationRepository;
 
         public AccommodationReservationService(IAccommodationReservationRepository iAccommodationreservationRepository)
         {
-            this.iAccommodationreservationRepository = iAccommodationreservationRepository;
+            IAccommodationreservationRepository = iAccommodationreservationRepository;
         }
 
         public List<AccommodationReservation> getAllExpiredlBy(DateTime date) {
@@ -31,7 +31,7 @@ namespace InitialProject.Service
 
             List<AccommodationReservation> expiredReservations = new List<AccommodationReservation>();
 
-            expiredReservations = iAccommodationreservationRepository.GetAllExpiredBy(processedDate.Day, processedDate.Month, processedDate.Year);
+            expiredReservations = IAccommodationreservationRepository.GetAllExpiredBy(processedDate.Day, processedDate.Month, processedDate.Year);
 
             return expiredReservations;
             
@@ -57,13 +57,13 @@ namespace InitialProject.Service
 
         public AccommodationReservation GetBy(int id) {
 
-            return iAccommodationreservationRepository.GetBy(id);
+            return IAccommodationreservationRepository.GetBy(id);
         }
 
         // Stajic
         public bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
         {
-            AccommodationReservation ar = new AccommodationReservation();
+            AccommodationReservation ar = new();
 
             if (accommodation.GuestLimit < guestNumber || IsViolatingMinReservatingDays(accommodation.MinimumReservationDays, startingDate, endingDate))
             {
@@ -78,7 +78,7 @@ namespace InitialProject.Service
                 ar.GuestNumber = guestNumber;
                 ar.Guest = user;
 
-                iAccommodationreservationRepository.Save(ar);
+                IAccommodationreservationRepository.Save(ar);
                 return true;
             }
 
@@ -87,7 +87,7 @@ namespace InitialProject.Service
 
         public bool IsAvailable(int id, DateTime startingDate, DateTime endingDate)
         {
-            List<AccommodationReservation> accommodationReservations = iAccommodationreservationRepository.GetByAccommodation(id);
+            List<AccommodationReservation> accommodationReservations = IAccommodationreservationRepository.GetByAccommodation(id);
 
             foreach (AccommodationReservation ar in accommodationReservations)
             {
@@ -116,17 +116,17 @@ namespace InitialProject.Service
 
         public void Add(AccommodationReservation accommodationReservation)
         {
-            iAccommodationreservationRepository.Save(accommodationReservation);
+            IAccommodationreservationRepository.Save(accommodationReservation);
         }
 
         public List<AccommodationReservation> GetByAccommodation(int id)
         {
-            return iAccommodationreservationRepository.GetByAccommodation(id);
+            return IAccommodationreservationRepository.GetByAccommodation(id);
         }
 
         public List<AccommodationReservation> GetBy(User user)
         {
-            return iAccommodationreservationRepository.GetBy(user);
+            return IAccommodationreservationRepository.GetBy(user);
         }
 
     }

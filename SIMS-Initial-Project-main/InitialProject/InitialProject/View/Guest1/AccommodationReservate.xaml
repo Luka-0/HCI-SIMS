@@ -18,7 +18,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <Grid Margin="0,0,483,272" DataContext="{Binding ElementName=AccommodationsGrid, Path=SelectedItem}">
-            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,54"/>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,54" />
+            <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,187,0,0" Click="GoBack_Click"/>
             <DatePicker x:Name="StartingDatePicker" HorizontalAlignment="Left" Margin="154,11,0,0" VerticalAlignment="Top"/>
             <DatePicker x:Name="EndingDatePicker" HorizontalAlignment="Left" Margin="154,55,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="GuestNumberTB" HorizontalAlignment="Left" Margin="154,110,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" TextAlignment="Center" Width="51"/>

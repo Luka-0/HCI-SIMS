@@ -15,6 +15,11 @@ namespace InitialProject.Controller
     {
         private readonly AccommodationReservationService AccommodationReservationService = new(new AccommodationReservationRepository());
 
+        public AccommodationReservation GetBy(int id)
+        {
+            return AccommodationReservationService.GetBy(id);
+        }
+
         public bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
         {
             return AccommodationReservationService.Reservate(accommodation, user, guestNumber, startingDate, endingDate);

@@ -44,7 +44,7 @@ namespace InitialProject.View
 
         private void RateAccommodation_Click(object sender, RoutedEventArgs e)
         {
-            RateAccommodation rateAccommodation = new();
+            RateAccommodation rateAccommodation = new(User);
             rateAccommodation.Show();
 
             Close();

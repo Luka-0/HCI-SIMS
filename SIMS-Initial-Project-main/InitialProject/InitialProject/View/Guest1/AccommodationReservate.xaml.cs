@@ -25,9 +25,9 @@ namespace InitialProject.View
 {
     public partial class AccommodationReservate : Window
     {
-        private AccommodationReservationController AccommodationReservationController = new();
-        private AccommodationController AccommodationController = new();
-        private LocationController LocationController = new();
+        private readonly AccommodationReservationController AccommodationReservationController = new();
+        private readonly AccommodationController AccommodationController = new();
+        private readonly LocationController LocationController = new();
 
         public ObservableCollection<Accommodation> AccommodationsToShow { get; set; }
         private User User { get; set; }
@@ -87,7 +87,7 @@ namespace InitialProject.View
             CountryComboBox.SelectedIndex = 0;
         }
 
-        private void InitializeCityComboBox(object sender, MouseEventArgs e)
+        private void InitializeCityComboBox(object sender, MouseEventArgs e) // TODO
         {
             if (CountryComboBox.SelectedIndex != 0)
             {
@@ -156,6 +156,7 @@ namespace InitialProject.View
         {
             AccommodationsToShow = new ObservableCollection<Accommodation>();   
             AccommodationsGrid.ItemsSource = AccommodationsToShow;
+
             foreach (Accommodation a in accommodations)
             {
                 AccommodationsToShow.Add(a);
@@ -268,6 +269,14 @@ namespace InitialProject.View
 
             RefreshDataGrid(accommodations);
 
+        }
+
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            Guest1 guest1 = new(User);
+            guest1.Show();
+
+            Close();
         }
     }
 }

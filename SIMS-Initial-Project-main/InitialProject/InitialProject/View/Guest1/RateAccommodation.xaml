@@ -12,10 +12,20 @@
         <Label Content="Owner's correctness: " HorizontalAlignment="Left" Margin="66,144,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="CorrectnessComboBox" HorizontalAlignment="Left" Margin="208,144,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Image links: " HorizontalAlignment="Left" Margin="66,309,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="165,317,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="104,211,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="205" Height="74"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="320,317,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
-        <Button Content="Submit" HorizontalAlignment="Left" Margin="183,380,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <TextBox x:Name="CommentTextBox" HorizontalAlignment="Left" Margin="104,211,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="205" Height="74"/>
+        <TextBox x:Name="ImagesTextBox" HorizontalAlignment="Left" Margin="165,317,0,0" TextWrapping="Wrap" Text="Image links" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="320,317,0,0" VerticalAlignment="Top" Click="AddLink_Click"/>
+        <Button Content="Submit" HorizontalAlignment="Left" Margin="183,380,0,0" VerticalAlignment="Top" Click="Submit_Click"/>
+        <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding ReservationsToShow}" Height="Auto" Width="Auto" Margin="312,0,20,0" VerticalAlignment="Top" 
+            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Accommodation.Title}"/>
+                <DataGridTextColumn Header="City" Binding="{Binding Accommodation.Location.City}"/>
+                <DataGridTextColumn Header="Last day of reservation" Binding="{Binding EndingDate}"/>
+                <DataGridTextColumn Header="Number of guests" Binding="{Binding GuestNumber}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="GoBack_Click"/>
 
     </Grid>
 </Window>

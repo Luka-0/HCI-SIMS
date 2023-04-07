@@ -18,6 +18,18 @@ namespace InitialProject.Repository
         {
             using var db = new UserContext();
 
+            var existingLocation = db.location.Find(accommodationReview.Reservation.Accommodation.Location.Id);
+            var existingAccommodation = db.accommodation.Find(accommodationReview.Reservation.Accommodation.Id);
+            var existingAccommodationReservation = db.accommodationReservation.Find(accommodationReview.Reservation.Id);
+
+            accommodationReview.Reservation.Accommodation.Location = existingLocation;
+            accommodationReview.Reservation.Accommodation = existingAccommodation;
+            accommodationReview.Reservation = existingAccommodationReservation;
+
+            db.location.Attach(existingLocation);
+            db.accommodation.Attach(existingAccommodation);
+            db.accommodationReservation.Attach(existingAccommodationReservation);
+
             db.Add(accommodationReview);
             db.SaveChanges();
         }
@@ -29,7 +41,8 @@ namespace InitialProject.Repository
             using(var db = new UserContext())
             {
                 accommodationReviews = db.accommodationReview.Include(t => t.Reservation)
-                                                             .Where(t => t.Reservation.Guest.Id == user.Id).ToList();
+                                                             .Where(t => t.Reservation.Guest.Id == user.Id)
+                                                             .ToList();
             }
 
             return accommodationReviews;

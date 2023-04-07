@@ -105,7 +105,7 @@ namespace InitialProject.Repository
             using (UserContext db = new())
             {
                 reservations = db.accommodationReservation.Include(t => t.Accommodation)
-                                                          .Include(t => t.Accommodation.Location)
+                                                          .ThenInclude(l => l.Location)
                                                           .Where(t => t.Guest.Id == user.Id).ToList();
             }
 
