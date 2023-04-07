@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Interface
 {
-    public interface IGuestReviewRepository
+    public interface IAccommodationReviewRepository
     {
-        public void Save(GuestReview guestReview);
-        public List<AccommodationReservation> GetGradedReservations(User owner);
-
-
+        public List<AccommodationReview> GetAllBy(User owner);
     }
 }

@@ -34,6 +34,8 @@ namespace InitialProject.View
 
         public ObservableCollection<Tour> toursToShow { get; set; }
 
+        private UserController UserController = new UserController();
+
         public List<Tour> Tours
         {
             get;
@@ -172,7 +174,7 @@ namespace InitialProject.View
                 if(!response.IsFull)
                 {
                     TourReservation newTourReservation = new TourReservation();
-                    reservationControler.Save(newTourReservation, tour, UserRepository.Get("Perica"), guestNumber);
+                    reservationControler.Save(newTourReservation, tour, UserController.GetBy("Perica"), guestNumber);
                     MessageBox.Show("Uspesno sacuvana rezervacija!");
                     FreeSpacesLabel.Content = "";
                     SelectedGuestNumber.Text = "";

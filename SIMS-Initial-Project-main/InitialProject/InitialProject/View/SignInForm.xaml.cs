@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using InitialProject.Enumeration;
 using InitialProject.View;
+using InitialProject.Contexts;
+using InitialProject.Controller;
 
 namespace InitialProject
 {
@@ -16,7 +18,7 @@ namespace InitialProject
     public partial class SignInForm : Window
     {
 
-        private readonly UserRepository _repository;
+        private readonly UserController UserController;
 
         private string _username;
         public string Username
@@ -43,12 +45,12 @@ namespace InitialProject
         {
             InitializeComponent();
             DataContext = this;
-            _repository = new UserRepository();
+            UserController = new UserController();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
         {
-            User user = UserRepository.Get(Username);
+            User user = UserController.GetBy(Username);
 
             if (user != null)
             {
@@ -120,7 +122,7 @@ namespace InitialProject
             user.Password = txtPassword.Password;
             user.Username = Username;
 
-            UserRepository.Add(user);
+            UserController.Add(user);
 
             MessageBox.Show("Successfully added user");
             this.Close();

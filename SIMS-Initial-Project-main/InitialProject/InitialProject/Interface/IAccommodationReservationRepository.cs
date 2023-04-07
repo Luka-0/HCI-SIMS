@@ -10,9 +10,9 @@ namespace InitialProject.Interface
 {
     interface IAccommodationReservationRepository
     {
-        public List<AccommodationReservation> GetAllExpiredBy(int day, int month, int year);
-        public Accommodation GetAccommodation(int reservationId);
-        public User GetUser(int reservationId);
+        public List<AccommodationReservation> GetAllExpiredBy(int day, int month, int year, User owner);
+        //public Accommodation GetAccommodation(int reservationId);
+        //public User GetUser(int reservationId);
         public AccommodationReservation GetBy(int id);
 
         // Stajic

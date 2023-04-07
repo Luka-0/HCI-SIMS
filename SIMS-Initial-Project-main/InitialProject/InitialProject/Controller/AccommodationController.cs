@@ -24,6 +24,11 @@ namespace InitialProject.Controller
             this.AccommodationService.Save(accommodation, record.CityName, record.Images, record.OwnerUsername);
 
         }
+        public void UpdateBy(string ownerUsername, string accommodationClass)
+        {
+            this.AccommodationService.UpdateBy(ownerUsername, accommodationClass);
+        
+        }
 
         public void Save(Accommodation accommodation)
         {

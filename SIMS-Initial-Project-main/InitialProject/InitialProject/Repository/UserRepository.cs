@@ -6,14 +6,16 @@ using System.IO.Enumeration;
 using System.Linq;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
+using InitialProject.Interface;
+using InitialProject.Enumeration;
 
 namespace InitialProject.Repository
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         public UserRepository() { }
 
-        public static User Get(String username)
+        public  User GetBy(String username)
         {
             using var db = new UserContext();
             foreach (User user in db.users)
@@ -26,23 +28,34 @@ namespace InitialProject.Repository
             return null;
         }
 
-        public static Boolean Add(User user)
-        {
+        public void UpdateStatusBy(String username, bool titleFlag) {
 
+            using var db = new UserContext();
+            foreach (User user in db.users)
+            {
+                if (user.Username.Equals(username))
+                {
+                    user.SuperTitle = titleFlag;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public  Boolean Add(User user)
+        {
             using var db = new UserContext();
             db.Add(user);
             db.SaveChanges();
 
             return true;
         }
-        public static User GetBy(int id)
+        public  User GetBy(int id)
         {
             using var db = new UserContext();
             List<User> users = db.users.ToList();
             return users.Find(user => user.Id == id);
 
         }
-
 
     }
 

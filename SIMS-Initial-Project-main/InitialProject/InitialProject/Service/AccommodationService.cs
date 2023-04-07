@@ -16,77 +16,88 @@ namespace InitialProject.Service
 {
     class AccommodationService
     {
-        private readonly IAccommodationRepository iAccommodationRepository;
-        private LocationService locationService;
-        private ImageService imageService;
+        private readonly IAccommodationRepository IAccommodationRepository;
+        private LocationService LocationService;
+        private ImageService ImageService;
+        private UserService UserService;
 
         public AccommodationService(IAccommodationRepository iAccommodationRepository)
         {
-            this.iAccommodationRepository = iAccommodationRepository;
-            this.locationService = new(new LocationRepository());
-            this.imageService = new(new ImageRepository());
+            this.IAccommodationRepository = iAccommodationRepository;
+            this.LocationService = new(new LocationRepository());
+            this.ImageService = new(new ImageRepository());
+            this.UserService = new(new UserRepository());
+
         }
 
         public void Save(Accommodation accommodation, string cityName, List<String> images, string ownerUsername)
         {
-            //  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
-            User owner = UserRepository.Get(ownerUsername);
+            //finished-->  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserService.GetBy(ownerUsername);
 
             //Saving new accommodation into databse
-            this.iAccommodationRepository.Save(accommodation);
+            this.IAccommodationRepository.Save(accommodation);
 
             var db = new UserContext();
             var tempRecord = db.accommodation.Find(accommodation.Id);   //Try creating method in Accommodation repository to return the same thing
 
             //Updating foreign key values of new accommodation record
-            tempRecord.Location = locationService.GetByCity(cityName);
+            tempRecord.Location = LocationService.GetByCity(cityName);
             tempRecord.Owner = owner;
 
             //saving all images refered to new accommodation.
-            imageService.Save(images, accommodation);
+            ImageService.Save(images, accommodation);
 
             db.SaveChanges();
+        }
+
+        public void UpdateBy(string ownerUsername, string accommodationClass) {
+
+            //finished--> TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserService.GetBy(ownerUsername);
+
+            this.IAccommodationRepository.UpdateBy(owner, accommodationClass);
         }
 
         // Stajic
         public void Save(Accommodation accommodation)
         {
-            iAccommodationRepository.Save(accommodation);
+            IAccommodationRepository.Save(accommodation);
         }
 
         public List<Accommodation> GetAll()
         {
-            return iAccommodationRepository.GetAll();
+            return IAccommodationRepository.GetAll();
         }
 
         public List<Accommodation> GetBy(string name)
         {
-            return iAccommodationRepository.GetBy(name);
+            return IAccommodationRepository.GetBy(name);
         }
 
         public List<Accommodation> GetBy(Location location)
         {
-            return iAccommodationRepository.GetBy(location);
+            return IAccommodationRepository.GetBy(location);
         }
 
         public List<Accommodation> GetByCity(string city)
         {
-            return iAccommodationRepository.GetByCity(city);
+            return IAccommodationRepository.GetByCity(city);
         }
 
         public List<Accommodation> GetBy(AccommodationType accommodationType)
         {
-            return iAccommodationRepository.GetBy(accommodationType);
+            return IAccommodationRepository.GetBy(accommodationType);
         }
 
         public List<Accommodation> GetByGuestNumber(int guestNumber)
         {
-            return iAccommodationRepository.GetByGuestNumber(guestNumber);
+            return IAccommodationRepository.GetByGuestNumber(guestNumber);
         }
 
         public List<Accommodation> GetByReservationDays(int reservationDays)
         {
-            return iAccommodationRepository.GetByReservationDays(reservationDays);
+            return IAccommodationRepository.GetByReservationDays(reservationDays);
         }
     }
 }

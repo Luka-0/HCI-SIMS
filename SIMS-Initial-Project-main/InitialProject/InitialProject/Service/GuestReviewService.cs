@@ -13,40 +13,46 @@ namespace InitialProject.Service
 {
     public class GuestReviewService
     {
-        private AccommodationReservationService accommodationReservationService;
-        private IGuestReviewRepository iGuestReviewRepository;
+        private AccommodationReservationService AccommodationReservationService;
+        private UserService UserService;
+        private IGuestReviewRepository IGuestReviewRepository;
 
         public GuestReviewService(IGuestReviewRepository iGuestReviewRepository) {
 
-            this.iGuestReviewRepository = iGuestReviewRepository;
-            this.accommodationReservationService = new(new AccommodationReservationRepository());
+            this.IGuestReviewRepository = iGuestReviewRepository;
+            this.AccommodationReservationService = new(new AccommodationReservationRepository());
+            this.UserService = new(new UserRepository());
         }
 
         public void Save(GuestReview review, int reservationId) {
 
-            iGuestReviewRepository.Save(review);
+            IGuestReviewRepository.Save(review);
 
             var db = new UserContext();
             var record = db.guestReview.Find(review.Id);   
 
-            record.Reservation = accommodationReservationService.GetBy(reservationId);
+            record.Reservation = AccommodationReservationService.GetBy(reservationId);
 
             db.SaveChanges();
         }
 
-        public List<AccommodationReservation> GetGradedReservations()
+        public List<AccommodationReservation> GetGradedReservations(string ownerUsername)
         {
-
-            return iGuestReviewRepository.GetGradedReservations();
+            //  FINISHED-->TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserService.GetBy(ownerUsername);
+            return IGuestReviewRepository.GetGradedReservations(owner);
         }
 
-        public List<AccommodationReservation> GetNotGradedExpiredReservations() {
+        public List<AccommodationReservation> GetNotGradedExpiredReservations(string ownerUsername) {
 
             DateTime todaysDate = DateTime.UtcNow.Date;
 
-            List<AccommodationReservation> expiredReservations = accommodationReservationService.getAllExpiredlBy(todaysDate);
+            //  FINISHED-->TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserService.GetBy(ownerUsername);
 
-            List<AccommodationReservation> gradedReservations = iGuestReviewRepository.GetGradedReservations();
+            List<AccommodationReservation> expiredReservations = AccommodationReservationService.getAllExpiredlBy(todaysDate, ownerUsername);
+
+            List<AccommodationReservation> gradedReservations = this.GetGradedReservations(ownerUsername);
 
 
             List<AccommodationReservation> nonGradedExpired = new List<AccommodationReservation>();

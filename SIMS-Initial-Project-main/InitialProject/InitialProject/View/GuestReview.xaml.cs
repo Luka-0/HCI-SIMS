@@ -22,13 +22,20 @@ namespace InitialProject.View
     /// </summary>
     public partial class GuestReview : Page
     {
+
         GuestReviewController GuestReviewController =  new GuestReviewController();
-        public GuestReview()
+
+        public string OwnerUsername;
+
+        
+        public GuestReview(string ownerUsername)
         {
             InitializeComponent();
 
+            this.OwnerUsername = ownerUsername;
+
             List<ExpiredReservationDto> records = new List<ExpiredReservationDto>();
-            records = GuestReviewController.LoadExpiredReservations();
+            records = GuestReviewController.LoadExpiredReservations(OwnerUsername);
             ExpiredReservations.ItemsSource = records;
  
         }

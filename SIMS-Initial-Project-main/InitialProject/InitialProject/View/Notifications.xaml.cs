@@ -23,17 +23,21 @@ namespace InitialProject.View
     public partial class Notifications : Page
     {
         GuestReviewController GuestReviewController = new GuestReviewController();
-        public Notifications()
+
+        public string OwnerUsername;
+
+        public Notifications(string ownerUsername)
         {
+            OwnerUsername = ownerUsername;
             InitializeComponent();
-          
             LoadNotifications();
+     
         }
 
         public void LoadNotifications() {
 
             List<ExpiredReservationDto> records = new List<ExpiredReservationDto>();
-            records = GuestReviewController.LoadExpiredReservations();
+            records = GuestReviewController.LoadExpiredReservations(OwnerUsername);
 
             if (records.Count == 0) {
                 notifications.Items.Clear();

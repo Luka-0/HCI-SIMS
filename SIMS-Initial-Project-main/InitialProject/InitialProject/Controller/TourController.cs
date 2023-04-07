@@ -21,7 +21,7 @@ public class TourController
 
     private LocationService locationService = new (new LocationRepository());
     //private ImageService imageService = new ImageService();
-    private UserService userService = new UserService();
+    //private UserService userService = new UserService();
 
     public List<Tour> GetAll()
     {
