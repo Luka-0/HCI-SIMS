@@ -44,7 +44,8 @@ namespace InitialProject.Repository
 
             using (var dbContext = new UserContext())
             {
-                Tours = dbContext.tour.Include(t => t.Location).ToList();
+                Tours = dbContext.tour.Where(t => t.Location != null).Include(t => t.Location).ToList();
+
             }
             return Tours;
         }

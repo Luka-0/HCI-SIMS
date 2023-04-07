@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using InitialProject.Contexts;
 using InitialProject.Dto;
 using InitialProject.Interface;
@@ -26,47 +27,38 @@ public class TourService
         return tour;
 
     }
-
-    //TODO Pavle ispravi
-    public List<TourBasicInfoDto> Get()
-    {
-        List<TourBasicInfoDto> basicInfoDtos = new List<TourBasicInfoDto>();
-        List<Tour> tours = GetAll();
-
-        foreach (var tour in tours)
-        {
-
-            //Location location = getLocationByTourId(tour.Id);
-            TourBasicInfoDto basicInfo = new TourBasicInfoDto(tour.Id, tour.Name,
-                tour.Location.Country, tour.Location.City, tour.Language, tour.GuestLimit, tour.StartDateAndTime);
-            basicInfoDtos.Add(basicInfo);
-        }
-        return basicInfoDtos;
-    }
-
-    //TODO Pavle ispravi
-    public List<TourBasicInfoDto> GetTodays()
-    {
-        List<TourBasicInfoDto> todaysTours = new List<TourBasicInfoDto>();
-        List<TourBasicInfoDto> tours = new List<TourBasicInfoDto>();
-        tours = Get();
-        foreach (var tour in tours)
-        {
-            DateTime date = tour.StartDateAndTime.Date;
-            if (date.Equals(DateTime.Today))
-            {
-                todaysTours.Add(tour);
-            }
-        }
-
-        return todaysTours;
-
-    }
-
     public List<Tour> GetAll()
     {
         return _tourRepository.GetAll();
     }
+
+    
+    public List<TourBasicInfoDto> Get()
+    {
+        List<Tour> tours = GetAll();
+
+        List<TourBasicInfoDto> basicInfoDtos = tours.Select(tour =>
+            new TourBasicInfoDto(tour.Id, tour.Name, tour.Location.Country, tour.Location.City,
+                    tour.Language, tour.GuestLimit, tour.StartDateAndTime))
+                    .ToList();
+
+
+        return basicInfoDtos;
+    }
+
+    public List<TourBasicInfoDto> GetTodays()
+    {
+        List<TourBasicInfoDto> tours = new List<TourBasicInfoDto>();
+        tours = Get();
+
+        List<TourBasicInfoDto> todayTours = tours.Where(t => t.StartDateAndTime.Date.Equals(DateTime.Today)).ToList();
+
+
+        return todayTours;
+
+    }
+
+   
 
     public Tour GetById(int id)
     {
