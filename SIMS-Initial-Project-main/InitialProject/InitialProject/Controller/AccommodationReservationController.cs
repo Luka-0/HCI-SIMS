@@ -20,9 +20,9 @@ namespace InitialProject.Controller
             return AccommodationReservationService.GetBy(id);
         }
 
-        public bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
+        public List<StartEndDateDto> GetAvailableDates(Accommodation accommodation, int guestNumber, DateTime startingDate, DateTime endingDate, int daysToStay)
         {
-            return AccommodationReservationService.Reservate(accommodation, user, guestNumber, startingDate, endingDate);
+            return AccommodationReservationService.GetAvailableDates(accommodation, guestNumber, startingDate, endingDate, daysToStay);
         }
 
         public void Add(AccommodationReservation accommodationReservation)

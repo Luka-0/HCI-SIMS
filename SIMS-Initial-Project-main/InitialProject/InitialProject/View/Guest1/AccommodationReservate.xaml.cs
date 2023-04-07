@@ -100,22 +100,38 @@ namespace InitialProject.View
             }
         }
 
+        private void InitializeDatesComboBox(List<StartEndDateDto> datesToChose)
+        {
+            OfferedDates.Items.Clear();
+
+            foreach (StartEndDateDto t in datesToChose)
+            {
+                OfferedDates.Items.Add(t.StartingDate.ToString() + t.EndingDate.ToString());
+            }
+
+            OfferedDates.SelectedIndex = 0;
+        }
+
         private void ReservateAccommodation_Click(object sender, RoutedEventArgs e)
         {
             int guestNumber = int.Parse(GuestNumberTB.Text);
+            int daysToStay = int.Parse(ReservatingDaysTB.Text);
             Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
             DateTime startDate = StartingDatePicker.SelectedDate.Value;
             DateTime endDate = EndingDatePicker.SelectedDate.Value;
 
             if (IsViolatingAnyUIControl(startDate, endDate, accommodation, guestNumber)) return;
 
-            if (AccommodationReservationController.Reservate(accommodation, User, guestNumber, startDate, endDate))
+            List<StartEndDateDto> datesToChose = AccommodationReservationController.GetAvailableDates(accommodation, guestNumber, startDate, endDate, daysToStay);
+            if (datesToChose == null)
             {
-                MessageBox.Show("Reservation was successful");
+                MessageBox.Show("Accommodation is full during those days");
                 return;
             }
 
-            MessageBox.Show("Reservation was UNsuccessful");
+            InitializeDatesComboBox(datesToChose);
+
+            //TODO inicijalizuj combo box za datume
         }
 
         private bool ValidateSelectedDates()

@@ -11,6 +11,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View;
 using InitialProject.Interface;
+using InitialProject.Dto;
 
 namespace InitialProject.Service
 {
@@ -61,28 +62,48 @@ namespace InitialProject.Service
         }
 
         // Stajic
-        public bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
+        public List<StartEndDateDto> GetAvailableDates(Accommodation accommodation, int guestNumber, DateTime startingDate, DateTime endingDate, int daysToStay)
         {
-            AccommodationReservation ar = new();
+            //AccommodationReservation ar = new();
 
             if (accommodation.GuestLimit < guestNumber || IsViolatingMinReservatingDays(accommodation.MinimumReservationDays, startingDate, endingDate))
             {
-                return false;
+                return null;
             }
 
-            if (IsAvailable(accommodation.Id, startingDate, endingDate))
+            List<StartEndDateDto> datesToChose = new();
+            int iterations = endingDate.Day - startingDate.Day + 1 - daysToStay;
+            for(int i=0; i<iterations; ++i)
             {
-                ar.Accommodation = accommodation;
-                ar.BegginingDate = startingDate;
-                ar.EndingDate = endingDate;
-                ar.GuestNumber = guestNumber;
-                ar.Guest = user;
+                DateTime tmpStartingDate = startingDate.AddDays(i);
 
-                IAccommodationreservationRepository.Save(ar);
-                return true;
+                DateTime tmpEndingDate = startingDate.AddDays(i + daysToStay);
+
+                StartEndDateDto tmp = new(tmpStartingDate, tmpEndingDate);
+                datesToChose.Add(tmp);
             }
 
-            return false;
+            foreach(StartEndDateDto t in datesToChose)
+            {
+                if (!IsAvailable(accommodation.Id, t.StartingDate, t.EndingDate))
+                { 
+                    datesToChose.Remove(t);
+                }
+            }
+
+            if (datesToChose.Count == 0) return null;
+
+            return datesToChose;
+
+            /*ar.Accommodation = accommodation;
+            ar.BegginingDate = startingDate;
+            ar.EndingDate = endingDate;
+            ar.GuestNumber = guestNumber;
+            ar.User = user;
+
+            IAccommodationreservationRepository.Save(ar);
+            return true;*/
+
         }
 
         public bool IsAvailable(int id, DateTime startingDate, DateTime endingDate)
@@ -101,7 +122,6 @@ namespace InitialProject.Service
                 }
                 else
                 {
-                    MessageBox.Show("Accommodation is already registered for those days");
                     return false;
                 }
             }

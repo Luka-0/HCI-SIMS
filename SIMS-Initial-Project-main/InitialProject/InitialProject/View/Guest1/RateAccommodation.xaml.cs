@@ -79,7 +79,7 @@ namespace InitialProject.View
             AccommodationReview accommodationReview = new(tidiness, correctness, CommentTextBox.Text, Images.ToString(), accommodationReservation);
 
             AccommodationReviewController.Save(accommodationReview);
-
+            MessageBox.Show("Everything was succesfull");
         }
 
         private void AddLink_Click(object sender, RoutedEventArgs e)
@@ -94,6 +94,7 @@ namespace InitialProject.View
             Images.Append('$');
 
             ImagesTextBox.Clear();
+            MessageBox.Show("Succesfully added");
         }
 
         private void RefreshDataGrid(List<AccommodationReservation> accommodationReservations)
@@ -129,7 +130,7 @@ namespace InitialProject.View
 
             if (!ValidateSelectedEndingDate(accommodationReservation))
             {
-                MessageBox.Show("5 days have already passed since that reservation");
+                MessageBox.Show("You can't rate it now");
                 return true;
             }
 
@@ -138,7 +139,7 @@ namespace InitialProject.View
 
         private bool ValidateSelectedEndingDate(AccommodationReservation accommodationReservation)
         {
-            return accommodationReservation.EndingDate.Day + 5 >= DateTime.Now.Day;
+            return accommodationReservation.EndingDate.Day <= DateTime.Now.Day && accommodationReservation.EndingDate.Day + 5 >= DateTime.Now.Day;
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
