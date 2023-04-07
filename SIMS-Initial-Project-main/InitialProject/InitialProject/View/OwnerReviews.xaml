@@ -1,0 +1,16 @@
+﻿<Page x:Class="InitialProject.View.OwnerReviews"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="990"
+      Title="OwnerReviews">
+
+    <Grid>
+        <DataGrid x:Name="reviews" d:ItemsSource="{d:SampleData ItemCount=20}" Margin="34,73,43,150" FontSize="25"/>
+        <Label Content="Reviews made by guests" HorizontalAlignment="Left" Margin="34,10,0,0" VerticalAlignment="Top" Width="404" FontSize="30"/>
+
+    </Grid>
+</Page>

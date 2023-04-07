@@ -13,23 +13,23 @@ namespace InitialProject.Service
 {
     public class GuestReviewService
     {
-        private AccommodationReservationService accommodationReservationService;
-        private IGuestReviewRepository iGuestReviewRepository;
+        private AccommodationReservationService AccommodationReservationService;
+        private IGuestReviewRepository IGuestReviewRepository;
 
         public GuestReviewService(IGuestReviewRepository iGuestReviewRepository) {
 
-            this.iGuestReviewRepository = iGuestReviewRepository;
-            this.accommodationReservationService = new(new AccommodationReservationRepository());
+            this.IGuestReviewRepository = iGuestReviewRepository;
+            this.AccommodationReservationService = new(new AccommodationReservationRepository());
         }
 
         public void Save(GuestReview review, int reservationId) {
 
-            iGuestReviewRepository.Save(review);
+            IGuestReviewRepository.Save(review);
 
             var db = new UserContext();
             var record = db.guestReview.Find(review.Id);   
 
-            record.Reservation = accommodationReservationService.GetBy(reservationId);
+            record.Reservation = AccommodationReservationService.GetBy(reservationId);
 
             db.SaveChanges();
         }
@@ -37,16 +37,16 @@ namespace InitialProject.Service
         public List<AccommodationReservation> GetGradedReservations()
         {
 
-            return iGuestReviewRepository.GetGradedReservations();
+            return IGuestReviewRepository.GetGradedReservations();
         }
 
         public List<AccommodationReservation> GetNotGradedExpiredReservations() {
 
             DateTime todaysDate = DateTime.UtcNow.Date;
 
-            List<AccommodationReservation> expiredReservations = accommodationReservationService.getAllExpiredlBy(todaysDate);
+            List<AccommodationReservation> expiredReservations = AccommodationReservationService.getAllExpiredlBy(todaysDate);
 
-            List<AccommodationReservation> gradedReservations = iGuestReviewRepository.GetGradedReservations();
+            List<AccommodationReservation> gradedReservations = IGuestReviewRepository.GetGradedReservations();
 
 
             List<AccommodationReservation> nonGradedExpired = new List<AccommodationReservation>();

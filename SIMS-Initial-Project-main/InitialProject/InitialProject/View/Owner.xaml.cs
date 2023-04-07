@@ -43,5 +43,10 @@ namespace InitialProject.View
         {
             OperationsContainer.Content = new Notifications();
         }
+
+        private void Button3_Click(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new OwnerReviews(Username);
+        }
     }
 }
