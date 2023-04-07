@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Dto;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using System;
@@ -48,14 +49,12 @@ namespace InitialProject.Controller
             tourKeyPointService.SetTypes(tourKeyPoints);    
         }
 
-        public List<TourKeyPoint> GetByGuestAndActiveTour(User user)
+        public List<TourAndKeyPointsDto> GetByGuestAndActiveTour(User user)
         {
-            List<TourKeyPoint> keyPoints = new List<TourKeyPoint>();
-
-
-
-            return keyPoints;
+            return tourKeyPointService.GetByGuestAndActiveTour(user);
         }
+
+
 
     }
 }

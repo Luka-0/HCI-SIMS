@@ -5,7 +5,9 @@ using System.IO.Packaging;
 using System.Linq;
 using System.Windows;
 using InitialProject.Contexts;
+using InitialProject.Dto;
 using InitialProject.Interface;
+using InitialProject.Migrations;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -97,6 +99,16 @@ public class TourKeyPointService
 
     }
 
-    
+    public List<TourAndKeyPointsDto> GetByGuestAndActiveTour(User user)
+    {
+        List<TourAndKeyPointsDto> tourAndKeyPointsDtos = new List<TourAndKeyPointsDto> ();
+        List<Tour> allActiveToursByGuest = tourService.GetAllActiveByGuest(user);
+
+        foreach(Tour tour in allActiveToursByGuest)
+        {
+            tourAndKeyPointsDtos.Add(new TourAndKeyPointsDto(tour, GetByTour(tour)));
+        }
+        return tourAndKeyPointsDtos;
+    }
 
 }

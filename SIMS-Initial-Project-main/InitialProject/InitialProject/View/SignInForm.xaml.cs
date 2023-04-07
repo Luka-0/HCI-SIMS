@@ -76,7 +76,7 @@ namespace InitialProject
 
                                 Guest2View view = new Guest2View(); 
                                 view.Show();
-
+                                this.Close();
                                 break;
                             }
                         case UserType.Guide:
