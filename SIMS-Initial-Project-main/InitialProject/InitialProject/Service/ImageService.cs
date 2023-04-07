@@ -1,4 +1,5 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 using System;
@@ -12,13 +13,21 @@ namespace InitialProject.Service
 {
     public class ImageService
     {
-        public static void Save(List<String> urlsDto, Accommodation accommodation)
+        private readonly IImageRepository iimageRepository;
+
+        public ImageService(IImageRepository iimageRepository)
+        {
+            this.iimageRepository = iimageRepository;
+        }
+
+        //Aleksandra
+        public  void Save(List<String> urlsDto, Accommodation accommodation)
         {
             foreach (string url in urlsDto)
             {
 
                 Image image = new Image(url);
-                ImageRepository.Save(image);
+                iimageRepository.Save(image);
 
                 var db = new UserContext();
                 var tempRecord = db.image.Find(image.Id);
@@ -31,7 +40,7 @@ namespace InitialProject.Service
 
 
         }
-
+        //Pavle
         public List<Image> Save(List<String> urlsDto)
         {
             List<Image> images = new List<Image>();
@@ -39,7 +48,7 @@ namespace InitialProject.Service
             {
 
                 Image image = new Image(url);
-                ImageRepository.Save(image);
+                iimageRepository.Save(image);
                 images.Add(image);
                 // var db = new UserContext();
                 // var tempRecord = db.image.Find(image.Id);
@@ -49,14 +58,14 @@ namespace InitialProject.Service
 
             return images;
         }
-
+        //Pavle
         public void SetTourId(List<Image> images, Tour tour)
         {
             using ( var db = new UserContext())
             {
                 foreach (var image in images)
                 {
-                    ImageRepository.Update(image, tour);
+                    iimageRepository.Update(image, tour);
 
                 }
 

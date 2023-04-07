@@ -1,4 +1,5 @@
 ﻿using InitialProject.Enumeration;
+using InitialProject.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,9 @@ namespace InitialProject.Dto
 
         public List<String> Images { get; set; }
 
-        public NewAccommodationDto(string title, int guestNumber, AccommodationType type, int minReservationDays, int cancellationDeadline, string city, List<String> urls) { 
+        public string OwnerUsername { get; set; }
+
+        public NewAccommodationDto(string title, int guestNumber, AccommodationType type, int minReservationDays, int cancellationDeadline, string city, List<String> urls, string username) { 
            
             Title = title;
             GuestLimit = guestNumber;
@@ -31,6 +34,7 @@ namespace InitialProject.Dto
             CancellationDeadline = cancellationDeadline;
             CityName = city;
             Images = urls;
+            OwnerUsername = username;
         }
 
     }

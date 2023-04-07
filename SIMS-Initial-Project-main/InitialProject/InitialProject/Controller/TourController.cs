@@ -20,7 +20,7 @@ public class TourController
     private TourService tourService = new TourService(new TourRepository());
 
     private LocationService locationService = new (new LocationRepository());
-    private ImageService imageService = new ImageService();
+    //private ImageService imageService = new ImageService();
     private UserService userService = new UserService();
 
     public List<Tour> GetAll()
@@ -77,7 +77,7 @@ public class TourController
     {
         Location location = locationService.GetBy(dto.Country, dto.City);
         List<TourKeyPoint> tourKeyPoints = tourKeyPointService.Save(dto.TourKeyPointNames);
-        List<Image> images = imageService.Save(dto.ImageURLs);
+        //List<Image> images = imageService.Save(dto.ImageURLs);
 
 
         
@@ -87,7 +87,7 @@ public class TourController
         // tourKeyPointService.SetTypes(tourKeyPoints);
         tour.Location = locationService.GetBy(dto.Country, dto.City);
 
-        imageService.SetTourId(images, tour);
+       // imageService.SetTourId(images, tour);
 
     }
 

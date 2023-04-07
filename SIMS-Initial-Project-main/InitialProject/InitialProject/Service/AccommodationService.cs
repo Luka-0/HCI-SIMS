@@ -17,26 +17,33 @@ namespace InitialProject.Service
     class AccommodationService
     {
         private readonly IAccommodationRepository iAccommodationRepository;
-        LocationController LocationController = new();
+        private LocationService locationService;
+        private ImageService imageService;
 
         public AccommodationService(IAccommodationRepository iAccommodationRepository)
         {
             this.iAccommodationRepository = iAccommodationRepository;
+            this.locationService = new(new LocationRepository());
+            this.imageService = new(new ImageRepository());
         }
 
-        public void Save(Accommodation accommodation, string cityName, List<String> images)
+        public void Save(Accommodation accommodation, string cityName, List<String> images, string ownerUsername)
         {
+            //  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserRepository.Get(ownerUsername);
+
             //Saving new accommodation into databse
             this.iAccommodationRepository.Save(accommodation);
 
             var db = new UserContext();
             var tempRecord = db.accommodation.Find(accommodation.Id);   //Try creating method in Accommodation repository to return the same thing
 
-            //Updating foreign key value of new accommodation record
-            tempRecord.Location = LocationController.GetByCity(cityName);
-            
+            //Updating foreign key values of new accommodation record
+            tempRecord.Location = locationService.GetByCity(cityName);
+            tempRecord.Owner = owner;
+
             //saving all images refered to new accommodation.
-            ImageService.Save(images, accommodation);
+            imageService.Save(images, accommodation);
 
             db.SaveChanges();
         }

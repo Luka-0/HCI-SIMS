@@ -21,7 +21,7 @@ namespace InitialProject.Controller
 
             Accommodation accommodation = new Accommodation(record.Title, record.GuestLimit, record.Type, record.MinimumReservationDays, record.CancellationDeadline);
 
-            this.AccommodationService.Save(accommodation, record.CityName, record.Images);
+            this.AccommodationService.Save(accommodation, record.CityName, record.Images, record.OwnerUsername);
 
         }
 

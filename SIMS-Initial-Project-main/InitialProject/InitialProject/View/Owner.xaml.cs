@@ -19,16 +19,19 @@ namespace InitialProject.View
     /// </summary>
     public partial class Owner : Window
     {
-        public Owner()
+        public string Username;
+        public Owner(string username)
         {
             InitializeComponent();
 
             OperationsContainer.Content = new Notifications();
+
+            Username = username;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OperationsContainer.Content = new AccommodationRegister();
+            OperationsContainer.Content = new AccommodationRegister(Username);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

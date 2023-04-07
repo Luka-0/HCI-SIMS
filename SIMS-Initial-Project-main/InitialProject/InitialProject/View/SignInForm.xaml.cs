@@ -89,7 +89,7 @@ namespace InitialProject
                             }
                         case UserType.Owner:
                             { 
-                                Owner owner = new Owner();
+                                Owner owner = new Owner(user.Username);
                                //this.Hide();
                                 owner.Show();
                                 MessageBox.Show("Owner: " + user.Username + " is  logged in.");

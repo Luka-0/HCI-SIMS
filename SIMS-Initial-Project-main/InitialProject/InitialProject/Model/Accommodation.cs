@@ -25,7 +25,11 @@ namespace InitialProject.Model
         public Location? Location { get; set; }
 
         //Images are in Image table
-        public List<Image> images { get; set; }
+        public List<Image> Images { get; set; }
+
+        //changes
+        [ForeignKey("ownerId")]
+        public User? Owner { get; set; }
 
         public Accommodation()
         {
