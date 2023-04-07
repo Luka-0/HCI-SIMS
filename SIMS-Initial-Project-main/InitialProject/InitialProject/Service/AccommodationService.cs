@@ -19,18 +19,21 @@ namespace InitialProject.Service
         private readonly IAccommodationRepository IAccommodationRepository;
         private LocationService LocationService;
         private ImageService ImageService;
+        private UserService UserService;
 
         public AccommodationService(IAccommodationRepository iAccommodationRepository)
         {
             this.IAccommodationRepository = iAccommodationRepository;
             this.LocationService = new(new LocationRepository());
             this.ImageService = new(new ImageRepository());
+            this.UserService = new(new UserRepository());
+
         }
 
         public void Save(Accommodation accommodation, string cityName, List<String> images, string ownerUsername)
         {
-            //  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
-            User owner = UserRepository.Get(ownerUsername);
+            //finished-->  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserService.GetBy(ownerUsername);
 
             //Saving new accommodation into databse
             this.IAccommodationRepository.Save(accommodation);
@@ -50,8 +53,8 @@ namespace InitialProject.Service
 
         public void UpdateBy(string ownerUsername, string accommodationClass) {
 
-            //  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
-            User owner = UserRepository.Get(ownerUsername);
+            //finished--> TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserService.GetBy(ownerUsername);
 
             this.IAccommodationRepository.UpdateBy(owner, accommodationClass);
         }

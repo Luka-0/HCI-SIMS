@@ -14,18 +14,20 @@ namespace InitialProject.Service
     {
         private readonly IAccommodationReviewRepository IAccommodationReviewRepository;
         private GuestReviewService GuestReviewService;
+        private UserService UserService;
 
         public AccommodationReviewService(IAccommodationReviewRepository iaccommodationReviewRepository) {
 
             this.IAccommodationReviewRepository = iaccommodationReviewRepository;
             this.GuestReviewService = new(new GuestReviewRepository());
+            this.UserService = new(new UserRepository()); 
         }
 
         public List<AccommodationReview> GetAllGradedBy(string ownerUsername) {
 
             List<AccommodationReservation> gradedReservations = new List<AccommodationReservation>();
 
-            //ogranici na ulogovanog vlasnika
+            //finished-->ogranici na ulogovanog vlasnika
             gradedReservations = GuestReviewService.GetGradedReservations(ownerUsername);
 
             List< AccommodationReview > accommodationReviews = new List<AccommodationReview>();
@@ -47,8 +49,8 @@ namespace InitialProject.Service
 
         public List<AccommodationReview> GetAllBy(string ownerUsername)
         {
-            //napravi preko servisa
-            User owner = UserRepository.Get(ownerUsername);
+            //finished-->napravi preko servisa
+            User owner = UserService.GetBy(ownerUsername);
 
             return this.IAccommodationReviewRepository.GetAllBy(owner);
         }

@@ -14,13 +14,14 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-
+        public bool SuperTitle { get; set; }
         public UserType Type { get; set; }
         public User()
         {
             Username = "default";
             Password = "default";
             Type = 0;
+            SuperTitle = false;
         }
 
         public User(string username, string password)

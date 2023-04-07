@@ -52,10 +52,11 @@ namespace InitialProject.View
         //azuriranje titule vlasnika
         public void InitializeOwnersTitle() {
 
-            double average = GetGradeSum() / GetGradeCount();
+            double average = Math.Round(GetGradeSum() / GetGradeCount(), 2);
             
             // let limit be a number less or equal to 5 for running tests, not 50
-            if (average >= 9.5 && GetGradeCount() >= 50)
+            //real limit by specification: 50
+            if (average >= 9.5 && GetGradeCount() >= 2)
             {
                 TitlePlaceHolder.Text = "Super-Owner";
                 this.SuperOwner = true;

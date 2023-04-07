@@ -17,22 +17,23 @@ namespace InitialProject.Service
     internal class AccommodationReservationService
     {
         private readonly IAccommodationReservationRepository iAccommodationreservationRepository;
-
+        private UserService UserService;
+        
         public AccommodationReservationService(IAccommodationReservationRepository iAccommodationreservationRepository)
         {
             this.iAccommodationreservationRepository = iAccommodationreservationRepository;
+            this.UserService = new(new UserRepository());
         }
 
         public List<AccommodationReservation> getAllExpiredlBy(DateTime date, string ownerUsername) {
 
             ProcessedDate processedDate = new ProcessedDate();
-            //  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
-            User owner = UserRepository.Get(ownerUsername);
+            //  Finished-->  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserService.GetBy(ownerUsername);
 
             processedDate = SeparateDate(date);
 
             List<AccommodationReservation> expiredReservations = new List<AccommodationReservation>();
-
             expiredReservations = iAccommodationreservationRepository.GetAllExpiredBy(processedDate.Day, processedDate.Month, processedDate.Year, owner);
 
             return expiredReservations;

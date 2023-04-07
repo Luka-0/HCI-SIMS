@@ -14,12 +14,14 @@ namespace InitialProject.Service
     public class GuestReviewService
     {
         private AccommodationReservationService AccommodationReservationService;
+        private UserService UserService;
         private IGuestReviewRepository IGuestReviewRepository;
 
         public GuestReviewService(IGuestReviewRepository iGuestReviewRepository) {
 
             this.IGuestReviewRepository = iGuestReviewRepository;
             this.AccommodationReservationService = new(new AccommodationReservationRepository());
+            this.UserService = new(new UserRepository());
         }
 
         public void Save(GuestReview review, int reservationId) {
@@ -36,8 +38,8 @@ namespace InitialProject.Service
 
         public List<AccommodationReservation> GetGradedReservations(string ownerUsername)
         {
-            //  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
-            User owner = UserRepository.Get(ownerUsername);
+            //  FINISHED-->TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserService.GetBy(ownerUsername);
             return IGuestReviewRepository.GetGradedReservations(owner);
         }
 
@@ -45,8 +47,8 @@ namespace InitialProject.Service
 
             DateTime todaysDate = DateTime.UtcNow.Date;
 
-            //  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
-            User owner = UserRepository.Get(ownerUsername);
+            //  FINISHED-->TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserService.GetBy(ownerUsername);
 
             List<AccommodationReservation> expiredReservations = AccommodationReservationService.getAllExpiredlBy(todaysDate, ownerUsername);
 

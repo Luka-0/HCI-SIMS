@@ -54,6 +54,7 @@ namespace InitialProject.Model
             this.MinimumReservationDays = minimumReservationDays;
             this.CancellationDeadline = cancellationDeadline;
             this.Available = true;
+            this.Class = "B";
         }
         /*
         public Accommodation()
@@ -82,7 +83,7 @@ namespace InitialProject.Model
             this.MinimumReservationDays = accommodation.MinimumReservationDays;
             this.CancellationDeadline = accommodation.CancellationDeadline;
             this.Available = accommodation.Available;
-
+            this.Class = "B";
         }
 
 
