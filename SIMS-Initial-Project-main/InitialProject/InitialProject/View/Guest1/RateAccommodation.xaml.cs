@@ -91,7 +91,7 @@ namespace InitialProject.View
             }
 
             Images.Append(ImagesTextBox.Text);
-            Images.Append(' ');
+            Images.Append('$');
 
             ImagesTextBox.Clear();
         }

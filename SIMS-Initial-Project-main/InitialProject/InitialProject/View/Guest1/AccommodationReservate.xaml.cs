@@ -78,7 +78,7 @@ namespace InitialProject.View
         {
             CountryComboBox.Items.Add("--Chose--");
 
-            List<Location> countries = LocationController.GetAll();
+            List<Location> countries = LocationController.GetAllDistinctByCountry();
             foreach(Location location in countries)
             {
                 CountryComboBox.Items.Add(location.Country.ToString());
@@ -87,52 +87,35 @@ namespace InitialProject.View
             CountryComboBox.SelectedIndex = 0;
         }
 
-        private void InitializeCityComboBox(object sender, MouseEventArgs e) // TODO
+        private void InitializeCityComboBox(object sender, MouseEventArgs e)
         {
-            if (CountryComboBox.SelectedIndex != 0)
-            {
+            if (CountryComboBox.SelectedIndex == 0) return;
 
+            CityComboBox.Items.Clear();
+
+            List<Location> locations = LocationController.GetByCountry(CountryComboBox.SelectedItem.ToString());
+            foreach (Location location in locations)
+            {
+                CityComboBox.Items.Add(location.City);
             }
         }
 
         private void ReservateAccommodation_Click(object sender, RoutedEventArgs e)
         {
-            if (!ValidateSelectedDates())
-            {
-                return;
-            }
-
             int guestNumber = int.Parse(GuestNumberTB.Text);
-            if(guestNumber <= 0)
-            {
-                MessageBox.Show("Please enter a proper guest number");
-                return;
-
-            }
-
             Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
-            if(accommodation == null)
-            {
-                MessageBox.Show("Please select an accommodation");
-                return;
-            }
-
             DateTime startDate = StartingDatePicker.SelectedDate.Value;
             DateTime endDate = EndingDatePicker.SelectedDate.Value;
 
-            if(startDate > endDate)
+            if (IsViolatingAnyUIControl(startDate, endDate, accommodation, guestNumber)) return;
+
+            if (AccommodationReservationController.Reservate(accommodation, User, guestNumber, startDate, endDate))
             {
-                MessageBox.Show("Selected starting date is after ending date, please select valid dates");
+                MessageBox.Show("Reservation was successful");
                 return;
             }
 
-            if (!AccommodationReservationController.Reservate(accommodation, User, guestNumber, startDate, endDate))
-            {
-                MessageBox.Show("Reservation was UNsuccessful");
-                return;
-            }
-            MessageBox.Show("Reservation was successful");
-
+            MessageBox.Show("Reservation was UNsuccessful");
         }
 
         private bool ValidateSelectedDates()
@@ -150,7 +133,36 @@ namespace InitialProject.View
             }
 
             return true;
-        } 
+        }
+
+        private bool IsViolatingAnyUIControl(DateTime startDate, DateTime endDate, Accommodation accommodation, int guestNumber)
+        {
+            if (!ValidateSelectedDates())
+            {
+                return false;
+            }
+
+            if (startDate > endDate)
+            {
+                MessageBox.Show("Selected starting date is after ending date, please select valid dates");
+                return true;
+            }
+
+            if (accommodation == null)
+            {
+                MessageBox.Show("Please select an accommodation");
+                return true;
+            }
+
+            if (guestNumber <= 0)
+            {
+                MessageBox.Show("Please enter a proper guest number");
+                return true;
+
+            }
+
+            return false;
+        }
 
         private void RefreshDataGrid(List<Accommodation> accommodations)
         {
@@ -278,5 +290,6 @@ namespace InitialProject.View
 
             Close();
         }
+
     }
 }

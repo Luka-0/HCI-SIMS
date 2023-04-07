@@ -14,6 +14,7 @@ namespace InitialProject.Interface
         public Location GetBy(string country, string city);
         public Location GetBy(int id);
         public List<Location> GetAll();
+        public List<Location> GetAllDistinctByCountry();
         public void Save(Location location);
 
     }
