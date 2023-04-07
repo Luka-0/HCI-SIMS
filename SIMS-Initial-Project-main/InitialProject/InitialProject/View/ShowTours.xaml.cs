@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,13 +31,16 @@ namespace InitialProject
         public ObservableCollection<TourBasicInfoDto> BasicTours { get; set; }
         public TourController tourController { get; set; } = new TourController();
         private int ColNum{ get; set; } = 0;
+        public User LoggedInGuide { get; set; }
 
-        public ShowTours()
+
+        public ShowTours(User user)
         {
             InitializeComponent();
             this.DataContext = this;
+            LoggedInGuide = user;
             BasicTours = new ObservableCollection<TourBasicInfoDto>();
-            List<TourBasicInfoDto> basicTours= tourController.GetTodays();
+            List<TourBasicInfoDto> basicTours = getUsersTours();
             //List<TourBasicInfoDto> basicTours = tourController.getAllBasicInfo();
             foreach (TourBasicInfoDto tour in basicTours)
             {
@@ -45,11 +49,18 @@ namespace InitialProject
 
 
         }
+
+        private List<TourBasicInfoDto> getUsersTours()
+        {
+            List<TourBasicInfoDto> tours = tourController.GetTodays().Where(t => t.GuideId == LoggedInGuide.Id).ToList();
+
+            return tours;
+        }
         private void generateColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             PropertyDescriptor propertyDescriptor = (PropertyDescriptor)e.PropertyDescriptor;
             e.Column.Header = propertyDescriptor.DisplayName;
-            if (propertyDescriptor.DisplayName == "id")
+            if (propertyDescriptor.DisplayName == "id" || propertyDescriptor.DisplayName == "GuideId")
             {
                 e.Cancel = true;
             }

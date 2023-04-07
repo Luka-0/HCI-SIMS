@@ -103,7 +103,7 @@ namespace InitialProject
 
         private void ViewTodaysTours(object sender, RoutedEventArgs e)
         {
-             ShowTours showTours = new ShowTours();
+             ShowTours showTours = new ShowTours(LoggedInGuide);
              showTours.Show();
              Close(); 
         }

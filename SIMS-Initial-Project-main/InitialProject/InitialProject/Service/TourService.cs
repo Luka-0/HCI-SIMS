@@ -39,8 +39,8 @@ public class TourService
 
         List<TourBasicInfoDto> basicInfoDtos = tours.Select(tour =>
             new TourBasicInfoDto(tour.Id, tour.Name, tour.Location.Country, tour.Location.City,
-                    tour.Language, tour.GuestLimit, tour.StartDateAndTime))
-                    .ToList();
+                    tour.Language,tour.Guide.Id, tour.GuestLimit, tour.StartDateAndTime))
+                        .ToList();
 
 
         return basicInfoDtos;
