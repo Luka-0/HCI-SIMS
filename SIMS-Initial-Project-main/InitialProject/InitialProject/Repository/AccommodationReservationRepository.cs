@@ -13,7 +13,7 @@ namespace InitialProject.Repository
 {
     public class AccommodationReservationRepository : IAccommodationReservationRepository
     {
-        public List<AccommodationReservation> GetAllExpiredBy(int day, int month, int year)
+        public List<AccommodationReservation> GetAllExpiredBy(int day, int month, int year, User owner)
         {
             List<AccommodationReservation> expiredReservations = new List<AccommodationReservation>();
 
@@ -24,19 +24,22 @@ namespace InitialProject.Repository
                                             && (ar.EndingDate.Month == month)
                                             && (ar.EndingDate.Year == year)
                                  )
+                                 .Include(r=>r.Accommodation)
+                                    .ThenInclude(r=>r.Owner).Where(t => t.Accommodation.Owner.Equals(owner))
+                                 .Include(r=>r.Guest)
                                  .ToList();
             }
 
-            foreach (var reservation in expiredReservations)
-            {
+            /* foreach (var reservation in expiredReservations)
+             {
+                 reservation.Accommodation = GetAccommodation(reservation.Id);
+                 reservation.Guest = GetUser(reservation.Id);
+             }*/
 
-                reservation.Accommodation = GetAccommodation(reservation.Id);
-                reservation.Guest = GetUser(reservation.Id);
-            }
             return expiredReservations;
         }
 
-        public Accommodation GetAccommodation(int reservationId)
+       /* public Accommodation GetAccommodation(int reservationId)
         {
 
             Accommodation accommodation = new Accommodation();
@@ -47,9 +50,9 @@ namespace InitialProject.Repository
                                  .Where(a => a.Id == reservationId).Select(a => a.Accommodation).First();
             }
             return accommodation;
-        }
+        }*/
 
-        public User GetUser(int reservationId)
+      /*  public User GetUser(int reservationId)
         {
 
             User guest = new User();
@@ -60,7 +63,7 @@ namespace InitialProject.Repository
                                  .Where(a => a.Id == reservationId).Select(a => a.Guest).First();
             }
             return guest;
-        }
+        }*/
 
         public AccommodationReservation GetBy(int id)
         {

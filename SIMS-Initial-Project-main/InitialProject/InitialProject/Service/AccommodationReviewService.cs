@@ -26,7 +26,7 @@ namespace InitialProject.Service
             List<AccommodationReservation> gradedReservations = new List<AccommodationReservation>();
 
             //ogranici na ulogovanog vlasnika
-            gradedReservations = GuestReviewService.GetGradedReservations();
+            gradedReservations = GuestReviewService.GetGradedReservations(ownerUsername);
 
             List< AccommodationReview > accommodationReviews = new List<AccommodationReview>();
 

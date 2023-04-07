@@ -22,10 +22,10 @@ namespace InitialProject.Controller
         
         }
 
-        public List<ExpiredReservationDto> LoadExpiredReservations()
+        public List<ExpiredReservationDto> LoadExpiredReservations(string ownerUsername)
         {
 
-            List<AccommodationReservation> reservations = guestReviewService.GetNotGradedExpiredReservations();
+            List<AccommodationReservation> reservations = guestReviewService.GetNotGradedExpiredReservations(ownerUsername);
 
             List<ExpiredReservationDto> expiredReservations = new List<ExpiredReservationDto>();
 

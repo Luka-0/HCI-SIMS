@@ -10,7 +10,7 @@ namespace InitialProject.Interface
     public interface IGuestReviewRepository
     {
         public void Save(GuestReview guestReview);
-        public List<AccommodationReservation> GetGradedReservations();
+        public List<AccommodationReservation> GetGradedReservations(User owner);
 
 
     }

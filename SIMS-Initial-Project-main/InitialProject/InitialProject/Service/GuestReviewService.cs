@@ -34,19 +34,23 @@ namespace InitialProject.Service
             db.SaveChanges();
         }
 
-        public List<AccommodationReservation> GetGradedReservations()
+        public List<AccommodationReservation> GetGradedReservations(string ownerUsername)
         {
-
-            return IGuestReviewRepository.GetGradedReservations();
+            //  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserRepository.Get(ownerUsername);
+            return IGuestReviewRepository.GetGradedReservations(owner);
         }
 
-        public List<AccommodationReservation> GetNotGradedExpiredReservations() {
+        public List<AccommodationReservation> GetNotGradedExpiredReservations(string ownerUsername) {
 
             DateTime todaysDate = DateTime.UtcNow.Date;
 
-            List<AccommodationReservation> expiredReservations = AccommodationReservationService.getAllExpiredlBy(todaysDate);
+            //  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserRepository.Get(ownerUsername);
 
-            List<AccommodationReservation> gradedReservations = IGuestReviewRepository.GetGradedReservations();
+            List<AccommodationReservation> expiredReservations = AccommodationReservationService.getAllExpiredlBy(todaysDate, ownerUsername);
+
+            List<AccommodationReservation> gradedReservations = this.GetGradedReservations(ownerUsername);
 
 
             List<AccommodationReservation> nonGradedExpired = new List<AccommodationReservation>();

@@ -24,9 +24,11 @@ namespace InitialProject.View
         {
             InitializeComponent();
 
-            OperationsContainer.Content = new Notifications();
-
             Username = username;
+
+            OperationsContainer.Content = new Notifications(username);
+
+          
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -36,12 +38,12 @@ namespace InitialProject.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            OperationsContainer.Content = new GuestReview();
+            OperationsContainer.Content = new GuestReview(Username);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            OperationsContainer.Content = new Notifications();
+            OperationsContainer.Content = new Notifications(Username);
         }
 
         private void Button3_Click(object sender, RoutedEventArgs e)
