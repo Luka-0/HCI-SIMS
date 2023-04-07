@@ -53,8 +53,9 @@ namespace InitialProject.View
         public void InitializeOwnersTitle() {
 
             double average = GetGradeSum() / GetGradeCount();
-
-            if (average >= 9.5 && GetGradeCount() >= 3)
+            
+            // let limit be a number less or equal to 5 for running tests, not 50
+            if (average >= 9.5 && GetGradeCount() >= 50)
             {
                 TitlePlaceHolder.Text = "Super-Owner";
                 this.SuperOwner = true;
