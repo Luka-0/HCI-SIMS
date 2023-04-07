@@ -28,6 +28,22 @@ namespace InitialProject.Repository
             db.SaveChanges();
 
         }
+        public void UpdateBy(User owner, string accommodationClass)
+        {
+            List<Accommodation> ownerAccommodations = new();
+
+            using (UserContext db = new())
+            {
+                ownerAccommodations = db.accommodation
+                    .Include(t => t.Location)
+                    .Include(t=> t.Owner)
+                    .Where(t => t.Owner.Equals(owner))
+                    .ToList();
+
+                ownerAccommodations.ForEach(t=>t.Class = accommodationClass);
+                db.SaveChanges();
+            }
+        }
 
         public List<Accommodation> GetAll()
         {

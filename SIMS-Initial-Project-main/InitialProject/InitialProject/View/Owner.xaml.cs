@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Controller;
+using InitialProject.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,16 +21,22 @@ namespace InitialProject.View
     /// </summary>
     public partial class Owner : Window
     {
-        public string Username;
+        private string Username;
+
+        private bool SuperOwner;
+
+        private AccommodationController AccommodationController = new AccommodationController();
+
         public Owner(string username)
         {
-            InitializeComponent();
+            this.Username = username;
+            OwnerReviews ownerReviews = new OwnerReviews(username);
+            this.SuperOwner = ownerReviews.SuperOwner;
 
-            Username = username;
+            InitializeComponent();
+            ChangeAccommodationClasses();
 
             OperationsContainer.Content = new Notifications(username);
-
-          
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -49,6 +57,16 @@ namespace InitialProject.View
         private void Button3_Click(object sender, RoutedEventArgs e)
         {
             OperationsContainer.Content = new OwnerReviews(Username);
+        }
+
+        private void ChangeAccommodationClasses() {
+            
+            if (this.SuperOwner) {
+
+                AccommodationController.UpdateBy(Username,"A");
+                return;
+            }
+            AccommodationController.UpdateBy(Username, "B");
         }
     }
 }

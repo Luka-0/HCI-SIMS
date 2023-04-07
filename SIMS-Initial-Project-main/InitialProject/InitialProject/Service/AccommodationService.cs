@@ -48,6 +48,14 @@ namespace InitialProject.Service
             db.SaveChanges();
         }
 
+        public void UpdateBy(string ownerUsername, string accommodationClass) {
+
+            //  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
+            User owner = UserRepository.Get(ownerUsername);
+
+            this.IAccommodationRepository.UpdateBy(owner, accommodationClass);
+        }
+
         // Stajic
         public void Save(Accommodation accommodation)
         {

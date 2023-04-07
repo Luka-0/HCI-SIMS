@@ -31,6 +31,8 @@ namespace InitialProject.Model
         [ForeignKey("ownerId")]
         public User? Owner { get; set; }
 
+        public string Class { get; set; }
+
         public Accommodation()
         {
             this.Title = "";
@@ -39,6 +41,7 @@ namespace InitialProject.Model
             this.Type = AccommodationType.House;
             this.GuestLimit = 1;
             this.Available = true;
+            this.Class = "B";//smestaji super-vlasnika ce biti oznaceni kao smestaji klase A
         }
 
 
