@@ -13,12 +13,12 @@ namespace InitialProject.Controller
     internal class AccommodationReviewController
     {
         private readonly AccommodationReviewService AccommodationReviewService = new(new AccommodationReviewRepository());
-        public List<AccommodationReviewDto> GetAllBy(string ownerUsername)
+        public List<AccommodationReviewDto> GetAllGradedBy(string ownerUsername)
         {
             List<AccommodationReview> reviews = new List<AccommodationReview>();
             List<AccommodationReviewDto> processedReviews = new List<AccommodationReviewDto>();
 
-            reviews = this.AccommodationReviewService.GetAllBy(ownerUsername);
+            reviews = this.AccommodationReviewService.GetAllGradedBy(ownerUsername);
 
             foreach (var review in reviews) {
 

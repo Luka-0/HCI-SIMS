@@ -13,13 +13,37 @@ namespace InitialProject.Service
     public  class AccommodationReviewService
     {
         private readonly IAccommodationReviewRepository IAccommodationReviewRepository;
-        private AccommodationReservationService AccommodationReservationService;
+        private GuestReviewService GuestReviewService;
 
         public AccommodationReviewService(IAccommodationReviewRepository iaccommodationReviewRepository) {
 
             this.IAccommodationReviewRepository = iaccommodationReviewRepository;
-            this.AccommodationReservationService = new(new AccommodationReservationRepository());
+            this.GuestReviewService = new(new GuestReviewRepository());
         }
+
+        public List<AccommodationReview> GetAllGradedBy(string ownerUsername) {
+
+            List<AccommodationReservation> gradedReservations = new List<AccommodationReservation>();
+
+            //ogranici na ulogovanog vlasnika
+            gradedReservations = GuestReviewService.GetGradedReservations();
+
+            List< AccommodationReview > accommodationReviews = new List<AccommodationReview>();
+
+            foreach (var review in GetAllBy(ownerUsername)) {
+
+                foreach (var reservation in gradedReservations) {
+
+                    if (reservation.Id == review.Reservation.Id) {
+
+                        accommodationReviews.Add(review);
+                    }
+                }   
+            }
+
+            return accommodationReviews;
+        }
+
 
         public List<AccommodationReview> GetAllBy(string ownerUsername)
         {

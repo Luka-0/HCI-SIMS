@@ -32,7 +32,7 @@ namespace InitialProject.View
 
             List<AccommodationReviewDto> accommodationReviews = new List<AccommodationReviewDto>();
 
-            accommodationReviews = AccommodationReviewController.GetAllBy(ownerUsername);
+            accommodationReviews = AccommodationReviewController.GetAllGradedBy(ownerUsername);
             reviews.ItemsSource = accommodationReviews;
         }
     }
