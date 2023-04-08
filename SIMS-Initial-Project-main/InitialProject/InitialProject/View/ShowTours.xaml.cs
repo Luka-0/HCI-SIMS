@@ -18,7 +18,9 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using InitialProject.Controller;
 using InitialProject.Dto;
+using InitialProject.Enumeration;
 using InitialProject.Model;
+using InitialProject.View;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace InitialProject
@@ -76,13 +78,23 @@ namespace InitialProject
         
             TourBasicInfoDto selectedTour= (TourBasicInfoDto)dataGridTours.SelectedItem;
 
+            tourController.SetStatus(selectedTour.id, TourStatus.Started);
             tourKeyPointController.StartTour(selectedTour.id);
             LiveTour liveTour= new LiveTour(selectedTour.id, LoggedInGuide);
 
             liveTour.Show();
             Close();
         }
-       
+
+        private void ShowHistory(object sender, RoutedEventArgs e)
+        {
+            GuideHistory guideHistory = new GuideHistory(LoggedInGuide);
+            guideHistory.Show();
+
+        }
+
+
+
 
     }
 }

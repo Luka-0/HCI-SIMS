@@ -126,12 +126,12 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public void Start(int id)
+        public void SetStatus(int id, TourStatus status)
         {
             using (var dbContext= new UserContext())
             {
                 var tour = dbContext.tour.Find(id);
-                tour.Status = TourStatus.Started;
+                tour.Status = status;
                 dbContext.SaveChanges();
             }
         }

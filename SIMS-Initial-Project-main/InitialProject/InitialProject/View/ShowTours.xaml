@@ -11,7 +11,9 @@
                   SelectionMode="Single" IsReadOnly="True" AutoGeneratingColumn="generateColumns" HorizontalAlignment="Left" 
                   Margin="10,47,0,0" VerticalAlignment="Top"/>
 
-        <Button  Click="StartTour"  Content="Zapocni" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button  Click="StartTour"  Content="Start" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button  Click="ShowHistory"  Content="My previous tours" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+
 
     </Grid>
 </Window>

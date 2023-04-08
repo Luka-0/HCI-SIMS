@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Controller;
 using InitialProject.Dto;
+using InitialProject.Enumeration;
 using InitialProject.Model;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -99,6 +100,7 @@ namespace InitialProject
         }
         private void EndTour()
         {
+            tourController.SetStatus(TourId, TourStatus.Finished);
             ShowTours showTours = new ShowTours(LoggedInGuide);
             showTours.Show();
             Close();

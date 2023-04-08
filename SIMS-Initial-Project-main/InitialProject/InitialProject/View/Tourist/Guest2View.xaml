@@ -15,7 +15,7 @@
                 <DataGridTextColumn Header="GuestLimit" Binding="{Binding GuestLimit}"/>
                 <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
                 <DataGridTextColumn Header="Duration" Binding="{Binding Duration}"/>
-                <DataGridTextColumn Header="Start Date And Time" Binding="{Binding StartDateAndTime}"/>
+                <DataGridTextColumn Header="SetStatus Date And Time" Binding="{Binding StartDateAndTime}"/>
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}"/>
             </DataGrid.Columns>
         </DataGrid>

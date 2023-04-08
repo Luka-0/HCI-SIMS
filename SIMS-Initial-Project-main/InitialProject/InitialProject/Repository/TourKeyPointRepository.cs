@@ -94,8 +94,8 @@ public class TourKeyPointRepository:ITourKeyPointRepository
     public void StartTour(int id)
     {
         using (var db = new UserContext()){
-            var tempRecord = db.tourKeyPoints.Where(t => t.Tour.Id == id && t.Type == TourKeyPointType.Start)
-                .FirstOrDefault();
+            var tempRecord = db.tourKeyPoints
+                .FirstOrDefault(t => t.Tour.Id == id && t.Type == TourKeyPointType.Start);
             tempRecord.Reached = true;
             db.SaveChanges();
         }

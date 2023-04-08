@@ -139,9 +139,20 @@ public class TourService
         return activeToursByGuest;
     }
 
-    public void Start(int id)
+    public void SetStatus(int id, TourStatus status)
     {
-        _tourRepository.Start(id);
+        _tourRepository.SetStatus(id, status);
+    }
+
+    public List<TourBasicInfoDto> GetFinished(int guideId)
+    {
+        List<TourBasicInfoDto> tours = new List<TourBasicInfoDto>();
+
+        tours = Get();
+
+        List<TourBasicInfoDto> todayTours = tours.Where(t => t.Status == TourStatus.Finished).ToList();
+
+        return todayTours;
     }
 
 }

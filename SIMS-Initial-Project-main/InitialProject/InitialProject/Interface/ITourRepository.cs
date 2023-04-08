@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Enumeration;
 
 namespace InitialProject.Interface
 {
@@ -16,7 +17,8 @@ namespace InitialProject.Interface
         public List<Tour> GetByDuration(TimeSpan duration);
         public List<Tour> GetByLanguage(string language);
         public List<Tour> GetByGuestLimit(int guestLimit);
-        public void Start(int id);
+        public void SetStatus(int id, TourStatus status);
+
 
     }
 }
