@@ -97,6 +97,25 @@ namespace InitialProject.Service
 
         }
 
+        public List<StartEndDateDto> FindOtherDates(DateTime endDate, Accommodation accommodation, int daysToStay)
+        {
+            List<StartEndDateDto> dates = new();
+
+            for(int i=1; ; ++i)
+            {
+                DateTime newStartDate = endDate.AddDays(i);
+                DateTime newEndDate = newStartDate.AddDays(daysToStay);
+
+                if(IsAvailable(accommodation.Id, newStartDate, newEndDate))
+                {
+                    StartEndDateDto tmp = new(newStartDate, newEndDate);
+                    dates.Add(tmp);
+                    return dates;
+                }
+            }
+        }
+
+
         public bool CreateReservation(Accommodation accommodation, DateTime startingDate, DateTime endingDate, int guestNumber, User user)
         {
 

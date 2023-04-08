@@ -125,8 +125,9 @@ namespace InitialProject.View
             DatesToChose = AccommodationReservationController.GetAvailableDates(accommodation, startDate, endDate, daysToStay);
             if (DatesToChose == null)
             {
-                MessageBox.Show("Accommodation is full during those days");
-                return;
+                MessageBox.Show("Accommodation is full during those days but we can reccomend other option");
+
+                DatesToChose = AccommodationReservationController.FindOtherDates(endDate, accommodation, daysToStay);
             }
 
             InitializeDatesComboBox();
@@ -135,11 +136,18 @@ namespace InitialProject.View
         private void CreateReservation_Click(object sender, RoutedEventArgs e)
         {
             int guestNumber = int.Parse(GuestNumberTB.Text);
+            int daysToStay = int.Parse(ReservatingDaysTB.Text);
             Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
             DateTime startDate = DatesToChose[OfferedDatesCB.SelectedIndex].StartingDate;
             DateTime endDate = DatesToChose[OfferedDatesCB.SelectedIndex].EndingDate;
 
             if (IsViolatingAnyUIControl(startDate, endDate, accommodation, guestNumber)) return;
+
+            if (daysToStay < accommodation.MinimumReservationDays)
+            {
+                MessageBox.Show("Entered days to stay are bellow the threshold for selected accommodation");
+                return;
+            }
 
             if (AccommodationReservationController.CreateReservation(accommodation, startDate, endDate, guestNumber, User))
             {
