@@ -2,6 +2,7 @@
 using InitialProject.Model;
 using InitialProject.Repository;
 using System;
+using System.Collections.Generic;
 
 namespace InitialProject.Service;
 
@@ -31,6 +32,11 @@ public class UserService
     public User GetBy(String username) {
 
         return this.IUserRepository.GetBy(username);
+    }
+
+    public List<User> GetOwners(){
+
+        return this.IUserRepository.GetOwners();
     }
 
 

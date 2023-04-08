@@ -12,7 +12,7 @@ namespace InitialProject.Interface
     interface IAccommodationRepository
     {
         public void Save(Accommodation accommodation);
-        public void UpdateBy(User owner, string accommodationClass);
+        public void UpdateClassBy(User owner, string accommodationClass);
         public List<Accommodation> GetAll();
         public List<Accommodation> GetBy(string name);
         public List<Accommodation> GetBy(Location location);

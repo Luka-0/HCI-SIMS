@@ -51,12 +51,18 @@ namespace InitialProject.Service
             db.SaveChanges();
         }
 
-        public void UpdateBy(string ownerUsername, string accommodationClass) {
+        public void UpdateClassBy(string ownerUsername, bool superOwner) {
 
             //finished--> TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
             User owner = UserService.GetBy(ownerUsername);
+            
+            string accommodationClass = "B";
 
-            this.IAccommodationRepository.UpdateBy(owner, accommodationClass);
+            if (superOwner) {
+                accommodationClass = "A";
+            }
+
+            this.IAccommodationRepository.UpdateClassBy(owner, accommodationClass);
         }
 
         // Stajic

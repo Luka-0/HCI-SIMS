@@ -27,43 +27,48 @@ namespace InitialProject.View
         
         private string OwnerUsername;
 
-        public bool SuperOwner;
+        //recenzije koje vlasnik moze da vidi
+        private List<AccommodationReviewDto> visibleOwnerReviews;
 
-        private List<AccommodationReviewDto> accommodationReviews;
+        //sve recenzije koje vlasnik ima
+        private List<AccommodationReviewDto> ownerReviews;
 
         public OwnerReviews(string ownerUsername)
         {
-            this.SuperOwner = false;
+           // this.SuperOwner = false;
             this.OwnerUsername = ownerUsername;
-            this.accommodationReviews = new List<AccommodationReviewDto>();
-            
+            this.visibleOwnerReviews = new List<AccommodationReviewDto>();
+            this.ownerReviews = new List<AccommodationReviewDto>();
+
             InitializeComponent();
-            InitializeOwnerReviews();
+            InitializeReviewReports();
             InitializeOwnersTitle();
         }
 
-        public void InitializeOwnerReviews()
+        public void InitializeReviewReports()
         {
-            this.accommodationReviews = AccommodationReviewController.GetAllGradedBy(OwnerUsername);
-            reviews.ItemsSource = accommodationReviews;
+            this.visibleOwnerReviews = AccommodationReviewController.GetAllGradedBy(OwnerUsername);
+            reviews.ItemsSource = visibleOwnerReviews;
+
+            this.ownerReviews = AccommodationReviewController.GetAllBy(OwnerUsername);
+
         }
 
-
-        //azuriranje titule vlasnika
+        //azuriranje titule vlasnika na frontu
         public void InitializeOwnersTitle() {
 
             double average = Math.Round(GetGradeSum() / GetGradeCount(), 2);
             
-            // let limit be a number less or equal to 5 for running tests, not 50
-            //real limit by specification: 50
-            if (average >= 9.5 && GetGradeCount() >= 2)
+            // let limit 4, for running tests
+            // real limit by specification: 50
+            if (average >= 9.5 && GetGradeCount() >= 50)
             {
                 TitlePlaceHolder.Text = "Super-Owner";
-                this.SuperOwner = true;
+                AccommodationReviewController.DeclareOwner(OwnerUsername);
             }
             else { 
                 TitlePlaceHolder.Text = "Owner";
-                this.SuperOwner = false;
+                AccommodationReviewController.DeclareOwner(OwnerUsername);
             }
 
             AverageGradePlaceHolder.Text = average.ToString();
@@ -77,7 +82,7 @@ namespace InitialProject.View
 
             double gradeSum = 0;
 
-            foreach (var review in accommodationReviews)
+            foreach (var review in ownerReviews)
             {
                 gradeSum += (review.Correctness + review.Tidiness);
             }
@@ -88,7 +93,7 @@ namespace InitialProject.View
         {
             double gradeCount = 0;
 
-            foreach (var review in accommodationReviews)
+            foreach (var review in ownerReviews)
             {
                 gradeCount++;
             }

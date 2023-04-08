@@ -15,17 +15,44 @@ namespace InitialProject.Controller
         private readonly AccommodationReviewService AccommodationReviewService = new(new AccommodationReviewRepository());
         public List<AccommodationReviewDto> GetAllGradedBy(string ownerUsername)
         {
-            List<AccommodationReview> reviews = new List<AccommodationReview>();
-            List<AccommodationReviewDto> processedReviews = new List<AccommodationReviewDto>();
+            //recenzije koje vlasnik moze da vidi - recenzije od gostiju koje je vlasnik ocenio
+            List<AccommodationReviewDto> visibleReviews = new List<AccommodationReviewDto>();
 
-            reviews = this.AccommodationReviewService.GetAllGradedBy(ownerUsername);
+            foreach (var review in AccommodationReviewService.GetAllGradedBy(ownerUsername))
+            {
 
-            foreach (var review in reviews) {
-
-                processedReviews.Add(new AccommodationReviewDto(review));
+                visibleReviews.Add(new AccommodationReviewDto(review));
             }
 
-            return processedReviews;
+            return visibleReviews;
+        }
+
+        public List<AccommodationReviewDto> GetAllBy(string ownerUsername)
+        {
+
+            //sve recenzije napravljene od strane gostiju za vlasnika i njegove smestaje
+            List<AccommodationReviewDto> reviews = new List<AccommodationReviewDto>();
+
+            foreach (var review in AccommodationReviewService.GetAllBy(ownerUsername))
+            {
+                reviews.Add(new AccommodationReviewDto(review));
+
+            }
+
+            return reviews;
+        }
+
+        public void DeclareOwners()
+        {
+            this.AccommodationReviewService.DeclareOwners();
+        }
+
+        public void DeclareOwner(string ownerUsername) {
+
+            List<AccommodationReview> ownerReviews = new List<AccommodationReview>();
+            ownerReviews = AccommodationReviewService.GetAllBy(ownerUsername);
+
+            this.AccommodationReviewService.DeclareOwner(ownerReviews, ownerUsername);
         }
 
         public void Save(AccommodationReview accommodationReview)
