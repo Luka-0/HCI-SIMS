@@ -50,12 +50,5 @@ namespace InitialProject.View
             Close();
         }
 
-        private void EditAccommodation_Click(object sender, RoutedEventArgs e)
-        {
-            EditReservation editReservation = new(User);
-            editReservation.Show();
-
-            Close();
-        }
     }
 }

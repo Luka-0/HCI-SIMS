@@ -6,17 +6,21 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="AccommodationReservate" Height="560" Width="800">
-    <Grid Margin="10,0,0,-30">
-        <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding accommodationsToShow}" Height="Auto" Width="Auto" Margin="324,0,10,0" VerticalAlignment="Top" 
+    <Grid Margin="10,0,0,-6">
+        <ScrollViewer Margin="0,0,0,11">
+            <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding AccommodationsToShow}" Height="Auto" Width="Auto" Margin="324,0,10,0" VerticalAlignment="Top" 
                   AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
-                <DataGridTextColumn Header="Guest Limit" Binding="{Binding GuestLimit}"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
-                <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}"/>
-                <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+                    <DataGridTextColumn Header="Class" Binding="{Binding Class}"/>
+                    <DataGridTextColumn Header="Guest Limit" Binding="{Binding GuestLimit}"/>
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                    <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}"/>
+                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+
         <Grid Margin="0,0,483,272" DataContext="{Binding ElementName=AccommodationsGrid, Path=SelectedItem}">
             <Border BorderBrush="Black" BorderThickness="1" Height="262" VerticalAlignment="Top" Margin="0,0,-11,0" />
             <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,231,0,0" Click="GoBack_Click"/>
@@ -32,6 +36,7 @@
             <Label Content="Days to stay:" HorizontalAlignment="Left" Margin="27,99,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.574,0.618" Width="81" Height="32"/>
             <TextBox x:Name="ReservatingDaysTB" HorizontalAlignment="Left" Margin="154,107,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" TextAlignment="Center" Width="50"/>
         </Grid>
+        
         <Grid Margin="0,263,483,0" >
             <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,-11,0"/>
             <ComboBox x:Name="FilterComboBox" HorizontalAlignment="Left" Margin="154,20,0,0" VerticalAlignment="Top" Width="120"/>

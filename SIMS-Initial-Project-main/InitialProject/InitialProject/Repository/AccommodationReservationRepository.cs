@@ -115,5 +115,13 @@ namespace InitialProject.Repository
             return reservations;
 
         }
+
+        public void Delete(AccommodationReservation accommodationReservation)
+        {
+            using var db = new UserContext();
+
+            db.accommodationReservation.Remove(accommodationReservation);
+            db.SaveChanges();
+        }
     }
 }

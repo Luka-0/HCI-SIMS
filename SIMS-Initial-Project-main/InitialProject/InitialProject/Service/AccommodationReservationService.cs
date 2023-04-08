@@ -73,7 +73,10 @@ namespace InitialProject.Service
             }
 
             List<StartEndDateDto> datesToChose = new();
-            int iterations = endingDate.Day - startingDate.Day + 1 - daysToStay;
+
+            TimeSpan difference = endingDate - startingDate;
+            int iterations = (int)difference.TotalDays - daysToStay + 1;
+
             for(int i=0; i<iterations; ++i)
             {
                 DateTime tmpStartingDate = startingDate.AddDays(i);
@@ -104,7 +107,7 @@ namespace InitialProject.Service
         {
             List<StartEndDateDto> dates = new();
 
-            for(int i=1; ; ++i)
+            for(int i=0; ; ++i)
             {
                 DateTime newStartDate = endDate.AddDays(i);
                 DateTime newEndDate = newStartDate.AddDays(daysToStay);
@@ -182,5 +185,25 @@ namespace InitialProject.Service
             return IAccommodationreservationRepository.GetBy(user);
         }
 
+        public bool Delete(AccommodationReservation accommodationReservation)
+        {
+            if (accommodationReservation.Accommodation.CancellationDeadline < 1)
+            {
+                if(DateTime.Now.AddDays(1)  > accommodationReservation.BegginingDate)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (DateTime.Now.AddDays(accommodationReservation.Accommodation.CancellationDeadline) > accommodationReservation.BegginingDate)
+                {
+                    return false;
+                }
+            }
+
+            IAccommodationreservationRepository.Delete(accommodationReservation);
+            return true;
+        }
     }
 }

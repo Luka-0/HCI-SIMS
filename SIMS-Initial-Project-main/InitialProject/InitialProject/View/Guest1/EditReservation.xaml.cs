@@ -21,9 +21,9 @@ namespace InitialProject.View
 {
     public partial class EditReservation : Window
     {
-        private AccommodationReservationController AccommodationReservationController = new();
+        private readonly AccommodationReservationController AccommodationReservationController = new();
 
-        public ObservableCollection<AccommodationReservation> reservationsToShow { get; set; }
+        public ObservableCollection<AccommodationReservation> ReservationsToShow { get; set; }
 
         private User User { get; set; }
 
@@ -45,12 +45,44 @@ namespace InitialProject.View
 
         private void RefreshDataGrid(List<AccommodationReservation> accommodationReservations)
         {
-            reservationsToShow = new ObservableCollection<AccommodationReservation>();
-            ReservationsGrid.ItemsSource = reservationsToShow;
+            ReservationsToShow = new ObservableCollection<AccommodationReservation>();
+            ReservationsGrid.ItemsSource = ReservationsToShow;
             foreach (AccommodationReservation a in accommodationReservations)
             {
-                reservationsToShow.Add(a);
+                ReservationsToShow.Add(a);
             }
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            AccommodationReservation accommodationReservation = (AccommodationReservation)ReservationsGrid.SelectedItem;
+
+            if (IsViolatingAnyUIControl(accommodationReservation)) return;
+
+            if (!AccommodationReservationController.Delete(accommodationReservation))
+                MessageBox.Show("You can't cancel that reservation");
+
+            RefreshDataGrid(AccommodationReservationController.GetBy(User));
+        }
+
+        private bool IsViolatingAnyUIControl(AccommodationReservation accommodationReservation)
+        {
+            if(accommodationReservation == null)
+            {
+                MessageBox.Show("Please select a reservation you want to cancel");
+                return true;
+            }
+
+
+            return false;
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            Guest1 guest1 = new(User);
+            guest1.Show();
+
+            Close();
         }
     }
 }
