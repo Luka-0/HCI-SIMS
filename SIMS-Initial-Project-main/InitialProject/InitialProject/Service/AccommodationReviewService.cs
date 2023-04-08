@@ -10,37 +10,42 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
-    public  class AccommodationReviewService
+    public class AccommodationReviewService
     {
         private readonly IAccommodationReviewRepository IAccommodationReviewRepository;
         private GuestReviewService GuestReviewService;
         private UserService UserService;
 
-        public AccommodationReviewService(IAccommodationReviewRepository iaccommodationReviewRepository) {
+        public AccommodationReviewService(IAccommodationReviewRepository iaccommodationReviewRepository)
+        {
 
             this.IAccommodationReviewRepository = iaccommodationReviewRepository;
             this.GuestReviewService = new(new GuestReviewRepository());
-            this.UserService = new(new UserRepository()); 
+            this.UserService = new(new UserRepository());
         }
 
-        public List<AccommodationReview> GetAllGradedBy(string ownerUsername) {
+        public List<AccommodationReview> GetAllGradedBy(string ownerUsername)
+        {
 
             List<AccommodationReservation> gradedReservations = new List<AccommodationReservation>();
 
             //finished-->ogranici na ulogovanog vlasnika
             gradedReservations = GuestReviewService.GetGradedReservations(ownerUsername);
 
-            List< AccommodationReview > accommodationReviews = new List<AccommodationReview>();
+            List<AccommodationReview> accommodationReviews = new List<AccommodationReview>();
 
-            foreach (var review in GetAllBy(ownerUsername)) {
+            foreach (var review in GetAllBy(ownerUsername))
+            {
 
-                foreach (var reservation in gradedReservations) {
+                foreach (var reservation in gradedReservations)
+                {
 
-                    if (reservation.Id == review.Reservation.Id) {
+                    if (reservation.Id == review.Reservation.Id)
+                    {
 
                         accommodationReviews.Add(review);
                     }
-                }   
+                }
             }
 
             return accommodationReviews;
@@ -54,14 +59,6 @@ namespace InitialProject.Service
 
             return this.IAccommodationReviewRepository.GetAllBy(owner);
         }
-    internal class AccommodationReviewService
-    {
-        private readonly IAccommodationReviewRepository IAccommodationReviewRepository;
-
-        public AccommodationReviewService(IAccommodationReviewRepository iAccommodationReviewRepository)
-        {
-            IAccommodationReviewRepository = iAccommodationReviewRepository;
-        }
 
         public void Save(AccommodationReview accommodationReview)
         {
@@ -72,6 +69,5 @@ namespace InitialProject.Service
         {
             return IAccommodationReviewRepository.GetBy(user);
         }
-
     }
 }

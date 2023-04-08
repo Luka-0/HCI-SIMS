@@ -11,27 +11,26 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    internal class AccommodationReviewRepository : IAccommodationReviewRepository
+    public class AccommodationReviewRepository : IAccommodationReviewRepository
     {
+        public AccommodationReviewRepository() { }
+
         public List<AccommodationReview> GetAllBy(User owner)
         {
-            List<AccommodationReview> accommodationReviews = new List<AccommodationReview> ();
+            List<AccommodationReview> accommodationReviews = new List<AccommodationReview>();
 
             using (UserContext db = new())
             {
                 accommodationReviews = db.accommodationReview.
                     Include(t => t.Reservation)
-                        .ThenInclude(t=> t.Accommodation)
-                            .ThenInclude(t=>t.Owner).Where(t => t.Reservation.Accommodation.Owner.Equals(owner))
-                    .Include(t=>t.Reservation)
-                        .ThenInclude(t=>t.Guest).ToList();
+                        .ThenInclude(t => t.Accommodation)
+                            .ThenInclude(t => t.Owner).Where(t => t.Reservation.Accommodation.Owner.Equals(owner))
+                    .Include(t => t.Reservation)
+                        .ThenInclude(t => t.Guest).ToList();
             }
 
             return accommodationReviews;
         }
-    public class AccommodationReviewRepository : IAccommodationReviewRepository
-    {
-        public AccommodationReviewRepository() { }
 
         public void Save(AccommodationReview accommodationReview)
         {

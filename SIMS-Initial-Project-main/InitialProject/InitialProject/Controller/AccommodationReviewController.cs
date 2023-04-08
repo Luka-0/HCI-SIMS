@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Controller
 {
-    internal class AccommodationReviewController
+    public class AccommodationReviewController
     {
         private readonly AccommodationReviewService AccommodationReviewService = new(new AccommodationReviewRepository());
         public List<AccommodationReviewDto> GetAllGradedBy(string ownerUsername)
@@ -27,7 +27,6 @@ namespace InitialProject.Controller
 
             return processedReviews;
         }
-        private readonly AccommodationReviewService AccommodationReviewService = new (new AccommodationReviewRepository());
 
         public void Save(AccommodationReview accommodationReview)
         {

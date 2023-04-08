@@ -17,12 +17,12 @@ namespace InitialProject.Service
 {
     internal class AccommodationReservationService
     {
-        private readonly IAccommodationReservationRepository iAccommodationreservationRepository;
+        private readonly IAccommodationReservationRepository IAccommodationreservationRepository;
         private UserService UserService;
         
         public AccommodationReservationService(IAccommodationReservationRepository iAccommodationreservationRepository)
         {
-            this.iAccommodationreservationRepository = iAccommodationreservationRepository;
+            this.IAccommodationreservationRepository = iAccommodationreservationRepository;
             this.UserService = new(new UserRepository());
         }
 
@@ -35,7 +35,7 @@ namespace InitialProject.Service
             processedDate = SeparateDate(date);
 
             List<AccommodationReservation> expiredReservations = new List<AccommodationReservation>();
-            expiredReservations = iAccommodationreservationRepository.GetAllExpiredBy(processedDate.Day, processedDate.Month, processedDate.Year, owner);
+            expiredReservations = IAccommodationreservationRepository.GetAllExpiredBy(processedDate.Day, processedDate.Month, processedDate.Year, owner);
 
             return expiredReservations;
             
