@@ -19,6 +19,7 @@ namespace InitialProject
     {
 
         private readonly UserController UserController;
+        private readonly AccommodationReviewController AccommodationReviewController;
 
         private string _username;
         public string Username
@@ -46,6 +47,7 @@ namespace InitialProject
             InitializeComponent();
             DataContext = this;
             UserController = new UserController();
+            AccommodationReviewController = new AccommodationReviewController();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -103,6 +105,14 @@ namespace InitialProject
                             MessageBox.Show("Unexpected user type!");
                             break;
                     }
+
+                    //bez obzira na tip ulogovanog korisnika
+                    //na osnovu poslednjih podataka iz tabele svih recenzija smestaja i vlasnika
+                    //se azuriraju klase smestaja za svakog vlasnika, kao i njegova titula
+                    //kako bi gosti koji pregledaju smestaje imali ispravne podatke o  smestajima
+                    //tj da te informacije ne zavise od toga da li je vlasnik prethodno bio ulogovan
+                    AccommodationReviewController.DeclareOwners();
+
 
                 }
                 else

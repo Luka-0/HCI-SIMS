@@ -13,8 +13,7 @@ namespace InitialProject.Interface
         public void UpdateStatusBy(String username, bool titleFlag);
         public Boolean Add(User user);
         public User GetBy(int id);
-   
-
+        public List<User> GetOwners();
 
         }
 }

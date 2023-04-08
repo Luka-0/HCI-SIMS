@@ -28,7 +28,7 @@ namespace InitialProject.Repository
             db.SaveChanges();
 
         }
-        public void UpdateBy(User owner, string accommodationClass)
+        public void UpdateClassBy(User owner, string accommodationClass)
         {
             List<Accommodation> ownerAccommodations = new();
 

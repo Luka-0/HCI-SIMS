@@ -57,6 +57,21 @@ namespace InitialProject.Repository
 
         }
 
+        public List<User> GetOwners() {
+
+            List<User> owners = new List<User>();
+
+            using var db = new UserContext();
+            foreach (User user in db.users)
+            {
+                if (user.Type == UserType.Owner)
+                {
+                    owners.Add(user);
+                }
+            }
+            return owners;
+        }
+
     }
 
 }
