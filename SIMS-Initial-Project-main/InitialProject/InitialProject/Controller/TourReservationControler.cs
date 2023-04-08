@@ -51,5 +51,15 @@ namespace InitialProject.Controller
             return tourReservationService.CountTourReservations(tour);
         }
 
+        public List<TourReservation> GetByTour(int id)
+        {
+            return tourReservationService.GetByTour(id);
+        }
+
+        public void SetArrivalKeyPoint(TourKeyPoint keyPoint, int reservationId)     //possibly not clean
+        {
+            tourReservationService.SetArrivalKeyPoint(keyPoint, reservationId);
+        }
+
     }
 }

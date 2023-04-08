@@ -25,11 +25,15 @@ namespace InitialProject.Model
         [Required]
         public User? BookingGuest { get; set; }
 
+        [ForeignKey("TourKeyPointId")]
+        public TourKeyPoint? ArrivalPoint { get; set; }
+
         public TourReservation(Tour tour, int guestNumber, User bookingGuest)
         {
             Tour = tour;
             GuestNumber = guestNumber;
             BookingGuest = bookingGuest;
+            ArrivalPoint = null;
         }
 
         public override string ToString()

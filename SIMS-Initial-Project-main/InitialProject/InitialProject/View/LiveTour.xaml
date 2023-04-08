@@ -46,5 +46,20 @@
         </DataGrid>
 
         <Button Grid.Column="0" Content="End tour" HorizontalAlignment="Center" VerticalAlignment="Center" Click="EndFromButton" />
+
+        <DataGrid Grid.Column="2"   ItemsSource="{Binding Reservations}" AutoGenerateColumns="False" Margin="0,48,0,0" VerticalAlignment="Top"  CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Arrived">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="False" Checked="SetArrivalKeyPoint" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="BookingGuest.Username" IsReadOnly="True" Binding="{Binding BookingGuest.Username}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+
     </Grid>
 </Window>
