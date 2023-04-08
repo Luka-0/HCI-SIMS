@@ -4,12 +4,13 @@ using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InitialProject.Controller
 {
-    internal class TourKeyPointController
+    public class TourKeyPointController
     {
         private TourKeyPointService tourKeyPointService = new TourKeyPointService(new TourKeyPointRepository());
 
@@ -30,7 +31,7 @@ namespace InitialProject.Controller
 
         public List<TourKeyPoint> Save(List<string> keyPointNames)
         {
-           return tourKeyPointService.Save(keyPointNames);
+            return tourKeyPointService.Save(keyPointNames);
         }
 
         public void Save(TourKeyPoint tourKeyPoint, TourKeyPointType type)
@@ -45,7 +46,7 @@ namespace InitialProject.Controller
 
         public void SetTypes(List<TourKeyPoint> tourKeyPoints)
         {
-            tourKeyPointService.SetTypes(tourKeyPoints);    
+            tourKeyPointService.SetTypes(tourKeyPoints);
         }
 
         public List<TourKeyPoint> GetByGuestAndActiveTour(User user)
@@ -57,5 +58,19 @@ namespace InitialProject.Controller
             return keyPoints;
         }
 
+        public void StartTour(int id)
+        {
+
+            tourKeyPointService.StartTour(id);
+        }
+
+        public void Reach(int id, TourKeyPointType type)
+        {
+            if (type != TourKeyPointType.Start)
+            {
+                tourKeyPointService.Reach(id);
+            }
+
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using InitialProject.Contexts;
 using InitialProject.Dto;
 using InitialProject.Interface;
@@ -27,6 +28,12 @@ public class TourController
     {
         return tourService.GetAll();
     }
+
+    public Tour GetById(int id)
+    {
+        return tourService.GetById(id);
+    }
+
 
     public List<Tour> GetByLocation(Location location)
     {
@@ -83,9 +90,11 @@ public class TourController
         
         tour.Guide = dto.Guide;
         //int tourId = tourService.get(tour.Id);
+        tour.Location = locationService.GetBy(dto.Country, dto.City);
+
         tourKeyPointService.Update(tourKeyPoints, tour);
         // tourKeyPointService.SetTypes(tourKeyPoints);
-        tour.Location = locationService.GetBy(dto.Country, dto.City);
+        
 
        // imageService.SetTourId(images, tour);
 
@@ -96,7 +105,7 @@ public class TourController
     {
         Tour newTour= Create(dto);
         Tour tour = tourService.Save(newTour);
-        UpdateTourProperties(tour, dto);     //Mzd mogu da pozivam ove fje na kraju svake prethodne i onda u ovoj imam samo 1 poziv?
+        UpdateTourProperties(tour, dto);     
 
     }
 
@@ -109,5 +118,6 @@ public class TourController
         return tourService.GetTodays();
     }
 
+   
 }
 

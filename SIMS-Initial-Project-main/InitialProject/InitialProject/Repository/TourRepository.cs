@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using InitialProject.Enumeration;
 using Microsoft.EntityFrameworkCore;
 using InitialProject.Interface;
 
@@ -61,11 +62,14 @@ namespace InitialProject.Repository
             {
                 tour = (Tour)dbContext.tour
                                 .Include(t => t.Location)
-                                 .Where(t => t.Id == id);
+                                .Include(t => t.TourKeyPoints)
+                                .Where(t => t.Id == id)
+                                .SingleOrDefault();
+
             }
             return tour;
         }
-
+        
         public List<Tour> GetByLocation(Location location)
         {
             List<Tour> Tours = new List<Tour>();
@@ -122,6 +126,15 @@ namespace InitialProject.Repository
             return Tours;
         }
 
+        public void Start(int id)
+        {
+            using (var dbContext= new UserContext())
+            {
+                var tour = dbContext.tour.Find(id);
+                tour.Status = TourStatus.Started;
+                dbContext.SaveChanges();
+            }
+        }
 
 
     }

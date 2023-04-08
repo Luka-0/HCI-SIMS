@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Packaging;
 using System.Linq;
+using System.Net;
 using System.Windows;
 using InitialProject.Contexts;
 using InitialProject.Interface;
@@ -97,6 +98,18 @@ public class TourKeyPointService
 
     }
 
-    
+    public void StartTour(int id)
+    {
+        tourService.Start(id);
+        _tourKeyPointsRepository.StartTour(id);
+    }
+
+    public void Reach(int id)
+    {
+        _tourKeyPointsRepository.Reach(id);
+    }
+
+
+
 
 }

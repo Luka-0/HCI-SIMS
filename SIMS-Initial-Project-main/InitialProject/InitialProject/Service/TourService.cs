@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using InitialProject.Contexts;
 using InitialProject.Dto;
+using InitialProject.Enumeration;
 using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -39,19 +40,20 @@ public class TourService
 
         List<TourBasicInfoDto> basicInfoDtos = tours.Select(tour =>
             new TourBasicInfoDto(tour.Id, tour.Name, tour.Location.Country, tour.Location.City,
-                    tour.Language,tour.Guide.Id, tour.GuestLimit, tour.StartDateAndTime))
+                    tour.Language,tour.Guide.Id, tour.GuestLimit, tour.StartDateAndTime, tour.Status))
                         .ToList();
 
 
         return basicInfoDtos;
     }
 
-    public List<TourBasicInfoDto> GetTodays()
+    public List<TourBasicInfoDto> GetTodays ()
     {
         List<TourBasicInfoDto> tours = new List<TourBasicInfoDto>();
         tours = Get();
 
-        List<TourBasicInfoDto> todayTours = tours.Where(t => t.StartDateAndTime.Date.Equals(DateTime.Today)).ToList();
+        List<TourBasicInfoDto> todayTours = tours.Where(t =>t.Status == TourStatus.Waiting &&
+                                                 t.StartDateAndTime.Date.Equals(DateTime.Today)).ToList();
 
 
         return todayTours;
@@ -64,6 +66,7 @@ public class TourService
     {
         return _tourRepository.GetById(id);
     }
+  
     public List<Tour> GetByLocation(Location location)
     {
         return _tourRepository.GetByLocation(location);
@@ -86,7 +89,11 @@ public class TourService
 
     public bool IsActive(Tour tour)
     {
-        return tour.Started;
+        if (tour.Status == TourStatus.Started)
+        {
+            return true;
+        }
+        return false;
     }
 
     public List<Tour> GetAllActive()
@@ -131,4 +138,10 @@ public class TourService
 
         return activeToursByGuest;
     }
+
+    public void Start(int id)
+    {
+        _tourRepository.Start(id);
+    }
+
 }

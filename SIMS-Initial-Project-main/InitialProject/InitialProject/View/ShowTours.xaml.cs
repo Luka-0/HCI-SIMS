@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using InitialProject.Controller;
 using InitialProject.Dto;
 using InitialProject.Model;
@@ -30,6 +31,7 @@ namespace InitialProject
     {
         public ObservableCollection<TourBasicInfoDto> BasicTours { get; set; }
         public TourController tourController { get; set; } = new TourController();
+        public TourKeyPointController tourKeyPointController { get; set; } = new TourKeyPointController();
         private int ColNum{ get; set; } = 0;
         public User LoggedInGuide { get; set; }
 
@@ -69,9 +71,18 @@ namespace InitialProject
                 e.Column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
-        private void ViewSpecificTour(object sender, RoutedEventArgs e)
+        private void StartTour(object sender, RoutedEventArgs e)
         {
+        
+            TourBasicInfoDto selectedTour= (TourBasicInfoDto)dataGridTours.SelectedItem;
 
+            tourKeyPointController.StartTour(selectedTour.id);
+            LiveTour liveTour= new LiveTour(selectedTour.id, LoggedInGuide);
+
+            liveTour.Show();
+            Close();
         }
+       
+
     }
 }

@@ -11,7 +11,7 @@
                   SelectionMode="Single" IsReadOnly="True" AutoGeneratingColumn="generateColumns" HorizontalAlignment="Left" 
                   Margin="10,47,0,0" VerticalAlignment="Top"/>
 
-        <Button  Click="ViewSpecificTour"  Content="Zapocni" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button  Click="StartTour"  Content="Zapocni" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
     </Grid>
 </Window>
