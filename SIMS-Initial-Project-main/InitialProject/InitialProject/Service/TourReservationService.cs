@@ -85,6 +85,14 @@ namespace InitialProject.Service
             return tour.GuestLimit - CountGuestsOnTour(tour);
         }
 
-        
+        public List<TourReservation> GetByTour(int id)
+        {
+            return _tourReservationRepository.GetByTour(id);
+        }
+
+        public void SetArrivalKeyPoint(TourKeyPoint keyPoint, int id)
+        {
+            _tourReservationRepository.SetArrivalKeyPoint(keyPoint, id);
+        }
     }
 }

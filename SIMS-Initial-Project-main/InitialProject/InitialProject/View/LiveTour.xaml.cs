@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,11 +30,14 @@ namespace InitialProject
         public int TourId { get; set; }
         public TourKeyPointController TourKeyPointController { get; set; } = new TourKeyPointController();
         public TourController tourController { get; set; } = new TourController();
+        public TourReservationControler TourReservationControler { get; set; } = new TourReservationControler();
         public ObservableCollection<TourKeyPoint> keyPoints { get; set; } = new ObservableCollection<TourKeyPoint>();
+
+        public ObservableCollection<TourReservation> Reservations{ get; set; } = new ObservableCollection<TourReservation>();
         private int ColNum { get; set; } = 5;
         public User LoggedInGuide { get; set; }
-
-
+        private TourKeyPoint _lastCheckedKeyPoint { get; set; }
+        
 
 
         public LiveTour(int tourId, User user)
@@ -43,11 +47,18 @@ namespace InitialProject
             this.DataContext = this;
             InitializeComponent();
             Tour tour = tourController.GetById(tourId);
+            List<TourReservation> reservations = TourReservationControler.GetByTour(tour.Id);
             //keyPoints = new ObservableCollection<TourKeyPoint>(tour.TourKeyPoints.ToList());
             foreach (var keyPoint in tour.TourKeyPoints)
             {
                 keyPoints.Add(keyPoint);
             }
+
+            foreach (TourReservation reservation in reservations)
+            {
+                Reservations.Add(reservation);
+            }
+            
            
         }
 
@@ -79,6 +90,8 @@ namespace InitialProject
 
             TourKeyPointController.Reach(keyPoint.Id, keyPoint.Type);
 
+            _lastCheckedKeyPoint = keyPoint;
+
             if (keyPoint.Type == TourKeyPointType.End)
             {
                 EndTour();
@@ -97,6 +110,13 @@ namespace InitialProject
             ShowTours showTours = new ShowTours(LoggedInGuide);
             showTours.Show();
             Close();
+        }
+
+        private void SetArrivalKeyPoint(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            TourReservation reservation = (TourReservation)checkBox.DataContext;
+            TourReservationControler.SetArrivalKeyPoint(_lastCheckedKeyPoint, reservation.Id);
         }
     }
 }

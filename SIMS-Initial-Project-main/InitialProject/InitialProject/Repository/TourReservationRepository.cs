@@ -88,7 +88,30 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
+        public List<TourReservation> GetByTour(int id)
+        {
+            using (var db = new UserContext())
+            {
+                List<TourReservation> reservations = new List<TourReservation>();
+                reservations = db.tourReservation.Where(r => r.Tour.Id == id)
+                        .Include(r => r.Tour)
+                        .Include(r => r.ArrivalPoint)
+                        .Include(r => r.BookingGuest)
+                        .ToList();
 
+                return reservations;
+            }
+        }
+
+        public void SetArrivalKeyPoint(TourKeyPoint keyPoint, int id)
+        {
+            using (var db = new UserContext())
+            {
+                var tempRecord = db.tourReservation.Find(id);
+                tempRecord.ArrivalPoint = keyPoint;
+                db.SaveChanges();
+            }
+        }
 
 
     }
