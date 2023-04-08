@@ -79,7 +79,7 @@ namespace InitialProject.Repository
         }
 
         // Stajic
-        public void Add(AccommodationReservation accommodationReservation)
+        public void Save(AccommodationReservation accommodationReservation)
         {
             using UserContext db = new();
 
@@ -108,7 +108,7 @@ namespace InitialProject.Repository
             using (UserContext db = new())
             {
                 reservations = db.accommodationReservation.Include(t => t.Accommodation)
-                                                          .Include(t => t.Accommodation.Location)
+                                                          .ThenInclude(l => l.Location)
                                                           .Where(t => t.Guest.Id == user.Id).ToList();
             }
 

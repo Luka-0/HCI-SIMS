@@ -11,6 +11,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View;
 using InitialProject.Interface;
+using InitialProject.Dto;
 
 namespace InitialProject.Service
 {
@@ -60,37 +61,85 @@ namespace InitialProject.Service
 
         public AccommodationReservation GetBy(int id) {
 
-            return iAccommodationreservationRepository.GetBy(id);
+            return IAccommodationreservationRepository.GetBy(id);
         }
 
         // Stajic
-        public bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
+        public List<StartEndDateDto> GetAvailableDates(Accommodation accommodation, DateTime startingDate, DateTime endingDate, int daysToStay)
         {
-            AccommodationReservation ar = new AccommodationReservation();
-
-            if (accommodation.GuestLimit < guestNumber || IsViolatingMinReservatingDays(accommodation.MinimumReservationDays, startingDate, endingDate))
+            if (IsViolatingMinReservatingDays(accommodation.MinimumReservationDays, startingDate, endingDate))
             {
-                return false;
+                return null;
             }
 
-            if (IsAvailable(accommodation.Id, startingDate, endingDate))
+            List<StartEndDateDto> datesToChose = new();
+            int iterations = endingDate.Day - startingDate.Day + 1 - daysToStay;
+            for(int i=0; i<iterations; ++i)
             {
-                ar.Accommodation = accommodation;
-                ar.BegginingDate = startingDate;
-                ar.EndingDate = endingDate;
-                ar.GuestNumber = guestNumber;
-                ar.Guest = user;
+                DateTime tmpStartingDate = startingDate.AddDays(i);
 
-                iAccommodationreservationRepository.Add(ar);
-                return true;
+                DateTime tmpEndingDate = startingDate.AddDays(i + daysToStay);
+
+                StartEndDateDto tmp = new(tmpStartingDate, tmpEndingDate);
+                datesToChose.Add(tmp);
             }
 
-            return false;
+            for (int i = 0; i < datesToChose.Count; ++i)
+            {
+                StartEndDateDto tmp = datesToChose[i];
+                if (!IsAvailable(accommodation.Id, tmp.StartingDate, tmp.EndingDate))
+                { 
+                    datesToChose.Remove(tmp);
+                    --i;
+                }
+            }
+
+            if (datesToChose.Count == 0) return null;
+
+            return datesToChose;
+
+        }
+
+        public List<StartEndDateDto> FindOtherDates(DateTime endDate, Accommodation accommodation, int daysToStay)
+        {
+            List<StartEndDateDto> dates = new();
+
+            for(int i=1; ; ++i)
+            {
+                DateTime newStartDate = endDate.AddDays(i);
+                DateTime newEndDate = newStartDate.AddDays(daysToStay);
+
+                if(IsAvailable(accommodation.Id, newStartDate, newEndDate))
+                {
+                    StartEndDateDto tmp = new(newStartDate, newEndDate);
+                    dates.Add(tmp);
+                    return dates;
+                }
+            }
+        }
+
+
+        public bool CreateReservation(Accommodation accommodation, DateTime startingDate, DateTime endingDate, int guestNumber, User user)
+        {
+
+            if (accommodation.GuestLimit < guestNumber) return false;
+
+            AccommodationReservation ar = new()
+            {
+                Accommodation = accommodation,
+                BegginingDate = startingDate,
+                EndingDate = endingDate,
+                GuestNumber = guestNumber,
+                Guest = user
+            };
+
+            IAccommodationreservationRepository.Save(ar);
+            return true;
         }
 
         public bool IsAvailable(int id, DateTime startingDate, DateTime endingDate)
         {
-            List<AccommodationReservation> accommodationReservations = iAccommodationreservationRepository.GetByAccommodation(id);
+            List<AccommodationReservation> accommodationReservations = IAccommodationreservationRepository.GetByAccommodation(id);
 
             foreach (AccommodationReservation ar in accommodationReservations)
             {
@@ -104,13 +153,14 @@ namespace InitialProject.Service
                 }
                 else
                 {
-                    MessageBox.Show("Accommodation is already registered for those days");
                     return false;
                 }
             }
 
             return true;
         }
+
+
 
         public bool IsViolatingMinReservatingDays(int minimumReservationDays, DateTime startingDate, DateTime endingDate)
         {
@@ -119,17 +169,17 @@ namespace InitialProject.Service
 
         public void Add(AccommodationReservation accommodationReservation)
         {
-            iAccommodationreservationRepository.Add(accommodationReservation);
+            IAccommodationreservationRepository.Save(accommodationReservation);
         }
 
         public List<AccommodationReservation> GetByAccommodation(int id)
         {
-            return iAccommodationreservationRepository.GetByAccommodation(id);
+            return IAccommodationreservationRepository.GetByAccommodation(id);
         }
 
         public List<AccommodationReservation> GetBy(User user)
         {
-            return iAccommodationreservationRepository.GetBy(user);
+            return IAccommodationreservationRepository.GetBy(user);
         }
 
     }

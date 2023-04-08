@@ -27,5 +27,16 @@ namespace InitialProject.Controller
 
             return processedReviews;
         }
+        private readonly AccommodationReviewService AccommodationReviewService = new (new AccommodationReviewRepository());
+
+        public void Save(AccommodationReview accommodationReview)
+        {
+            AccommodationReviewService.Save(accommodationReview);
+        }
+
+        public List<AccommodationReview> GetBy(User user)
+        {
+            return AccommodationReviewService.GetBy(user);
+        }
     }
 }

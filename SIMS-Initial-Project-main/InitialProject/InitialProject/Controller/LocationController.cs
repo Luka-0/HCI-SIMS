@@ -46,10 +46,16 @@ namespace InitialProject.Controller
             return LocationService.GetByCity(city);
         }
 
-        public List<Location> getByCountry(string country)
+        public List<Location> GetByCountry(string country)
         {
             return LocationService.GetByCountry(country);
         }
+
+        public List<Location> GetAllDistinctByCountry()
+        {
+            return LocationService.GetAllDistinctByCountry();
+        }
+
 
         public Location GetBy(int id)
         {

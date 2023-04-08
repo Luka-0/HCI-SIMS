@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,6 +28,17 @@ namespace InitialProject.Model
 
         [ForeignKey("AccommodationReservationId")]
         public AccommodationReservation Reservation { get; set; }
+
+        public AccommodationReview() { }
+
+        public AccommodationReview(int tidiness, int correctness, string comment, string images, AccommodationReservation reservation)
+        {
+            Tidiness = tidiness;
+            Correctness = correctness;
+            Comment = comment;
+            Images = images;
+            Reservation = reservation;
+        }
 
         public override string ToString()
         {

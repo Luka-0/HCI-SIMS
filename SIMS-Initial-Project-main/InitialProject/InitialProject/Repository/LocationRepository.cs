@@ -53,37 +53,67 @@ namespace InitialProject.Repository
                 return location;
             }
         }
-            public Location GetBy(int id)
-            {
-                Location location = new Location();
 
-                using (var dbContext = new UserContext())
-                {
-                    location = (Location)dbContext.location
-                                     .Where(l => l.Id == id);
-                }
-                return location;
+        public Location GetBy(int id)
+        {
+            Location location = new Location();
+
+            using (var dbContext = new UserContext())
+            {
+                location = (Location)dbContext.location
+                                    .Where(l => l.Id == id);
             }
-            public List<Location> GetAll()
-            {
-                List<Location> locations = new List<Location>();
+            return location;
+        }
 
-                using (var db = new UserContext())
+        public List<Location> GetAll()
+        {
+            List<Location> locations = new List<Location>();
+
+            using (var db = new UserContext())
+            {
+                foreach (Location location in db.location)
                 {
-                    foreach (Location location in db.location)
+                    locations.Add(location);
+                }
+            }
+            return locations;
+        }
+
+        public List<Location> GetAllDistinctByCountry() // ne radi sa Distinct ni DistinctBy pa radim rucno
+        {
+            List<Location> locations = new();
+            var db = new UserContext();
+            bool hasFound;
+
+            foreach(Location location in db.location)
+            {
+                hasFound = false;
+                foreach(Location l in locations)
+                {
+                    if (l.Country.Equals(location.Country)) 
                     {
-                        locations.Add(location);
+                        hasFound = true;
+                        break;
                     }
                 }
-                return locations;
+
+                if (!hasFound)
+                {
+                    locations.Add(location);
+                }
+
             }
 
-            public void Save(Location location)
-            {
-                using var db = new UserContext();
+            return locations;
+        }
 
-                db.Add(location);
-                db.SaveChanges();
-            }
+        public void Save(Location location)
+        {
+            using var db = new UserContext();
+
+            db.Add(location);
+            db.SaveChanges();
+        }
     }
 }

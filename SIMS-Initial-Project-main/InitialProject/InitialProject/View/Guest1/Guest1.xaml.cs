@@ -25,13 +25,13 @@ namespace InitialProject.View
             User = user;
         }
 
-        private void ShowAccommodationReservate(object sender, RoutedEventArgs e)
+        private void AccommodationReservate_Click(object sender, RoutedEventArgs e)
         {
 
             AccommodationReservate accommodationReservate = new(User);
             accommodationReservate.Show();
 
-            this.Close();
+            Close();
         }
 
         private void EditReservation_Click(object sender, RoutedEventArgs e)
@@ -39,7 +39,23 @@ namespace InitialProject.View
             EditReservation editReservation = new(User);
             editReservation.Show();
 
-            this.Close();
+            Close();
+        }
+
+        private void RateAccommodation_Click(object sender, RoutedEventArgs e)
+        {
+            RateAccommodation rateAccommodation = new(User);
+            rateAccommodation.Show();
+
+            Close();
+        }
+
+        private void EditAccommodation_Click(object sender, RoutedEventArgs e)
+        {
+            EditReservation editReservation = new(User);
+            editReservation.Show();
+
+            Close();
         }
     }
 }

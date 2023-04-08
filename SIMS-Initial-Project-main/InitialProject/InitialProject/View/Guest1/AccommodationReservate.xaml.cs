@@ -25,11 +25,12 @@ namespace InitialProject.View
 {
     public partial class AccommodationReservate : Window
     {
-        private AccommodationReservationController AccommodationReservationController = new();
-        private AccommodationController AccommodationController = new();
-        private LocationController LocationController = new();
+        private readonly AccommodationReservationController AccommodationReservationController = new();
+        private readonly AccommodationController AccommodationController = new();
+        private readonly LocationController LocationController = new();
 
         public ObservableCollection<Accommodation> AccommodationsToShow { get; set; }
+        private List<StartEndDateDto> DatesToChose { get; set; }
         private User User { get; set; }
         
         public AccommodationReservate(User user)
@@ -78,7 +79,7 @@ namespace InitialProject.View
         {
             CountryComboBox.Items.Add("--Chose--");
 
-            List<Location> countries = LocationController.GetAll();
+            List<Location> countries = LocationController.GetAllDistinctByCountry();
             foreach(Location location in countries)
             {
                 CountryComboBox.Items.Add(location.Country.ToString());
@@ -89,49 +90,71 @@ namespace InitialProject.View
 
         private void InitializeCityComboBox(object sender, MouseEventArgs e)
         {
-            if (CountryComboBox.SelectedIndex != 0)
-            {
+            if (CountryComboBox.SelectedIndex == 0) return;
 
+            CityComboBox.Items.Clear();
+
+            List<Location> locations = LocationController.GetByCountry(CountryComboBox.SelectedItem.ToString());
+            foreach (Location location in locations)
+            {
+                CityComboBox.Items.Add(location.City);
             }
         }
 
-        private void ReservateAccommodation_Click(object sender, RoutedEventArgs e)
+        private void InitializeDatesComboBox()
         {
-            if (!ValidateSelectedDates())
+            OfferedDatesCB.Items.Clear();
+
+            foreach (StartEndDateDto t in DatesToChose)
             {
-                return;
+                OfferedDatesCB.Items.Add(t.StartingDate.ToString() + t.EndingDate.ToString());
             }
 
-            int guestNumber = int.Parse(GuestNumberTB.Text);
-            if(guestNumber <= 0)
-            {
-                MessageBox.Show("Please enter a proper guest number");
-                return;
+            OfferedDatesCB.SelectedIndex = 0;
+        }
 
-            }
-
+        private void GenerateDates_Click(object sender, RoutedEventArgs e)
+        {
+            int daysToStay = int.Parse(ReservatingDaysTB.Text);
             Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
-            if(accommodation == null)
-            {
-                MessageBox.Show("Please select an accommodation");
-                return;
-            }
-
             DateTime startDate = StartingDatePicker.SelectedDate.Value;
             DateTime endDate = EndingDatePicker.SelectedDate.Value;
 
-            if(startDate > endDate)
+            if (IsViolatingAnyUIControl(startDate, endDate, accommodation)) return;
+
+            DatesToChose = AccommodationReservationController.GetAvailableDates(accommodation, startDate, endDate, daysToStay);
+            if (DatesToChose == null)
             {
-                MessageBox.Show("Selected starting date is after ending date, please select valid dates");
+                MessageBox.Show("Accommodation is full during those days but we can reccomend other option");
+
+                DatesToChose = AccommodationReservationController.FindOtherDates(endDate, accommodation, daysToStay);
+            }
+
+            InitializeDatesComboBox();
+        }
+
+        private void CreateReservation_Click(object sender, RoutedEventArgs e)
+        {
+            int guestNumber = int.Parse(GuestNumberTB.Text);
+            int daysToStay = int.Parse(ReservatingDaysTB.Text);
+            Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
+            DateTime startDate = DatesToChose[OfferedDatesCB.SelectedIndex].StartingDate;
+            DateTime endDate = DatesToChose[OfferedDatesCB.SelectedIndex].EndingDate;
+
+            if (IsViolatingAnyUIControl(startDate, endDate, accommodation, guestNumber)) return;
+
+            if (daysToStay < accommodation.MinimumReservationDays)
+            {
+                MessageBox.Show("Entered days to stay are bellow the threshold for selected accommodation");
                 return;
             }
 
-            if (!AccommodationReservationController.Reservate(accommodation, User, guestNumber, startDate, endDate))
+            if (AccommodationReservationController.CreateReservation(accommodation, startDate, endDate, guestNumber, User))
             {
-                MessageBox.Show("Reservation was UNsuccessful");
+                MessageBox.Show("Succesfully saved");
                 return;
             }
-            MessageBox.Show("Reservation was successful");
+            MessageBox.Show("Saving was UNsuccesful");
 
         }
 
@@ -150,12 +173,42 @@ namespace InitialProject.View
             }
 
             return true;
-        } 
+        }
+
+        private bool IsViolatingAnyUIControl(DateTime startDate, DateTime endDate, Accommodation accommodation, int guestNumber=1)
+        {
+            if (!ValidateSelectedDates())
+            {
+                return true;
+            }
+
+            if (startDate > endDate)
+            {
+                MessageBox.Show("Selected starting date is after ending date, please select valid dates");
+                return true;
+            }
+
+            if (accommodation == null)
+            {
+                MessageBox.Show("Please select an accommodation");
+                return true;
+            }
+
+            if (guestNumber <= 0)
+            {
+                MessageBox.Show("Please enter a proper guest number");
+                return true;
+
+            }
+
+            return false;
+        }
 
         private void RefreshDataGrid(List<Accommodation> accommodations)
         {
             AccommodationsToShow = new ObservableCollection<Accommodation>();   
             AccommodationsGrid.ItemsSource = AccommodationsToShow;
+
             foreach (Accommodation a in accommodations)
             {
                 AccommodationsToShow.Add(a);
@@ -269,5 +322,14 @@ namespace InitialProject.View
             RefreshDataGrid(accommodations);
 
         }
+
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            Guest1 guest1 = new(User);
+            guest1.Show();
+
+            Close();
+        }
+
     }
 }

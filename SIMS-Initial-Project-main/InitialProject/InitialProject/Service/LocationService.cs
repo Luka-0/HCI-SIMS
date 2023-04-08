@@ -40,6 +40,12 @@ namespace InitialProject.Service
             return ILocationRepository.GetAll();
         }
 
+        public List<Location> GetAllDistinctByCountry()
+        {
+            return ILocationRepository.GetAllDistinctByCountry();
+        }
+
+
         public void Save(Location location)
         {
             ILocationRepository.Save(location);

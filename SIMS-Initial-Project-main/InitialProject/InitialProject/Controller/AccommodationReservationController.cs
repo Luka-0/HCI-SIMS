@@ -15,9 +15,24 @@ namespace InitialProject.Controller
     {
         private readonly AccommodationReservationService AccommodationReservationService = new(new AccommodationReservationRepository());
 
-        public bool Reservate(Accommodation accommodation, User user, int guestNumber, DateTime startingDate, DateTime endingDate)
+        public AccommodationReservation GetBy(int id)
         {
-            return AccommodationReservationService.Reservate(accommodation, user, guestNumber, startingDate, endingDate);
+            return AccommodationReservationService.GetBy(id);
+        }
+
+        public List<StartEndDateDto> GetAvailableDates(Accommodation accommodation, DateTime startingDate, DateTime endingDate, int daysToStay)
+        {
+            return AccommodationReservationService.GetAvailableDates(accommodation, startingDate, endingDate, daysToStay);
+        }
+
+        public List<StartEndDateDto> FindOtherDates(DateTime endDate, Accommodation accommodation, int daysToStay)
+        {
+            return AccommodationReservationService.FindOtherDates(endDate, accommodation, daysToStay);
+        }
+
+        public bool CreateReservation(Accommodation accommodation, DateTime startingDate, DateTime endingDate, int guestNumber, User user)
+        {
+            return AccommodationReservationService.CreateReservation(accommodation, startingDate, endingDate, guestNumber, user);
         }
 
         public void Add(AccommodationReservation accommodationReservation)
