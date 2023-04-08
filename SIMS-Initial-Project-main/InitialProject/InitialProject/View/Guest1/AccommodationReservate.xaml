@@ -8,7 +8,7 @@
         Title="AccommodationReservate" Height="560" Width="800">
     <Grid Margin="10,0,0,-6">
         <ScrollViewer Margin="0,0,0,11">
-            <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding AccommodationsToShow}" Height="Auto" Width="Auto" Margin="324,0,10,0" VerticalAlignment="Top" 
+            <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding AccommodationsToShow}" Height="Auto" Width="Auto" Margin="307,0,10,0" VerticalAlignment="Top" 
                   AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
@@ -22,7 +22,7 @@
         </ScrollViewer>
 
         <Grid Margin="0,0,483,272" DataContext="{Binding ElementName=AccommodationsGrid, Path=SelectedItem}">
-            <Border BorderBrush="Black" BorderThickness="1" Height="262" VerticalAlignment="Top" Margin="0,0,-11,0" />
+            <Border BorderBrush="Black" BorderThickness="1" Height="262" VerticalAlignment="Top" />
             <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,231,0,0" Click="GoBack_Click"/>
             <DatePicker x:Name="StartingDatePicker" HorizontalAlignment="Left" Margin="154,11,0,0" VerticalAlignment="Top"/>
             <DatePicker x:Name="EndingDatePicker" HorizontalAlignment="Left" Margin="154,55,0,0" VerticalAlignment="Top"/>
@@ -38,7 +38,7 @@
         </Grid>
         
         <Grid Margin="0,263,483,0" >
-            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,-11,0"/>
+            <Border BorderBrush="Black" BorderThickness="1"/>
             <ComboBox x:Name="FilterComboBox" HorizontalAlignment="Left" Margin="154,20,0,0" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="154,134,0,0" TextWrapping="Wrap" Text="--Here--" VerticalAlignment="Top" Width="120"/>
             <Button x:Name="ApplyFilterButton" Content="Apply filter" HorizontalAlignment="Center" Margin="0,257,0,0" VerticalAlignment="Top" Click="ApplyFilter_Click"/>

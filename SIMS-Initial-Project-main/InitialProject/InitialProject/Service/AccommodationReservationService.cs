@@ -76,6 +76,7 @@ namespace InitialProject.Service
 
             TimeSpan difference = endingDate - startingDate;
             int iterations = (int)difference.TotalDays - daysToStay + 1;
+            MessageBox.Show(iterations.ToString());
 
             for(int i=0; i<iterations; ++i)
             {

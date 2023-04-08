@@ -19,7 +19,8 @@
         </DataGrid>
         
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="262,169,0,0" VerticalAlignment="Top" Click="Cancel_Click"/>
-        <Button Content="Back" HorizontalAlignment="Left" Margin="82,70,0,0" VerticalAlignment="Top" Click="Back_Click"/>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Back_Click"/>
+        <Button Content="Postpone" HorizontalAlignment="Left" Margin="43,169,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
