@@ -19,6 +19,7 @@ namespace InitialProject.Interface
         public void Save(AccommodationReservation accommodationReservation);
         public List<AccommodationReservation> GetByAccommodation(int id);
         public List<AccommodationReservation> GetBy(User user);
+        public void Delete(AccommodationReservation accommodationReservation);
 
     }
 }

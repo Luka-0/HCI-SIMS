@@ -49,5 +49,10 @@ namespace InitialProject.Controller
         {
             return AccommodationReservationService.GetBy(user);
         }
+
+        public bool Delete(AccommodationReservation accommodationReservation)
+        {
+            return AccommodationReservationService.Delete(accommodationReservation);
+        }
     }
 }

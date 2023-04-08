@@ -7,17 +7,19 @@
         mc:Ignorable="d"
         Title="EditReservation" Height="560" Width="800">
     <Grid>
-        <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding reservationsToShow}" Height="Auto" Width="Auto" Margin="331,10,10,0" VerticalAlignment="Top" 
+        <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding ReservationsToShow}" Height="Auto" Width="Auto" Margin="331,10,10,0" VerticalAlignment="Top" 
                   AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Accommodation.Title}"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding Accommodation.Type}"/>
-                <DataGridTextColumn Header="Guest Number" Binding="{Binding GuestNumber}"/>
                 <DataGridTextColumn Header="City" Binding="{Binding Accommodation.Location.City}"/>
-                <DataGridTextColumn Header="Starting Date" Binding="{Binding BegginingDate}"/>
-                <DataGridTextColumn Header="Ending Date" Binding="{Binding EndingDate}" Width="*"/>
+                <DataGridTextColumn Header="Guest Number" Binding="{Binding GuestNumber}"/>
+                <DataGridTextColumn Header="Starting Date" Binding="{Binding BegginingDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                <DataGridTextColumn Header="Ending Date" Binding="{Binding EndingDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="262,169,0,0" VerticalAlignment="Top" Click="Cancel_Click"/>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="82,70,0,0" VerticalAlignment="Top" Click="Back_Click"/>
 
     </Grid>
 </Window>

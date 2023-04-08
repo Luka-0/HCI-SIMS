@@ -107,7 +107,7 @@ namespace InitialProject.View
 
             foreach (StartEndDateDto t in DatesToChose)
             {
-                OfferedDatesCB.Items.Add(t.StartingDate.ToString() + t.EndingDate.ToString());
+                OfferedDatesCB.Items.Add(t.StartingDate.Date.ToString() + t.EndingDate.Date.ToString());
             }
 
             OfferedDatesCB.SelectedIndex = 0;
@@ -209,7 +209,9 @@ namespace InitialProject.View
             AccommodationsToShow = new ObservableCollection<Accommodation>();   
             AccommodationsGrid.ItemsSource = AccommodationsToShow;
 
-            foreach (Accommodation a in accommodations)
+            var sortedAccommodations = accommodations.OrderBy(t => t.Class);
+
+            foreach (Accommodation a in sortedAccommodations)
             {
                 AccommodationsToShow.Add(a);
             }
