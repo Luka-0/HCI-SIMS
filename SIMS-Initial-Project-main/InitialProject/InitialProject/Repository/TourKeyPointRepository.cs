@@ -91,5 +91,26 @@ public class TourKeyPointRepository:ITourKeyPointRepository
         }
     }
 
-    
+    public void StartTour(int id)
+    {
+        using (var db = new UserContext()){
+            var tempRecord = db.tourKeyPoints.Where(t => t.Tour.Id == id && t.Type == TourKeyPointType.Start)
+                .FirstOrDefault();
+            tempRecord.Reached = true;
+            db.SaveChanges();
+        }
+    }
+
+    public void Reach(int id)
+    {
+        using (var db = new UserContext())
+        {
+            var tempRecord = db.tourKeyPoints.Find(id);
+            tempRecord.Reached = true;
+            db.SaveChanges();
+        }
+        
+    }
+
+
 }

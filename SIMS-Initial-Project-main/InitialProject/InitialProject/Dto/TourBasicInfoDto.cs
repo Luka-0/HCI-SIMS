@@ -1,4 +1,5 @@
 ﻿using System;
+using InitialProject.Enumeration;
 
 namespace InitialProject.Dto;
 
@@ -12,6 +13,7 @@ public class TourBasicInfoDto
     public int GuideId { get; set; }
     public int GuestLimit { get; set; }
     public DateTime StartDateAndTime { get; set; }
+    public TourStatus Status;
 
 
     public TourBasicInfoDto()
@@ -19,7 +21,7 @@ public class TourBasicInfoDto
     }
 
     public TourBasicInfoDto(int id, string name, string country, string city, string language, int guideId, int guestLimit,
-        DateTime startDateAndTime)
+        DateTime startDateAndTime, TourStatus status)
     {
         this.id = id;
         this.Name = name;
@@ -29,6 +31,7 @@ public class TourBasicInfoDto
         this.GuideId = guideId;
         this.GuestLimit = guestLimit;
         this.StartDateAndTime = startDateAndTime;
+        this.Status = status;
     }
 
 

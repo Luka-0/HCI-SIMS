@@ -16,6 +16,7 @@ namespace InitialProject.Interface
         public List<Tour> GetByDuration(TimeSpan duration);
         public List<Tour> GetByLanguage(string language);
         public List<Tour> GetByGuestLimit(int guestLimit);
+        public void Start(int id);
 
     }
 }
