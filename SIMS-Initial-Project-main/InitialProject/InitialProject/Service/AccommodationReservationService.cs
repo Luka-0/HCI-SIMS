@@ -62,11 +62,9 @@ namespace InitialProject.Service
         }
 
         // Stajic
-        public List<StartEndDateDto> GetAvailableDates(Accommodation accommodation, int guestNumber, DateTime startingDate, DateTime endingDate, int daysToStay)
+        public List<StartEndDateDto> GetAvailableDates(Accommodation accommodation, DateTime startingDate, DateTime endingDate, int daysToStay)
         {
-            //AccommodationReservation ar = new();
-
-            if (accommodation.GuestLimit < guestNumber || IsViolatingMinReservatingDays(accommodation.MinimumReservationDays, startingDate, endingDate))
+            if (IsViolatingMinReservatingDays(accommodation.MinimumReservationDays, startingDate, endingDate))
             {
                 return null;
             }
@@ -83,11 +81,13 @@ namespace InitialProject.Service
                 datesToChose.Add(tmp);
             }
 
-            foreach(StartEndDateDto t in datesToChose)
+            for (int i = 0; i < datesToChose.Count; ++i)
             {
-                if (!IsAvailable(accommodation.Id, t.StartingDate, t.EndingDate))
+                StartEndDateDto tmp = datesToChose[i];
+                if (!IsAvailable(accommodation.Id, tmp.StartingDate, tmp.EndingDate))
                 { 
-                    datesToChose.Remove(t);
+                    datesToChose.Remove(tmp);
+                    --i;
                 }
             }
 
@@ -95,15 +95,24 @@ namespace InitialProject.Service
 
             return datesToChose;
 
-            /*ar.Accommodation = accommodation;
-            ar.BegginingDate = startingDate;
-            ar.EndingDate = endingDate;
-            ar.GuestNumber = guestNumber;
-            ar.User = user;
+        }
+
+        public bool CreateReservation(Accommodation accommodation, DateTime startingDate, DateTime endingDate, int guestNumber, User user)
+        {
+
+            if (accommodation.GuestLimit < guestNumber) return false;
+
+            AccommodationReservation ar = new()
+            {
+                Accommodation = accommodation,
+                BegginingDate = startingDate,
+                EndingDate = endingDate,
+                GuestNumber = guestNumber,
+                Guest = user
+            };
 
             IAccommodationreservationRepository.Save(ar);
-            return true;*/
-
+            return true;
         }
 
         public bool IsAvailable(int id, DateTime startingDate, DateTime endingDate)
@@ -128,6 +137,8 @@ namespace InitialProject.Service
 
             return true;
         }
+
+
 
         public bool IsViolatingMinReservatingDays(int minimumReservationDays, DateTime startingDate, DateTime endingDate)
         {
