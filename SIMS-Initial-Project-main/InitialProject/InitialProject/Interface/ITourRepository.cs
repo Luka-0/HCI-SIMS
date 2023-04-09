@@ -19,6 +19,6 @@ namespace InitialProject.Interface
         public List<Tour> GetByGuestLimit(int guestLimit);
         public void SetStatus(int id, TourStatus status);
 
-
+        public void Delete(int id);
     }
 }

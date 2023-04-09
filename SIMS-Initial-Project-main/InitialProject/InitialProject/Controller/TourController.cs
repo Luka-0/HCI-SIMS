@@ -124,10 +124,14 @@ public class TourController
         tourService.SetStatus(id,status);
     }
 
-    public List<TourBasicInfoDto> GetFinished(int guideId)
+    public List<TourBasicInfoDto> GetByStatus(int guideId, TourStatus status)
     {
-        return tourService.GetFinished(guideId);
+        return tourService.GetByStatus(guideId, status);
     }
 
+    public void Delete(int id)
+    {
+        tourService.Delete(id);
+    }
 }
 

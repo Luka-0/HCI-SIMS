@@ -43,7 +43,7 @@ namespace InitialProject.View
 
         private void GetFinishedTours(int guideId)
         {
-            List<TourBasicInfoDto> tours = tourController.GetFinished(guideId);
+            List<TourBasicInfoDto> tours = tourController.GetByStatus(guideId, TourStatus.Finished);
 
 
             foreach (TourBasicInfoDto tour in tours)
@@ -51,7 +51,7 @@ namespace InitialProject.View
                 BasicTours.Add(tour);
             }
         }
-        private void generateColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        /*private void generateColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             PropertyDescriptor propertyDescriptor = (PropertyDescriptor)e.PropertyDescriptor;
             e.Column.Header = propertyDescriptor.DisplayName;
@@ -63,6 +63,7 @@ namespace InitialProject.View
             if (ColNum == 7)
                 e.Column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
+        */
 
         
         private void ShowReviews(object sender, RoutedEventArgs e)

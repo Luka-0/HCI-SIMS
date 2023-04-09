@@ -136,6 +136,17 @@ namespace InitialProject.Repository
             }
         }
 
+        public void Delete(int id)
+        {
+            Tour tour = GetById(id);
+            using (var dbContext = new UserContext())
+            {
+                dbContext.tour.Remove(tour);
+                dbContext.SaveChanges();
+            }
+            
+        }
+
 
     }
 }

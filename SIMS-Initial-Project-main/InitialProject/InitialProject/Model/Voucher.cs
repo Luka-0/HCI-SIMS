@@ -16,6 +16,9 @@ namespace InitialProject.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [ForeignKey("UserId")]
+        public User? User { get; set; }
+
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime ReceivedDate { get; set; }

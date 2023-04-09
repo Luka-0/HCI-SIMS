@@ -144,15 +144,19 @@ public class TourService
         _tourRepository.SetStatus(id, status);
     }
 
-    public List<TourBasicInfoDto> GetFinished(int guideId)
+    public List<TourBasicInfoDto> GetByStatus(int guideId, TourStatus status)
     {
         List<TourBasicInfoDto> tours = new List<TourBasicInfoDto>();
 
         tours = Get();
 
-        List<TourBasicInfoDto> todayTours = tours.Where(t => t.Status == TourStatus.Finished).ToList();
+        List<TourBasicInfoDto> finishedTours = tours.Where(t => t.Status == status).ToList();
 
-        return todayTours;
+        return finishedTours;
     }
 
+    public void Delete(int id)
+    {
+        _tourRepository.Delete(id);
+    }
 }
