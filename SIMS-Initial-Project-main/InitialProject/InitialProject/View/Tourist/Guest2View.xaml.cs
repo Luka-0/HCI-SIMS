@@ -30,7 +30,7 @@ namespace InitialProject.View
         private LocationController LocationController = new();
        
         TourService TourService = new TourService(new TourRepository());
-        TourReservationControler reservationControler = new TourReservationControler();
+        TourReservationController _reservationController = new TourReservationController();
 
         public ObservableCollection<Tour> toursToShow { get; set; }
 
@@ -58,7 +58,7 @@ namespace InitialProject.View
 
         public void ShowReservations()
         {
-            Reservations = reservationControler.GetAll();
+            Reservations = _reservationController.GetAll();
             foreach(TourReservation tour in Reservations)
             {
                 MessageBox.Show(tour.ToString());
@@ -155,7 +155,7 @@ namespace InitialProject.View
                 Tour tour = (Tour)TourShowGrid.SelectedItem;
                 int guestNumber = int.Parse(SelectedGuestNumber.Text);
 
-                TourReservationResponseDto response = reservationControler.Reserve(tour, guestNumber);
+                TourReservationResponseDto response = _reservationController.Reserve(tour, guestNumber);
 
                 if (response.IsFull && response.AvaliableSpace == 0)        //nemoguce rezervisati
                 {
@@ -174,7 +174,7 @@ namespace InitialProject.View
                 if(!response.IsFull)
                 {
                     TourReservation newTourReservation = new TourReservation();
-                    reservationControler.Save(newTourReservation, tour, UserController.GetBy("Perica"), guestNumber);
+                    _reservationController.Save(newTourReservation, tour, UserController.GetBy("Perica"), guestNumber);
                     MessageBox.Show("Uspesno sacuvana rezervacija!");
                     FreeSpacesLabel.Content = "";
                     SelectedGuestNumber.Text = "";
@@ -200,7 +200,7 @@ namespace InitialProject.View
             try
             {
                 Tour tour = (Tour)TourShowGrid.SelectedItem;
-                MessageBox.Show(reservationControler.CountTourReservations(tour).ToString());
+                MessageBox.Show(_reservationController.CountTourReservations(tour).ToString());
             }
             catch
             {

@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230408165824_ValidPropKodTourReview")]
+    partial class ValidPropKodTourReview
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -326,12 +328,8 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AmusementScore")
+                    b.Property<int>("AmusmentScore")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<int>("GuideKnowledge")
                         .HasColumnType("INTEGER");
@@ -344,9 +342,6 @@ namespace InitialProject.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("TourReservationId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Valid")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

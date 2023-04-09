@@ -94,5 +94,16 @@ namespace InitialProject.Service
         {
             _tourReservationRepository.SetArrivalKeyPoint(keyPoint, id);
         }
+
+        public TourReservation GetByPAVLE(int id)
+        {
+            return _tourReservationRepository.GetByPAVLE(id);
+        }
+
+        public string GetArrivalKeyPointName(int id)
+        {
+            TourReservation reservation = GetByPAVLE(id);
+            return reservation.ArrivalPoint.Name;
+        }
     }
 }

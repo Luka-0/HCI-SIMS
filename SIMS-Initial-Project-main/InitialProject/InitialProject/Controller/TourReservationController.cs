@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Controller
 {
-    public class TourReservationControler
+    public class TourReservationController
     {
         private  TourReservationService tourReservationService = new TourReservationService(new TourReservationRepository());
         public TourReservationResponseDto Reserve(Tour tour, int guestNumber)
@@ -61,5 +61,14 @@ namespace InitialProject.Controller
             tourReservationService.SetArrivalKeyPoint(keyPoint, reservationId);
         }
 
+        public TourReservation GetByPAVLE(int id)
+        {
+            return tourReservationService.GetByPAVLE(id);
+        }
+
+        public string GetArrivalKeyPointName(int id)
+        {
+            return tourReservationService.GetArrivalKeyPointName(id);
+        }
     }
 }

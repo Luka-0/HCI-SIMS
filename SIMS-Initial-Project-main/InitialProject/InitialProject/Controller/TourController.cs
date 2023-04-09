@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using InitialProject.Contexts;
 using InitialProject.Dto;
+using InitialProject.Enumeration;
 using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -118,6 +119,15 @@ public class TourController
         return tourService.GetTodays();
     }
 
-   
+    public void SetStatus(int id, TourStatus status)
+    {
+        tourService.SetStatus(id,status);
+    }
+
+    public List<TourBasicInfoDto> GetFinished(int guideId)
+    {
+        return tourService.GetFinished(guideId);
+    }
+
 }
 

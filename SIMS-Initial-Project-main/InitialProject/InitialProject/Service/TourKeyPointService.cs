@@ -114,7 +114,6 @@ public class TourKeyPointService
     
     public void StartTour(int id)
     {
-        tourService.Start(id);
         _tourKeyPointsRepository.StartTour(id);
     }
 

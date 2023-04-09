@@ -28,6 +28,15 @@ namespace InitialProject.Controller
             tourReviewService.Save(review);
         }
 
+        public List<TourReview> GetByTour(int id)
+        {
+            return tourReviewService.GetByTour(id);
+        }
 
+
+        public void Invalidate(int id)
+        {
+            tourReviewService.Invalidate(id);
+        }
     }
 }

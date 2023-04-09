@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Controller;
 using InitialProject.Dto;
+using InitialProject.Enumeration;
 using InitialProject.Model;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -30,7 +31,7 @@ namespace InitialProject
         public int TourId { get; set; }
         public TourKeyPointController TourKeyPointController { get; set; } = new TourKeyPointController();
         public TourController tourController { get; set; } = new TourController();
-        public TourReservationControler TourReservationControler { get; set; } = new TourReservationControler();
+        public TourReservationController TourReservationController { get; set; } = new TourReservationController();
         public ObservableCollection<TourKeyPoint> keyPoints { get; set; } = new ObservableCollection<TourKeyPoint>();
 
         public ObservableCollection<TourReservation> Reservations{ get; set; } = new ObservableCollection<TourReservation>();
@@ -47,7 +48,7 @@ namespace InitialProject
             this.DataContext = this;
             InitializeComponent();
             Tour tour = tourController.GetById(tourId);
-            List<TourReservation> reservations = TourReservationControler.GetByTour(tour.Id);
+            List<TourReservation> reservations = TourReservationController.GetByTour(tour.Id);
             //keyPoints = new ObservableCollection<TourKeyPoint>(tour.TourKeyPoints.ToList());
             foreach (var keyPoint in tour.TourKeyPoints)
             {
@@ -99,6 +100,7 @@ namespace InitialProject
         }
         private void EndTour()
         {
+            tourController.SetStatus(TourId, TourStatus.Finished);
             ShowTours showTours = new ShowTours(LoggedInGuide);
             showTours.Show();
             Close();
@@ -116,7 +118,7 @@ namespace InitialProject
         {
             CheckBox checkBox = (CheckBox)sender;
             TourReservation reservation = (TourReservation)checkBox.DataContext;
-            TourReservationControler.SetArrivalKeyPoint(_lastCheckedKeyPoint, reservation.Id);
+            TourReservationController.SetArrivalKeyPoint(_lastCheckedKeyPoint, reservation.Id);
         }
     }
 }
