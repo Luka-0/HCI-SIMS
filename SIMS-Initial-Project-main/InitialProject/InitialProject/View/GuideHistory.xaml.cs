@@ -64,15 +64,15 @@ namespace InitialProject.View
                 e.Column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
-        private void ShowTourReviews(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        
+        private void ShowReviews(object sender, RoutedEventArgs e)
         {
             TourBasicInfoDto selectedTour = (TourBasicInfoDto)DataGridTours.SelectedItem;
 
-            TourReviews tourReviews = new TourReviews(LoggedInGuide,selectedTour.id);
+            TourReviews tourReviews = new TourReviews(LoggedInGuide, selectedTour.id);
 
             tourReviews.Show();
             Close();
         }
-
     }
 }

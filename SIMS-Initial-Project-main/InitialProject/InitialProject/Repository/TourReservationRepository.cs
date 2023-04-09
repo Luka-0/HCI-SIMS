@@ -33,7 +33,8 @@ namespace InitialProject.Repository
             using (var dbContext = new UserContext())
             {
                 reservation = (TourReservation)dbContext.tourReservation
-                                 .Where(t => t.Id == id);
+                    .Where(t => t.Id == id);
+                //.SingleOrDefault(); Ja(Pavle) mislim da sad dodao ovo na gresku, ali nisam sig proveri to
             }
             return reservation;
         }
@@ -110,6 +111,21 @@ namespace InitialProject.Repository
                 var tempRecord = db.tourReservation.Find(id);
                 tempRecord.ArrivalPoint = keyPoint;
                 db.SaveChanges();
+            }
+        }
+
+        public TourReservation GetByPAVLE(int id)
+        {
+            using (var db = new UserContext())
+            {
+                
+                TourReservation reservation =  db.tourReservation
+                    .Where(t => t.Id == id)
+                    .Include(t => t.BookingGuest)
+                    .Include(t  => t.ArrivalPoint)
+                    .FirstOrDefault();
+
+                return reservation;
             }
         }
 

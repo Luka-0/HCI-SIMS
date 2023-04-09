@@ -42,6 +42,24 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
+        public List<TourReview> GetByTour(int id)
+        {
+            using var db = new UserContext();
+            List<TourReview> reviews = db.tourReview.Where(t => t.Reservation.Tour.Id == id)
+                .Include(t => t.Reservation)
+                .Include(t => t.Reservation.Tour)
+                .ToList();
+            return reviews;
+        }
+
+        public void Invalidate(int id)
+        {
+            using var db= new UserContext();
+            TourReview review = db.tourReview.Find(id);
+            review.Valid = false;
+            db.SaveChanges();
+
+        }
 
     }
 }

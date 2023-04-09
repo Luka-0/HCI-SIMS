@@ -12,5 +12,7 @@ namespace InitialProject.Interface
         public List<TourReview> GetAll();
         public TourReview GetById(int id);
         public void Save(TourReview review);
+        public List<TourReview> GetByTour(int id);
+        public void Invalidate(int id);
     }
 }

@@ -33,6 +33,15 @@ namespace InitialProject.Service
             _tourReviewRepository.Save(tourReview);
         }
 
+        public List<TourReview> GetByTour(int id)
+        {
+           return _tourReviewRepository.GetByTour(id);
+        }
 
+
+        public void Invalidate(int id)
+        {
+            _tourReviewRepository.Invalidate(id);
+        }
     }
 }

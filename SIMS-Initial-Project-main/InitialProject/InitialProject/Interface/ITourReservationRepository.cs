@@ -17,5 +17,7 @@ namespace InitialProject.Interface
 
         public List<TourReservation> GetByTour(int id);
         public void SetArrivalKeyPoint(TourKeyPoint keyPoint, int id);
+
+        public TourReservation GetByPAVLE(int id);
     }
 }
