@@ -14,6 +14,7 @@ namespace InitialProject.Interface
         //public Accommodation GetAccommodation(int reservationId);
         //public User GetUser(int reservationId);
         public AccommodationReservation GetBy(int id);
+        public List<AccommodationReservation> GetAllBetween(DateTime startingDate, DateTime endingDate, User owner);
 
         // Stajic
         public void Save(AccommodationReservation accommodationReservation);

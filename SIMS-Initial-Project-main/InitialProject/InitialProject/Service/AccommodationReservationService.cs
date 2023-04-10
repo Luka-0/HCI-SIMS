@@ -207,5 +207,14 @@ namespace InitialProject.Service
             IAccommodationreservationRepository.Delete(accommodationReservation);
             return true;
         }
+
+
+        //Aleksandra
+        public List<AccommodationReservation> GetAllBetween(DateTime startingDate, DateTime endingDate, string ownerUsername) {
+
+            User owner = this.UserService.GetBy(ownerUsername);
+
+            return this.IAccommodationreservationRepository.GetAllBetween(startingDate, endingDate, owner);
+        }
     }
 }
