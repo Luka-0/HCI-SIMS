@@ -22,10 +22,10 @@ namespace InitialProject.View
     public partial class EditReservation : Window
     {
         private readonly AccommodationReservationController AccommodationReservationController = new();
-        private readonly ReservationRescheduleController ReservationRescheduleController = new();
+        private readonly ReservationReschedulingRequestController ReservationReschedulingRequestController = new();
 
         public ObservableCollection<AccommodationReservation> ReservationsToShow { get; set; }
-        public ObservableCollection<ReservationReschedule> ReschedulingsToShow { get; set; }
+        public ObservableCollection<ReservationReschedulingRequest> ReschedulingsToShow { get; set; }
 
         private User User { get; set; }
 
@@ -106,9 +106,9 @@ namespace InitialProject.View
             DateTime newStartingDate = accommodationReservation.BegginingDate.AddDays(postponeDays);
             DateTime newEndingDate = accommodationReservation.EndingDate.AddDays(postponeDays);
 
-            ReservationReschedule reservationReschedule = new(Enumeration.RequestState.Waiting, accommodationReservation, newStartingDate, newEndingDate);
+            ReservationReschedulingRequest reservationReschedulingRequest = new(Enumeration.RequestState.Waiting, accommodationReservation, newStartingDate, newEndingDate);
 
-            ReservationRescheduleController.Save(reservationReschedule);
+            ReservationReschedulingRequestController.Save(reservationReschedulingRequest);
         }
     }
 }

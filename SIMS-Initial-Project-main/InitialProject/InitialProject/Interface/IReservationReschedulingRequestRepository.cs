@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Interface
 {
-    interface IReservationRescheduleRepository
+    interface IReservationReschedulingRequestRepository
     {
-        public void Save(ReservationReschedule reservationReschedule);
+        public void Save(ReservationReschedulingRequest reservationReschedulingRequest);
     }
 }

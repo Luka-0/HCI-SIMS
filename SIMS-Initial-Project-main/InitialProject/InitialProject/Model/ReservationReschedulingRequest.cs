@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    [Table("ReservationRescheduling")]
-    public class ReservationReschedule
+    [Table("ReservationReschedulingRequest")]
+    public class ReservationReschedulingRequest
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,7 +18,7 @@ namespace InitialProject.Model
 
         public RequestState State { get; set; }
 
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         [ForeignKey("AccommodationReservationId")]
         public AccommodationReservation Reservation { get; set; }
@@ -28,16 +28,19 @@ namespace InitialProject.Model
 
         [DataType(DataType.DateTime)]
         public DateTime NewEndingDate {  get; set; }
+        public bool? Achievable { get; set; }
 
-        public ReservationReschedule() { }
 
-        public ReservationReschedule(RequestState state, AccommodationReservation reservation, DateTime newStartingDate, DateTime newEndingDate)
+        public ReservationReschedulingRequest() { }
+
+        public ReservationReschedulingRequest(RequestState state, AccommodationReservation reservation, DateTime newStartingDate, DateTime newEndingDate)
         {
             State = state;
             Reservation = reservation;
             NewStartingDate = newStartingDate;
             NewEndingDate = newEndingDate;
             Comment = new("");
+            Achievable = false;
         }
 
         public override string ToString()
