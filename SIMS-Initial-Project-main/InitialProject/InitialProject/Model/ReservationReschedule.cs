@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace InitialProject.Model
 {
     [Table("ReservationRescheduling")]
-    public class ReservationRescheduling
+    public class ReservationReschedule
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -28,6 +28,17 @@ namespace InitialProject.Model
 
         [DataType(DataType.DateTime)]
         public DateTime NewEndingDate {  get; set; }
+
+        public ReservationReschedule() { }
+
+        public ReservationReschedule(RequestState state, AccommodationReservation reservation, DateTime newStartingDate, DateTime newEndingDate)
+        {
+            State = state;
+            Reservation = reservation;
+            NewStartingDate = newStartingDate;
+            NewEndingDate = newEndingDate;
+            Comment = new("");
+        }
 
         public override string ToString()
         {
