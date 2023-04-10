@@ -40,35 +40,35 @@ namespace InitialProject.Service
 
 
         }
-        //Pavle
+        
         public List<Image> Save(List<String> urlsDto)
         {
-            List<Image> images = new List<Image>();
-            foreach (string url in urlsDto)
+            // List<Image> images = new List<Image>();
+            // foreach (string url in urlsDto)
+            // {
+            //
+            //     Image image = new Image(url);
+            //     iimageRepository.Save(image);
+            //     images.Add(image);
+            // }
+            //
+            // return images;
+            List<Image> images = urlsDto.Select(url =>
             {
-
                 Image image = new Image(url);
                 iimageRepository.Save(image);
-                images.Add(image);
-                // var db = new UserContext();
-                // var tempRecord = db.image.Find(image.Id);
-                //
-                // db.SaveChanges();
-            }
+                return image;
+            }).ToList();
 
             return images;
+
         }
-        //Pavle
+        
         public void SetTourId(List<Image> images, Tour tour)
         {
-            using ( var db = new UserContext())
+            using( var db = new UserContext())
             {
-                foreach (var image in images)
-                {
-                    iimageRepository.Update(image, tour);
-
-                }
-
+                images.ForEach(image => iimageRepository.Update(image, tour));
                 
             }
             

@@ -30,6 +30,8 @@ namespace InitialProject.View
 
 
         public TourController TourController { get; set; } = new TourController();
+        public VoucherController VoucherController { get; set; } = new VoucherController();
+
         public AllTours(User user)
         {
             LoggedInGuide = user;
@@ -55,7 +57,8 @@ namespace InitialProject.View
             TimeSpan difference = tour.StartDateAndTime - DateTime.Now;
             if (difference > limit)
             {
-                TourController.Delete(tour.id);
+                TourController.Cancel(tour.id);
+                
             }
         }
     }

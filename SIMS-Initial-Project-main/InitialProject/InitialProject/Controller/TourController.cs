@@ -5,6 +5,7 @@ using InitialProject.Contexts;
 using InitialProject.Dto;
 using InitialProject.Enumeration;
 using InitialProject.Interface;
+using InitialProject.Migrations;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -73,40 +74,22 @@ public class TourController
 
     public Tour Create(TourToControllerDto dto)
     {
-        
-
-        Tour tour = new Tour(dto.Name, dto.Description, dto.Language,
+        Tour newTour = new Tour(dto.Name, dto.Description, dto.Language,
             dto.GuestLimit, dto.StartDateAndTime,
             dto.Duration);
-        return tour;
+
+        return  tourService.Save(newTour);
+
     }
 
-    public void UpdateTourProperties(Tour tour, TourToControllerDto dto)
+    public void UpdateTourProperties(Tour tour, TourToControllerDto dto, List<TourKeyPoint> keyPoints)
     {
-        Location location = locationService.GetBy(dto.Country, dto.City);
-        List<TourKeyPoint> tourKeyPoints = tourKeyPointService.Save(dto.TourKeyPointNames);
-        //List<Image> images = imageService.Save(dto.ImageURLs);
-
-
-        
-        tour.Guide = dto.Guide;
         //int tourId = tourService.get(tour.Id);
-        tour.Location = locationService.GetBy(dto.Country, dto.City);
 
-        tourKeyPointService.Update(tourKeyPoints, tour);
         // tourKeyPointService.SetTypes(tourKeyPoints);
         
 
-       // imageService.SetTourId(images, tour);
-
-    }
-
-    //TODO Krstic ispravlja lel
-    public void Add(TourToControllerDto dto)
-    {
-        Tour newTour= Create(dto);
-        Tour tour = tourService.Save(newTour);
-        UpdateTourProperties(tour, dto);     
+       tourService.UpdateTourProperties(tour, dto, keyPoints);
 
     }
 
@@ -129,9 +112,9 @@ public class TourController
         return tourService.GetByStatus(guideId, status);
     }
 
-    public void Delete(int id)
+    public void Cancel(int id)
     {
-        tourService.Delete(id);
+        tourService.Cancel(id);
     }
 }
 

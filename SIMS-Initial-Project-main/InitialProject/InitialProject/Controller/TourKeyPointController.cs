@@ -72,5 +72,10 @@ namespace InitialProject.Controller
             }
 
         }
+
+        public List<TourKeyPoint> Create(List<string> tourKeyPointNames, Tour tour)
+        {
+            return tourKeyPointService.Create(tourKeyPointNames, tour);
+        }
     }
 }

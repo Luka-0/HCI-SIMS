@@ -112,5 +112,14 @@ public class TourKeyPointRepository:ITourKeyPointRepository
         
     }
 
+    public List<TourKeyPoint> GetAllByTour(int id)
+    {
+        using (var db = new UserContext())
+        {
+            return db.tourKeyPoints.Where(t=>t.Tour.Id==id).ToList();
+        }
+        
+    }
+
 
 }

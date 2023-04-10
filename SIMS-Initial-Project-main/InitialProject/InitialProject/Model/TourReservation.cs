@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace InitialProject.Model
 {
@@ -40,5 +41,6 @@ namespace InitialProject.Model
         {
             return Id.ToString() + " " + Tour.ToString() + " " + GuestNumber.ToString() + "\n";
         }
+       
     }
 }

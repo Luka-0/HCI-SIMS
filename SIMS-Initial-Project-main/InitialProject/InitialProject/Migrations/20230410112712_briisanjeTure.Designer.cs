@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230410112712_briisanjeTure")]
+    partial class briisanjeTure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -191,7 +193,7 @@ namespace InitialProject.Migrations
                     b.ToTable("Location");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.ReservationReschedulingRequest", b =>
+            modelBuilder.Entity("InitialProject.Model.ReservationRescheduling", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -200,10 +202,8 @@ namespace InitialProject.Migrations
                     b.Property<int>("AccommodationReservationId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool?>("Achievable")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Comment")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("NewEndingDate")
@@ -219,7 +219,7 @@ namespace InitialProject.Migrations
 
                     b.HasIndex("AccommodationReservationId");
 
-                    b.ToTable("ReservationReschedulingRequest");
+                    b.ToTable("ReservationRescheduling");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>
@@ -478,7 +478,7 @@ namespace InitialProject.Migrations
                     b.Navigation("Tour");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.ReservationReschedulingRequest", b =>
+            modelBuilder.Entity("InitialProject.Model.ReservationRescheduling", b =>
                 {
                     b.HasOne("InitialProject.Model.AccommodationReservation", "Reservation")
                         .WithMany()
