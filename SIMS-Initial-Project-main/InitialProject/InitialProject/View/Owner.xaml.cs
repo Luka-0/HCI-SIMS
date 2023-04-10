@@ -51,6 +51,11 @@ namespace InitialProject.View
         {
 
             OperationsContainer.Content = new OwnerReviews(Username);
-        }  
+        }
+
+        private void Button4_Click(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new ReschedulingRequestsHandler(Username);
+        }
     }
 }
