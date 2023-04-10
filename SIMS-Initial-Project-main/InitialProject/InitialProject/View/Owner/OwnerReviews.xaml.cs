@@ -74,10 +74,6 @@ namespace InitialProject.View
             AverageGradePlaceHolder.Text = average.ToString();
             GradeNumPlaceHolder.Text = GetGradeCount().ToString();
         }
-
-        //smatrala sam da nema potrebe da se pravi klasa koja bi imala polja za izracunavanje
-        //parametara titule, jer su u pitanju 2-3 polja, a napravila sam razdvojene funkcije
-        //kako bi funkcija za inicijalizaciju titule vlasnika imala jednu ulogu
         public double GetGradeSum() {
 
             double gradeSum = 0;

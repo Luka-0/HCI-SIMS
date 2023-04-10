@@ -30,10 +30,10 @@ namespace InitialProject.Service
                 iimageRepository.Save(image);
 
                 var db = new UserContext();
-                var tempRecord = db.image.Find(image.Id);
+                var existingImage = db.image.Find(image.Id);
 
                 //note: null values for Tour are allowed by database structure.
-                tempRecord.Accommodation = accommodation;
+                existingImage.Accommodation = accommodation;
 
                 db.SaveChanges();
             }

@@ -57,5 +57,12 @@ namespace InitialProject.View
         {
             OperationsContainer.Content = new ReschedulingRequestsHandler(Username);
         }
+
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            this.Close();
+        }
     }
 }

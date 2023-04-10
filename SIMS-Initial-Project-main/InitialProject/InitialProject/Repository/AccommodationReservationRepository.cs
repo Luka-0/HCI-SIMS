@@ -32,40 +32,8 @@ namespace InitialProject.Repository
                                  .ToList();
             }
 
-            /* foreach (var reservation in expiredReservations)
-             {
-                 reservation.Accommodation = GetAccommodation(reservation.Id);
-                 reservation.Guest = GetUser(reservation.Id);
-             }*/
-
             return expiredReservations;
         }
-
-       /* public Accommodation GetAccommodation(int reservationId)
-        {
-
-            Accommodation accommodation = new Accommodation();
-
-            using (var dbContext = new UserContext())
-            {
-                accommodation = (Accommodation)dbContext.accommodationReservation
-                                 .Where(a => a.Id == reservationId).Select(a => a.Accommodation).First();
-            }
-            return accommodation;
-        }*/
-
-      /*  public User GetUser(int reservationId)
-        {
-
-            User guest = new User();
-
-            using (var dbContext = new UserContext())
-            {
-                guest = (User)dbContext.accommodationReservation
-                                 .Where(a => a.Id == reservationId).Select(a => a.Guest).First();
-            }
-            return guest;
-        }*/
 
         public AccommodationReservation GetBy(int id)
         {
