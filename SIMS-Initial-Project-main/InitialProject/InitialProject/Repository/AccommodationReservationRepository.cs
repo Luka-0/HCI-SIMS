@@ -145,5 +145,17 @@ namespace InitialProject.Repository
             return accommodationReservations;
         }
 
+        public void UpdateScheduledDatesBy(int id, DateTime newBegginingDate, DateTime newEndingDate) {
+
+            AccommodationReservation accommodationReservation = new();
+
+            var db = new UserContext();
+            accommodationReservation = db.accommodationReservation.Find(id);
+
+            accommodationReservation.BegginingDate = newBegginingDate;
+            accommodationReservation.EndingDate = newEndingDate;
+            db.SaveChanges();
+        }
+
     }
 }

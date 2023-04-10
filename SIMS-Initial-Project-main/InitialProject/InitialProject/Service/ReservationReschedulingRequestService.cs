@@ -1,9 +1,12 @@
-﻿using InitialProject.Interface;
+﻿using InitialProject.Enumeration;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.ExceptionServices;
 using System.Security.RightsManagement;
 using System.Text;
@@ -11,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
-    internal class ReservationReschedulingRequestService
+    public class ReservationReschedulingRequestService
     {
         private readonly IReservationReschedulingRequestRepository IReservationReschedulingRequestRepository;
         private UserService UserService;
@@ -61,5 +64,29 @@ namespace InitialProject.Service
 
             return processedRequests;
         }
-     }
-}
+
+
+        public void DetermineResponse(int id, string comment, RequestState requestState){
+
+            this.IReservationReschedulingRequestRepository.UpdateCommentBy(id, comment);
+            this.IReservationReschedulingRequestRepository.UpdateStateBy(id, requestState);
+            this.UpdateReservationDates(id);
+        }
+
+        private void UpdateReservationDates(int requestId){
+
+            ReservationReschedulingRequest existingRequest = new ReservationReschedulingRequest();
+
+            existingRequest = this.IReservationReschedulingRequestRepository.GetBy(requestId);
+
+            int reservationId = existingRequest.Reservation.Id;
+
+            if (existingRequest.State == RequestState.Approved){
+
+                this.AccommodationReservationService.UpdateScheduledDatesBy(reservationId, existingRequest.NewStartingDate, existingRequest.NewEndingDate);
+            }
+        }
+    }
+ }
+    
+

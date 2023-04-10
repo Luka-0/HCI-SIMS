@@ -1,4 +1,5 @@
 ﻿using InitialProject.Dto;
+using InitialProject.Enumeration;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -28,6 +29,15 @@ namespace InitialProject.Controller
                 reservationReschedulingRequests.Add(new ReservationReschedulingRequestDto(request));
             }
             return reservationReschedulingRequests;
+        }
+
+        public void Respond(ReservationReschedulingResponseDto reservationReschedulingResponseDto) {
+        
+            string comment = reservationReschedulingResponseDto.Comment;
+            RequestState requestState = reservationReschedulingResponseDto.State;
+            int existingRequestId = reservationReschedulingResponseDto.RequestId;
+
+            this.reservationReschedulingRequestService.DetermineResponse(existingRequestId, comment, requestState);
         }
     }
 }

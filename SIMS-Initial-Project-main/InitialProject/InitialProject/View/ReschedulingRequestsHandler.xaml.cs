@@ -1,4 +1,6 @@
 ﻿using InitialProject.Controller;
+using InitialProject.Dto;
+using InitialProject.Enumeration;
 using InitialProject.Interface;
 using System;
 using System.Collections.Generic;
@@ -39,11 +41,21 @@ namespace InitialProject.View
             reschedulingRequests.ItemsSource = ReservationReschedulingRequestController.GetAllBy(OwnerUsername);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Approve_Click(object sender, RoutedEventArgs e)
         {
-            
-        } 
+            ReservationReschedulingRequestDto selectedRequest = reschedulingRequests.SelectedItem as ReservationReschedulingRequestDto;
 
-        
+            ReservationReschedulingResponseDto ownersResponse = new ReservationReschedulingResponseDto(RequestState.Approved, comment.Text, selectedRequest.RequestId);
+            ReservationReschedulingRequestController.Respond(ownersResponse);
+
+        }
+
+        private void Reject_Click(object sender, RoutedEventArgs e)
+        {
+            ReservationReschedulingRequestDto selectedRequest = reschedulingRequests.SelectedItem as ReservationReschedulingRequestDto;
+
+            ReservationReschedulingResponseDto ownersResponse = new ReservationReschedulingResponseDto(RequestState.Rejected, comment.Text, selectedRequest.RequestId);
+            ReservationReschedulingRequestController.Respond(ownersResponse);
+        }
     }
 }

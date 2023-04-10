@@ -12,17 +12,20 @@ namespace InitialProject.Dto
 {
     public class ReservationReschedulingRequestDto
     {
+        public int RequestId { get; set; }
         public int ReservationId { get; set; }
         public DateTime NewStartingDate { get; set; }
         public DateTime NewEndingDate { get; set; }
         public string Achievability { get; set; }
+
+
 
         public ReservationReschedulingRequestDto(ReservationReschedulingRequest reservationReschedulingRequest) {
 
             this.ReservationId = reservationReschedulingRequest.Reservation.Id;
             this.NewStartingDate = reservationReschedulingRequest.NewStartingDate;
             this.NewEndingDate = reservationReschedulingRequest.NewEndingDate;
-
+            this.RequestId = reservationReschedulingRequest.Id;
             this.Achievability = "RESERVED";
 
             if (reservationReschedulingRequest.Achievable) {

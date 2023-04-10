@@ -216,5 +216,10 @@ namespace InitialProject.Service
 
             return this.IAccommodationreservationRepository.GetAllBetween(startingDate, endingDate, owner);
         }
+
+        public void UpdateScheduledDatesBy(int id, DateTime newBegginingDate, DateTime newEndingDate) {
+
+            this.IAccommodationreservationRepository.UpdateScheduledDatesBy(id, newBegginingDate, newEndingDate);
+        }
     }
 }

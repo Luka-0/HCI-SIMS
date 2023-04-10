@@ -1,6 +1,8 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Enumeration;
 using InitialProject.Interface;
 using InitialProject.Model;
+using InitialProject.Service;
 using InitialProject.View;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -52,6 +54,43 @@ namespace InitialProject.Repository
 
             return reservationReschedulingRequests;
 
+        }
+
+        public void UpdateStateBy(int id, RequestState requestState)
+        {
+            ReservationReschedulingRequest  reservationReschedulingRequest = new();
+
+            var db = new UserContext();
+            reservationReschedulingRequest = db.reservationReschedulingRequest.Find(id);  
+
+            reservationReschedulingRequest.State = requestState;
+            db.SaveChanges();
+
+        }
+
+        public void UpdateCommentBy(int id, string comment)
+        {
+            ReservationReschedulingRequest reservationReschedulingRequest = new();
+
+            var db = new UserContext();
+            reservationReschedulingRequest = db.reservationReschedulingRequest.Find(id);
+
+            reservationReschedulingRequest.Comment = comment;
+            db.SaveChanges();
+
+        }
+
+        public ReservationReschedulingRequest GetBy(int id)
+        {
+            ReservationReschedulingRequest reservationReschedulingRequest = new();
+
+            using (UserContext db = new())
+            {
+                reservationReschedulingRequest = (ReservationReschedulingRequest)db.reservationReschedulingRequest
+                                                 .Include(t => t.Reservation)
+                                                 .Where(t => t.Id.Equals(id)).First();
+            }
+            return reservationReschedulingRequest;
         }
     }
 }
