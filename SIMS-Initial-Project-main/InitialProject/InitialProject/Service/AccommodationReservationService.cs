@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using InitialProject.Model;
-using InitialProject.Repository;
 using InitialProject.View;
 using InitialProject.Interface;
 using InitialProject.Dto;
@@ -67,8 +65,9 @@ namespace InitialProject.Service
         // Stajic
         public List<StartEndDateDto> GetAvailableDates(Accommodation accommodation, DateTime startingDate, DateTime endingDate, int daysToStay)
         {
-            if (IsViolatingMinReservatingDays(accommodation.MinimumReservationDays, startingDate, endingDate))
+            if (daysToStay < accommodation.MinimumReservationDays)
             {
+                MessageBox.Show("Your reservation is not long enough for this accommodation");
                 return null;
             }
 
@@ -98,7 +97,11 @@ namespace InitialProject.Service
                 }
             }
 
-            if (datesToChose.Count == 0) return null;
+            if (datesToChose.Count == 0)
+            {
+                MessageBox.Show("Accommodation is full during those days but we can reccommend another option");
+                return null;
+            }
 
             return datesToChose;
 
@@ -164,12 +167,10 @@ namespace InitialProject.Service
             return true;
         }
 
-
-
-        public bool IsViolatingMinReservatingDays(int minimumReservationDays, DateTime startingDate, DateTime endingDate)
+        /*public bool IsViolatingMinReservatingDays(int minimumReservationDays, DateTime startingDate, DateTime endingDate)
         {
             return endingDate.Day - startingDate.Day + 1 < minimumReservationDays;
-        }
+        }*/
 
         public void Add(AccommodationReservation accommodationReservation)
         {

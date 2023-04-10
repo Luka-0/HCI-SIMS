@@ -22,8 +22,10 @@ namespace InitialProject.View
     public partial class EditReservation : Window
     {
         private readonly AccommodationReservationController AccommodationReservationController = new();
+        private readonly ReservationRescheduleController ReservationRescheduleController = new();
 
         public ObservableCollection<AccommodationReservation> ReservationsToShow { get; set; }
+        public ObservableCollection<ReservationReschedule> ReschedulingsToShow { get; set; }
 
         private User User { get; set; }
 
@@ -65,7 +67,7 @@ namespace InitialProject.View
             RefreshDataGrid(AccommodationReservationController.GetBy(User));
         }
 
-        private bool IsViolatingAnyUIControl(AccommodationReservation accommodationReservation)
+        private bool IsViolatingAnyUIControl(AccommodationReservation accommodationReservation, bool clickedPostpone = false)
         {
             if(accommodationReservation == null)
             {
@@ -73,6 +75,14 @@ namespace InitialProject.View
                 return true;
             }
 
+            if (clickedPostpone)
+            {
+                if(int.Parse(DaysToPostponeTB.Text) <= 0)
+                {
+                    MessageBox.Show("Please enter a proper number of days to postpone by");
+                    return true;
+                }
+            }
 
             return false;
         }
@@ -83,6 +93,22 @@ namespace InitialProject.View
             guest1.Show();
 
             Close();
+        }
+
+        private void Postpone_Click(object sender, RoutedEventArgs e)
+        {
+            AccommodationReservation accommodationReservation = (AccommodationReservation)ReservationsGrid.SelectedItem;
+
+            if (IsViolatingAnyUIControl(accommodationReservation, true)) return;
+
+            int postponeDays = int.Parse(DaysToPostponeTB.Text);
+
+            DateTime newStartingDate = accommodationReservation.BegginingDate.AddDays(postponeDays);
+            DateTime newEndingDate = accommodationReservation.EndingDate.AddDays(postponeDays);
+
+            ReservationReschedule reservationReschedule = new(Enumeration.RequestState.Waiting, accommodationReservation, newStartingDate, newEndingDate);
+
+            ReservationRescheduleController.Save(reservationReschedule);
         }
     }
 }

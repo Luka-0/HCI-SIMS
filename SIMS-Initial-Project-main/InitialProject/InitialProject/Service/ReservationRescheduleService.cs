@@ -1,13 +1,15 @@
 ﻿using InitialProject.Interface;
+using InitialProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
-    class ReservationRescheduleService
+    internal class ReservationRescheduleService
     {
         private readonly IReservationRescheduleRepository IReservationRescheduleRepository;
 
@@ -16,6 +18,10 @@ namespace InitialProject.Service
             IReservationRescheduleRepository = iReservationRescheduleRepository;
         }
 
+        public void Save(ReservationReschedule reservationReschedule)
+        {
+            IReservationRescheduleRepository.Save(reservationReschedule);
+        }
 
     }
 }
