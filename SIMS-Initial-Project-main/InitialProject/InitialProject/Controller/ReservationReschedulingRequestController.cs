@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Dto;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using System;
@@ -16,6 +17,17 @@ namespace InitialProject.Controller
         public void Save(ReservationReschedulingRequest reservationReschedulingRequest)
         {
             this.reservationReschedulingRequestService.Save(reservationReschedulingRequest);
+        }
+
+        public List<ReservationReschedulingRequestDto> GetAllBy(string ownerUsername) {
+
+            List<ReservationReschedulingRequestDto> reservationReschedulingRequests = new List<ReservationReschedulingRequestDto>();
+
+            foreach (var request in reservationReschedulingRequestService.GetAllBy(ownerUsername)) {
+
+                reservationReschedulingRequests.Add(new ReservationReschedulingRequestDto(request));
+            }
+            return reservationReschedulingRequests;
         }
     }
 }

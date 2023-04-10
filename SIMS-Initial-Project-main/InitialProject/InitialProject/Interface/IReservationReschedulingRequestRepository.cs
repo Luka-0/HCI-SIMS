@@ -10,5 +10,7 @@ namespace InitialProject.Interface
     interface IReservationReschedulingRequestRepository
     {
         public void Save(ReservationReschedulingRequest reservationReschedulingRequest);
-    }
+        public List<ReservationReschedulingRequest> GetAllBy(User owner);
+        
+     }
 }

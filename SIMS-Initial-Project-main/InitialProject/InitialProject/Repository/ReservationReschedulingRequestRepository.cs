@@ -1,6 +1,8 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Interface;
 using InitialProject.Model;
+using InitialProject.View;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +34,24 @@ namespace InitialProject.Repository
 
             db.Add(reservationReschedulingRequest);
             db.SaveChanges();
+        }
+
+        public List<ReservationReschedulingRequest> GetAllBy(User owner) {
+
+            List<ReservationReschedulingRequest> reservationReschedulingRequests = new();
+
+            using (UserContext db = new())
+            {
+                reservationReschedulingRequests = db.reservationReschedulingRequest.
+                    Include(t => t.Reservation)
+                        .ThenInclude(t => t.Accommodation)
+                            .ThenInclude(t => t.Owner).Where(t => t.Reservation.Accommodation.Owner.Equals(owner))
+                    .Include(t => t.Reservation)
+                        .ThenInclude(t => t.Guest).ToList();
+            }
+
+            return reservationReschedulingRequests;
+
         }
     }
 }

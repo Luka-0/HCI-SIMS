@@ -21,6 +21,7 @@
         <Frame x:Name="OperationsContainer" Height="723" Margin="213,34,60,0" VerticalAlignment="Top" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.RowSpan="2"/>
         <Button Content="Main Page" HorizontalAlignment="Left" Height="44" Margin="36,78,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button_Click_2" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" />
         <Button Content="Reviews" HorizontalAlignment="Left" Height="50" Margin="36,271,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button3_Click" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.RowSpan="2"/>
+        <Button Content="Rescheduling Requests" HorizontalAlignment="Left" Height="50" Margin="36,37,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button4_Click" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.Row="1"/>
 
 
     </Grid>
