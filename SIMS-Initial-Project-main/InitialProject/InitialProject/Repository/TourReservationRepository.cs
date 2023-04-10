@@ -129,6 +129,21 @@ namespace InitialProject.Repository
             }
         }
 
+        public void Cancel(List<TourReservation> reservations)
+        {
+            using (var db = new UserContext())
+            {
+                foreach (TourReservation reservation in reservations)
+                {
+                    TourReservation tempReservation = db.tourReservation.Find(reservation.Id);
+                    tempReservation.Tour = null;
+                    
+                }
+                db.SaveChanges();
+            }
+            
+        }
+
 
     }
 }

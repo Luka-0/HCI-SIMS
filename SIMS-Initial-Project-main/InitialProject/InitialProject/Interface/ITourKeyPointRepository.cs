@@ -19,5 +19,6 @@ namespace InitialProject.Interface
         public void StartTour(int id);
         public void Reach(int id);
 
+        public List<TourKeyPoint> GetAllByTour(int id);
     }
 }

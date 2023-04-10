@@ -48,5 +48,30 @@ namespace InitialProject.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite($"Data Source={path}");
 
+        // protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     modelBuilder.Entity<TourReservation>()
+        //         .HasOne(tr => tr.Tour)
+        //         .WithMany()
+        //         .OnDelete(DeleteBehavior.Cascade);
+        // }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Tour>(entity =>
+            {
+                entity.HasMany(d => d.images)
+                    .WithOne(p => p.Tour)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<Tour>(entity =>
+            {
+                entity.HasMany(d => d.TourKeyPoints)
+                    .WithOne(p => p.Tour)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+        }
+
     }
 }

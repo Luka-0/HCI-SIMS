@@ -62,11 +62,18 @@ namespace InitialProject.Service
             }
             return vouchers;
         }
-        
 
 
-
-
-
+        public void GiveOut(List<User?> users)
+        {
+            List<Voucher> vouchers = users.Select(user => new Voucher(user)).ToList();
+            
+            foreach (User? user in users)
+            {
+                Voucher voucher = new Voucher(user);
+                _voucherRepository.Save(voucher);
+                _voucherRepository.Update(voucher, user);
+            }
+        }
     }
 }

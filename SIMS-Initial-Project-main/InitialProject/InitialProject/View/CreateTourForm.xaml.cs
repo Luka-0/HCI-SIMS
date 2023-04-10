@@ -26,9 +26,11 @@ namespace InitialProject
 
         public User LoggedInGuide { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
-        public TourController tourController { get; set; }= new TourController();
+        public TourController TourController{ get; set; }= new TourController();
+        public TourKeyPointController TourKeyPointController{ get; set; } = new TourKeyPointController();
 
-        
+
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -99,7 +101,10 @@ namespace InitialProject
             tourToControllerDto.Duration = SetDuration(Duration.Text);
             tourToControllerDto.ImageURLs = Separate(ImageURLs.Text);
             tourToControllerDto.Guide = LoggedInGuide;
-            tourController.Add(tourToControllerDto);
+
+            Tour newTour = TourController.Create(tourToControllerDto);
+            List<TourKeyPoint> newKeyPoints=  TourKeyPointController.Create(tourToControllerDto.TourKeyPointNames, newTour);
+            TourController.UpdateTourProperties(newTour,tourToControllerDto, newKeyPoints);
         }
 
         private void ViewTodaysTours(object sender, RoutedEventArgs e)

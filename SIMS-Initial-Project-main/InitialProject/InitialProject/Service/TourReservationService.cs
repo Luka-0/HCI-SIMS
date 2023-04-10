@@ -14,8 +14,11 @@ namespace InitialProject.Service
 {
     public class TourReservationService
     {
+        private readonly VoucherService voucherService= new VoucherService(new VoucherRepository());
+
         private readonly ITourReservationRepository _tourReservationRepository;
 
+        
         public TourReservationService(ITourReservationRepository repository)
         {
             _tourReservationRepository = repository;
@@ -105,5 +108,16 @@ namespace InitialProject.Service
             TourReservation reservation = GetByPAVLE(id);
             return reservation.ArrivalPoint.Name;
         }
+
+        public void GiveOutVouchers(int id)
+        {
+            List<TourReservation> reservations = GetByTour(id);
+
+            List<User?> users = reservations.Select(reservation => reservation.BookingGuest).ToList();
+
+            voucherService.GiveOut(users);
+           // _tourReservationRepository.Cancel(reservations);
+        }
+
     }
 }

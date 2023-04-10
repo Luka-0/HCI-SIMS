@@ -49,5 +49,26 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
+        public void SaveMultiple(List<Voucher> vouchers)
+        {
+            var db = new UserContext();
+            foreach (var voucher in vouchers)
+            {
+                User existingUser = db.users.Find(voucher.User.Id);
+                db.users.Attach(existingUser);
+                db.Add(voucher);
+            }
+            db.SaveChanges();
+        }
+
+        public void Update(Voucher voucher, User? user)
+        {
+            var db = new UserContext();
+            Voucher tempVoucher = db.voucher.Find(voucher.Id);
+            tempVoucher.User = user;
+            db.SaveChanges();
+
+        }
+
     }
 }

@@ -138,11 +138,13 @@ namespace InitialProject.Repository
 
         public void Delete(int id)
         {
-            Tour tour = GetById(id);
             using (var dbContext = new UserContext())
             {
+                Tour tour = dbContext.tour.SingleOrDefault(ttt => ttt.Id == id);
+
                 dbContext.tour.Remove(tour);
-                dbContext.SaveChanges();
+                dbContext.SaveChangesAsync();
+                //dbContext.SaveChanges();
             }
             
         }

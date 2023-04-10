@@ -12,6 +12,7 @@ namespace InitialProject.Model
     [Table("Voucher")]
     public class Voucher
     {
+        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -29,6 +30,19 @@ namespace InitialProject.Model
 
         [Required]
         public VoucherObtainedReason ObtainedReason { get; set; }
+
+        public Voucher(User user)
+        {
+            //User = user;
+            ReceivedDate = DateTime.Today;
+            ExpirationDate = ReceivedDate.AddYears(1);
+            ObtainedReason = VoucherObtainedReason.CanceledTour;
+        }
+
+        public Voucher()
+        {
+        }
+
 
         public override string ToString()
         {

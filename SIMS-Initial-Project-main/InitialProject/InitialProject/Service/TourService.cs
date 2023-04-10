@@ -15,6 +15,9 @@ namespace InitialProject.Service;
 public class TourService
 {
     private readonly TourReservationService tourReservationService = new TourReservationService(new TourReservationRepository());
+    //private readonly TourKeyPointService tourKeyPointService = new TourKeyPointService(new TourKeyPointRepository());
+    private readonly LocationService locationService = new LocationService(new LocationRepository());
+    private readonly ImageService imageService = new ImageService(new ImageRepository());
     private readonly ITourRepository _tourRepository;
 
     public TourService(ITourRepository repository)
@@ -155,8 +158,19 @@ public class TourService
         return finishedTours;
     }
 
-    public void Delete(int id)
+    public void Cancel(int id)
     {
+        tourReservationService.GiveOutVouchers(id);
         _tourRepository.Delete(id);
+
+    }
+
+    public void UpdateTourProperties(Tour tour, TourToControllerDto dto, List<TourKeyPoint> keyPoints)
+    {
+        tour.Guide = dto.Guide;
+        tour.Location = locationService.GetBy(dto.Country, dto.City);
+        List<Image> images = imageService.Save(dto.ImageURLs);
+        imageService.SetTourId(images, tour);
+
     }
 }

@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230410111827_brisanjeTure")]
+    partial class brisanjeTure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -469,7 +471,8 @@ namespace InitialProject.Migrations
                     b.HasOne("InitialProject.Model.Tour", "Tour")
                         .WithMany("images")
                         .HasForeignKey("TourId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("TourId");
 
                     b.Navigation("Accommodation");
 
@@ -507,7 +510,8 @@ namespace InitialProject.Migrations
                     b.HasOne("InitialProject.Model.Tour", "Tour")
                         .WithMany("TourKeyPoints")
                         .HasForeignKey("tourID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("TourID");
 
                     b.Navigation("Tour");
                 });

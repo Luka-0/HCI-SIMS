@@ -85,10 +85,11 @@ public class TourKeyPointService
     public void Update(List<TourKeyPoint> tourKeyPoints, Tour tour)
     {
         {
-            foreach (var keyPoint in tourKeyPoints)
-            {
-                _tourKeyPointsRepository.Update(keyPoint,tour);
-            }
+            // foreach (var keyPoint in tourKeyPoints)
+            // {
+            //     _tourKeyPointsRepository.Update(keyPoint,tour);
+            // }
+            tourKeyPoints.ForEach(keyPoint => _tourKeyPointsRepository.Update(keyPoint, tour));
         }
     }
 
@@ -123,6 +124,15 @@ public class TourKeyPointService
     }
 
 
+    public List<TourKeyPoint> Create(List<string> tourKeyPointNames, Tour tour)
+    {
+        List<TourKeyPoint> keyPoints = Save(tourKeyPointNames);
+        Update(keyPoints, tour);
+        return GetAllByTour(tour.Id);
+    }
 
-
+    private List<TourKeyPoint> GetAllByTour(int id)
+    {
+       return _tourKeyPointsRepository.GetAllByTour(id);
+    }
 }
