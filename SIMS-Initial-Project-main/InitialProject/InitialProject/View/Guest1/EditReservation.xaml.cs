@@ -42,10 +42,10 @@ namespace InitialProject.View
                 this.Close();
             }
 
-            RefreshDataGrid(allReservations);
+            RefreshReservationDataGrid(allReservations);
         }
 
-        private void RefreshDataGrid(List<AccommodationReservation> accommodationReservations)
+        private void RefreshReservationDataGrid(List<AccommodationReservation> accommodationReservations)
         {
             ReservationsToShow = new ObservableCollection<AccommodationReservation>();
             ReservationsGrid.ItemsSource = ReservationsToShow;
@@ -64,7 +64,7 @@ namespace InitialProject.View
             if (!AccommodationReservationController.Delete(accommodationReservation))
                 MessageBox.Show("You can't cancel that reservation");
 
-            RefreshDataGrid(AccommodationReservationController.GetBy(User));
+            RefreshReservationDataGrid(AccommodationReservationController.GetBy(User));
         }
 
         private bool IsViolatingAnyUIControl(AccommodationReservation accommodationReservation, bool clickedPostpone = false)
