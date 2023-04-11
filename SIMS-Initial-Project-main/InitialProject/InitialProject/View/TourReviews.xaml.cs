@@ -43,7 +43,7 @@ namespace InitialProject.View
 
         public void GetReviews(int id)
         {
-            reviews =  TourReviewController.GetByTour(id);
+            reviews =  TourReviewController.GetManyByTour(id);
 
             foreach (TourReview review in reviews)
             {

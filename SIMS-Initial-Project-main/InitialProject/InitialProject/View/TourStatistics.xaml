@@ -7,6 +7,36 @@
         mc:Ignorable="d"
         Title="Tour Statistics" Height="720" Width="1080">
     <Grid>
-        
+        <TextBlock Text="{Binding Path=Statistics.TourName}" HorizontalAlignment="Center"></TextBlock>
+        <Grid  DataContext="{Binding Path=Statistics}" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="1">Youth:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="2">Middle aged:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="3">Old :</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="4">Used voucher(%):</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="5">Didn't use a voucher(%):</TextBlock>
+
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=YouthCount}" IsReadOnly="True"></TextBox>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=MiddleAgedCount}" IsReadOnly="True"></TextBox>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=OldPeopleCount}" IsReadOnly="True"></TextBox>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=WithVouchers}" IsReadOnly="True"></TextBox>
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=WithoutVouchers}" IsReadOnly="True"></TextBox>
+
+
+
+        </Grid>
     </Grid>
 </Window>

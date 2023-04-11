@@ -28,9 +28,9 @@ namespace InitialProject.Controller
             tourReviewService.Save(review);
         }
 
-        public List<TourReview> GetByTour(int id)
+        public List<TourReview> GetManyByTour(int id)
         {
-            return tourReviewService.GetByTour(id);
+            return tourReviewService.GetManyByTour(id);
         }
 
 

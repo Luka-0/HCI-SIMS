@@ -23,31 +23,46 @@ namespace InitialProject.View
     public partial class TourStatistics : Window
     {   
         public TourReviewController TourReviewController = new TourReviewController();
-        public UserController UserController = new UserController();
-        public TourStatisticsDto Statistics { get; set; }
+        public TourStatisticsDto Statistics { get; set; } = new TourStatisticsDto();
         public TourStatistics(int id, string tourName)
         {
-            InitializeComponent();
 
-            List<TourReview> reviews = TourReviewController.GetByTour(id);
+            List<TourReview> reviews = TourReviewController.GetManyByTour(id);
             Statistics = new TourStatisticsDto();
             SetStatistics(reviews);
-
+            Statistics.TourName = tourName;
             this.DataContext = this;
+            InitializeComponent();
+
         }
 
-        private void SetVoucherUsagePercentage(List<TourReview> reviews, List<User> tourists)
+        private void SetVoucherUsagePercentage(List<TourReservation> reservations)
         {
+            int voucherCount = 0;
+            int total = reservations.Count;
+            if (total > 0)
+            {
+                foreach (TourReservation reservation in reservations)
+                {
+                    if (reservation.Voucher != null) voucherCount++;
+                }
+                Statistics.WithVouchers = (int)((double)voucherCount / (double)total * 100.0);
+                Statistics.WithoutVouchers = 100 - Statistics.WithVouchers;
 
+            }
         }
         
         private void SetStatistics(List<TourReview> reviews)
         {
-            List<User> tourists = reviews.Select(r => r.Reservation.BookingGuest).ToList();
+            
 
-            foreach (User user in tourists)
+            List<TourReservation> reservations = reviews.Select(t=>t.Reservation).ToList();
+
+            List<User?> tourists = reviews.Select(r => r.Reservation.BookingGuest).ToList();
+
+            foreach (var user in tourists)
             {
-                if (user.Age < 18)
+                if (user != null && user.Age < 18)
                 {
                     Statistics.YouthCount++;
                 }
@@ -63,7 +78,7 @@ namespace InitialProject.View
                     }
                 }
             }
-            SetVoucherUsagePercentage(reviews, tourists);
+            SetVoucherUsagePercentage(reservations);
             
             
         }
