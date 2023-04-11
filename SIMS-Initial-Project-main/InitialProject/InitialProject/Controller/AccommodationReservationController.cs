@@ -54,5 +54,9 @@ namespace InitialProject.Controller
         {
             return AccommodationReservationService.Delete(accommodationReservation);
         }
+        public List<AccommodationReservation> GetAllCancelled(string ownerUsername) {
+
+            return this.AccommodationReservationService.GetAllCancelled(ownerUsername);
+        }
     }
 }

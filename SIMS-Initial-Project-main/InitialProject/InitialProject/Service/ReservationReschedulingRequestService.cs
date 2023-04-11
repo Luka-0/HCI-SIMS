@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.ExceptionServices;
+using System.Security.AccessControl;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,10 +47,11 @@ namespace InitialProject.Service
             List<AccommodationReservation> existingReservations = new List<AccommodationReservation>();
 
             List<ReservationReschedulingRequest> processedRequests = new List<ReservationReschedulingRequest>();
-
+            
+  
             foreach (var request in requests) {
 
-                existingReservations = AccommodationReservationService.GetAllBetween(request.NewStartingDate, request.NewEndingDate, ownerUsername);
+                existingReservations = AccommodationReservationService.GetAllPreservedBetween(request, ownerUsername);
 
                 if (existingReservations.Count() == 0)
                 {

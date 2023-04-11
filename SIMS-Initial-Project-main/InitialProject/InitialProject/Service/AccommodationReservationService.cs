@@ -26,19 +26,19 @@ namespace InitialProject.Service
 
         public List<AccommodationReservation> getAllExpiredlBy(DateTime date, string ownerUsername) {
 
-            ProcessedDate processedDate = new ProcessedDate();
+            //ProcessedDate processedDate = new ProcessedDate();
             //  Finished-->  TODO: napraviti interface za USER repository, povezati ga sa servisom i ovde pozvati taj servis
             User owner = UserService.GetBy(ownerUsername);
 
-            processedDate = SeparateDate(date);
+           // processedDate = SeparateDate(date);
 
             List<AccommodationReservation> expiredReservations = new List<AccommodationReservation>();
-            expiredReservations = IAccommodationreservationRepository.GetAllExpiredBy(processedDate.Day, processedDate.Month, processedDate.Year, owner);
+            expiredReservations = IAccommodationreservationRepository.GetAllExpiredBy(date.Day, date.Month, date.Year, owner);
 
             return expiredReservations;
             
             }
-
+        /*
         public ProcessedDate SeparateDate(DateTime date)
             {
             ProcessedDate processedDate = new ProcessedDate();  
@@ -55,7 +55,7 @@ namespace InitialProject.Service
             processedDate.Year = Int32.Parse(parts[2]);
 
             return processedDate;
-            }
+            }*/
 
         public AccommodationReservation GetBy(int id) {
 
@@ -210,16 +210,47 @@ namespace InitialProject.Service
 
 
         //Aleksandra
-        public List<AccommodationReservation> GetAllBetween(DateTime startingDate, DateTime endingDate, string ownerUsername) {
+        public List<AccommodationReservation> GetAllPreservedBetween(ReservationReschedulingRequest reservationReschedulingRequest, string ownerUsername) {
+
+            int reservedAccommodationId;
+            List<AccommodationReservation> preservedReservations = new List<AccommodationReservation>();
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
 
             User owner = this.UserService.GetBy(ownerUsername);
 
-            return this.IAccommodationreservationRepository.GetAllBetween(startingDate, endingDate, owner);
-        }
+            int accommodationId = reservationReschedulingRequest.Reservation.Accommodation.Id;
+            int reservationId = reservationReschedulingRequest.Reservation.Id;
+            DateTime newStartingDate = reservationReschedulingRequest.NewStartingDate;
+            DateTime newEndingDate = reservationReschedulingRequest.NewEndingDate;
 
+            reservations = this.IAccommodationreservationRepository.GetAllBetween(newStartingDate, newEndingDate, owner);
+         
+
+            foreach (var reservation in reservations) {
+
+                reservedAccommodationId = reservation.Accommodation.Id;
+
+                if (!reservation.Cancelled && reservedAccommodationId == accommodationId && reservationId != reservation.Id) {
+
+                    preservedReservations.Add(reservation);
+                }
+            }
+            return preservedReservations;
+        }
+        //aleksandra
         public void UpdateScheduledDatesBy(int id, DateTime newBegginingDate, DateTime newEndingDate) {
 
             this.IAccommodationreservationRepository.UpdateScheduledDatesBy(id, newBegginingDate, newEndingDate);
         }
+        //aleksandra
+        public List<AccommodationReservation> GetAllCancelled(string ownerUsername) {
+
+            User owner = UserService.GetBy(ownerUsername);
+
+            return this.IAccommodationreservationRepository.GetAllCancelled(owner);
+        }
+        
+
+
     }
 }

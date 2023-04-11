@@ -11,14 +11,12 @@ namespace InitialProject.Interface
     interface IAccommodationReservationRepository
     {
         public List<AccommodationReservation> GetAllExpiredBy(int day, int month, int year, User owner);
-        //public Accommodation GetAccommodation(int reservationId);
-        //public User GetUser(int reservationId);
         public AccommodationReservation GetBy(int id);
         public List<AccommodationReservation> GetAllBetween(DateTime startingDate, DateTime endingDate, User owner);
         public void UpdateScheduledDatesBy(int id, DateTime newBegginingDate, DateTime newEndingDate);
+        public List<AccommodationReservation> GetAllCancelled(User owner);
 
-
-        // Stajic
+         // Stajic
         public void Save(AccommodationReservation accommodationReservation);
         public List<AccommodationReservation> GetByAccommodation(int id);
         public List<AccommodationReservation> GetBy(User user);

@@ -1,5 +1,6 @@
 ﻿using InitialProject.Controller;
 using InitialProject.Dto;
+using InitialProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace InitialProject.View
     public partial class Notifications : Page
     {
         GuestReviewController GuestReviewController = new GuestReviewController();
+        AccommodationReservationController AccommodationReservationController = new AccommodationReservationController();
 
         public string OwnerUsername;
 
@@ -36,36 +38,60 @@ namespace InitialProject.View
 
         public void LoadNotifications() {
 
-            List<ExpiredReservationDto> records = new List<ExpiredReservationDto>();
-            records = GuestReviewController.LoadExpiredReservations(OwnerUsername);
+            LoadExpiredReservationsNotifications();
+            LoadCancelledReservationNotifications();
 
-            if (records.Count == 0) {
+        }
+
+        public void LoadExpiredReservationsNotifications() {
+
+            List<ExpiredReservationDto> expiredReservations = new List<ExpiredReservationDto>();
+            expiredReservations = GuestReviewController.LoadExpiredReservations(OwnerUsername);
+
+            if (expiredReservations.Count == 0) {
                 notifications.Items.Clear();
                 return;
             }
 
             string message;
 
-            foreach (ExpiredReservationDto record in records) {
+            foreach (ExpiredReservationDto reservation in expiredReservations) {
 
-                message = PrepareMessage(record);
+                message = PrepareMessage(reservation);
                 notifications.Items.Add(message);   
             }
         }
 
-        public string PrepareMessage(ExpiredReservationDto record) {
+        public string PrepareMessage(ExpiredReservationDto reservation) {
 
             DateTime todaysDate = DateTime.UtcNow.Date;
-            int daysLeft = 5 - (todaysDate.Day - record.EndingDate.Day);
+            int daysLeft = 5 - (todaysDate.Day - reservation.EndingDate.Day);
 
             string message;
 
             if (daysLeft == 1)
             {
-                return message = "Reservation "+ record.ReservationId +" has expired: \n   " + daysLeft.ToString() + " day left to rate guest: " + record.GuestUsername;
+                return message = "Reservation "+ reservation.ReservationId +" has expired: \n   " + daysLeft.ToString() + " day left to rate guest: " + reservation.GuestUsername;
             }
 
-            return message = "Reservation "+ record.ReservationId +" has expired: \n   " + daysLeft.ToString() + " days left to rate guest: " + record.GuestUsername;
+            return message = "Reservation "+ reservation.ReservationId +" has expired: \n   " + daysLeft.ToString() + " days left to rate guest: " + reservation.GuestUsername;
+        }
+
+        public void LoadCancelledReservationNotifications() {
+
+            List<AccommodationReservation> cancelledReservations = new List<AccommodationReservation>();
+            cancelledReservations = AccommodationReservationController.GetAllCancelled(OwnerUsername);
+
+            List<string> cancelledReservationsNotifications = new List<string>();
+
+            foreach (var reservation in cancelledReservations)
+            {
+
+                cancelledReservationsNotifications.Add("Reservation: " + reservation.Id + "has been cancelled.");
+            }
+
+            cancellationNotification.ItemsSource = cancelledReservationsNotifications;
+
         }
     }
 }

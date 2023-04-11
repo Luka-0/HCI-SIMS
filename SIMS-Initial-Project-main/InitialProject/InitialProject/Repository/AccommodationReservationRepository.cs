@@ -125,5 +125,22 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
+        public List<AccommodationReservation> GetAllCancelled(User owner) {
+
+            List<AccommodationReservation> cancelledReservations = new List<AccommodationReservation>();
+
+            using (var dbContext = new UserContext())
+            {
+                cancelledReservations = dbContext.accommodationReservation
+                                            .Where(ar => ar.Cancelled == true)
+                                           .Include(r => r.Accommodation)
+                                                .ThenInclude(r => r.Owner).Where(t => t.Accommodation.Owner.Equals(owner))
+                                           .Include(r => r.Guest)
+                                           .ToList();
+            }
+            return cancelledReservations;
+
+        }
+
     }
 }
