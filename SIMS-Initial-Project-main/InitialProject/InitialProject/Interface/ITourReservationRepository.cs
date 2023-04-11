@@ -10,7 +10,6 @@ namespace InitialProject.Interface
     public interface ITourReservationRepository
     {
         public List<TourReservation> GetAll();
-        public TourReservation GetById(int id);
         public List<TourReservation> GetByTour(Tour tour);
         public List<TourReservation> GetByGuest(User user);
         public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber);
@@ -18,7 +17,7 @@ namespace InitialProject.Interface
         public List<TourReservation> GetByTour(int id);
         public void SetArrivalKeyPoint(TourKeyPoint keyPoint, int id);
 
-        public TourReservation GetByPAVLE(int id);
-        public void Cancel(List<TourReservation> reservations);
+        public TourReservation GetById(int id);
+        public void Delete(List<TourReservation> reservations);
     }
 }

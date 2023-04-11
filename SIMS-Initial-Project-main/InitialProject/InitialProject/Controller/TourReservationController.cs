@@ -56,14 +56,14 @@ namespace InitialProject.Controller
             return tourReservationService.GetByTour(id);
         }
 
-        public void SetArrivalKeyPoint(TourKeyPoint keyPoint, int reservationId)     //possibly not clean
+        public void SetArrivalKeyPoint(TourKeyPoint keyPoint, int reservationId)    
         {
             tourReservationService.SetArrivalKeyPoint(keyPoint, reservationId);
         }
 
-        public TourReservation GetByPAVLE(int id)
+        public TourReservation GetById(int id)
         {
-            return tourReservationService.GetByPAVLE(id);
+            return tourReservationService.GetById(id);
         }
 
         public string GetArrivalKeyPointName(int id)

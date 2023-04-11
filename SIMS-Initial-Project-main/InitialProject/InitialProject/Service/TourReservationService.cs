@@ -100,14 +100,9 @@ namespace InitialProject.Service
             _tourReservationRepository.SetArrivalKeyPoint(keyPoint, id);
         }
 
-        public TourReservation GetByPAVLE(int id)
-        {
-            return _tourReservationRepository.GetByPAVLE(id);
-        }
-
         public string GetArrivalKeyPointName(int id)
         {
-            TourReservation reservation = GetByPAVLE(id);
+            TourReservation reservation = GetById(id);
             return reservation.ArrivalPoint.Name;
         }
 
@@ -118,7 +113,7 @@ namespace InitialProject.Service
             List<User?> users = reservations.Select(reservation => reservation.BookingGuest).ToList();
 
             voucherService.GiveOut(users);
-            // _tourReservationRepository.Cancel(reservations);
+             _tourReservationRepository.Delete(reservations);
         }
 
         public int getGuestNumber(int id)

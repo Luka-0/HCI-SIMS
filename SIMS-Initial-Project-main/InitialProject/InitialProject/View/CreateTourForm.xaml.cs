@@ -111,7 +111,7 @@ namespace InitialProject
         {
              ShowTours showTours = new ShowTours(LoggedInGuide);
              showTours.Show();
-             Close(); 
+              
         }
 
         private void ShowTours(object sender, RoutedEventArgs e)

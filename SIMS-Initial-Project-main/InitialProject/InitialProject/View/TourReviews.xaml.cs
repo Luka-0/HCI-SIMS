@@ -47,7 +47,7 @@ namespace InitialProject.View
 
             foreach (TourReview review in reviews)
             {
-                TourReservation reservation = TourReservationController.GetByPAVLE(review.Reservation.Id);
+                TourReservation reservation = TourReservationController.GetById(review.Reservation.Id);
                 String keyPointName= TourReservationController.GetArrivalKeyPointName(reservation.Id);
                 basicTourReviews.Add(new BasicTourReviewDto(reservation.BookingGuest.Username, review.Valid, review, keyPointName));
             }

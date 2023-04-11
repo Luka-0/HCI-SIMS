@@ -26,7 +26,7 @@ namespace InitialProject.Repository
             return reservations;
         }
 
-        public TourReservation GetById(int id)
+      /*  public TourReservation GetById(int id)
         {
             TourReservation reservation = new TourReservation();
 
@@ -38,7 +38,7 @@ namespace InitialProject.Repository
             }
             return reservation;
         }
-
+        */
         public List<TourReservation> GetByTour(Tour tour)
         {
             List<TourReservation> reservations = new List<TourReservation>();
@@ -114,7 +114,7 @@ namespace InitialProject.Repository
             }
         }
 
-        public TourReservation GetByPAVLE(int id)
+        public TourReservation GetById(int id)
         {
             using (var db = new UserContext())
             {
@@ -129,17 +129,15 @@ namespace InitialProject.Repository
             }
         }
 
-        public void Cancel(List<TourReservation> reservations)
+        public void Delete(List<TourReservation> reservations)
         {
             using (var db = new UserContext())
             {
                 foreach (TourReservation reservation in reservations)
                 {
-                    TourReservation tempReservation = db.tourReservation.Find(reservation.Id);
-                    tempReservation.Tour = null;
-                    
+                    db.tourReservation.Remove(reservation);
                 }
-                db.SaveChanges();
+                db.SaveChangesAsync();
             }
             
         }
