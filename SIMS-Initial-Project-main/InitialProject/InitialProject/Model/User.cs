@@ -16,6 +16,7 @@ namespace InitialProject.Model
         public string Password { get; set; }
         public bool SuperTitle { get; set; }
         public UserType Type { get; set; }
+        public int Age { get; set; }
         public User()
         {
             Username = "default";

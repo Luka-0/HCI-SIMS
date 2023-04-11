@@ -19,6 +19,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button  Click="ShowReviews"  Content="Show Reviews" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button  Click="ShowStatistics"  Content="Show Statistics" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
 
 
 <!--<DataGrid x:Name="DataGridTours" ItemsSource="{Binding Path=BasicTours}" AutoGenerateColumns="True" 

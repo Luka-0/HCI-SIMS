@@ -28,8 +28,7 @@ namespace InitialProject.View
     {
         private User LoggedInGuide { get; set;}
 
-        public ObservableCollection<TourBasicInfoDto> BasicTours { get; set; } =
-            new ObservableCollection<TourBasicInfoDto>();
+        public ObservableCollection<TourBasicInfoDto> BasicTours { get; set; } = new ObservableCollection<TourBasicInfoDto>();
         public TourController tourController { get; set; } = new TourController();
         private int ColNum { get; set; } = 0;
 
@@ -74,6 +73,14 @@ namespace InitialProject.View
 
             tourReviews.Show();
             Close();
+        }
+
+        private void ShowStatistics(object sender, RoutedEventArgs e)
+        {
+            TourBasicInfoDto selectedTour = (TourBasicInfoDto)DataGridTours.SelectedItem;
+            TourStatistics tourStatistics= new TourStatistics(selectedTour.id, selectedTour.Name);
+            
+            tourStatistics.Show();
         }
     }
 }

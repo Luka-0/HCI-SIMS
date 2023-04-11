@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Model;
 
 namespace InitialProject.View
 {
@@ -19,7 +20,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourView : Window
     {
-        public TourView()
+        public TourView(int tourId)
         {
             InitializeComponent();
         }
