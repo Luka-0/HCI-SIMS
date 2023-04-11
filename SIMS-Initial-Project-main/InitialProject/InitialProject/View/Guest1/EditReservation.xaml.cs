@@ -39,19 +39,35 @@ namespace InitialProject.View
             if(allReservations.Count == 0)
             {
                 MessageBox.Show("There are currently no reservations to show");
-                this.Close();
+                Close();
             }
 
-            RefreshDataGrid(allReservations);
+            RefreshReservationDataGrid(allReservations);
+
+            RefreshReschedulingDataGrid();
         }
 
-        private void RefreshDataGrid(List<AccommodationReservation> accommodationReservations)
+        private void RefreshReservationDataGrid(List<AccommodationReservation> accommodationReservations)
         {
             ReservationsToShow = new ObservableCollection<AccommodationReservation>();
             ReservationsGrid.ItemsSource = ReservationsToShow;
+
             foreach (AccommodationReservation a in accommodationReservations)
             {
                 ReservationsToShow.Add(a);
+            }
+        }
+
+        private void RefreshReschedulingDataGrid()
+        {
+            List<ReservationReschedulingRequest> allrequests = ReservationReschedulingRequestController.GetAllByUser(User.Id);
+
+            ReschedulingsToShow = new ObservableCollection<ReservationReschedulingRequest>();
+            ReservationsResceduleDG.ItemsSource = ReschedulingsToShow;
+
+            foreach(ReservationReschedulingRequest r in allrequests)
+            {
+                ReschedulingsToShow.Add(r);
             }
         }
 
@@ -64,7 +80,7 @@ namespace InitialProject.View
             if (!AccommodationReservationController.Delete(accommodationReservation))
                 MessageBox.Show("You can't cancel that reservation");
 
-            RefreshDataGrid(AccommodationReservationController.GetBy(User));
+            RefreshReservationDataGrid(AccommodationReservationController.GetBy(User));
         }
 
         private bool IsViolatingAnyUIControl(AccommodationReservation accommodationReservation, bool clickedPostpone = false)
@@ -109,6 +125,9 @@ namespace InitialProject.View
             ReservationReschedulingRequest reservationReschedulingRequest = new(Enumeration.RequestState.Waiting, accommodationReservation, newStartingDate, newEndingDate);
 
             ReservationReschedulingRequestController.Save(reservationReschedulingRequest);
+            MessageBox.Show("Successful");
+
+            RefreshReschedulingDataGrid();
         }
     }
 }
