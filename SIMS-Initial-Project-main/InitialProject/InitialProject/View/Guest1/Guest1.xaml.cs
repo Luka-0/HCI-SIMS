@@ -1,4 +1,6 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Contexts;
+using InitialProject.Controller;
+using InitialProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +19,36 @@ namespace InitialProject.View
 {
     public partial class Guest1 : Window
     {
+        private readonly ReservationReschedulingRequestController ReservationReschedulingRequestController = new();
+
         private User User { get; set; }
 
         public Guest1(User user)
         {
             InitializeComponent();
             User = user;
+
+            CheckNotifications();
+        }
+
+        private void CheckNotifications()
+        {
+            List<ReservationReschedulingRequest> reschedulings = ReservationReschedulingRequestController.GetAllByUser(User.Id);
+            bool notify = false;
+
+            foreach(ReservationReschedulingRequest r in reschedulings)
+            {
+                if (r.WasNotified == false && r.State != Enumeration.RequestState.Waiting)
+                {
+                    notify = true;
+                    ReservationReschedulingRequestController.UpdateWasNotifiedBy(r.Id, true);
+                }
+            }
+
+            if(notify)
+            {
+                MessageBox.Show("One of your requests for reservation was answered by the owner");
+            }
         }
 
         private void AccommodationReservate_Click(object sender, RoutedEventArgs e)

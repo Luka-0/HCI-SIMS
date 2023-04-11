@@ -17,7 +17,7 @@ namespace InitialProject.Repository
     {
         public ReservationReschedulingRequestRepository() { }
 
-        public void Save (ReservationReschedulingRequest reservationReschedulingRequest)
+        public void Save(ReservationReschedulingRequest reservationReschedulingRequest)
         {
             using var db = new UserContext();
 
@@ -78,6 +78,17 @@ namespace InitialProject.Repository
             reservationReschedulingRequest.Comment = comment;
             db.SaveChanges();
 
+        }
+
+        public void UpdateWasNotifiedBy(int id, bool wasNotified)
+        {
+            ReservationReschedulingRequest reservationReschedulingRequest = new();
+
+            var db = new UserContext();
+            reservationReschedulingRequest = db.reservationReschedulingRequest.Find(id);
+
+            reservationReschedulingRequest.WasNotified = wasNotified;
+            db.SaveChanges();
         }
 
         public ReservationReschedulingRequest GetBy(int id)

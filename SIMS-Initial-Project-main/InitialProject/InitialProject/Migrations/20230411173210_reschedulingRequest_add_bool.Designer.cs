@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230411173210_reschedulingRequest_add_bool")]
+    partial class reschedulingRequest_add_bool
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -317,9 +319,6 @@ namespace InitialProject.Migrations
                     b.Property<int?>("TourKeyPointId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("VoucherId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BookingGuestId");
@@ -327,8 +326,6 @@ namespace InitialProject.Migrations
                     b.HasIndex("TourId");
 
                     b.HasIndex("TourKeyPointId");
-
-                    b.HasIndex("VoucherId");
 
                     b.ToTable("TourReservation");
                 });
@@ -373,9 +370,6 @@ namespace InitialProject.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Age")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Password")
@@ -544,17 +538,11 @@ namespace InitialProject.Migrations
                         .WithMany()
                         .HasForeignKey("TourKeyPointId");
 
-                    b.HasOne("InitialProject.Model.Voucher", "Voucher")
-                        .WithMany()
-                        .HasForeignKey("VoucherId");
-
                     b.Navigation("ArrivalPoint");
 
                     b.Navigation("BookingGuest");
 
                     b.Navigation("Tour");
-
-                    b.Navigation("Voucher");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TourReview", b =>

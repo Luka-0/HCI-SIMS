@@ -1,5 +1,6 @@
 ﻿using InitialProject.Dto;
 using InitialProject.Enumeration;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -39,6 +40,12 @@ namespace InitialProject.Controller
 
             this.reservationReschedulingRequestService.DetermineResponse(existingRequestId, comment, requestState);
         }
+
+        public void UpdateWasNotifiedBy(int id, bool wasNotified)
+        {
+            reservationReschedulingRequestService.UpdateWasNotifiedBy(id, wasNotified);
+        }
+
 
         public List<ReservationReschedulingRequest> GetAllByUser(int id)
         {

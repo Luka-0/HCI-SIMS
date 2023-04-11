@@ -50,9 +50,9 @@ namespace InitialProject.Controller
             return AccommodationReservationService.GetBy(user);
         }
 
-        public bool Delete(AccommodationReservation accommodationReservation)
+        public bool Delete(bool logicaly, AccommodationReservation accommodationReservation)
         {
-            return AccommodationReservationService.Delete(accommodationReservation);
+            return AccommodationReservationService.Delete(logicaly, accommodationReservation);
         }
         public List<AccommodationReservation> GetAllCancelled(string ownerUsername) {
 

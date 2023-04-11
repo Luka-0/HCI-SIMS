@@ -94,6 +94,22 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
+        public void LogicalyDelete(AccommodationReservation accommodationReservation)
+        {
+            using var db = new UserContext();
+
+            AccommodationReservation accommodationToDelete = GetBy(accommodationReservation.Id);
+
+            var entity = db.accommodationReservation.Find(accommodationReservation.Id);
+
+            if (entity != null)
+            {
+                entity.Cancelled = true;
+                db.SaveChanges();
+            }
+        }
+
+
         //Aleksandra
         public List<AccommodationReservation> GetAllBetween(DateTime startingDate, DateTime endingDate, User owner) {
 

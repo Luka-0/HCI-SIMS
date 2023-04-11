@@ -77,10 +77,13 @@ namespace InitialProject.View
 
             if (IsViolatingAnyUIControl(accommodationReservation)) return;
 
-            if (!AccommodationReservationController.Delete(accommodationReservation))
+            if (!AccommodationReservationController.Delete(true, accommodationReservation))
+            {
                 MessageBox.Show("You can't cancel that reservation");
+                return;
+            }
 
-            RefreshReservationDataGrid(AccommodationReservationController.GetBy(User));
+            MessageBox.Show("Successful");
         }
 
         private bool IsViolatingAnyUIControl(AccommodationReservation accommodationReservation, bool clickedPostpone = false)

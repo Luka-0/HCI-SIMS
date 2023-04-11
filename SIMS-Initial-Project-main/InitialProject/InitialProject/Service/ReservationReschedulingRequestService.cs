@@ -89,6 +89,12 @@ namespace InitialProject.Service
             }
         }
 
+        public void UpdateWasNotifiedBy(int id, bool wasNotified)
+        {
+            IReservationReschedulingRequestRepository.UpdateWasNotifiedBy(id, wasNotified);
+        }
+
+
         public List<ReservationReschedulingRequest> GetAllByUser(int id)
         {
             return IReservationReschedulingRequestRepository.GetAllByUser(id);

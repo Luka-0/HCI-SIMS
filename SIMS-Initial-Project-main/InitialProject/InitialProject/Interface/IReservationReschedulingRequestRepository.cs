@@ -14,6 +14,7 @@ namespace InitialProject.Interface
         public List<ReservationReschedulingRequest> GetAllBy(User owner);
         public void UpdateCommentBy(int id, string comment);
         public void UpdateStateBy(int id, RequestState requestState);
+        public void UpdateWasNotifiedBy(int id, bool wasNotified);
         public ReservationReschedulingRequest GetBy(int id);
         public List<ReservationReschedulingRequest> GetAllByUser(int id);
 
