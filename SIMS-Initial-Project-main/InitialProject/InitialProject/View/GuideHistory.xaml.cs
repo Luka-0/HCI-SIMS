@@ -29,26 +29,42 @@ namespace InitialProject.View
         private User LoggedInGuide { get; set;}
 
         public ObservableCollection<TourBasicInfoDto> BasicTours { get; set; } = new ObservableCollection<TourBasicInfoDto>();
-        public TourController tourController { get; set; } = new TourController();
+        public TourController TourController { get; set; } = new TourController();
         private int ColNum { get; set; } = 0;
-
+        public ObservableCollection<string> TourYears { get; set; } = new ObservableCollection<string>();
         public GuideHistory(User user)
         {
             LoggedInGuide = user;
             InitializeComponent();
             this.DataContext = this;
-            GetFinishedTours(LoggedInGuide.Id);
+            List<TourBasicInfoDto> tours =  GetFinishedTours(LoggedInGuide.Id);
+            GetTourYears(tours);
+
         }
 
-        private void GetFinishedTours(int guideId)
+        private void GetTourYears(List<TourBasicInfoDto> tours)
         {
-            List<TourBasicInfoDto> tours = tourController.GetByStatus(guideId, TourStatus.Finished);
+            foreach (TourBasicInfoDto tour in tours)
+            {
+                string year = tour.StartDateAndTime.Date.Year.ToString();
+                if (!TourYears.Contains(year))
+                {
+                    TourYears.Add(year);
+                }    
+            }
+            TourYears.Add("All time");
+        }
 
+        private List<TourBasicInfoDto> GetFinishedTours(int guideId)
+        {
+            List<TourBasicInfoDto> tours = TourController.GetByStatus(guideId, TourStatus.Finished);
 
             foreach (TourBasicInfoDto tour in tours)
             {
                 BasicTours.Add(tour);
             }
+
+            return tours;
         }
         /*private void generateColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
@@ -81,6 +97,24 @@ namespace InitialProject.View
             TourStatistics tourStatistics= new TourStatistics(selectedTour.id, selectedTour.Name);
             
             tourStatistics.Show();
+        }
+
+        private Tour GetBestTour()
+        {
+            string time = ComboBox1.Text;
+            int bestTourId = TourController.GetMostVisitedTour(LoggedInGuide.Id, time);
+
+
+            return TourController.GetById(bestTourId);
+        }
+
+        private void ShowBestStatistics(object sender, RoutedEventArgs e)
+        {
+            Tour tour = GetBestTour();
+            TourStatistics tourStatistics = new TourStatistics(tour.Id , tour.Name);
+            tourStatistics.Show();
+
+
         }
     }
 }

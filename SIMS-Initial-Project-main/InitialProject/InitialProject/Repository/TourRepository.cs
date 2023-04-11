@@ -149,6 +149,14 @@ namespace InitialProject.Repository
             
         }
 
+        public List<Tour> GetAllByGuide(int id)
+        {
+            using (var db = new UserContext())
+            {
+                return db.tour.Where(t => t.Guide.Id == id).ToList();
+            }
+        }
+
 
     }
 }

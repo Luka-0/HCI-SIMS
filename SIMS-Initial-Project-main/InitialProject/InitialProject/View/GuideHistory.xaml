@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="GuideHistory" Height="720" Width="1080">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
         <DataGrid x:Name="DataGridTours" ItemsSource="{Binding BasicTours}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="0, 48, 0, 0" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
@@ -19,11 +24,27 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button  Click="ShowReviews"  Content="Show Reviews" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Button  Click="ShowStatistics"  Content="Show Statistics" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+        <Button  Click="ShowStatistics"  Content="Show Statistics" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
+        <Grid Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
 
-<!--<DataGrid x:Name="DataGridTours" ItemsSource="{Binding Path=BasicTours}" AutoGenerateColumns="True" 
-                      SelectionMode="Single" IsReadOnly="True" AutoGeneratingColumn="generateColumns" HorizontalAlignment="Left" 
-                      Margin="10,47,0,0" VerticalAlignment="Top"/>-->
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Choose most popular tour:"></TextBlock>
+            <ComboBox Grid.Row="1" Name="ComboBox1" ItemsSource="{Binding Path=TourYears}" Width="200" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Grid.Row="2"  Click="ShowBestStatistics"  Content="Show Best Statistics" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0"  />
+
         </Grid>
+    </Grid>
 </Window>

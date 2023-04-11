@@ -20,5 +20,6 @@ namespace InitialProject.Interface
         public void SetStatus(int id, TourStatus status);
 
         public void Delete(int id);
+        List<Tour> GetAllByGuide(int id);
     }
 }
