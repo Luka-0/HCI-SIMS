@@ -28,7 +28,7 @@ namespace InitialProject.Model
 
         [DataType(DataType.DateTime)]
         public DateTime NewEndingDate {  get; set; }
-        public bool? Achievable { get; set; }
+        public bool Achievable { get; set; }
 
 
         public ReservationReschedulingRequest() { }

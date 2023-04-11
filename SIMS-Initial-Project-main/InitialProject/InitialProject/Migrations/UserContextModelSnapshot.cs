@@ -200,7 +200,7 @@ namespace InitialProject.Migrations
                     b.Property<int>("AccommodationReservationId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool?>("Achievable")
+                    b.Property<bool>("Achievable")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Comment")

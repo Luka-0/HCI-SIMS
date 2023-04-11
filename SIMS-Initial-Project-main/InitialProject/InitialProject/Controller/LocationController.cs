@@ -15,22 +15,20 @@ namespace InitialProject.Controller
     {
         private readonly LocationService LocationService = new (new LocationRepository());
 
-        public void AddNew(LocationDto record)
-        {
-            Location location  = new Location(record.City, record.Country);
+        public void AddNew(LocationDto location){
 
-            LocationService.Save(location);
+            LocationService.Save(new Location(location.City, location.Country));
         }
 
 
         public List<LocationDto> Load()
         {
             List<LocationDto> locations = new List<LocationDto>();
-            List<Location> records = LocationService.GetAll();
+            List<Location> existingLocations = LocationService.GetAll();
 
-            foreach (Location record in records) {
+            foreach (Location location in existingLocations) {
 
-                locations.Add(new LocationDto(record.City, record.Country));
+                locations.Add(new LocationDto(location.City, location.Country));
             
             }
             return locations;

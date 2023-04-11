@@ -1,6 +1,7 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Interface;
 using InitialProject.Model;
+using InitialProject.View;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace InitialProject.Repository
 {
@@ -30,40 +32,8 @@ namespace InitialProject.Repository
                                  .ToList();
             }
 
-            /* foreach (var reservation in expiredReservations)
-             {
-                 reservation.Accommodation = GetAccommodation(reservation.Id);
-                 reservation.Guest = GetUser(reservation.Id);
-             }*/
-
             return expiredReservations;
         }
-
-       /* public Accommodation GetAccommodation(int reservationId)
-        {
-
-            Accommodation accommodation = new Accommodation();
-
-            using (var dbContext = new UserContext())
-            {
-                accommodation = (Accommodation)dbContext.accommodationReservation
-                                 .Where(a => a.Id == reservationId).Select(a => a.Accommodation).First();
-            }
-            return accommodation;
-        }*/
-
-      /*  public User GetUser(int reservationId)
-        {
-
-            User guest = new User();
-
-            using (var dbContext = new UserContext())
-            {
-                guest = (User)dbContext.accommodationReservation
-                                 .Where(a => a.Id == reservationId).Select(a => a.Guest).First();
-            }
-            return guest;
-        }*/
 
         public AccommodationReservation GetBy(int id)
         {
@@ -123,5 +93,37 @@ namespace InitialProject.Repository
             db.accommodationReservation.Remove(accommodationReservation);
             db.SaveChanges();
         }
+
+        //Aleksandra
+        public List<AccommodationReservation> GetAllBetween(DateTime startingDate, DateTime endingDate, User owner) {
+
+            List<AccommodationReservation> accommodationReservations = new List<AccommodationReservation>();
+
+            using (var dbContext = new UserContext())
+            {
+                accommodationReservations = dbContext.accommodationReservation
+                                            .Where(ar => ((startingDate >= ar.BegginingDate && startingDate <= ar.EndingDate) || (endingDate >= ar.BegginingDate && endingDate <= ar.EndingDate)) ||
+                                                         (ar.BegginingDate >= startingDate && ar.BegginingDate <= endingDate) || (ar.EndingDate >= startingDate && (ar.EndingDate <= endingDate))
+                                                   )
+                                           .Include(r => r.Accommodation)
+                                                .ThenInclude(r => r.Owner).Where(t => t.Accommodation.Owner.Equals(owner))
+                                           .Include(r => r.Guest)
+                                           .ToList();
+            }
+            return accommodationReservations;
+        }
+
+        public void UpdateScheduledDatesBy(int id, DateTime newBegginingDate, DateTime newEndingDate) {
+
+            AccommodationReservation accommodationReservation = new();
+
+            var db = new UserContext();
+            accommodationReservation = db.accommodationReservation.Find(id);
+
+            accommodationReservation.BegginingDate = newBegginingDate;
+            accommodationReservation.EndingDate = newEndingDate;
+            db.SaveChanges();
+        }
+
     }
 }

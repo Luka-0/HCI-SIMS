@@ -1,6 +1,10 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Enumeration;
 using InitialProject.Interface;
 using InitialProject.Model;
+using InitialProject.Service;
+using InitialProject.View;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +36,61 @@ namespace InitialProject.Repository
 
             db.Add(reservationReschedulingRequest);
             db.SaveChanges();
+        }
+
+        public List<ReservationReschedulingRequest> GetAllBy(User owner) {
+
+            List<ReservationReschedulingRequest> reservationReschedulingRequests = new();
+
+            using (UserContext db = new())
+            {
+                reservationReschedulingRequests = db.reservationReschedulingRequest.
+                    Include(t => t.Reservation)
+                        .ThenInclude(t => t.Accommodation)
+                            .ThenInclude(t => t.Owner).Where(t => t.Reservation.Accommodation.Owner.Equals(owner))
+                    .Include(t => t.Reservation)
+                        .ThenInclude(t => t.Guest).ToList();
+            }
+
+            return reservationReschedulingRequests;
+
+        }
+
+        public void UpdateStateBy(int id, RequestState requestState)
+        {
+            ReservationReschedulingRequest  reservationReschedulingRequest = new();
+
+            var db = new UserContext();
+            reservationReschedulingRequest = db.reservationReschedulingRequest.Find(id);  
+
+            reservationReschedulingRequest.State = requestState;
+            db.SaveChanges();
+
+        }
+
+        public void UpdateCommentBy(int id, string comment)
+        {
+            ReservationReschedulingRequest reservationReschedulingRequest = new();
+
+            var db = new UserContext();
+            reservationReschedulingRequest = db.reservationReschedulingRequest.Find(id);
+
+            reservationReschedulingRequest.Comment = comment;
+            db.SaveChanges();
+
+        }
+
+        public ReservationReschedulingRequest GetBy(int id)
+        {
+            ReservationReschedulingRequest reservationReschedulingRequest = new();
+
+            using (UserContext db = new())
+            {
+                reservationReschedulingRequest = (ReservationReschedulingRequest)db.reservationReschedulingRequest
+                                                 .Include(t => t.Reservation)
+                                                 .Where(t => t.Id.Equals(id)).First();
+            }
+            return reservationReschedulingRequest;
         }
     }
 }

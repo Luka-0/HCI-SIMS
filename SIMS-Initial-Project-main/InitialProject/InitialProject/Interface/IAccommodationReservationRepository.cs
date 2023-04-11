@@ -14,6 +14,9 @@ namespace InitialProject.Interface
         //public Accommodation GetAccommodation(int reservationId);
         //public User GetUser(int reservationId);
         public AccommodationReservation GetBy(int id);
+        public List<AccommodationReservation> GetAllBetween(DateTime startingDate, DateTime endingDate, User owner);
+        public void UpdateScheduledDatesBy(int id, DateTime newBegginingDate, DateTime newEndingDate);
+
 
         // Stajic
         public void Save(AccommodationReservation accommodationReservation);
@@ -21,5 +24,5 @@ namespace InitialProject.Interface
         public List<AccommodationReservation> GetBy(User user);
         public void Delete(AccommodationReservation accommodationReservation);
 
-    }
+        }
 }
