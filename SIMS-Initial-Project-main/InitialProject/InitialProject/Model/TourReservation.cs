@@ -28,6 +28,8 @@ namespace InitialProject.Model
 
         [ForeignKey("TourKeyPointId")]
         public TourKeyPoint? ArrivalPoint { get; set; }
+        [ForeignKey("VoucherId")]
+        public Voucher? Voucher { get; set; }
 
         public TourReservation(Tour tour, int guestNumber, User bookingGuest)
         {

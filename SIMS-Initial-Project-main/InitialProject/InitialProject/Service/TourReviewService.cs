@@ -33,9 +33,9 @@ namespace InitialProject.Service
             _tourReviewRepository.Save(tourReview);
         }
 
-        public List<TourReview> GetByTour(int id)
+        public List<TourReview> GetManyByTour(int id)
         {
-           return _tourReviewRepository.GetByTour(id);
+           return _tourReviewRepository.GetManyByTour(id);
         }
 
 
@@ -43,5 +43,7 @@ namespace InitialProject.Service
         {
             _tourReviewRepository.Invalidate(id);
         }
+
+        
     }
 }
