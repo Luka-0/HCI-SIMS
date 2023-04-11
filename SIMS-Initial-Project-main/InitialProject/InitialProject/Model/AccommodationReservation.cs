@@ -33,7 +33,7 @@ namespace InitialProject.Model
         public bool Cancelled { get; set; }
 
         public AccommodationReservation() {
-
+            Cancelled = false;
            // this.Accommodation = new Accommodation();
            // this.Guest = new User();
         }

@@ -21,6 +21,6 @@ namespace InitialProject.Interface
         public List<AccommodationReservation> GetByAccommodation(int id);
         public List<AccommodationReservation> GetBy(User user);
         public void Delete(AccommodationReservation accommodationReservation);
-
+        public void LogicalyDelete(AccommodationReservation accommodationReservation);
         }
 }

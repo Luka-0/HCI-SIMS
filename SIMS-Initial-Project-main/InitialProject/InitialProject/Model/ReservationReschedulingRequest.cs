@@ -30,6 +30,8 @@ namespace InitialProject.Model
         public DateTime NewEndingDate {  get; set; }
         public bool Achievable { get; set; }
 
+        public bool WasNotified { get; set; } = false;
+
 
         public ReservationReschedulingRequest() { }
 

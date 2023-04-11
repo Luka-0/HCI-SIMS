@@ -10,6 +10,7 @@ using System.Windows;
 using InitialProject.View;
 using InitialProject.Interface;
 using InitialProject.Dto;
+using System.Printing;
 
 namespace InitialProject.Service
 {
@@ -186,7 +187,7 @@ namespace InitialProject.Service
             return IAccommodationreservationRepository.GetBy(user);
         }
 
-        public bool Delete(AccommodationReservation accommodationReservation)
+        public bool Delete(bool logicaly, AccommodationReservation accommodationReservation)
         {
             if (accommodationReservation.Accommodation.CancellationDeadline < 1)
             {
@@ -203,7 +204,15 @@ namespace InitialProject.Service
                 }
             }
 
-            IAccommodationreservationRepository.Delete(accommodationReservation);
+            if (logicaly)
+            {
+                IAccommodationreservationRepository.LogicalyDelete(accommodationReservation);
+            }
+            else
+            {
+                IAccommodationreservationRepository.Delete(accommodationReservation);
+            }
+
             return true;
         }
 
