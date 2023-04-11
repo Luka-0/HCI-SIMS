@@ -23,15 +23,16 @@
         <Button Content="Postpone" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" Click="Postpone_Click"/>
         <TextBox x:Name="DaysToPostponeTB" HorizontalAlignment="Left" Margin="220,155,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="58"/>
         <Label Content="How many days to postpone for:" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top"/>
-        
-        <DataGrid x:Name="ReservationsResceduleDG" ItemsSource="{Binding ReservationsToShow}" Height="Auto" Width="Auto" Margin="331,272,10,0" VerticalAlignment="Top" 
+
+        <DataGrid x:Name="ReservationsResceduleDG" ItemsSource="{Binding ReschedulingsToShow}" Height="Auto" Width="Auto" Margin="10,272,10,0" VerticalAlignment="Top" 
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Accommodation.Title}"/>
-                <DataGridTextColumn Header="City" Binding="{Binding Accommodation.Location.City}"/>
-                <DataGridTextColumn Header="Guest Number" Binding="{Binding GuestNumber}"/>
-                <DataGridTextColumn Header="Starting Date" Binding="{Binding BegginingDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
-                <DataGridTextColumn Header="Ending Date" Binding="{Binding EndingDate, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Reservation.Accommodation.Title}"/>
+                <DataGridTextColumn Header="Guest Number" Binding="{Binding Reservation.GuestNumber}"/>
+                <DataGridTextColumn Header="Starting Date" Binding="{Binding NewStartingDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                <DataGridTextColumn Header="Ending Date" Binding="{Binding NewEndingDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                <DataGridTextColumn Header="Status" Binding="{Binding State}" />
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 

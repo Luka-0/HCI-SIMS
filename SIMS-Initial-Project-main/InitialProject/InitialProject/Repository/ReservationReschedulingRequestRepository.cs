@@ -92,5 +92,21 @@ namespace InitialProject.Repository
             }
             return reservationReschedulingRequest;
         }
+
+        public List<ReservationReschedulingRequest> GetAllByUser(int id)
+        {
+            List<ReservationReschedulingRequest> reservationReschedulingRequests = new();
+
+            using (UserContext db = new())
+            {
+                reservationReschedulingRequests = db.reservationReschedulingRequest.
+                    Include(t => t.Reservation)
+                        .ThenInclude(t => t.Accommodation)
+                    .Include(t => t.Reservation)
+                        .ThenInclude(t => t.Guest).Where(t => t.Reservation.Guest.Id == id).ToList();
+            }
+
+            return reservationReschedulingRequests;
+        }
     }
 }

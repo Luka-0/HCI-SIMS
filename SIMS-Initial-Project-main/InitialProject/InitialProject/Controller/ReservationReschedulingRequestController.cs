@@ -39,5 +39,10 @@ namespace InitialProject.Controller
 
             this.reservationReschedulingRequestService.DetermineResponse(existingRequestId, comment, requestState);
         }
+
+        public List<ReservationReschedulingRequest> GetAllByUser(int id)
+        {
+            return reservationReschedulingRequestService.GetAllByUser(id);
+        }
     }
 }

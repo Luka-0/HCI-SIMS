@@ -15,5 +15,7 @@ namespace InitialProject.Interface
         public void UpdateCommentBy(int id, string comment);
         public void UpdateStateBy(int id, RequestState requestState);
         public ReservationReschedulingRequest GetBy(int id);
+        public List<ReservationReschedulingRequest> GetAllByUser(int id);
+
     }
 }

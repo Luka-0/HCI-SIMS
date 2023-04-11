@@ -88,6 +88,11 @@ namespace InitialProject.Service
                 this.AccommodationReservationService.UpdateScheduledDatesBy(reservationId, existingRequest.NewStartingDate, existingRequest.NewEndingDate);
             }
         }
+
+        public List<ReservationReschedulingRequest> GetAllByUser(int id)
+        {
+            return IReservationReschedulingRequestRepository.GetAllByUser(id);
+        }
     }
  }
     
