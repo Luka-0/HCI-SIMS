@@ -210,7 +210,10 @@ namespace InitialProject.Service
 
 
         //Aleksandra
-        public List<AccommodationReservation> GetAllPreservedBetween(ReservationReschedulingRequest reservationReschedulingRequest, string ownerUsername) {
+        
+        //dobavlja sve rezervacije rezervisane(neotkazane) za period iz primljenog zahteva
+        //parametar je bas zahtev kako broj parametara funkcije ne bi bio opterecen
+        public List<AccommodationReservation> GetAllPreserved(ReservationReschedulingRequest reservationReschedulingRequest, string ownerUsername) {
 
             int reservedAccommodationId;
             List<AccommodationReservation> preservedReservations = new List<AccommodationReservation>();

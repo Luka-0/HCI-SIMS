@@ -51,7 +51,7 @@ namespace InitialProject.Service
   
             foreach (var request in requests) {
 
-                existingReservations = AccommodationReservationService.GetAllPreservedBetween(request, ownerUsername);
+                existingReservations = AccommodationReservationService.GetAllPreserved(request, ownerUsername);
 
                 if (existingReservations.Count() == 0)
                 {
