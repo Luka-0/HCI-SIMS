@@ -213,22 +213,18 @@ namespace InitialProject.Service
         
         //dobavlja sve rezervacije rezervisane(neotkazane) za period iz primljenog zahteva
         //parametar je bas zahtev kako broj parametara funkcije ne bi bio opterecen
-        public List<AccommodationReservation> GetAllPreserved(ReservationReschedulingRequest reservationReschedulingRequest, string ownerUsername) {
+        public List<AccommodationReservation> GetAllPreserved(ReservationReschedulingRequest reschedulingRequest, string ownerUsername) {
 
             int reservedAccommodationId;
             List<AccommodationReservation> preservedReservations = new List<AccommodationReservation>();
             List<AccommodationReservation> reservations = new List<AccommodationReservation>();
 
+            int accommodationId = reschedulingRequest.Reservation.Accommodation.Id;
+            int reservationId = reschedulingRequest.Reservation.Id;
+
             User owner = this.UserService.GetBy(ownerUsername);
-
-            int accommodationId = reservationReschedulingRequest.Reservation.Accommodation.Id;
-            int reservationId = reservationReschedulingRequest.Reservation.Id;
-            DateTime newStartingDate = reservationReschedulingRequest.NewStartingDate;
-            DateTime newEndingDate = reservationReschedulingRequest.NewEndingDate;
-
-            reservations = this.IAccommodationreservationRepository.GetAllBetween(newStartingDate, newEndingDate, owner);
+            reservations = this.IAccommodationreservationRepository.GetAllBetween(reschedulingRequest.NewStartingDate, reschedulingRequest.NewEndingDate, owner);
          
-
             foreach (var reservation in reservations) {
 
                 reservedAccommodationId = reservation.Accommodation.Id;

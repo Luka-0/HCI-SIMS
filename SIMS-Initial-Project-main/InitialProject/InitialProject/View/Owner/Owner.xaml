@@ -22,7 +22,7 @@
         <Button Content="Main Page" HorizontalAlignment="Left" Height="44" Margin="36,124,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button_Click_2" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" />
         <Button Content="Reviews" HorizontalAlignment="Left" Height="50" Margin="36,6,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button3_Click" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.Row="1"/>
         <Button Content="Rescheduling Requests" HorizontalAlignment="Left" Height="50" Margin="36,69,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button4_Click" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.Row="1"/>
-        <Button Content="Log Out" HorizontalAlignment="Left" Height="44" Margin="36,62,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="LogOut" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" />
+        <Button Content="Log Out" HorizontalAlignment="Left" Height="44" Margin="36,62,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="LogOut" Grid.ColumnSpan="2" Background="SeaGreen" Foreground="White" />
 
 
     </Grid>
