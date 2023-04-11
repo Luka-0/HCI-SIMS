@@ -100,8 +100,6 @@ public class Tour
     }
 
 
-
-
     public override string ToString()
     {
         return Name + " " + Language + " " + Description + " " + Location + "\n";

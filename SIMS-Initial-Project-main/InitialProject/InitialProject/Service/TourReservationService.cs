@@ -14,11 +14,11 @@ namespace InitialProject.Service
 {
     public class TourReservationService
     {
-        private readonly VoucherService voucherService= new VoucherService(new VoucherRepository());
+        private readonly VoucherService voucherService = new VoucherService(new VoucherRepository());
 
         private readonly ITourReservationRepository _tourReservationRepository;
 
-        
+
         public TourReservationService(ITourReservationRepository repository)
         {
             _tourReservationRepository = repository;
@@ -26,6 +26,7 @@ namespace InitialProject.Service
 
         private TourReservationRepository tourReservationRepository = new TourReservationRepository();
         private TourRepository tourRepository = new TourRepository();
+
         public List<TourReservation> GetAll()
         {
             return tourReservationRepository.GetAll();
@@ -41,7 +42,7 @@ namespace InitialProject.Service
             return _tourReservationRepository.GetByGuest(user);
         }
 
-        
+
 
         public TourReservation GetById(int id)
         {
@@ -57,10 +58,11 @@ namespace InitialProject.Service
         public bool IsReserved(Tour tour)
         {
             List<TourReservation> reservations = tourReservationRepository.GetByTour(tour);
-            if(reservations.Find(r => r.Tour.Id == tour.Id) != null)
+            if (reservations.Find(r => r.Tour.Id == tour.Id) != null)
             {
                 return true;
             }
+
             return false;
         }
 
@@ -77,9 +79,9 @@ namespace InitialProject.Service
 
         public bool IsFull(Tour tour)
         {
-            if(tour.GuestLimit == CountGuestsOnTour(tour))
+            if (tour.GuestLimit == CountGuestsOnTour(tour))
                 return true;
-            else 
+            else
                 return false;
         }
 
@@ -116,8 +118,13 @@ namespace InitialProject.Service
             List<User?> users = reservations.Select(reservation => reservation.BookingGuest).ToList();
 
             voucherService.GiveOut(users);
-           // _tourReservationRepository.Cancel(reservations);
+            // _tourReservationRepository.Cancel(reservations);
         }
 
+        public int getGuestNumber(int id)
+        {
+            List<TourReservation> reservations = GetByTour(id);
+            return reservations.Sum(reservation => reservation.GuestNumber);
+        }
     }
 }

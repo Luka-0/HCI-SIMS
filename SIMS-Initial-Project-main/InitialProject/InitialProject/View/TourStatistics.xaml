@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Tour Statistics" Height="720" Width="1080">
     <Grid>
-        <TextBlock Text="{Binding Path=Statistics.TourName}" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock  Text="{Binding Path=Statistics.TourName}" HorizontalAlignment="Left"></TextBlock>
         <Grid  DataContext="{Binding Path=Statistics}" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>

@@ -8,6 +8,7 @@ using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.VisualBasic;
 
 namespace InitialProject.Service;
@@ -172,5 +173,48 @@ public class TourService
         List<Image> images = imageService.Save(dto.ImageURLs);
         imageService.SetTourId(images, tour);
 
+    }
+
+    public int GetMostVisitedTour(int guideId, string time)
+    {
+        List<Tour> allTours = _tourRepository.GetAllByGuide(guideId);
+
+        List<Tour> selected = Select(allTours, time);
+
+        return FindBestTour(selected);
+    }
+
+    private List<Tour> Select(List<Tour> allTours, string time)
+    {
+        if (time.Equals("All time"))
+        {
+            return allTours;
+        }
+        else
+        {
+            return allTours.Where(t => t.StartDateAndTime.Date.Year.ToString().Equals(time)).ToList();
+        }
+    }
+
+    private int FindBestTour(List<Tour> tours)
+    {
+        Dictionary<string, TourGuestsDto> tourAndTotalTourists = new Dictionary<string, TourGuestsDto>();
+
+        foreach (Tour tour in tours)
+        {
+            if (!tourAndTotalTourists.ContainsKey(tour.Name))
+            {
+                int tourists = tourReservationService.getGuestNumber(tour.Id);
+                tourAndTotalTourists.Add(tour.Name, new TourGuestsDto(tour.Id, tourists));
+            }
+            else
+            {
+                TourGuestsDto dto = tourAndTotalTourists[tour.Name];
+                dto.TotalGuests+= tourReservationService.getGuestNumber(tour.Id);
+            }
+        }
+        TourGuestsDto maxPair = tourAndTotalTourists.FirstOrDefault(x => x.Value.TotalGuests == tourAndTotalTourists.Max(y => y.Value.TotalGuests)).Value;
+
+        return maxPair.TourId;
     }
 }
