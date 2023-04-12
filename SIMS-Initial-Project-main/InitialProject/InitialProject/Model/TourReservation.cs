@@ -39,6 +39,11 @@ namespace InitialProject.Model
             ArrivalPoint = null;
         }
 
+        public TourReservation(Voucher voucher)
+        {
+            this.Voucher = voucher;
+        }
+
         public override string ToString()
         {
             return Id.ToString() + " " + Tour.ToString() + " " + GuestNumber.ToString() + "\n";

@@ -46,7 +46,7 @@ namespace InitialProject.Model
 
         public override string ToString()
         {
-            return Id.ToString() + " | " + ReceivedDate.ToString() + " | " + ExpirationDate.ToString()  + " | " + ObtainedReason.ToString();
+            return ReceivedDate.ToString() + " | " + ExpirationDate.ToString()  + " | " + ObtainedReason.ToString();
         }
     }
 }

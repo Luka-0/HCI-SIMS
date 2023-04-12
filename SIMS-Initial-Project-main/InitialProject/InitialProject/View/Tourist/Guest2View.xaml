@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Guest2View" Height="580" Width="970">
-    <Grid>
+        Title="Guest2View" Height="780" Width="970">
+    <Grid HorizontalAlignment="Center" Width="970">
         <DataGrid x:Name = "TourShowGrid" ItemsSource="{Binding toursToShow}" Height="200" Width="700" Margin="13,9,187,321" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" >
 
             <DataGrid.Columns>
@@ -21,17 +21,33 @@
         </DataGrid>
 
         <TextBox x:Name="inputField" Height="35"  Width="150" Margin="19,226,731,269"/>
-        <TextBox x:Name="inputField2" Height="35"  Width="150" Margin="185,226,565,269" />
-        <Button x:Name="ShowByLocation" Height="30"  Width="150"  Margin="21,279,729,221" Click="ShowByLocation_Click" >Pretrazi po lokaciji</Button>
-        <Button x:Name="ShowByLenght" Height="30"  Width="150" Margin="345,279,405,221" Click="ShowByLenght_Click" >Pretrazi po trajanju</Button>
-        <Button x:Name="ShowByLanguagee" Height="30" Width="150" Margin="187,279,563,221" Click="ShowByLanguagee_Click" >Pretrazi po jeziku</Button>
-        <Button x:Name="ShowByGuestNumber" Height="30" Width="150" Margin="501,279,249,221" Click="ShowByGuestNumber_Click" >Pretrazi po broju ljudi</Button>
+        <Button x:Name="ShowByGuestNumber" Height="30" Width="150" Margin="232,348,588,386" Click="ShowByGuestNumber_Click" >Pretrazi po broju ljudi</Button>
+        <Button x:Name="ShowKeyPoints" Width="100" Margin="405,348,465,386" Click="ShowKeyPoints_Click">Pristustvo na turi</Button>
+        <Button x:Name="Grade" Width="100" Margin="540,347,330,386" Click="Grade_Click">Oceni</Button>
 
-        <Label Margin="22,382,778,117">Za rezervaciju</Label>
-        <Label x:Name="FreeSpacesLabel"  Margin="184,386,510,112">Broj slobodnih mesta:</Label>
-        <TextBox x:Name="SelectedGuestNumber" Margin="22,422,730,79"/>
-        <Button x:Name="ReserveTourButton" Width="100" Margin="234,422,616,79" Click="ReserveTourButton_Click">Rezervisi</Button>
-        <Button x:Name="CancelReservationButton" Width="100" Margin="345,422,505,79" Click="CancelReservationButton_Click">Odustani</Button>
-        <Button x:Name="testDugme" Width="100" Margin="485,422,385,79"  Content="Test dugme" Click="testDugme_Click"/>
+        <Label Margin="37,591,763,122" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0.406"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.695"/>
+                </TransformGroup>
+            </Label.RenderTransform> Za rezervaciju
+        </Label>
+        <Label x:Name="FreeSpacesLabel"  Margin="244,589,450,122">Broj slobodnih mesta:</Label>
+        <TextBox x:Name="SelectedGuestNumber" Margin="22,647,730,79"/>
+        <Button x:Name="ReserveTourButton" Width="100" Margin="244,647,626,79" Click="ReserveTourButton_Click">Rezervisi</Button>
+        <Button x:Name="CancelReservationButton" Width="100" Margin="355,647,515,79" Click="CancelReservationButton_Click">Odustani</Button>
+        <Button x:Name="testDugme" Width="100" Margin="485,647,385,79"  Content="Test dugme" Click="testDugme_Click"/>
+
+        <DataGrid x:Name = "ShowVoucher" ItemsSource="{Binding vouchersToShow}" Height="200" Margin="48,384,572,180" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="ShowVoucher_SelectionChanged" >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ExpirationDate" Binding="{Binding ExpirationDate}"/>
+                <DataGridTextColumn Header="ObtainedReason" Binding="{Binding ObtainedReason}"/>
+                <DataGridTextColumn Header="ReceivedDate" Binding="{Binding ReceivedDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
