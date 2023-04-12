@@ -117,7 +117,7 @@ public class TourController
         tourService.Cancel(id);
     }
 
-    public int GetMostVisitedTour(int guideId, string time)
+    public TourGuestsDto GetMostVisitedTour(int guideId, string time)
     {
         return tourService.GetMostVisitedTour(guideId, time);
     }

@@ -14,5 +14,21 @@ public class TourStatisticsDto
     public TourStatisticsDto()
     {
     }
+    public TourStatisticsDto(TourGuestsDto dto)
+    {
+        TourId = dto.TourId;
+        TourName = "";
+        YouthCount = dto.TotalYouth;
+        MiddleAgedCount = dto.TotalMiddleAged;
+        OldPeopleCount = dto.TotalOld;
+        SetPercentage(dto.TotalGuests, dto.TotalWithVoucher);
+    }
+    private void SetPercentage(int totalGuests, int withVouchers)
+    {
+        WithVouchers = (int)((double)withVouchers / (double)totalGuests * 100.0);
+        WithoutVouchers= 100 - WithVouchers;
+    }
+
+
 
 }

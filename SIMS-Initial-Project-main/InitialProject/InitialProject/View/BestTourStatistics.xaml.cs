@@ -11,18 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Model;
+using InitialProject.Dto;
 
 namespace InitialProject.View
 {
     /// <summary>
-    /// Interaction logic for TourView.xaml
+    /// Interaction logic for BestTourStatistics.xaml
     /// </summary>
-    public partial class TourView : Window
+    public partial class BestTourStatistics : Window
     {
-        public TourView(int tourId)
+        public TourStatisticsDto BestTour { get; set; } = new TourStatisticsDto();
+        public BestTourStatistics(TourGuestsDto bestTour)
         {
+            BestTour = new TourStatisticsDto(bestTour);
+            
+            this.DataContext = this;
             InitializeComponent();
         }
+
+        
     }
 }

@@ -18,7 +18,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button  Click="CancelTour"  Content="Cancel tour" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button  Click="CancelTour"  Content="Cancel tour" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="253,516,0,0" />
 
     </Grid>
 </Window>

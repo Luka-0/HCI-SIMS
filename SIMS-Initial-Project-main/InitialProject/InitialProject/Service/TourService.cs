@@ -175,7 +175,7 @@ public class TourService
 
     }
 
-    public int GetMostVisitedTour(int guideId, string time)
+    public TourGuestsDto GetMostVisitedTour(int guideId, string time)
     {
         List<Tour> allTours = _tourRepository.GetAllByGuide(guideId);
 
@@ -196,7 +196,7 @@ public class TourService
         }
     }
 
-    private int FindBestTour(List<Tour> tours)
+    private TourGuestsDto FindBestTour(List<Tour> tours)
     {
         Dictionary<string, TourGuestsDto> tourAndTotalTourists = new Dictionary<string, TourGuestsDto>();
 
@@ -204,17 +204,25 @@ public class TourService
         {
             if (!tourAndTotalTourists.ContainsKey(tour.Name))
             {
-                int tourists = tourReservationService.getGuestNumber(tour.Id);
-                tourAndTotalTourists.Add(tour.Name, new TourGuestsDto(tour.Id, tourists));
+                TourGuestsDto newDto = new TourGuestsDto();
+                TourGuestsDto dto1 = tourReservationService.GetGuestNumber(tour.Id, newDto);
+                dto1.TourId = tour.Id;
+                int tourists = dto1.TotalGuests;
+                 tourAndTotalTourists.Add(tour.Name, dto1);
             }
             else
             {
                 TourGuestsDto dto = tourAndTotalTourists[tour.Name];
-                dto.TotalGuests+= tourReservationService.getGuestNumber(tour.Id);
+                TourGuestsDto dto1 = tourReservationService.GetGuestNumber(tour.Id, dto);
+                dto.TotalGuests = dto1.TotalGuests;
+                dto.TotalYouth = dto1.TotalYouth;
+                dto.TotalMiddleAged = dto1.TotalMiddleAged;
+                dto.TotalWithVoucher = dto1.TotalWithVoucher;
+                dto.TotalWithoutVoucher = dto1.TotalWithoutVoucher;
             }
         }
-        TourGuestsDto maxPair = tourAndTotalTourists.FirstOrDefault(x => x.Value.TotalGuests == tourAndTotalTourists.Max(y => y.Value.TotalGuests)).Value;
+        return tourAndTotalTourists.FirstOrDefault(x => x.Value.TotalGuests == tourAndTotalTourists.Max(y => y.Value.TotalGuests)).Value;
 
-        return maxPair.TourId;
+        
     }
 }

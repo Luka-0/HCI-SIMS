@@ -98,6 +98,7 @@ namespace InitialProject.Repository
                         .Include(r => r.Tour)
                         .Include(r => r.ArrivalPoint)
                         .Include(r => r.BookingGuest)
+                        .Include(r => r.Voucher)
                         .ToList();
 
                 return reservations;

@@ -9,6 +9,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Dto;
 
 namespace InitialProject.Service
 {
@@ -116,10 +117,20 @@ namespace InitialProject.Service
              _tourReservationRepository.Delete(reservations);
         }
 
-        public int getGuestNumber(int id)
+        public TourGuestsDto GetGuestNumber(int id, TourGuestsDto dto)
         {
+            
             List<TourReservation> reservations = GetByTour(id);
-            return reservations.Sum(reservation => reservation.GuestNumber);
+
+            foreach (TourReservation reservation in reservations)
+            {
+                dto.TotalGuests += reservation.GuestNumber;
+                dto.AddByAge(reservation.BookingGuest.Age, reservation.GuestNumber);
+                dto.AddByVoucher(reservation.Voucher, reservation.GuestNumber);
+            } 
+          //  return reservations.Sum(reservation => reservation.GuestNumber);
+            return dto;
+
         }
     }
 }

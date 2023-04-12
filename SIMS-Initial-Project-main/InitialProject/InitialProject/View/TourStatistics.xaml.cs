@@ -24,6 +24,7 @@ namespace InitialProject.View
     {   
         public TourReviewController TourReviewController = new TourReviewController();
         public TourStatisticsDto Statistics { get; set; } = new TourStatisticsDto();
+        public TourGuestsDto TotalStatistics { get; set; } = new TourGuestsDto();
         public TourStatistics(int id, string tourName)
         {
 

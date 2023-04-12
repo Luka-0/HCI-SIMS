@@ -99,19 +99,20 @@ namespace InitialProject.View
             tourStatistics.Show();
         }
 
-        private Tour GetBestTour()
+        private TourGuestsDto GetBestTour()
         {
             string time = ComboBox1.Text;
-            int bestTourId = TourController.GetMostVisitedTour(LoggedInGuide.Id, time);
+            TourGuestsDto dto= TourController.GetMostVisitedTour(LoggedInGuide.Id, time);
 
+            return dto;
 
-            return TourController.GetById(bestTourId);
         }
 
         private void ShowBestStatistics(object sender, RoutedEventArgs e)
         {
-            Tour tour = GetBestTour();
-            TourStatistics tourStatistics = new TourStatistics(tour.Id , tour.Name);
+            //TourStatistics tourStatistics = new TourStatistics(tour.Id , tour.Name);
+            //tourStatistics.Show();
+            BestTourStatistics tourStatistics = new BestTourStatistics(GetBestTour());
             tourStatistics.Show();
 
 
