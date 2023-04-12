@@ -3,6 +3,7 @@ using InitialProject.Dto;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.View.Tourist;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,11 +29,15 @@ namespace InitialProject.View
     {
         private TourController tourController = new TourController();
         private LocationController LocationController = new();
-       
+        private VoucherController VoucherController = new();
+
+
         TourService TourService = new TourService(new TourRepository());
         TourReservationController _reservationController = new TourReservationController();
 
         public ObservableCollection<Tour> toursToShow { get; set; }
+
+        public ObservableCollection<Voucher> vouchersToShow { get; set; }
 
         private UserController UserController = new UserController();
 
@@ -52,19 +57,35 @@ namespace InitialProject.View
         {
             InitializeComponent();
             ShowAllTours();
-            this.ResizeMode = ResizeMode.NoResize;
+            ShowAllVouchers();
+            //this.ResizeMode = ResizeMode.NoResize;
 
         }
 
         public void ShowReservations()
         {
             Reservations = _reservationController.GetAll();
-            foreach(TourReservation tour in Reservations)
+            foreach (TourReservation tour in Reservations)
             {
                 MessageBox.Show(tour.ToString());
             }
         }
 
+        public void ShowAllVouchers()
+        {
+            List<Voucher> allVouchers = VoucherController.GetAll();
+            RefreshVoucherGrid(allVouchers);
+        }
+
+        private void RefreshVoucherGrid(List<Voucher> vouchers)
+        {
+            vouchersToShow = new ObservableCollection<Voucher>();
+            ShowVoucher.ItemsSource = vouchersToShow;
+            foreach (Voucher v in vouchers)
+            {
+                vouchersToShow.Add(v);
+            }
+        }
         private void RefreshDataGrid(List<Tour> tours)
         {
             toursToShow = new ObservableCollection<Tour>();
@@ -84,20 +105,7 @@ namespace InitialProject.View
 
         private void ShowByLocation_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                string city = inputField.Text;
-                string country = inputField2.Text;
-
-                Location location = LocationController.GetBy(country, city);
-
-                Tours = tourController.GetByLocation(location);
-                RefreshDataGrid(Tours);
-            }
-            catch 
-            {
-                MessageBox.Show("Greska");
-            }
+            
         }
 
         private void ShowByLanguagee_Click(object sender, RoutedEventArgs e)
@@ -150,8 +158,8 @@ namespace InitialProject.View
 
         private void ReserveTourButton_Click(object sender, RoutedEventArgs e)
         {
-           try
-            {
+         //  try
+        //    {
                 Tour tour = (Tour)TourShowGrid.SelectedItem;
                 int guestNumber = int.Parse(SelectedGuestNumber.Text);
 
@@ -180,11 +188,11 @@ namespace InitialProject.View
                     SelectedGuestNumber.Text = "";
                     ShowAllTours();
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Error");
-            }
+         //  }
+           // catch
+           // {
+           //     MessageBox.Show("Error");
+           // }
 
         }
 
@@ -206,6 +214,24 @@ namespace InitialProject.View
             {
                 MessageBox.Show("ne smaraj me\n");
             }
+        }
+
+        private void ShowVoucher_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Voucher tempVoucher = (Voucher)ShowVoucher.SelectedItem;
+            //voucherSelLabel.Content = "Selected voucher: " + tempVoucher.ToString();
+        }
+
+        private void ShowKeyPoints_Click(object sender, RoutedEventArgs e)
+        {
+            KeyPointView keyPointView = new KeyPointView();
+            keyPointView.Show();
+        }
+
+        private void Grade_Click(object sender, RoutedEventArgs e)
+        {
+            GradeTour gradeTour = new GradeTour();
+            gradeTour.Show();
         }
     }
 }
