@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20230415095453_TourRequest6")]
-    partial class TourRequest6
+    [Migration("20230416104805_tourReq3")]
+    partial class tourReq3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -318,6 +318,9 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("LocationId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("LowerDateLimit")
                         .HasColumnType("TEXT");
 
@@ -328,6 +331,8 @@ namespace InitialProject.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
 
                     b.ToTable("TourRequest");
                 });
@@ -559,6 +564,15 @@ namespace InitialProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Tour");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TourRequest", b =>
+                {
+                    b.HasOne("InitialProject.Model.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TourReservation", b =>

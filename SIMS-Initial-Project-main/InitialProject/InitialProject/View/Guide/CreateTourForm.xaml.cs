@@ -12,6 +12,7 @@ using InitialProject.Controller;
 using InitialProject.Dto;
 using InitialProject.Enumeration;
 using InitialProject.View;
+using InitialProject.View.Guide;
 using Microsoft.VisualBasic;
 
 
@@ -118,6 +119,12 @@ namespace InitialProject
         {
             AllTours allTours = new AllTours(LoggedInGuide);
             allTours.Show();
+        }
+
+        private void ShowTourRequests(object sender, RoutedEventArgs e)
+        {
+            TourRequestsView tourRequestsView = new TourRequestsView(LoggedInGuide);
+            tourRequestsView.Show();
         }
     }
 }

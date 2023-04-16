@@ -12,10 +12,9 @@ public class TourRequest
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-    [Required]
+    
     [ForeignKey("LocationId")]
-    public Location? Location;
-
+    public Location? Location { get; set; }
     public string Language { get; set; }
     public int GuestNumber { get; set; }
     public string Description { get; set; }
