@@ -1,4 +1,5 @@
 ﻿using InitialProject.Dto;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -47,7 +48,8 @@ namespace InitialProject.Controller
             this.AccommodationReviewService.DeclareOwners();
         }
 
-        public void DeclareOwner(string ownerUsername) {
+        public void DeclareOwner(string ownerUsername)
+        {
 
             List<AccommodationReview> ownerReviews = new List<AccommodationReview>();
             ownerReviews = AccommodationReviewService.GetAllBy(ownerUsername);
@@ -64,5 +66,7 @@ namespace InitialProject.Controller
         {
             return AccommodationReviewService.GetBy(user);
         }
+
+
     }
 }

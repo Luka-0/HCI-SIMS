@@ -110,7 +110,6 @@ namespace InitialProject.Service
             return IAccommodationReviewRepository.GetBy(user);
         }
 
-
     }
 }
 
