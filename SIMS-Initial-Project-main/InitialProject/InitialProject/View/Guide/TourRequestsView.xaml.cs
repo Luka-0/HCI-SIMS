@@ -30,13 +30,12 @@ namespace InitialProject.View.Guide
         public TourRequestController TourRequestController { get; set; } = new TourRequestController();
         public List<TourRequest> Requests { get; set; }
 
+
         public TourRequestsView( User user)
         {
             LoggedInGuide = user;
-
             Requests= TourRequestController.GetAllPending();
-            
-            
+
             this.DataContext = this;
             InitializeComponent();
         }
@@ -90,6 +89,18 @@ namespace InitialProject.View.Guide
             //Myb put it in try catch 
             DateTime dateTime = DateTime.ParseExact(format, "d-M-yyyy", CultureInfo.InvariantCulture);
 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             return dateTime;
         
         }
@@ -161,6 +172,16 @@ namespace InitialProject.View.Guide
             FilteredRequests = new ObservableCollection<TourRequest>(TourRequestController.GetAllPending());
             DataGridRequests.ItemsSource = FilteredRequests;
             
+        }
+
+        private void ShowMonthly(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CreateNewTour(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -22,4 +22,9 @@ public class TourRequestService
         
 
     }
+
+    public List<TourRequest> GetAll()
+    {
+        return _tourRequestRepository.GetAll();
+    }
 }

@@ -14,4 +14,9 @@ public class TourRequestController
     {
         return tourRequestService.GetAllPending();
     }
+
+    public List<TourRequest> GetAll()
+    {
+        return tourRequestService.GetAll();
+    }
 }
