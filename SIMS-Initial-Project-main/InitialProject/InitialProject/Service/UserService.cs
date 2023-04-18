@@ -39,5 +39,13 @@ public class UserService
         return this.IUserRepository.GetOwners();
     }
 
+    public void UpdateBy(int id, bool superTitle, int bonusPoints)
+    {
+        IUserRepository.UpdateBy(id, superTitle, bonusPoints);
+    }
 
+    public void UpdateBy(int id, bool superTitle, int bonusPoints, DateTime validTill)
+    {
+        IUserRepository.UpdateBy(id, superTitle, bonusPoints, validTill);
+    }
 }

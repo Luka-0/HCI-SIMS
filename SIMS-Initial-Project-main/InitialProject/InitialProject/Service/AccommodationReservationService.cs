@@ -216,9 +216,14 @@ namespace InitialProject.Service
             return true;
         }
 
+        public List<AccommodationReservation> GetDuringLastYearBy(User user)
+        {
+            return IAccommodationreservationRepository.GetDuringLastYearBy(user);
+        }
+
 
         //Aleksandra
-        
+
         //dobavlja sve rezervacije rezervisane(neotkazane) za period iz primljenog zahteva
         //parametar je bas zahtev kako broj parametara funkcije ne bi bio opterecen
         public List<AccommodationReservation> GetAllPreserved(ReservationReschedulingRequest reschedulingRequest, string ownerUsername) {

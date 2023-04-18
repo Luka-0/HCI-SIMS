@@ -20,6 +20,8 @@ namespace InitialProject.View
     public partial class Guest1 : Window
     {
         private readonly ReservationReschedulingRequestController ReservationReschedulingRequestController = new();
+        private readonly AccommodationReservationController AccommodationReservationController = new();
+        private readonly UserController UserController = new();
 
         private User User { get; set; }
 
@@ -29,6 +31,7 @@ namespace InitialProject.View
             User = user;
 
             CheckNotifications();
+            CheckSuperTitleRequirements();
         }
 
         private void CheckNotifications()
@@ -48,6 +51,37 @@ namespace InitialProject.View
             if(notify)
             {
                 MessageBox.Show("One of your requests for reservation was answered by the owner");
+            }
+        }
+
+        private void CheckSuperTitleRequirements()
+        {
+            if (!User.SuperTitle)
+            {
+                List<AccommodationReservation> reservations = AccommodationReservationController.GetDuringLastYearBy(User);
+                if (reservations.Count > 9)
+                {
+                    UserController.UpdateBy(User.Id, true, 5);
+                    MessageBox.Show("You have become a SUEPER GUEST");
+                }
+
+                return;
+            }
+            
+            if (User.SuperTitleValidTill < DateTime.Now)
+            {
+                List<AccommodationReservation> reservations = AccommodationReservationController.GetDuringLastYearBy(User);
+
+                if (reservations.Count > 9)
+                {
+                    UserController.UpdateBy(User.Id, true, 5, User.SuperTitleValidTill.AddYears(1));
+                    MessageBox.Show("You have become a SUEPER GUEST");
+                }
+                else
+                {
+                    UserController.UpdateBy(User.Id, false, 0, User.SuperTitleValidTill.AddYears(1));
+                    MessageBox.Show("You are no longer super guest");
+                }
             }
         }
 

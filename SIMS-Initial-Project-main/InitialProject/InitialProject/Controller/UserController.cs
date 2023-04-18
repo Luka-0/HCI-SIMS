@@ -36,6 +36,15 @@ namespace InitialProject.Controller
             return this.UserService.GetBy(username);
         }
 
+        public void UpdateBy(int id, bool superTitle, int bonusPoints)
+        {
+            UserService.UpdateBy(id, superTitle, bonusPoints);
+        }
+
+        public void UpdateBy(int id, bool superTitle, int bonusPoints, DateTime validTill)
+        {
+            UserService.UpdateBy(id, superTitle, bonusPoints, validTill);
+        }
         
     }
 }

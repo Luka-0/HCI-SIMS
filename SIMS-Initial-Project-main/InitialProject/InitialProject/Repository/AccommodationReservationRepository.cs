@@ -100,14 +100,28 @@ namespace InitialProject.Repository
 
             AccommodationReservation accommodationToDelete = GetBy(accommodationReservation.Id);
 
-            var entity = db.accommodationReservation.Find(accommodationReservation.Id);
+            var entityToUpdate = db.accommodationReservation.Find(accommodationReservation.Id);
 
-            if (entity != null)
+            if (entityToUpdate != null)
             {
-                entity.Cancelled = true;
+                entityToUpdate.Cancelled = true;
                 db.SaveChanges();
             }
         }
+
+        public List<AccommodationReservation> GetDuringLastYearBy(User user)
+        {
+            List<AccommodationReservation> reservations = new();
+
+            using (UserContext db = new())
+            {
+                reservations = db.accommodationReservation.Where(t => t.Guest.Id == user.Id && t.BegginingDate > DateTime.Now.AddYears(-1))
+                                                          .ToList();
+            }
+
+            return reservations;
+        }
+
 
 
         //Aleksandra

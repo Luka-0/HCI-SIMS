@@ -14,6 +14,8 @@ namespace InitialProject.Interface
         public Boolean Add(User user);
         public User GetBy(int id);
         public List<User> GetOwners();
+        public void UpdateBy(int id, bool superTitle, int bonusPoints);
+        public void UpdateBy(int id, bool superTitle, int bonusPoints, DateTime validTill);
 
-        }
+    }
 }

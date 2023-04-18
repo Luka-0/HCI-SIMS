@@ -16,21 +16,25 @@ namespace InitialProject.Model
         public string Password { get; set; }
         public bool SuperTitle { get; set; }
         public int BonusPoints { get; set; }
-        public DateTime SuperTitleValidTill { get; set; } = new();
+        public DateTime SuperTitleValidTill { get; set; }
         public UserType Type { get; set; }
         public int Age { get; set; }
         public User()
         {
             Username = "default";
             Password = "default";
-            Type = 0;
+
             SuperTitle = false;
+            BonusPoints = 0;
         }
 
         public User(string username, string password)
         {   
             Username = username;
             Password = password;
+
+            SuperTitle = false;
+            BonusPoints = 0;
         }
 
         public string[] ToCSV()

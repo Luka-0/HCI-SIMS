@@ -58,5 +58,11 @@ namespace InitialProject.Controller
 
             return this.AccommodationReservationService.GetAllCancelled(ownerUsername);
         }
+
+        public List<AccommodationReservation> GetDuringLastYearBy(User user)
+        {
+            return AccommodationReservationService.GetDuringLastYearBy(user);
+        }
+
     }
 }
