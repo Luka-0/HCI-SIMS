@@ -13,11 +13,15 @@ public class TourRequestRepository: ITourRequestRepository
 {
     public List<TourRequest> GetAllPending()
     {
-        using (var db = new UserContext())
-        {
-            return db.tourRequest.Where(tr=>tr.State == TourRequestState.Pending)
-                .Include(tr=>tr.Location)
-                .ToList();
-        }
+        using var db = new UserContext();
+        return db.tourRequest.Where(tr=>tr.State == TourRequestState.Pending)
+            .Include(tr=>tr.Location)
+            .ToList();
+    }
+
+    public List<TourRequest> GetAll()
+    {
+        using var db = new UserContext();
+        return db.tourRequest.ToList();
     }
 }

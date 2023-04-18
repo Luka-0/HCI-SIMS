@@ -7,4 +7,5 @@ namespace InitialProject.Interface;
 public interface ITourRequestRepository
 {
     public List<TourRequest> GetAllPending();
+    public List<TourRequest> GetAll();
 }
