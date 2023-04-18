@@ -15,6 +15,8 @@ namespace InitialProject.Model
         public string Username { get; set; }
         public string Password { get; set; }
         public bool SuperTitle { get; set; }
+        public int BonusPoints { get; set; }
+        public DateTime SuperTitleValidTill { get; set; } = new();
         public UserType Type { get; set; }
         public int Age { get; set; }
         public User()
