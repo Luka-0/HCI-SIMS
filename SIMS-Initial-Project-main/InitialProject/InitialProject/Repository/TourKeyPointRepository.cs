@@ -2,64 +2,55 @@
 using InitialProject.Contexts;
 using InitialProject.Model;
 using System.Collections.Generic;
+using System.Linq;
+using InitialProject.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace InitialProject.Repository;
 
-public class TourKeyPointRepository
+public class TourKeyPointRepository:ITourKeyPointRepository
 {
-    public static List<TourKeyPoint> GetAll()
+    public List<TourKeyPoint> GetAll()
     {
-        List<TourKeyPoint> tourKeyPoints= new List<TourKeyPoint>();
+        List<TourKeyPoint> keyPoints = new List<TourKeyPoint>();
 
-        using (var db = new UserContext())
+        using (var dbContext = new UserContext())
         {
-            foreach (TourKeyPoint tourKeyPoint in db.tourKeyPoints)
-            {
-                tourKeyPoints.Add(tourKeyPoint);
-                
-            }
-            db.SaveChanges();
+            keyPoints = dbContext.tourKeyPoints.Include(t => t.Tour).ToList();
         }
-        return tourKeyPoints;
+        return keyPoints;
     }
 
-    public static List<TourKeyPoint> GetBy(List<string> TourKeyPointNames) 
+    public List<TourKeyPoint> GetByTour(Tour tour)
     {
-        List<TourKeyPoint> allTourKeyPoints = GetAll();
-        List<TourKeyPoint> tourKeyPoints = new List<TourKeyPoint>();
-        using var db = new UserContext();
+        List<TourKeyPoint> keyPoints = new List<TourKeyPoint>();
 
-        foreach (TourKeyPoint tourKeyPoint in allTourKeyPoints)
+        using (var dbContext = new UserContext())
         {
-            foreach (string name in TourKeyPointNames)
-            {
-                if (tourKeyPoint.Name.Equals(name))
-                {
-                    tourKeyPoints.Add(tourKeyPoint);
-                }
-            }
+            keyPoints = dbContext.tourKeyPoints.Include(t => t.Tour)
+                                               .Where(t  => t.Tour.Id == tour.Id) 
+                                               .ToList();
         }
+        return keyPoints;
+    }
+
+    public List<TourKeyPoint> GetByTourKeyPointNames(List<string> TourKeyPointNames) 
+    {
+        using var db = new UserContext();
+        List<TourKeyPoint> allTourKeyPoints = db.tourKeyPoints.ToList();
+        List<TourKeyPoint> tourKeyPoints = new List<TourKeyPoint>();
+        
+
+        foreach (TourKeyPoint keyPoint in allTourKeyPoints)
+        {
+            tourKeyPoints.Add(allTourKeyPoints.Find(i => i.Name == keyPoint.Name));
+        }
+        
         return tourKeyPoints;
 
     }
 
-    /*public static List<TourKeyPoint> Save(List<string> tourKeyPointNames)
-    {
-        List<TourKeyPoint> tourKeyPoints = new List<TourKeyPoint>();
-        using var db = new UserContext();
-
-        foreach (String name in tourKeyPointNames)
-        {
-            TourKeyPoint tourKeyPoint = new TourKeyPoint(name);
-            db.tourKeyPoints.Add(tourKeyPoint);
-            tourKeyPoints.Add(tourKeyPoint);
-
-        }
-
-        db.SaveChanges();
-        return tourKeyPoints;
-    }*/
-    public static void Save(TourKeyPoint tourKeyPoint, TourKeyPointType type)
+    public void Save(TourKeyPoint tourKeyPoint, TourKeyPointType type)
     {
         tourKeyPoint.Type = type;
         using var db = new UserContext();
@@ -68,7 +59,7 @@ public class TourKeyPointRepository
         db.SaveChanges();
     }
 
-    public static void Update(TourKeyPoint tourKeyPoint, Tour tour)
+    public void Update(TourKeyPoint tourKeyPoint, Tour tour)
     {
         using (var db =new UserContext())
         {
@@ -79,7 +70,7 @@ public class TourKeyPointRepository
         }
     }
 
-    public static TourKeyPoint GetBy(int id)
+    public TourKeyPoint GetById(int id)
     {
         using (var db = new UserContext())
         {
@@ -87,7 +78,7 @@ public class TourKeyPointRepository
         }
     }
 
-    public static void SetType(int  startId, int endId)
+    public void SetType(int  startId, int endId)
     {
         using (var db = new UserContext())
         {
@@ -100,5 +91,35 @@ public class TourKeyPointRepository
         }
     }
 
-    
+    public void StartTour(int id)
+    {
+        using (var db = new UserContext()){
+            var tempRecord = db.tourKeyPoints
+                .FirstOrDefault(t => t.Tour.Id == id && t.Type == TourKeyPointType.Start);
+            tempRecord.Reached = true;
+            db.SaveChanges();
+        }
+    }
+
+    public void Reach(int id)
+    {
+        using (var db = new UserContext())
+        {
+            var tempRecord = db.tourKeyPoints.Find(id);
+            tempRecord.Reached = true;
+            db.SaveChanges();
+        }
+        
+    }
+
+    public List<TourKeyPoint> GetAllByTour(int id)
+    {
+        using (var db = new UserContext())
+        {
+            return db.tourKeyPoints.Where(t=>t.Tour.Id==id).ToList();
+        }
+        
+    }
+
+
 }

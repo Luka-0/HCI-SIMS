@@ -1,5 +1,6 @@
 ﻿using InitialProject.Dto;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -11,18 +12,20 @@ namespace InitialProject.Controller
 {
     public class GuestReviewController
     {
-        public static void Save(NewGuestReviewDto guestReviewDto) {
+        private GuestReviewService guestReviewService = new(new GuestReviewRepository());
+
+        public void Save(NewGuestReviewDto guestReviewDto) {
 
             GuestReview review = new GuestReview(guestReviewDto.Tidiness, guestReviewDto.Obedience, guestReviewDto.Comment);
-            
-            GuestReviewService.Save(review, guestReviewDto.ReservationId);
+
+            guestReviewService.Save(review, guestReviewDto.ReservationId);
         
         }
 
-        public static List<ExpiredReservationDto> LoadExpiredReservations()
+        public List<ExpiredReservationDto> LoadExpiredReservations(string ownerUsername)
         {
 
-            List<AccommodationReservation> reservations = GuestReviewService.GetNotGradedExpiredReservations();
+            List<AccommodationReservation> reservations = guestReviewService.GetNotGradedExpiredReservations(ownerUsername);
 
             List<ExpiredReservationDto> expiredReservations = new List<ExpiredReservationDto>();
 

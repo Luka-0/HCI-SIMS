@@ -1,4 +1,5 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Interface;
 using InitialProject.Model;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class ImageRepository
+    public class ImageRepository : IImageRepository
     {
-        public static void Save(Image image)
+        public void Save(Image image)
         {
             using var db = new UserContext();
 
@@ -18,7 +19,7 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
-        public static void Update(Image image, Tour tour)
+        public void Update(Image image, Tour tour)
         {
             using var db = new UserContext();
             image.Tour = tour;

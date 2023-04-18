@@ -1,0 +1,50 @@
+﻿<Window x:Class="InitialProject.View.GuideHistory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="GuideHistory" Height="720" Width="1080">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="DataGridTours" ItemsSource="{Binding BasicTours}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="0, 48, 0, 0" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Country}"/>
+                <DataGridTextColumn Header="City" Binding="{Binding City}"/>
+                <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
+                <DataGridTextColumn Header="Guest Limit" Binding="{Binding GuestLimit}"/>
+                <DataGridTextColumn Header="Start Date And Time" Binding="{Binding StartDateAndTime}"/>
+            
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button  Click="ShowReviews"  Content="Show Reviews" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button  Click="ShowStatistics"  Content="Show Statistics" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+        <Grid Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Choose most popular tour:"></TextBlock>
+            <ComboBox Grid.Row="1" Name="ComboBox1" ItemsSource="{Binding Path=TourYears}" Width="200" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Grid.Row="2"  Click="ShowBestStatistics"  Content="Show Best Statistics" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0"  />
+
+        </Grid>
+    </Grid>
+</Window>

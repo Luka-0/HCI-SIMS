@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using InitialProject.Enumeration;
 using Microsoft.EntityFrameworkCore;
+using InitialProject.Interface;
 
 namespace InitialProject.Repository
 {
-    public class TourRepository
+    public class TourRepository : ITourRepository
     {
         //public TourRepository() { }
 
@@ -27,9 +29,6 @@ namespace InitialProject.Repository
     }
     */
     
-    
-
-
         public Tour Save(Tour tour)
         {
             using var db = new UserContext();
@@ -46,7 +45,11 @@ namespace InitialProject.Repository
 
             using (var dbContext = new UserContext())
             {
-                Tours = dbContext.tour.Include(t => t.Location).ToList();
+                Tours = dbContext.tour.Where(t => t.Location != null && t.Guide != null)
+                                        .Include(t => t.Location)
+                                        .Include(t => t.Guide)
+                                        .ToList();
+
             }
             return Tours;
         }
@@ -59,12 +62,15 @@ namespace InitialProject.Repository
             {
                 tour = (Tour)dbContext.tour
                                 .Include(t => t.Location)
-                                 .Where(t => t.Id == id);
+                                .Include(t => t.TourKeyPoints)
+                                .Where(t => t.Id == id)
+                                .SingleOrDefault();
+
             }
             return tour;
         }
-
-        public List<Tour> GetBy(Location location)
+        
+        public List<Tour> GetByLocation(Location location)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -78,7 +84,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public List<Tour> GetBy(TimeSpan duration)
+        public List<Tour> GetByDuration(TimeSpan duration)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -92,7 +98,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public List<Tour> GetBy(string language)
+        public List<Tour> GetByLanguage(string language)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -106,7 +112,7 @@ namespace InitialProject.Repository
             return Tours;
         }
 
-        public List<Tour> GetBy(int guestLimit)
+        public List<Tour> GetByGuestLimit(int guestLimit)
         {
             List<Tour> Tours = new List<Tour>();
 
@@ -114,12 +120,42 @@ namespace InitialProject.Repository
             {
                 Tours = dbContext.tour
                                  .Include(t => t.Location)
-                                 .Where(t => t.GuestLimit >= guestLimit)
+                                 .Where(t => t.GuestLimit == guestLimit)
                                  .ToList();
             }
             return Tours;
         }
 
+        public void SetStatus(int id, TourStatus status)
+        {
+            using (var dbContext= new UserContext())
+            {
+                var tour = dbContext.tour.Find(id);
+                tour.Status = status;
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var dbContext = new UserContext())
+            {
+                Tour tour = dbContext.tour.SingleOrDefault(ttt => ttt.Id == id);
+
+                dbContext.tour.Remove(tour);
+                dbContext.SaveChangesAsync();
+                //dbContext.SaveChanges();
+            }
+            
+        }
+
+        public List<Tour> GetAllByGuide(int id)
+        {
+            using (var db = new UserContext())
+            {
+                return db.tour.Where(t => t.Guide.Id == id).ToList();
+            }
+        }
 
 
     }

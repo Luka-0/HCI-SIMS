@@ -1,4 +1,5 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Interface;
 using InitialProject.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,17 +10,15 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class TourReservationRepository
+    public class TourReservationRepository:ITourReservationRepository
     {
-       // public TourReservationRepository() { }
-
         public List<TourReservation> GetAll()
         {
             List<TourReservation> reservations = new List<TourReservation>();
 
             using (var dbContext = new UserContext())
             {
-                reservations = dbContext.tourReservations
+                reservations = dbContext.tourReservation
                                         .Include(t => t.Tour)
                                         .ThenInclude(l => l.Location)
                                         .ToList();
@@ -27,52 +26,26 @@ namespace InitialProject.Repository
             return reservations;
         }
 
-        public TourReservation GetById(int id)
+      /*  public TourReservation GetById(int id)
         {
             TourReservation reservation = new TourReservation();
 
             using (var dbContext = new UserContext())
             {
-                reservation = (TourReservation)dbContext.tourReservations
-                                 .Where(t => t.Id == id);
+                reservation = (TourReservation)dbContext.tourReservation
+                    .Where(t => t.Id == id);
+                //.SingleOrDefault(); Ja(Pavle) mislim da sad dodao ovo na gresku, ali nisam sig proveri to
             }
             return reservation;
         }
-
-        //CountBy given tour/tourId
-        public int CountReservationsBy(Tour tour)
-        {
-            int count = 0;
-
-            using (var dbContext = new UserContext())
-            {
-                count = dbContext.tourReservations
-                                 .Where(t => t.Tour.Id == tour.Id)
-                                 .Count();
-            }
-            return count;
-        }
-
-        public int CountGuestsBy(Tour tour)
-        {
-            int count = 0;
-
-            using (var dbContext = new UserContext())
-            {
-                count = dbContext.tourReservations
-                                 .Where(t => t.Tour.Id == tour.Id)
-                                 .Sum(t => t.GuestNumber);
-            }
-            return count;
-        }
-
-        public List<TourReservation> GetBy(Tour tour)
+        */
+        public List<TourReservation> GetByTour(Tour tour)
         {
             List<TourReservation> reservations = new List<TourReservation>();
 
             using (var dbContext = new UserContext())
             {
-                reservations = dbContext.tourReservations
+                reservations = dbContext.tourReservation
                                  .Include(t => t.Tour)
                                  .Where(t => t.Tour.Id == tour.Id)
                                  .ToList();
@@ -80,16 +53,18 @@ namespace InitialProject.Repository
             return reservations;
         }
 
-        public bool IsReserved(Tour tour) 
+        public List<TourReservation> GetByGuest(User user)
         {
-            List<TourReservation> reservations = GetAll();
+            List<TourReservation> reservations = new List<TourReservation>();
 
-            foreach(var reservation in reservations)
+            using (var dbContext = new UserContext())
             {
-                if(reservation.Tour.Id == tour.Id) 
-                    return true;
+                reservations = dbContext.tourReservation
+                                 .Include(t => t.Tour)
+                                 .Where(t => t.BookingGuest.Id == user.Id)
+                                 .ToList();
             }
-            return false;
+            return reservations;
         }
 
         public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber)
@@ -112,15 +87,61 @@ namespace InitialProject.Repository
             db.Add(reservation);
 
             db.SaveChanges();
-
-
         }
 
+        public List<TourReservation> GetByTour(int id)
+        {
+            using (var db = new UserContext())
+            {
+                List<TourReservation> reservations = new List<TourReservation>();
+                reservations = db.tourReservation.Where(r => r.Tour.Id == id)
+                        .Include(r => r.Tour)
+                        .Include(r => r.ArrivalPoint)
+                        .Include(r => r.BookingGuest)
+                        .Include(r => r.Voucher)
+                        .ToList();
 
+                return reservations;
+            }
+        }
 
+        public void SetArrivalKeyPoint(TourKeyPoint keyPoint, int id)
+        {
+            using (var db = new UserContext())
+            {
+                var tempRecord = db.tourReservation.Find(id);
+                tempRecord.ArrivalPoint = keyPoint;
+                db.SaveChanges();
+            }
+        }
 
+        public TourReservation GetById(int id)
+        {
+            using (var db = new UserContext())
+            {
+                
+                TourReservation reservation =  db.tourReservation
+                    .Where(t => t.Id == id)
+                    .Include(t => t.BookingGuest)
+                    .Include(t  => t.ArrivalPoint)
+                    .FirstOrDefault();
 
+                return reservation;
+            }
+        }
 
+        public void Delete(List<TourReservation> reservations)
+        {
+            using (var db = new UserContext())
+            {
+                foreach (TourReservation reservation in reservations)
+                {
+                    db.tourReservation.Remove(reservation);
+                }
+                db.SaveChangesAsync();
+            }
+            
+        }
 
 
     }

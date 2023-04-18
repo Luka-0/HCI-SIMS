@@ -1,0 +1,19 @@
+﻿<Window x:Class="InitialProject.ShowTours"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject"
+        mc:Ignorable="d"
+        Title="Today's tours" Height="720" Width="1080" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <DataGrid x:Name="dataGridTours" ItemsSource="{Binding Path=BasicTours}" AutoGenerateColumns="True" 
+                  SelectionMode="Single" IsReadOnly="True" AutoGeneratingColumn="generateColumns" HorizontalAlignment="Left" 
+                  Margin="10,47,0,0" VerticalAlignment="Top"/>
+
+        <Button  Click="StartTour"  Content="Start" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button  Click="ShowHistory"  Content="My previous tours" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+
+
+    </Grid>
+</Window>

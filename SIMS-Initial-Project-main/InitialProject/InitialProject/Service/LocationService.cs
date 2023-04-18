@@ -1,7 +1,7 @@
-﻿using InitialProject.Contexts;
+﻿    using InitialProject.Contexts;
 using InitialProject.Dto;
+using InitialProject.Interface;
 using InitialProject.Model;
-﻿using InitialProject.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -11,32 +11,49 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
-    public class LocationService
+    class LocationService
     {
+        private readonly ILocationRepository ILocationRepository;
 
-        public static Location GetBy(string city)
+        public LocationService(ILocationRepository iLocationRepository)
         {
-            return LocationRepository.GetBy(city);
+            ILocationRepository = iLocationRepository;
         }
 
-        public static Location GetBy(int id)
+        public Location GetByCity(string city)
         {
-            return LocationRepository.GetBy(id);
+            return ILocationRepository.GetByCity(city);
         }
 
-        public static List<Location> GetAll()
+        public List<Location> GetByCountry(string country)
         {
-            return LocationRepository.GetAll();
+            return ILocationRepository.GetByCountry(country);
         }
 
-        public static void Save(Location location)
+        public Location GetBy(int id)
         {
-            LocationRepository.Save(location);
+            return ILocationRepository.GetBy(id);
         }
 
-        public static Location GetBy(String country, String city)
+        public List<Location> GetAll()
         {
-            return LocationRepository.GetBy(country, city);
+            return ILocationRepository.GetAll();
+        }
+
+        public List<Location> GetAllDistinctByCountry()
+        {
+            return ILocationRepository.GetAllDistinctByCountry();
+        }
+
+
+        public void Save(Location location)
+        {
+            ILocationRepository.Save(location);
+        }
+
+        public Location GetBy(String country, String city)
+        {
+            return ILocationRepository.GetBy(country, city);
         }
 
     }

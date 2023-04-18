@@ -3,24 +3,44 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Packaging;
 using System.Linq;
+using System.Net;
 using System.Windows;
 using InitialProject.Contexts;
+using InitialProject.Dto;
+using InitialProject.Interface;
+using InitialProject.Migrations;
 using InitialProject.Model;
 using InitialProject.Repository;
 
 namespace InitialProject.Service;
 
 public class TourKeyPointService
-{   
+{
+    private readonly TourService tourService = new TourService(new TourRepository());
+    private readonly ITourKeyPointRepository _tourKeyPointsRepository;
 
-    public static List<TourKeyPoint> GetAll()
+    public List<TourKeyPoint> GetAll()
     {
-        return TourKeyPointRepository.GetAll();
+        return _tourKeyPointsRepository.GetAll();
     }
-    public static List<TourKeyPoint> GetBy(List<string> names)
+
+    public List<TourKeyPoint> GetByTour(Tour tour)
+    {
+        return _tourKeyPointsRepository.GetByTour(tour);
+    }
+    public TourKeyPointService(ITourKeyPointRepository repository)
+    {
+        _tourKeyPointsRepository = repository;
+    }
+
+    public TourKeyPoint GetById(int id)
+    {
+        return _tourKeyPointsRepository.GetById(id);
+    }
+    public List<TourKeyPoint> GetByTourKeyPointNames(List<string> names)
     {
 
-        return TourKeyPointRepository.GetBy(names);
+        return _tourKeyPointsRepository.GetByTourKeyPointNames(names);
     }
 
     public TourKeyPointType GetTypesByIndex(List<String> names, String currentName)
@@ -39,7 +59,11 @@ public class TourKeyPointService
         }
         return TourKeyPointType.Mid;
     }
-    
+
+    public void Save(TourKeyPoint tourKeyPoint, TourKeyPointType type)
+    {
+        _tourKeyPointsRepository.Save(tourKeyPoint, type);
+    }
 
     public  List<TourKeyPoint> Save(List<string> keyPointNames)
     {
@@ -49,8 +73,8 @@ public class TourKeyPointService
 
             TourKeyPoint tourKeyPoint= new TourKeyPoint(name);
             TourKeyPointType type = GetTypesByIndex(keyPointNames, name);
-            TourKeyPointRepository.Save(tourKeyPoint, type);
-            TourKeyPoint keyPointFromDb = TourKeyPointRepository.GetBy(tourKeyPoint.Id);
+            _tourKeyPointsRepository.Save(tourKeyPoint, type);
+            TourKeyPoint keyPointFromDb = _tourKeyPointsRepository.GetById(tourKeyPoint.Id);
             tourKeyPoints.Add(keyPointFromDb);
 
         }
@@ -61,10 +85,11 @@ public class TourKeyPointService
     public void Update(List<TourKeyPoint> tourKeyPoints, Tour tour)
     {
         {
-            foreach (var keyPoint in tourKeyPoints)
-            {
-                TourKeyPointRepository.Update(keyPoint,tour);
-            }
+            // foreach (var keyPoint in tourKeyPoints)
+            // {
+            //     _tourKeyPointsRepository.Update(keyPoint,tour);
+            // }
+            tourKeyPoints.ForEach(keyPoint => _tourKeyPointsRepository.Update(keyPoint, tour));
         }
     }
 
@@ -72,8 +97,42 @@ public class TourKeyPointService
     {
         TourKeyPoint start = tourKeyPoints.First();
         TourKeyPoint end = tourKeyPoints.Last();
-        TourKeyPointRepository.SetType(start.Id, end.Id);
+        _tourKeyPointsRepository.SetType(start.Id, end.Id);
 
     }
 
+    public List<TourAndKeyPointsDto> GetByGuestAndActiveTour(User user)
+    {
+        List<TourAndKeyPointsDto> tourAndKeyPointsDtos = new List<TourAndKeyPointsDto> ();
+        List<Tour> allActiveToursByGuest = tourService.GetAllActiveByGuest(user);
+
+        foreach(Tour tour in allActiveToursByGuest)
+        {
+            tourAndKeyPointsDtos.Add(new TourAndKeyPointsDto(tour, GetByTour(tour)));
+        }
+        return tourAndKeyPointsDtos;
+    }
+    
+    public void StartTour(int id)
+    {
+        _tourKeyPointsRepository.StartTour(id);
+    }
+
+    public void Reach(int id)
+    {
+        _tourKeyPointsRepository.Reach(id);
+    }
+
+
+    public List<TourKeyPoint> Create(List<string> tourKeyPointNames, Tour tour)
+    {
+        List<TourKeyPoint> keyPoints = Save(tourKeyPointNames);
+        Update(keyPoints, tour);
+        return GetAllByTour(tour.Id);
+    }
+
+    private List<TourKeyPoint> GetAllByTour(int id)
+    {
+       return _tourKeyPointsRepository.GetAllByTour(id);
+    }
 }

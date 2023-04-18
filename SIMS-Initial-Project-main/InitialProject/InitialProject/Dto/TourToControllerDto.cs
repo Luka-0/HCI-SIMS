@@ -13,6 +13,7 @@ public class TourToControllerDto
     public string City;
     public string Description;
     public string Language;
+    public User Guide;
     public int GuestLimit;
     public List<String> TourKeyPointNames;
     public DateTime StartDateAndTime;
@@ -23,13 +24,14 @@ public class TourToControllerDto
 
     public TourToControllerDto() { }
 
-    public TourToControllerDto(string name, string country, string city, string description, string language, int guestLimit, List<String> tourKeyPointNames,DateTime startDateAndTime, TimeSpan duration, List<String> imageURLs)
+    public TourToControllerDto(string name, string country, string city, string description, string language, User guide, int guestLimit, List<String> tourKeyPointNames,DateTime startDateAndTime, TimeSpan duration, List<String> imageURLs)
     {
         Name = name;
         Country = country;
         City = city;
         Description = description;
         Language = language;
+        this.Guide = guide;
         GuestLimit = guestLimit;
         TourKeyPointNames = tourKeyPointNames;
         StartDateAndTime = startDateAndTime;

@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using InitialProject.Enumeration;
 using InitialProject.View;
+using InitialProject.Contexts;
+using InitialProject.Controller;
 
 namespace InitialProject
 {
@@ -16,7 +18,8 @@ namespace InitialProject
     public partial class SignInForm : Window
     {
 
-        private readonly UserRepository _repository;
+        private readonly UserController UserController;
+        private readonly AccommodationReviewController AccommodationReviewController;
 
         private string _username;
         public string Username
@@ -43,12 +46,13 @@ namespace InitialProject
         {
             InitializeComponent();
             DataContext = this;
-            _repository = new UserRepository();
+            UserController = new UserController();
+            AccommodationReviewController = new AccommodationReviewController();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
         {
-            User user = UserRepository.GetUser(Username);
+            User user = UserController.GetBy(Username);
 
             if (user != null)
             {
@@ -76,20 +80,20 @@ namespace InitialProject
 
                                 Guest2View view = new Guest2View(); 
                                 view.Show();
-
+                                this.Close();
                                 break;
                             }
                         case UserType.Guide:
                             {
                                 CreateTourForm createTourForm = new CreateTourForm(user);
                                 createTourForm.Show();
-                                Close(); //this.close();
+                                Close();
                                 
                                 break;
                             }
                         case UserType.Owner:
                             { 
-                                Owner owner = new Owner();
+                                Owner owner = new Owner(user.Username);
                                //this.Hide();
                                 owner.Show();
                                 MessageBox.Show("Owner: " + user.Username + " is  logged in.");
@@ -101,6 +105,14 @@ namespace InitialProject
                             MessageBox.Show("Unexpected user type!");
                             break;
                     }
+
+                    //bez obzira na tip ulogovanog korisnika
+                    //na osnovu poslednjih podataka iz tabele svih recenzija smestaja i vlasnika
+                    //se azuriraju klase smestaja za svakog vlasnika, kao i njegova titula
+                    //kako bi gosti koji pregledaju smestaje imali ispravne podatke o  smestajima
+                    //tj da te informacije ne zavise od toga da li je vlasnik prethodno bio ulogovan
+                    AccommodationReviewController.DeclareOwners();
+
 
                 }
                 else
@@ -120,7 +132,7 @@ namespace InitialProject
             user.Password = txtPassword.Password;
             user.Username = Username;
 
-            UserRepository.AddUser(user);
+            UserController.Add(user);
 
             MessageBox.Show("Successfully added user");
             this.Close();

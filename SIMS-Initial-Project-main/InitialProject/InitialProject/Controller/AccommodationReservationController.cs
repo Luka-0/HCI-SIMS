@@ -1,5 +1,7 @@
 ﻿using InitialProject.Dto;
+using InitialProject.Interface;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -11,23 +13,50 @@ namespace InitialProject.Controller
 {
     internal class AccommodationReservationController
     {
-       /* public static List<ExpiredReservationDto> LoadExpiredReservations() {
+        private readonly AccommodationReservationService AccommodationReservationService = new(new AccommodationReservationRepository());
 
-            DateTime todaysDate = DateTime.UtcNow.Date;
-
-            List<AccommodationReservation> reservations = AccommodationReservationService.getAlExpiredlBy(todaysDate);
-
-            List<ExpiredReservationDto> expiredReservations = new List<ExpiredReservationDto>();
-
-            foreach (AccommodationReservation r in reservations) {
-
-                ExpiredReservationDto item = new ExpiredReservationDto(r);
-
-                expiredReservations.Add(item);
-            }
-
-            return expiredReservations;
+        public AccommodationReservation GetBy(int id)
+        {
+            return AccommodationReservationService.GetBy(id);
         }
-       */
+
+        public List<StartEndDateDto> GetAvailableDates(Accommodation accommodation, DateTime startingDate, DateTime endingDate, int daysToStay)
+        {
+            return AccommodationReservationService.GetAvailableDates(accommodation, startingDate, endingDate, daysToStay);
+        }
+
+        public List<StartEndDateDto> FindOtherDates(DateTime endDate, Accommodation accommodation, int daysToStay)
+        {
+            return AccommodationReservationService.FindOtherDates(endDate, accommodation, daysToStay);
+        }
+
+        public bool CreateReservation(Accommodation accommodation, DateTime startingDate, DateTime endingDate, int guestNumber, User user)
+        {
+            return AccommodationReservationService.CreateReservation(accommodation, startingDate, endingDate, guestNumber, user);
+        }
+
+        public void Add(AccommodationReservation accommodationReservation)
+        {
+            AccommodationReservationService.Add(accommodationReservation);
+        }
+
+        public List<AccommodationReservation> GetByAccommodation(int id)
+        {
+            return AccommodationReservationService.GetByAccommodation(id);
+        }
+
+        public List<AccommodationReservation> GetBy(User user)
+        {
+            return AccommodationReservationService.GetBy(user);
+        }
+
+        public bool Delete(bool logicaly, AccommodationReservation accommodationReservation)
+        {
+            return AccommodationReservationService.Delete(logicaly, accommodationReservation);
+        }
+        public List<AccommodationReservation> GetAllCancelled(string ownerUsername) {
+
+            return this.AccommodationReservationService.GetAllCancelled(ownerUsername);
+        }
     }
 }

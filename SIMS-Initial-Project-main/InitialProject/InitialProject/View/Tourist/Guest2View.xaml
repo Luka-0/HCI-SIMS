@@ -1,0 +1,53 @@
+﻿<Window x:Class="InitialProject.View.Guest2View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="Guest2View" Height="780" Width="970">
+    <Grid HorizontalAlignment="Center" Width="970">
+        <DataGrid x:Name = "TourShowGrid" ItemsSource="{Binding toursToShow}" Height="200" Width="700" Margin="13,9,187,321" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="GuestLimit" Binding="{Binding GuestLimit}"/>
+                <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
+                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}"/>
+                <DataGridTextColumn Header="SetStatus Date And Time" Binding="{Binding StartDateAndTime}"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBox x:Name="inputField" Height="35"  Width="150" Margin="19,226,731,269"/>
+        <Button x:Name="ShowByGuestNumber" Height="30" Width="150" Margin="232,348,588,386" Click="ShowByGuestNumber_Click" >Pretrazi po broju ljudi</Button>
+        <Button x:Name="ShowKeyPoints" Width="100" Margin="405,348,465,386" Click="ShowKeyPoints_Click">Pristustvo na turi</Button>
+        <Button x:Name="Grade" Width="100" Margin="540,347,330,386" Click="Grade_Click">Oceni</Button>
+
+        <Label Margin="37,591,763,122" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0.406"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.695"/>
+                </TransformGroup>
+            </Label.RenderTransform> Za rezervaciju
+        </Label>
+        <Label x:Name="FreeSpacesLabel"  Margin="244,589,450,122">Broj slobodnih mesta:</Label>
+        <TextBox x:Name="SelectedGuestNumber" Margin="22,647,730,79"/>
+        <Button x:Name="ReserveTourButton" Width="100" Margin="244,647,626,79" Click="ReserveTourButton_Click">Rezervisi</Button>
+        <Button x:Name="CancelReservationButton" Width="100" Margin="355,647,515,79" Click="CancelReservationButton_Click">Odustani</Button>
+        <Button x:Name="testDugme" Width="100" Margin="485,647,385,79"  Content="Test dugme" Click="testDugme_Click"/>
+
+        <DataGrid x:Name = "ShowVoucher" ItemsSource="{Binding vouchersToShow}" Height="200" Margin="48,384,572,180" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="ShowVoucher_SelectionChanged" >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ExpirationDate" Binding="{Binding ExpirationDate}"/>
+                <DataGridTextColumn Header="ObtainedReason" Binding="{Binding ObtainedReason}"/>
+                <DataGridTextColumn Header="ReceivedDate" Binding="{Binding ReceivedDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

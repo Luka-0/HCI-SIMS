@@ -1,4 +1,5 @@
 ﻿using InitialProject.Dto;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -10,27 +11,58 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Controller
 {
-    internal class LocationController
+    public class LocationController
     {
-        public static void AddNew(LocationDto record)
-        {
-            Location location  = new Location(record.City, record.Country);
+        private readonly LocationService LocationService = new (new LocationRepository());
 
-            LocationService.Save(location);
+        public void AddNew(LocationDto location){
+
+            LocationService.Save(new Location(location.City, location.Country));
         }
 
 
-        public static List<LocationDto> Load()
+        public List<LocationDto> Load()
         {
             List<LocationDto> locations = new List<LocationDto>();
-            List<Location> records = LocationService.GetAll();
+            List<Location> existingLocations = LocationService.GetAll();
 
-            foreach (Location record in records) {
+            foreach (Location location in existingLocations) {
 
-                locations.Add(new LocationDto(record.City, record.Country));
+                locations.Add(new LocationDto(location.City, location.Country));
             
             }
             return locations;
+        }
+
+        public List<Location> GetAll()
+        {
+            return LocationService.GetAll();
+        }
+
+        public Location GetByCity(string city)
+        {
+            return LocationService.GetByCity(city);
+        }
+
+        public List<Location> GetByCountry(string country)
+        {
+            return LocationService.GetByCountry(country);
+        }
+
+        public List<Location> GetAllDistinctByCountry()
+        {
+            return LocationService.GetAllDistinctByCountry();
+        }
+
+
+        public Location GetBy(int id)
+        {
+            return LocationService.GetBy(id);
+        }
+
+        public Location GetBy(String country, String city)
+        {
+            return LocationService.GetBy(country, city);
         }
     }
 }

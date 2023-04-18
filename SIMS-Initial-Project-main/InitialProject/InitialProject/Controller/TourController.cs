@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using InitialProject.Contexts;
 using InitialProject.Dto;
+using InitialProject.Enumeration;
+using InitialProject.Interface;
+using InitialProject.Migrations;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -11,62 +15,46 @@ namespace InitialProject.Controller;
 
 public class TourController
 {
-    private TourKeyPointService tourKeyPointService = new TourKeyPointService();
-    private TourReservationService reservationService = new TourReservationService();
-    private TourService tourService = new TourService();
 
-    //private LocationService locationService = new LocationService();
-    private ImageService imageService = new ImageService();
+   // private TourRepository tourRepository = new TourRepository();
+    private TourKeyPointService tourKeyPointService = new TourKeyPointService(new TourKeyPointRepository());
+    private TourReservationService reservationService = new TourReservationService(new TourReservationRepository());
 
-    public List<GetTourDto> GetAll()
+    private TourService tourService = new TourService(new TourRepository());
+
+    private LocationService locationService = new (new LocationRepository());
+    //private ImageService imageService = new ImageService();
+    //private UserService userService = new UserService();
+
+    public List<Tour> GetAll()
     {
-        List<Tour> allTours = tourService.GetAll();
-        List<GetTourDto> getTourDtos = new List<GetTourDto>();
+        return tourService.GetAll();
+    }
 
-        Location tourLocation = new Location();
-        foreach (Tour tour in allTours)
-        {
-            getTourDtos.Add(new GetTourDto(tour.Name, tour.Description, tour.Location, tour.Language, tour.GuestLimit, tour.Duration, tour.StartDateAndTime, tour.TourKeyPoints, tour.images));
-        }
-        return getTourDtos;
+    public Tour GetById(int id)
+    {
+        return tourService.GetById(id);
     }
 
 
-
-    public List<GetTourDto> GetBy(Location location)
+    public List<Tour> GetByLocation(Location location)
     {
-        List<Tour> allTours = tourService.GetBy(location);
-        List<GetTourDto> getTourDtos = new List<GetTourDto>();
-
-        foreach (Tour tour in allTours)
-        {
-            getTourDtos.Add(new GetTourDto(tour.Name, tour.Description, tour.Location, tour.Language, tour.GuestLimit, tour.Duration, tour.StartDateAndTime, tour.TourKeyPoints, tour.images));
-        }
-        return getTourDtos;
+        return tourService.GetByLocation(location);
     }
 
-    public List<GetTourDto> GetBy(TimeSpan duration)
+    public List<Tour> GetByDuration(TimeSpan duration)
     {
-        List<Tour> allTours = tourService.GetBy(duration);
-        List<GetTourDto> getTourDtos = new List<GetTourDto>();
-
-        foreach (Tour tour in allTours)
-        {
-            getTourDtos.Add(new GetTourDto(tour.Name, tour.Description, tour.Location, tour.Language, tour.GuestLimit, tour.Duration, tour.StartDateAndTime, tour.TourKeyPoints, tour.images));
-        }
-        return getTourDtos;
+        return tourService.GetByDuration(duration);
     }
 
-    public List<GetTourDto> GetBy(string language)
+    public List<Tour> GetByLanguage(string language)
     {
-        List<Tour> allTours = tourService.GetBy(language);
-        List<GetTourDto> getTourDtos = new List<GetTourDto>();
+        return tourService.GetByLanguage(language);
+    }
 
-        foreach (Tour tour in allTours)
-        {
-            getTourDtos.Add(new GetTourDto(tour.Name, tour.Description, tour.Location, tour.Language, tour.GuestLimit, tour.Duration, tour.StartDateAndTime, tour.TourKeyPoints, tour.images));
-        }
-        return getTourDtos;
+    public List<Tour> GetByGuestLimit(int guestLimit)
+    {
+        return tourService.GetByGuestLimit(guestLimit);
     }
 
     public List<GetTourDto> GetBy(int guestNumber)
@@ -77,44 +65,32 @@ public class TourController
         foreach (Tour tour in allTours)
         {
             if (reservationService.IsReserved(tour))
-                if (reservationService.CountGuestsBy(tour) == guestNumber)
+                if (reservationService.CountGuestsOnTour(tour) == guestNumber)
                     getTourDtos.Add(new GetTourDto(tour.Name, tour.Description, tour.Location, tour.Language, tour.GuestLimit, tour.Duration, tour.StartDateAndTime, tour.TourKeyPoints, tour.images));
         }
         return getTourDtos;
     }
 
 
-
-    public Tour Reserve(Tour tour, int guestNumber)
+    public Tour Create(TourToControllerDto dto)
     {
-        Tour chosenTour = tourService.GetById(tour.Id);
-
-        //TODO: ispravi ovo
-        return null;
-    }
-
-    public void Add(TourToControllerDto dto)
-    {
-        Location location = LocationService.GetBy(dto.Country, dto.City);
-        List<TourKeyPoint> tourKeyPoints = tourKeyPointService.Save(dto.TourKeyPointNames);
-        List<Image> images = imageService.Save(dto.ImageURLs);
-
-        Tour tour = new Tour(dto.Name, dto.Description, dto.Language, 
-            dto.GuestLimit, dto.StartDateAndTime, 
+        Tour newTour = new Tour(dto.Name, dto.Description, dto.Language,
+            dto.GuestLimit, dto.StartDateAndTime,
             dto.Duration);
 
-        var db = new UserContext();
-        tour = tourService.Save(tour);
+        return  tourService.Save(newTour);
 
+    }
+
+    public void UpdateTourProperties(Tour tour, TourToControllerDto dto, List<TourKeyPoint> keyPoints)
+    {
         //int tourId = tourService.get(tour.Id);
-        tourKeyPointService.Update(tourKeyPoints, tour);
-       // tourKeyPointService.SetTypes(tourKeyPoints);
-        tour.Location = LocationService.GetBy(dto.Country, dto.City);
 
-        imageService.SetTourId(images, tour);
-
-        db.SaveChanges();
+        // tourKeyPointService.SetTypes(tourKeyPoints);
         
+
+       tourService.UpdateTourProperties(tour, dto, keyPoints);
+
     }
 
     public List<TourBasicInfoDto> Get()
@@ -126,5 +102,24 @@ public class TourController
         return tourService.GetTodays();
     }
 
+    public void SetStatus(int id, TourStatus status)
+    {
+        tourService.SetStatus(id,status);
+    }
+
+    public List<TourBasicInfoDto> GetByStatus(int guideId, TourStatus status)
+    {
+        return tourService.GetByStatus(guideId, status);
+    }
+
+    public void Cancel(int id)
+    {
+        tourService.Cancel(id);
+    }
+
+    public TourGuestsDto GetMostVisitedTour(int guideId, string time)
+    {
+        return tourService.GetMostVisitedTour(guideId, time);
+    }
 }
 

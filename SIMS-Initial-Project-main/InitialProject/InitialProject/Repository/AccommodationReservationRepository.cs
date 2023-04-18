@@ -1,5 +1,7 @@
 ﻿using InitialProject.Contexts;
+using InitialProject.Interface;
 using InitialProject.Model;
+using InitialProject.View;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,12 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace InitialProject.Repository
 {
-    internal class AccommodationReservationRepository
+    public class AccommodationReservationRepository : IAccommodationReservationRepository
     {
-        public static List<AccommodationReservation> GetAllExpiredBy(int day, int month, int year)
+        public List<AccommodationReservation> GetAllExpiredBy(int day, int month, int year, User owner)
         {
             List<AccommodationReservation> expiredReservations = new List<AccommodationReservation>();
 
@@ -23,45 +26,16 @@ namespace InitialProject.Repository
                                             && (ar.EndingDate.Month == month)
                                             && (ar.EndingDate.Year == year)
                                  )
+                                 .Include(r=>r.Accommodation)
+                                    .ThenInclude(r=>r.Owner).Where(t => t.Accommodation.Owner.Equals(owner))
+                                 .Include(r=>r.Guest)
                                  .ToList();
             }
 
-            foreach (var reservation in expiredReservations)
-            {
-
-                reservation.Accommodation = GetAccommodation(reservation.Id);
-                reservation.Guest = GetUser(reservation.Id);
-            }
             return expiredReservations;
         }
 
-        public static Accommodation GetAccommodation(int reservationId)
-        {
-
-            Accommodation accommodation = new Accommodation();
-
-            using (var dbContext = new UserContext())
-            {
-                accommodation = (Accommodation)dbContext.accommodationReservation
-                                 .Where(a => a.Id == reservationId).Select(a => a.Accommodation).First();
-            }
-            return accommodation;
-        }
-
-        public static User GetUser(int reservationId)
-        {
-
-            User guest = new User();
-
-            using (var dbContext = new UserContext())
-            {
-                guest = (User)dbContext.accommodationReservation
-                                 .Where(a => a.Id == reservationId).Select(a => a.Guest).First();
-            }
-            return guest;
-        }
-
-        public static AccommodationReservation GetBy(int id)
+        public AccommodationReservation GetBy(int id)
         {
 
             AccommodationReservation reservation = new AccommodationReservation();
@@ -75,7 +49,7 @@ namespace InitialProject.Repository
         }
 
         // Stajic
-        public static void Add(AccommodationReservation accommodationReservation)
+        public void Save(AccommodationReservation accommodationReservation)
         {
             using UserContext db = new();
 
@@ -85,16 +59,104 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
-        public static List<AccommodationReservation> GetByAccommodation(int id)
+        public List<AccommodationReservation> GetByAccommodation(int id)
         {
-            List<AccommodationReservation> retVal = new();
+            List<AccommodationReservation> reservations = new();
 
             using (UserContext db = new())
             {
-                retVal = db.accommodationReservation.Where(t => t.Accommodation.Id == id).ToList();
+                reservations = db.accommodationReservation.Where(t => t.Accommodation.Id == id).ToList();
             }
 
-            return retVal;
+            return reservations;
         }
+
+        public List<AccommodationReservation> GetBy(User user)
+        {
+            List<AccommodationReservation> reservations = new();
+
+            using (UserContext db = new())
+            {
+                reservations = db.accommodationReservation.Include(t => t.Accommodation)
+                                                          .ThenInclude(l => l.Location)
+                                                          .Where(t => t.Guest.Id == user.Id).ToList();
+            }
+
+            return reservations;
+
+        }
+
+        public void Delete(AccommodationReservation accommodationReservation)
+        {
+            using var db = new UserContext();
+
+            db.accommodationReservation.Remove(accommodationReservation);
+            db.SaveChanges();
+        }
+
+        public void LogicalyDelete(AccommodationReservation accommodationReservation)
+        {
+            using var db = new UserContext();
+
+            AccommodationReservation accommodationToDelete = GetBy(accommodationReservation.Id);
+
+            var entity = db.accommodationReservation.Find(accommodationReservation.Id);
+
+            if (entity != null)
+            {
+                entity.Cancelled = true;
+                db.SaveChanges();
+            }
+        }
+
+
+        //Aleksandra
+        public List<AccommodationReservation> GetAllBetween(DateTime startingDate, DateTime endingDate, User owner) {
+
+            List<AccommodationReservation> accommodationReservations = new List<AccommodationReservation>();
+
+            using (var dbContext = new UserContext())
+            {
+                accommodationReservations = dbContext.accommodationReservation
+                                            .Where(ar => ((startingDate >= ar.BegginingDate && startingDate <= ar.EndingDate) || (endingDate >= ar.BegginingDate && endingDate <= ar.EndingDate)) ||
+                                                         (ar.BegginingDate >= startingDate && ar.BegginingDate <= endingDate) || (ar.EndingDate >= startingDate && (ar.EndingDate <= endingDate))
+                                                   )
+                                           .Include(r => r.Accommodation)
+                                                .ThenInclude(r => r.Owner).Where(t => t.Accommodation.Owner.Equals(owner))
+                                           .Include(r => r.Guest)
+                                           .ToList();
+            }
+            return accommodationReservations;
+        }
+
+        public void UpdateScheduledDatesBy(int id, DateTime newBegginingDate, DateTime newEndingDate) {
+
+            AccommodationReservation accommodationReservation = new();
+
+            var db = new UserContext();
+            accommodationReservation = db.accommodationReservation.Find(id);
+
+            accommodationReservation.BegginingDate = newBegginingDate;
+            accommodationReservation.EndingDate = newEndingDate;
+            db.SaveChanges();
+        }
+
+        public List<AccommodationReservation> GetAllCancelled(User owner) {
+
+            List<AccommodationReservation> cancelledReservations = new List<AccommodationReservation>();
+
+            using (var dbContext = new UserContext())
+            {
+                cancelledReservations = dbContext.accommodationReservation
+                                            .Where(ar => ar.Cancelled == true)
+                                           .Include(r => r.Accommodation)
+                                                .ThenInclude(r => r.Owner).Where(t => t.Accommodation.Owner.Equals(owner))
+                                           .Include(r => r.Guest)
+                                           .ToList();
+            }
+            return cancelledReservations;
+
+        }
+
     }
 }

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Packaging;
 using System.Runtime.Serialization;
+using InitialProject.Enumeration;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
@@ -23,6 +24,10 @@ public class Tour
     [ForeignKey("locationID")]
     [AllowNull]
     public Location? Location { get; set; }
+    
+    [ForeignKey("guideID")]
+    [AllowNull]
+    public User? Guide { get; set; }
 
     public string Description { get; set; }
     public string Language { get; set; }
@@ -40,16 +45,16 @@ public class Tour
     //Images are in Image table
     
     public List<Image>? images { get; set; }
-    public Boolean Started { get; set; }
+    public TourStatus Status{ get; set; }
 
     public Tour()
     {
-        Started = false;
+        Status = TourStatus.Waiting;
     }
 
     public Tour(String name, String language, int guestLimit, List<TourKeyPoint> tourKeyPoints)
     {
-        Started = false;
+        Status = TourStatus.Waiting;
     }
 
     public Tour(String name, Location location, string description, string language, int guestLimit,
@@ -64,21 +69,22 @@ public class Tour
         this.StartDateAndTime = start;
         this.Duration = duration;
         this.images = images;
-        this.Started = false;
+        this.Status = TourStatus.Waiting;
     }
     
     public Tour(String name, string description, string language, int guestLimit,
-        List<TourKeyPoint> keyPoints, DateTime start, TimeSpan duration)
+        List<TourKeyPoint> keyPoints, DateTime start, TimeSpan duration, User guide)
     {
         this.Name = name;
         this.Location = null;
         this.Description = description;
         this.Language = language;
         this.GuestLimit = guestLimit;
+        this.Guide = guide;
         this.TourKeyPoints = keyPoints;
         this.StartDateAndTime = start;
         this.Duration = duration;
-        this.Started = false;
+        this.Status = TourStatus.Waiting;
     }
     public Tour(String name, string description, string language, int guestLimit,
          DateTime start, TimeSpan duration)
@@ -90,10 +96,8 @@ public class Tour
         this.GuestLimit = guestLimit;
         this.StartDateAndTime = start;
         this.Duration = duration;
-        this.Started = false;
+        this.Status = TourStatus.Waiting;
     }
-
-
 
 
     public override string ToString()
