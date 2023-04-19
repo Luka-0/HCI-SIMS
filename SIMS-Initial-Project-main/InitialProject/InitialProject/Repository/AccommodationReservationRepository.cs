@@ -86,7 +86,7 @@ namespace InitialProject.Repository
 
         }
 
-        /*public AccommodationReservation GetByIdWithInclude(int id)
+        public AccommodationReservation GetByIdWithInclude(int id)
         {
             AccommodationReservation reservation = null;
 
@@ -95,11 +95,12 @@ namespace InitialProject.Repository
                 reservation = db.accommodationReservation.Where(t => t.Id == id)
                                                          .Include(t => t.Accommodation)
                                                          .ThenInclude(l => l.Location)
+                                                         .Include(t => t.Guest)
                                                          .First();
             }
 
             return reservation;
-        }*/
+        }
 
         public void Delete(AccommodationReservation accommodationReservation)
         {

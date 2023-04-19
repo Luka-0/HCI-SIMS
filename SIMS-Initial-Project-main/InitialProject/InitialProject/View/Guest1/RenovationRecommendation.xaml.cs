@@ -19,6 +19,7 @@ namespace InitialProject.View
 {
     public partial class RenovationRecommendation : Window
     {
+        private readonly RenovationSuggestionController RenovationSuggestionController = new();
         private readonly AccommodationReservationController AccommodationReservationController = new();
 
         public ObservableCollection<AccommodationReservation> ReservationToShow { get; set; } = new();
@@ -28,7 +29,8 @@ namespace InitialProject.View
             InitializeComponent();
             InitializeCB();
 
-            ReservationToShow.Add(accommodationReservation);
+            AccommodationReservation tmp = AccommodationReservationController.GetByIdWithInclude(accommodationReservation.Id);
+            ReservationToShow.Add(tmp);
             ReservationGrid.ItemsSource = ReservationToShow;
         }
 
@@ -46,7 +48,27 @@ namespace InitialProject.View
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!IsViolatingAnyUIControl()) return;
 
+            RenovationSuggestion renovationSuggestion = new (int.Parse(RatingCB.SelectedItem.ToString()), CommentTB.Text, ReservationToShow.First());
+            RenovationSuggestionController.Save(renovationSuggestion);
+
+            MessageBox.Show("Successfull");
+
+            Guest1 guest1 = new(ReservationToShow.First().Guest);
+            guest1.Show();
+            Close();
+        }
+
+        private bool IsViolatingAnyUIControl()
+        {
+            if(RatingCB.SelectedIndex == 0)
+            {
+                MessageBox.Show("Please select a proper rating");
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -167,10 +167,10 @@ namespace InitialProject.Service
             return true;
         }
 
-        /*public bool IsViolatingMinReservatingDays(int minimumReservationDays, DateTime startingDate, DateTime endingDate)
+        public bool IsViolatingMinReservatingDays(int minimumReservationDays, DateTime startingDate, DateTime endingDate)
         {
             return endingDate.Day - startingDate.Day + 1 < minimumReservationDays;
-        }*/
+        }
 
         public void Add(AccommodationReservation accommodationReservation)
         {
@@ -187,10 +187,10 @@ namespace InitialProject.Service
             return IAccommodationreservationRepository.GetBy(user);
         }
 
-        /*public AccommodationReservation GetByIdWithInclude(int id)
+        public AccommodationReservation GetByIdWithInclude(int id)
         {
             return IAccommodationreservationRepository.GetByIdWithInclude(id);
-        }*/
+        }
 
         public bool Delete(bool logicaly, AccommodationReservation accommodationReservation)
         {

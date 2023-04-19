@@ -50,10 +50,10 @@ namespace InitialProject.Controller
             return AccommodationReservationService.GetBy(user);
         }
 
-        /*public AccommodationReservation GetByIdWithInclude(int id)
+        public AccommodationReservation GetByIdWithInclude(int id)
         {
             return AccommodationReservationService.GetByIdWithInclude(id);
-        }*/
+        }
 
 
         public bool Delete(bool logicaly, AccommodationReservation accommodationReservation)
