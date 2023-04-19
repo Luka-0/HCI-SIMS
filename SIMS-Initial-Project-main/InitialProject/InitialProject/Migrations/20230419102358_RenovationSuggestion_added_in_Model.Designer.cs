@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230419102358_RenovationSuggestion_added_in_Model")]
+    partial class RenovationSuggestion_added_in_Model
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -192,29 +194,6 @@ namespace InitialProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Location");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.RenovationSuggestion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("RenovationRating")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReservationId");
-
-                    b.ToTable("RenovationSuggestion");
                 });
 
             modelBuilder.Entity("InitialProject.Model.ReservationReschedulingRequest", b =>
@@ -555,17 +534,6 @@ namespace InitialProject.Migrations
                     b.Navigation("Accommodation");
 
                     b.Navigation("Tour");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.RenovationSuggestion", b =>
-                {
-                    b.HasOne("InitialProject.Model.AccommodationReservation", "AccommodationReservation")
-                        .WithMany()
-                        .HasForeignKey("ReservationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AccommodationReservation");
                 });
 
             modelBuilder.Entity("InitialProject.Model.ReservationReschedulingRequest", b =>

@@ -34,6 +34,7 @@ namespace InitialProject.Contexts
 
         public DbSet<ReservationReschedulingRequest> reservationReschedulingRequest { get; set; }
         public DbSet<TourRequest> tourRequest { get; set; }
+        public DbSet<RenovationSuggestion> renovationSuggestion { get; set; }
 
         //Pavle:
         //public string path = @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";

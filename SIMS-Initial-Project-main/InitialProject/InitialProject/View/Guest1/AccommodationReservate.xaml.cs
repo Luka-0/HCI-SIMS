@@ -28,6 +28,7 @@ namespace InitialProject.View
         private readonly AccommodationReservationController AccommodationReservationController = new();
         private readonly AccommodationController AccommodationController = new();
         private readonly LocationController LocationController = new();
+        private readonly UserController UserController = new UserController();
 
         public ObservableCollection<Accommodation> AccommodationsToShow { get; set; }
         private List<StartEndDateDto> DatesToChose { get; set; }
@@ -113,6 +114,18 @@ namespace InitialProject.View
             OfferedDatesCB.SelectedIndex = 0;
         }
 
+        private void CheckSuperTitle()
+        {
+            if (User.SuperTitle)
+            {
+                if(User.BonusPoints > 0)
+                {
+                    UserController.UpdateBy(User.Id, true, User.BonusPoints - 1);
+                    MessageBox.Show("One bonus point was spent which leaves you with " + User.BonusPoints.ToString());
+                }
+            }
+        }
+
         private void GenerateDates_Click(object sender, RoutedEventArgs e)
         {
             int daysToStay = int.Parse(ReservatingDaysTB.Text);
@@ -136,6 +149,9 @@ namespace InitialProject.View
             int guestNumber = int.Parse(GuestNumberTB.Text);
             int daysToStay = int.Parse(ReservatingDaysTB.Text);
             Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
+
+            if (OfferedDatesCB.Items.Count == 0) return;
+
             DateTime startDate = DatesToChose[OfferedDatesCB.SelectedIndex].StartingDate;
             DateTime endDate = DatesToChose[OfferedDatesCB.SelectedIndex].EndingDate;
 
@@ -150,6 +166,11 @@ namespace InitialProject.View
             if (AccommodationReservationController.CreateReservation(accommodation, startDate, endDate, guestNumber, User))
             {
                 MessageBox.Show("Succesfully saved");
+
+                CheckSuperTitle();
+
+                OfferedDatesCB.Items.Clear();
+
                 return;
             }
             MessageBox.Show("Saving was UNsuccesful");

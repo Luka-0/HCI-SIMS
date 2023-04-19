@@ -18,7 +18,7 @@ namespace InitialProject.Model
         public AccommodationType Type { get; set; }
         public int MinimumReservationDays { get; set; }
         public int CancellationDeadline { get; set; }
-        public bool Available { get; set; }
+        public bool Available { get; set; } // za sada je nepotrebno
 
         //changes
         [ForeignKey("locationID")]

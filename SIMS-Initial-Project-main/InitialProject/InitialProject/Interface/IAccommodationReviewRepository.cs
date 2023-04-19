@@ -12,5 +12,6 @@ namespace InitialProject.Interface
         public void Save(AccommodationReview accommodationReview);
         public List<AccommodationReview> GetBy(User user);
         public List<AccommodationReview> GetAllBy(User owner);
+
     }
 }

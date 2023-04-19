@@ -72,6 +72,39 @@ namespace InitialProject.Repository
             return owners;
         }
 
+        public void UpdateBy(int id, bool superTitle, int bonusPoints)
+        {
+            using var db = new UserContext();
+
+            User user = GetBy(id);
+
+            var entityToUpdate = db.users.Find(user.Id);
+
+            if (entityToUpdate != null)
+            {
+                entityToUpdate.SuperTitle = superTitle;
+                entityToUpdate.BonusPoints = bonusPoints;
+                db.SaveChanges();
+            }
+        }
+
+        public void UpdateBy(int id, bool superTitle, int bonusPoints, DateTime validTill)
+        {
+            using var db = new UserContext();
+
+            User user = GetBy(id);
+
+            var entityToUpdate = db.users.Find(user.Id);
+
+            if (entityToUpdate != null)
+            {
+                entityToUpdate.SuperTitle = superTitle;
+                entityToUpdate.BonusPoints = bonusPoints;
+                entityToUpdate.SuperTitleValidTill = validTill;
+                db.SaveChanges();
+            }
+        }
+
     }
 
 }

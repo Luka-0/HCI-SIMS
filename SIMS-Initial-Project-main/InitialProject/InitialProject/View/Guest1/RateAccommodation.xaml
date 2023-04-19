@@ -9,9 +9,9 @@
     <Grid>
         <Label Content="Tidiness: " HorizontalAlignment="Left" Margin="66,96,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="TidinessComboBox" HorizontalAlignment="Left" Margin="183,96,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Owner's correctness: " HorizontalAlignment="Left" Margin="66,144,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CorrectnessComboBox" HorizontalAlignment="Left" Margin="208,144,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Image links: " HorizontalAlignment="Left" Margin="66,309,0,0" VerticalAlignment="Top"/>
+        <Label Content="Owner's correctness: " HorizontalAlignment="Left" Margin="43,144,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="CorrectnessComboBox" HorizontalAlignment="Left" Margin="189,146,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Image links: " HorizontalAlignment="Left" Margin="66,314,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="CommentTextBox" HorizontalAlignment="Left" Margin="104,211,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="205" Height="74"/>
         <TextBox x:Name="ImagesTextBox" HorizontalAlignment="Left" Margin="165,317,0,0" TextWrapping="Wrap" Text="Image links" VerticalAlignment="Top" Width="120"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="320,317,0,0" VerticalAlignment="Top" Click="AddLink_Click"/>
@@ -26,6 +26,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="GoBack_Click"/>
+        <Button x:Name="RenovationSuggestionButton" Content="Suggestion for renovation" HorizontalAlignment="Left" Margin="133,452,0,0" VerticalAlignment="Top" Click="SuggestionForReservation_Click"/>
 
     </Grid>
 </Window>

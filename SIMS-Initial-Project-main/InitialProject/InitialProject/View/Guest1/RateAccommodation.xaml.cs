@@ -1,5 +1,6 @@
 ﻿using InitialProject.Controller;
 using InitialProject.Model;
+using InitialProject.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,6 +39,7 @@ namespace InitialProject.View
             User = user;
 
             RefreshDataGrid(AccommodationReservationController.GetBy(User));
+            RenovationSuggestionButton.IsEnabled = false;
         }
 
         private void InitializeTidinesComboBox()
@@ -80,6 +82,9 @@ namespace InitialProject.View
 
             AccommodationReviewController.Save(accommodationReview);
             MessageBox.Show("Everything was succesfull");
+
+            RenovationSuggestionButton.IsEnabled = true;
+            ReservationsGrid.IsEnabled = false;
         }
 
         private void AddLink_Click(object sender, RoutedEventArgs e)
@@ -146,6 +151,21 @@ namespace InitialProject.View
         {
             Guest1 guest1 = new(User);
             guest1.Show();
+
+            Close();
+        }
+
+        private void SuggestionForReservation_Click(object sender, RoutedEventArgs e)
+        {
+            AccommodationReservation accommodationReservation = (AccommodationReservation)ReservationsGrid.SelectedItem;
+            if (accommodationReservation == null)
+            {
+                MessageBox.Show("Please select an accomodation first");
+                return;
+            }
+
+            RenovationRecommendation renovationRecommendation = new(accommodationReservation);
+            renovationRecommendation.Show();
 
             Close();
         }

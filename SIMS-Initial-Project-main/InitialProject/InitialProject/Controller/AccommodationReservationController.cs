@@ -50,6 +50,12 @@ namespace InitialProject.Controller
             return AccommodationReservationService.GetBy(user);
         }
 
+        /*public AccommodationReservation GetByIdWithInclude(int id)
+        {
+            return AccommodationReservationService.GetByIdWithInclude(id);
+        }*/
+
+
         public bool Delete(bool logicaly, AccommodationReservation accommodationReservation)
         {
             return AccommodationReservationService.Delete(logicaly, accommodationReservation);
@@ -58,5 +64,11 @@ namespace InitialProject.Controller
 
             return this.AccommodationReservationService.GetAllCancelled(ownerUsername);
         }
+
+        public List<AccommodationReservation> GetDuringLastYearBy(User user)
+        {
+            return AccommodationReservationService.GetDuringLastYearBy(user);
+        }
+
     }
 }

@@ -187,6 +187,11 @@ namespace InitialProject.Service
             return IAccommodationreservationRepository.GetBy(user);
         }
 
+        /*public AccommodationReservation GetByIdWithInclude(int id)
+        {
+            return IAccommodationreservationRepository.GetByIdWithInclude(id);
+        }*/
+
         public bool Delete(bool logicaly, AccommodationReservation accommodationReservation)
         {
             if (accommodationReservation.Accommodation.CancellationDeadline < 1)
@@ -216,9 +221,14 @@ namespace InitialProject.Service
             return true;
         }
 
+        public List<AccommodationReservation> GetDuringLastYearBy(User user)
+        {
+            return IAccommodationreservationRepository.GetDuringLastYearBy(user);
+        }
+
 
         //Aleksandra
-        
+
         //dobavlja sve rezervacije rezervisane(neotkazane) za period iz primljenog zahteva
         //parametar je bas zahtev kako broj parametara funkcije ne bi bio opterecen
         public List<AccommodationReservation> GetAllPreserved(ReservationReschedulingRequest reschedulingRequest, string ownerUsername) {
