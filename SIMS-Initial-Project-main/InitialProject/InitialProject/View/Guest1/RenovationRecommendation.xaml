@@ -7,15 +7,19 @@
         mc:Ignorable="d"
         Title="RenovationRecommendation" Height="560" Width="800">
     <Grid>
-        <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding ReservationsToShow}" Height="Auto" Width="Auto" Margin="331,10,10,0" VerticalAlignment="Top" 
+        <DataGrid x:Name="ReservationGrid" ItemsSource="{Binding ReservationToShow}" Height="Auto" Width="Auto" Margin="170,23,170,0" VerticalAlignment="Top" 
                   AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Accommodation.Title}"/>
+                <DataGridTextColumn Header="Class" Binding="{Binding Accommodation.Class}"/>
+                <DataGridTextColumn Header="Accommodation type" Binding="{Binding Accommodation.Type}"/>
                 <DataGridTextColumn Header="City" Binding="{Binding Accommodation.Location.City}"/>
-                <DataGridTextColumn Header="Guest Number" Binding="{Binding GuestNumber}"/>
-                <DataGridTextColumn Header="Starting Date" Binding="{Binding BegginingDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                <DataGridTextColumn Header="Ending Date" Binding="{Binding EndingDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="*"/>
+                <DataGridTextColumn Header="Reservation last date" Binding="{Binding EndingDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBox x:Name="CommentTB" HorizontalAlignment="Center" Margin="0,149,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="242" Height="90"/>
+        <Label Content="How needed are the repairs:" HorizontalAlignment="Left" Margin="156,318,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="RatingCB" HorizontalAlignment="Left" Margin="474,322,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="FinishButton" Content="Finish" HorizontalAlignment="Center" Margin="0,462,0,0" VerticalAlignment="Top" Click="FinishButton_Click"/>
     </Grid>
 </Window>

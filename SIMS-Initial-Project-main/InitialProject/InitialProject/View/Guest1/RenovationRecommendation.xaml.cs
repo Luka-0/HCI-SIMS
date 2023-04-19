@@ -1,6 +1,8 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Controller;
+using InitialProject.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +19,33 @@ namespace InitialProject.View
 {
     public partial class RenovationRecommendation : Window
     {
-        private readonly AccommodationReservation AccommodationReservation;
+        private readonly AccommodationReservationController AccommodationReservationController = new();
+
+        public ObservableCollection<AccommodationReservation> ReservationToShow { get; set; } = new();
 
         public RenovationRecommendation(AccommodationReservation accommodationReservation)
         {
             InitializeComponent();
-            AccommodationReservation = accommodationReservation;
+            InitializeCB();
 
+            ReservationToShow.Add(accommodationReservation);
+            ReservationGrid.ItemsSource = ReservationToShow;
+        }
+
+        private void InitializeCB()
+        {
+            RatingCB.Items.Add("--Select--");
+            RatingCB.Items.Add("1");
+            RatingCB.Items.Add("2");
+            RatingCB.Items.Add("3");
+            RatingCB.Items.Add("4");
+            RatingCB.Items.Add("5");
+
+            RatingCB.SelectedIndex = 0;
+        }
+
+        private void FinishButton_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

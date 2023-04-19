@@ -86,6 +86,21 @@ namespace InitialProject.Repository
 
         }
 
+        /*public AccommodationReservation GetByIdWithInclude(int id)
+        {
+            AccommodationReservation reservation = null;
+
+            using(UserContext db = new())
+            {
+                reservation = db.accommodationReservation.Where(t => t.Id == id)
+                                                         .Include(t => t.Accommodation)
+                                                         .ThenInclude(l => l.Location)
+                                                         .First();
+            }
+
+            return reservation;
+        }*/
+
         public void Delete(AccommodationReservation accommodationReservation)
         {
             using var db = new UserContext();

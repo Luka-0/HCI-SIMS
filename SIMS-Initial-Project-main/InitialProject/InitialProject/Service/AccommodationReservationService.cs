@@ -187,6 +187,11 @@ namespace InitialProject.Service
             return IAccommodationreservationRepository.GetBy(user);
         }
 
+        /*public AccommodationReservation GetByIdWithInclude(int id)
+        {
+            return IAccommodationreservationRepository.GetByIdWithInclude(id);
+        }*/
+
         public bool Delete(bool logicaly, AccommodationReservation accommodationReservation)
         {
             if (accommodationReservation.Accommodation.CancellationDeadline < 1)
