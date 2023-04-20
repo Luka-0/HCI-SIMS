@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using InitialProject.Enumeration;
 using Microsoft.VisualBasic;
 
@@ -21,6 +22,8 @@ public class TourRequest
     public DateTime LowerDateLimit { get; set; }
     public DateTime UpperDateLimit { get; set; }
     public TourRequestState State { get; set; }
+    [AllowNull]
+    public DateTime SelectedDate { get; set; }
 
     public TourRequest()
     {
