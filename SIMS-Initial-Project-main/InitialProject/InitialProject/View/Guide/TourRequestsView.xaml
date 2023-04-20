@@ -13,6 +13,7 @@
             <RowDefinition Height="27"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+
         <Grid Row="0">
             <DataGrid x:Name="DataGridRequests" ItemsSource="{Binding Requests}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,10,0,0" VerticalAlignment="Top">
                 <DataGrid.Columns>
@@ -25,7 +26,6 @@
                     <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <!-- <Button  Click="CancelTour"  Content="Cancel tour" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="253,516,0,0" /> -->
         </Grid>
         <Grid Row ="1" Height="100" Margin="0, 0, 0 , 0">
             <Grid.ColumnDefinitions>
@@ -67,38 +67,78 @@
         </Grid>
 
         <Grid Grid.Row="3" Margin="0,5,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"></ColumnDefinition>
+                <ColumnDefinition Width="154"></ColumnDefinition>
                 <ColumnDefinition Width="55"></ColumnDefinition>
-                <ColumnDefinition Width="85"></ColumnDefinition>
-                <ColumnDefinition Width="55"></ColumnDefinition>
-                <ColumnDefinition Width="168"></ColumnDefinition>
-                <ColumnDefinition Width="105"></ColumnDefinition>
-                <ColumnDefinition Width="217"></ColumnDefinition>
-                <ColumnDefinition Width="115"></ColumnDefinition>
+                <ColumnDefinition Width="119"></ColumnDefinition>
+                <ColumnDefinition Width="175"></ColumnDefinition>
+                <ColumnDefinition Width="215"></ColumnDefinition>
+                <ColumnDefinition Width="95"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="0" Content="Filter by:"></Label>
-            <ComboBox Grid.Column="1" Grid.Row="0"  Name="ComboBox1"  Width="70" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="location"></TextBlock>
-                            <TextBlock Text="language"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <Grid Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40*"></RowDefinition>
+                    <RowDefinition Height="37*"></RowDefinition>
+                    <RowDefinition Height="38*"></RowDefinition>
+                    <RowDefinition Height="38*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Content="Filter by:" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label x:Name="LanguageLabel" Grid.Row="1" Content="language:" HorizontalAlignment="Right" Visibility="Collapsed"></Label>
+
+                <Label x:Name="LocationCountryLabel" Grid.Row="1" Content="country:" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed"></Label>
+                <Label x:Name="LocationCityLabel" Grid.Row="2" Content="city:" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed"></Label>
+
+
+            </Grid>
+
+            <Grid Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40*"></RowDefinition>
+                    <RowDefinition Height="37*"></RowDefinition>
+                    <RowDefinition Height="38*"></RowDefinition>
+                    <RowDefinition Height="38*"></RowDefinition>
+
+                </Grid.RowDefinitions>
+
+                <ComboBox  Name="ComboBox1"  Width="110" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" SelectionChanged="ComboBox1_SelectionChanged">
+                    <ComboBoxItem Content="location"></ComboBoxItem>
+                    <ComboBoxItem Content="language"></ComboBoxItem>
+                </ComboBox>
+
+                <TextBox Grid.Row="1"  x:Name ="InputLanguage" Height="25" Width="110" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,1,0,0"/>
+
+                <TextBox Grid.Row="1"  x:Name ="InputLocationCountry" Height="25" Width="110" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,1,0,0"/>
+                <TextBox Grid.Row ="2"  x:Name ="InputLocationCity" Height="25" Width="110" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,1,0,0"/>
+
+                <Button  Grid.Row="3" x:Name="FilterButton" Click="UpdateYearly" Visibility="Collapsed" Content="Show Yearly" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="78" />
+
+            </Grid>
+
 
             <Label Grid.Column="2" Grid.Row="0" Content="Results:"></Label>
-            <DataGrid Grid.Column="3" x:Name="RequestsYearly" ItemsSource="{Binding Requests}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,0,5,0" VerticalAlignment="Top" Height="26">
+
+            <!--
+            <DataGrid x:Name="YearlyGrid" Grid.Column="3" ItemsSource="{Binding RequestYearlyCounts}"  SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,0,5,0" VerticalAlignment="Top" Height="26">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Year" Binding="{Binding Location.Country}"/>
-                    <DataGridTextColumn Header="Num.Of Requests" Binding="{Binding Location.City}"/>
+                    <DataGridTextColumn Header="Year" Binding="{Binding Year}"/>
+                    <DataGridTextColumn Header="Num.Of Requests" Binding="{Binding Count}"/>
+                </DataGrid.Columns>
+            </DataGrid>-->
+            <!--<DataGrid Grid.Column="3" x:Name="YearlyDataGrid" ItemsSource="{Binding RequestYearlyCounts}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" SelectionChanged="YearlyDataGrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Year" Binding="{Binding Year}"/>
+                    <DataGridTextColumn Header="Num. of req." Binding="{Binding Count}"/>
+                </DataGrid.Columns>
+            </DataGrid>-->
+            <DataGrid Grid.Column="3" x:Name="YearlyDataGrid" ItemsSource="{Binding RequestYearlyCounts}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,10,0,0" VerticalAlignment="Top">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Year" Binding="{Binding Year}"/>
+                    <DataGridTextColumn Header="Num. of req." Binding="{Binding Count}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -107,14 +147,8 @@
 
             <Label Grid.Column="5" Content="Create new tour for the most popular:" ></Label>
             <ComboBox Grid.Column="6"  Grid.Row="0"  Name="ComboBox2"  Width="70" Height="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="location"></TextBlock>
-                            <TextBlock Text="language"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
+                <ComboBoxItem Content="location"></ComboBoxItem>
+                <ComboBoxItem Content="language"></ComboBoxItem>
             </ComboBox>
 
             <Button  Grid.Column="7" Click="CreateNewTour" Content="Create tour" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="78" />

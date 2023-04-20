@@ -22,6 +22,6 @@ public class TourRequestRepository: ITourRequestRepository
     public List<TourRequest> GetAll()
     {
         using var db = new UserContext();
-        return db.tourRequest.ToList();
+        return db.tourRequest.Include(t=>t.Location).ToList();
     }
 }
