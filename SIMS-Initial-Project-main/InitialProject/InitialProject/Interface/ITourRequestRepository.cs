@@ -8,4 +8,5 @@ public interface ITourRequestRepository
 {
     public List<TourRequest> GetAllPending();
     public List<TourRequest> GetAll();
+    public void Accept(int id);
 }

@@ -302,6 +302,13 @@ namespace InitialProject.View.Guide
 
 
         }
+
+        private void AcceptRequest(object sender, RoutedEventArgs e)
+        {
+            TourRequest selected= (TourRequest)DataGridRequests.SelectedItem;
+
+            TourRequestController.Accept(selected.Id);
+        }
     }
 
 

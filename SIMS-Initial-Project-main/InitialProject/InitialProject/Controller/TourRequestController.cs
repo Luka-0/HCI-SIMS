@@ -19,4 +19,9 @@ public class TourRequestController
     {
         return tourRequestService.GetAll();
     }
+
+    public void Accept(int id)
+    {
+        tourRequestService.Accept(id);
+    }
 }

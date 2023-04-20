@@ -24,4 +24,12 @@ public class TourRequestRepository: ITourRequestRepository
         using var db = new UserContext();
         return db.tourRequest.Include(t=>t.Location).ToList();
     }
+
+    public void Accept(int id)
+    {
+        using var db = new UserContext();
+        TourRequest request =  db.tourRequest.Find(id);
+        request.State = TourRequestState.Accepted;
+        db.SaveChanges();
+    }
 }
