@@ -157,6 +157,14 @@ namespace InitialProject.Repository
             }
         }
 
+        public List<DateTime> GetDatesByGuide(int id)
+        {
+            using (var dbContext = new UserContext())
+            {
+                return dbContext.tour.Where(t=>t.Guide.Id == id).Select(t=>t.StartDateAndTime.Date).ToList();
+            }
+        }
+
 
     }
 }

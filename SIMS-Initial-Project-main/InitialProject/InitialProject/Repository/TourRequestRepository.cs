@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using InitialProject.Contexts;
@@ -25,11 +26,12 @@ public class TourRequestRepository: ITourRequestRepository
         return db.tourRequest.Include(t=>t.Location).ToList();
     }
 
-    public void Accept(int id)
+    public void Accept(int id, DateTime selectedDate)
     {
         using var db = new UserContext();
         TourRequest request =  db.tourRequest.Find(id);
         request.State = TourRequestState.Accepted;
+        request.SelectedDate = selectedDate;
         db.SaveChanges();
     }
 }

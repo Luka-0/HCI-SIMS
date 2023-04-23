@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -20,8 +21,8 @@ public class TourRequestController
         return tourRequestService.GetAll();
     }
 
-    public void Accept(int id)
+    public void Accept(int id, DateTime selectedDate)
     {
-        tourRequestService.Accept(id);
+        tourRequestService.Accept(id, selectedDate);
     }
 }

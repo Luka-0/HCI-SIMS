@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using InitialProject.Controller;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore.Update;
+using System.Xml.Linq;
 
 namespace InitialProject.View.Guide
 {
@@ -32,20 +33,24 @@ namespace InitialProject.View.Guide
             new ObservableCollection<TourRequest>();
 
         public TourRequestController TourRequestController { get; set; } = new TourRequestController();
+        public TourController TourController { get; set; }= new TourController();
         public List<TourRequest> Requests { get; set; }
         public List<TourRequest> AllRequests { get; set; }
 
         public ObservableCollection<TourRequestYearlyCountDto> RequestYearlyCounts { get; set; }
 
+        public DateTime LowerDate { get; set; }
+        public DateTime UpperDate { get; set; }
+
         public TourRequestsView(User user)
         {
-            this.DataContext = this;    
+            this.DataContext = this;
             LoggedInGuide = user;
-            
+
             Requests = TourRequestController.GetAllPending();
             AllRequests = TourRequestController.GetAll();
             InitializeComponent();
-            RequestYearlyCounts =  GetYearlyRequests(AllRequests);
+            RequestYearlyCounts = GetYearlyRequests(AllRequests);
 
 
             YearlyDataGrid.ItemsSource = RequestYearlyCounts;
@@ -199,7 +204,7 @@ namespace InitialProject.View.Guide
                     dto.Dates.Add(request.LowerDateLimit.Date);
                 }
             }
-            
+
             return new ObservableCollection<TourRequestYearlyCountDto>(count);
 
         }
@@ -253,28 +258,31 @@ namespace InitialProject.View.Guide
 
         private List<TourRequest> FilterByLanguage(string inputLanguage)
         {
-            return  AllRequests.Where(r=>r.Language.ToLower().Equals(inputLanguage)).ToList();
+            return AllRequests.Where(r => r.Language.ToLower().Equals(inputLanguage)).ToList();
         }
 
         private List<TourRequest> FilterByLocation(string inputCountry, string inputCity)
         {
-            if (inputCountry != String.Empty && inputCity != String.Empty){
-              return  AllRequests.Where(r =>
+            if (inputCountry != String.Empty && inputCity != String.Empty)
+            {
+                return AllRequests.Where(r =>
                         r.Location.Country.ToLower().Equals(inputCountry) &&
                         r.Location.City.ToLower().Equals(inputCity))
-                        .ToList();
+                    .ToList();
             }
-            if(inputCountry != String.Empty && inputCity ==String.Empty)
+
+            if (inputCountry != String.Empty && inputCity == String.Empty)
             {
                 return AllRequests.Where(r => r.Location.Country.ToLower().Equals(inputCountry)).ToList();
             }
+
             if (inputCountry == String.Empty && inputCity != String.Empty)
             {
                 return AllRequests.Where(r => r.Location.City.ToLower().Equals(inputCity)).ToList();
             }
 
             return AllRequests;
-}
+        }
 
         private void UpdateYearly(object sender, RoutedEventArgs e)
         {
@@ -285,11 +293,11 @@ namespace InitialProject.View.Guide
             {
                 if (InputLanguage.Text != String.Empty)
                 {
-                    requests =  FilterByLanguage(InputLanguage.Text.ToLower());
+                    requests = FilterByLanguage(InputLanguage.Text.ToLower());
                 }
                 else
                 {
-                    requests =  FilterByLocation(InputLocationCountry.Text.ToLower(), InputLocationCity.Text.ToLower());
+                    requests = FilterByLocation(InputLocationCountry.Text.ToLower(), InputLocationCity.Text.ToLower());
                 }
             }
             else
@@ -297,7 +305,7 @@ namespace InitialProject.View.Guide
                 requests = AllRequests;
             }
 
-            ObservableCollection<TourRequestYearlyCountDto> filteredYearlyDtos =  GetYearlyRequests(requests);
+            ObservableCollection<TourRequestYearlyCountDto> filteredYearlyDtos = GetYearlyRequests(requests);
             YearlyDataGrid.ItemsSource = filteredYearlyDtos;
 
 
@@ -305,11 +313,52 @@ namespace InitialProject.View.Guide
 
         private void AcceptRequest(object sender, RoutedEventArgs e)
         {
-            TourRequest selected= (TourRequest)DataGridRequests.SelectedItem;
+            TourRequest selected = (TourRequest)DataGridRequests.SelectedItem;
+            DateTime selectedDate = (DateTime)DatePicker1.SelectedDate;
 
-            TourRequestController.Accept(selected.Id);
+            TourRequestController.Accept(selected.Id, selectedDate);
+
+
+            Requests = TourRequestController.GetAllPending();
+            FilteredRequests = new ObservableCollection<TourRequest>(Requests);
+            DataGridRequests.ItemsSource = FilteredRequests;
+
+            //TODO SLANJE OBAVESTENJA GOSTU2
+
         }
+
+        private void DataGridRequests_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TourRequest
+                selected = (TourRequest)DataGridRequests
+                    .SelectedItem; // Replace "MyObject" with the type of your object
+
+
+            DatePicker1.BlackoutDates.Clear();
+            List<DateTime> occupiedDates = new List<DateTime>();
+            if (selected != null)
+            {
+                occupiedDates= TourController.GetOccupiedDays(LoggedInGuide.Id, selected.LowerDateLimit, selected.UpperDateLimit);
+            }
+            
+
+            if (selected != null)
+            {
+                DatePicker1.DisplayDateStart = selected.LowerDateLimit;
+                DatePicker1.DisplayDateEnd = selected.UpperDateLimit;
+
+                DatePicker1.BlackoutDates.Add(
+                    new CalendarDateRange(new DateTime(0001, 1, 1), selected.LowerDateLimit.AddDays(-1)));
+                DatePicker1.BlackoutDates.Add(
+                    new CalendarDateRange(selected.UpperDateLimit.AddDays(1), new DateTime(9999, 1, 1)));
+                foreach (DateTime date in occupiedDates)
+                {
+                    DatePicker1.BlackoutDates.Add(new CalendarDateRange(date));
+                }
+                
+            }
+        }
+
+
     }
-
-
 }

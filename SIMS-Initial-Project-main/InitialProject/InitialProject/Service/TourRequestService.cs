@@ -36,8 +36,8 @@ public class TourRequestService
         return new Location();
     }
 
-    public void Accept(int id)
+    public void Accept(int id, DateTime selectedDate)
     {
-        _tourRequestRepository.Accept(id);
+        _tourRequestRepository.Accept(id, selectedDate);
     }
 }

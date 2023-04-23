@@ -225,4 +225,20 @@ public class TourService
 
         
     }
+
+    public List<DateTime> GetOccupiedDays(int guideId, DateTime lowerLimit, DateTime upperLimit)
+    {
+        List<DateTime> dates = _tourRepository.GetDatesByGuide(guideId);
+
+        List<DateTime> datesForBlackingOut = new List<DateTime>();
+        foreach (var date in dates)
+        {
+            if (date >= lowerLimit && date <= upperLimit)
+            {
+                datesForBlackingOut.Add(date);
+            }
+        }
+
+        return datesForBlackingOut;
+    }
 }

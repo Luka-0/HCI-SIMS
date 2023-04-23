@@ -121,5 +121,10 @@ public class TourController
     {
         return tourService.GetMostVisitedTour(guideId, time);
     }
+
+    public List<DateTime> GetOccupiedDays(int GuideId, DateTime lowerLimit, DateTime upperLimit)
+    {
+        return tourService.GetOccupiedDays(GuideId, lowerLimit, upperLimit);
+    }
 }
 

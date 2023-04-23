@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <Grid Row="0">
-            <DataGrid x:Name="DataGridRequests" ItemsSource="{Binding Requests}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,10,0,0" VerticalAlignment="Top">
+            <DataGrid x:Name="DataGridRequests" ItemsSource="{Binding Requests}" SelectionMode="Single" SelectionChanged="DataGridRequests_SelectionChanged" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,10,0,0" VerticalAlignment="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}"/>
                     <DataGridTextColumn Header="City" Binding="{Binding Location.City}"/>
@@ -30,10 +30,9 @@
         </Grid>
 
         <Button  Grid.Row="1" Click="AcceptRequest" Content="Accept" HorizontalAlignment="Center" Width="78" Margin="0,5,0,5" />
+        <DatePicker Grid.Row ="1" x:Name="DatePicker1" Margin="604,5,322,5" HorizontalContentAlignment="Center"/>
 
-
-
-        <Grid Row ="2" Height="100" Margin="0, 0, 0 , 0">
+            <Grid Row ="2" Height="100" Margin="0, 0, 0 , 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
