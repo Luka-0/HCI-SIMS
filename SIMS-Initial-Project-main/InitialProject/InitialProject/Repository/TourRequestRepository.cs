@@ -34,4 +34,10 @@ public class TourRequestRepository: ITourRequestRepository
         request.SelectedDate = selectedDate;
         db.SaveChanges();
     }
+
+    public List<string> GetLanguages()
+    {
+        using var db = new UserContext();
+        return db.tourRequest.Select(tr=>tr.Language).ToList();
+    }
 }

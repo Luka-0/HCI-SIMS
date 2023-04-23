@@ -25,4 +25,14 @@ public class TourRequestController
     {
         tourRequestService.Accept(id, selectedDate);
     }
+
+    public string GetHottestLanguage()
+    {
+       return tourRequestService.GetHottestLanguage();
+    }
+
+    public Location GetHottestLocation()
+    {
+        return tourRequestService.GetHottestLocation();
+    }
 }

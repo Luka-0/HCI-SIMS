@@ -38,10 +38,7 @@ namespace InitialProject.View.Guide
         public List<TourRequest> AllRequests { get; set; }
 
         public ObservableCollection<TourRequestYearlyCountDto> RequestYearlyCounts { get; set; }
-
-        public DateTime LowerDate { get; set; }
-        public DateTime UpperDate { get; set; }
-
+        
         public TourRequestsView(User user)
         {
             this.DataContext = this;
@@ -217,10 +214,6 @@ namespace InitialProject.View.Guide
             monthlyRequests.Show();
         }
 
-        private void CreateNewTour(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void ComboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -356,6 +349,20 @@ namespace InitialProject.View.Guide
                     DatePicker1.BlackoutDates.Add(new CalendarDateRange(date));
                 }
                 
+            }
+        }
+        private void CreateNewTour(object sender, RoutedEventArgs e)
+        {
+            Location hottestLocation = TourRequestController.GetHottestLocation();
+            string hottestLanguage = TourRequestController.GetHottestLanguage();
+            if (ComboBox2.SelectedIndex == 0)
+            {
+
+            }
+
+            if (ComboBox2.SelectedIndex == 1)
+            {
+
             }
         }
 
