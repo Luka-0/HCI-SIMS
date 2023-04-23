@@ -14,6 +14,8 @@ using InitialProject.Enumeration;
 using InitialProject.View;
 using InitialProject.View.Guide;
 using Microsoft.VisualBasic;
+using System.Reflection.Metadata;
+using System.Windows.Controls;
 
 
 namespace InitialProject
@@ -31,7 +33,6 @@ namespace InitialProject
         public TourKeyPointController TourKeyPointController{ get; set; } = new TourKeyPointController();
 
 
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -39,11 +40,21 @@ namespace InitialProject
 
         public CreateTourForm(User user)
         {
-            InitializeComponent();
-            DataContext = this;
+
             LoggedInGuide = user;
+            
+            DataContext = this;
+            InitializeComponent();
 
-
+        }
+        public CreateTourForm(User user, string language): this(user)
+        {
+            Language.Text = language;
+        }
+        public CreateTourForm(User user, Location location) : this(user)
+        {
+            Country.Text = location.Country;
+            City.Text = location.City;
         }
 
         private List<String> Separate(String names)
@@ -125,6 +136,7 @@ namespace InitialProject
         {
             TourRequestsView tourRequestsView = new TourRequestsView(LoggedInGuide);
             tourRequestsView.Show();
+            Close();
         }
     }
 }

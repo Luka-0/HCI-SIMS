@@ -357,12 +357,13 @@ namespace InitialProject.View.Guide
             string hottestLanguage = TourRequestController.GetHottestLanguage();
             if (ComboBox2.SelectedIndex == 0)
             {
-
+                CreateTourForm createTourForm = new CreateTourForm(LoggedInGuide, hottestLocation);
+                createTourForm.Show();
             }
-
             if (ComboBox2.SelectedIndex == 1)
             {
-
+                CreateTourForm createTourForm = new CreateTourForm(LoggedInGuide, hottestLanguage);
+                createTourForm.Show();
             }
         }
 
