@@ -11,6 +11,7 @@ namespace InitialProject.Interface
     {
         public void Save(GuestReview guestReview);
         public List<AccommodationReservation> GetGradedReservations(User owner);
+        public List<GuestReview> GetAll(User user);
 
 
     }

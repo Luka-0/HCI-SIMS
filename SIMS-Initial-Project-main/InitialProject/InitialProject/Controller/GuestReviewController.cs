@@ -40,5 +40,10 @@ namespace InitialProject.Controller
             return expiredReservations;
         }
 
+        public List<GuestReview> GetAll(User user)
+        {
+            return guestReviewService.GetAll(user);
+        }
+
     }
 }

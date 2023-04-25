@@ -35,5 +35,21 @@ namespace InitialProject.Repository
             }
             return reservation;
         }
+
+        public List<GuestReview> GetAll(User user)
+        {
+            List<GuestReview> guestReviews = new List<GuestReview>();
+
+            using(var dbContext = new UserContext())
+            {
+                guestReviews = dbContext.guestReview.Where(t => t.Reservation.Guest.Id == user.Id)
+                                                    .Include(t => t.Reservation)
+                                                        .ThenInclude(t => t.Accommodation)
+                                                            .ThenInclude(t => t.Owner)
+                                                    .ToList();
+            }
+
+            return guestReviews;
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace InitialProject.Model
 
         [DataType(DataType.DateTime)]
         public DateTime EndingDate { get; set; }
-        public bool Cancelled { get; set; }
+        public bool Cancelled { get; set; } = false;
 
         public AccommodationReservation() {
             Cancelled = false;

@@ -66,5 +66,10 @@ namespace InitialProject.View
                 MessageBox.Show("Unsupported grade value!");
             }
         }
+
+        //public static explicit operator GuestReview(Model.GuestReview v)
+       // {
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -73,5 +73,11 @@ namespace InitialProject.Service
             }
             return nonGradedExpired;
         }
+
+        public List<GuestReview> GetAll(User user)
+        {
+            return IGuestReviewRepository.GetAll(user);
+        }
+
     }
 }

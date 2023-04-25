@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="ViewRatings" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid x:Name="ReviewsGrid" ItemsSource="{Binding ReviewsToShow}" Height="Auto" Width="Auto" 
+            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="172,20,172,388">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Owner" Binding="{Binding Title}"/>
+                <DataGridTextColumn Header="Tidiness" Binding="{Binding Tidiness}"/>
+                <DataGridTextColumn Header="Obedience" Binding="{Binding Obedience}"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>
