@@ -17,7 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace InitialProject.View
+namespace InitialProject.View.Guest1
 {
 
     public partial class RateAccommodation : Window
@@ -149,8 +149,8 @@ namespace InitialProject.View
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            Guest1 guest1 = new(User);
-            guest1.Show();
+            Guest1Menu guest1Menu = new(User);
+            guest1Menu.Show();
 
             Close();
         }

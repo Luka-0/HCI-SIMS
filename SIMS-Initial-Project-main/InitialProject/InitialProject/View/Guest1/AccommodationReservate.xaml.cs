@@ -21,7 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 
-namespace InitialProject.View
+namespace InitialProject.View.Guest1
 {
     public partial class AccommodationReservate : Window
     {
@@ -346,8 +346,8 @@ namespace InitialProject.View
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            Guest1 guest1 = new(User);
-            guest1.Show();
+            Guest1Menu guest1Menu = new(User);
+            guest1Menu.Show();
 
             Close();
         }

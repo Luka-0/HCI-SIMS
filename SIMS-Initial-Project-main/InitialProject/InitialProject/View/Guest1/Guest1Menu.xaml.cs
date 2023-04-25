@@ -1,6 +1,7 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Controller;
 using InitialProject.Model;
+using InitialProject.View.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ using System.Windows.Shapes;
 
 namespace InitialProject.View
 {
-    public partial class Guest1 : Window
+    public partial class Guest1Menu : Window
     {
         private readonly ReservationReschedulingRequestController ReservationReschedulingRequestController = new();
         private readonly AccommodationReservationController AccommodationReservationController = new();
@@ -25,7 +26,7 @@ namespace InitialProject.View
 
         private User User { get; set; }
 
-        public Guest1(User user)
+        public Guest1Menu(User user)
         {
             InitializeComponent();
             User = user;
@@ -110,5 +111,12 @@ namespace InitialProject.View
             Close();
         }
 
+        private void ViewReviews_Click(object sender, RoutedEventArgs e)
+        {
+            ViewRatings viewRatings = new(User);
+            viewRatings.Show();
+
+            Close();
+        }
     }
 }

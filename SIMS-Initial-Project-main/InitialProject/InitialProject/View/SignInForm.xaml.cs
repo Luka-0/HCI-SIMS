@@ -68,10 +68,10 @@ namespace InitialProject
                             {
                                 MessageBox.Show("Guest1: " + user.Username + " is  logged in.");
 
-                                Guest1 guest1 = new(user);
-                                guest1.Show();
+                                Guest1Menu guest1Menu = new(user);
+                                guest1Menu.Show();
 
-                                this.Close();
+                                Close();
                                 break;
                             }
                         case UserType.Guest2:

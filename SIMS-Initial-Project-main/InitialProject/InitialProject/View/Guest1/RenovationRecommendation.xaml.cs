@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace InitialProject.View
+namespace InitialProject.View.Guest1
 {
     public partial class RenovationRecommendation : Window
     {
@@ -55,8 +55,9 @@ namespace InitialProject.View
 
             MessageBox.Show("Successfull");
 
-            Guest1 guest1 = new(ReservationToShow.First().Guest);
-            guest1.Show();
+            Guest1Menu guest1Menu = new(ReservationToShow.First().Guest);
+            guest1Menu.Show();
+
             Close();
         }
 
