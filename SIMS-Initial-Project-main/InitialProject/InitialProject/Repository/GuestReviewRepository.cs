@@ -40,7 +40,7 @@ namespace InitialProject.Repository
         {
             List<GuestReview> guestReviews = new();
 
-            using var db = new UserContext();
+            /*using var db = new UserContext();
 
             foreach(GuestReview g in db.guestReview)
             {
@@ -48,16 +48,16 @@ namespace InitialProject.Repository
                 {
                     guestReviews.Add(g);
                 }
-            }
+            }*/
 
-            /*using(var dbContext = new UserContext())
+            using(var dbContext = new UserContext())
             {
-                guestReviews = dbContext.guestReview.Where(t => t.Reservation != null && t.Reservation.Guest.Id == user.Id)
+                guestReviews = dbContext.guestReview//.Where(t =>t.Reservation.Guest.Id == user.Id)
                                                     .Include(t => t.Reservation)
                                                         .ThenInclude(t => t.Accommodation)
                                                             .ThenInclude(t => t.Owner)
                                                     .ToList();
-            }*/
+            }
 
             return guestReviews;
         }

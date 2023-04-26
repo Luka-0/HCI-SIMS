@@ -8,6 +8,7 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InitialProject.Repository
 {
@@ -56,7 +57,7 @@ namespace InitialProject.Repository
         {
             List<AccommodationReview> accommodationReviews = new();
 
-            using var db = new UserContext();
+            /*using var db = new UserContext();
 
             foreach(AccommodationReview ar in db.accommodationReview)
             {
@@ -65,13 +66,14 @@ namespace InitialProject.Repository
                     accommodationReviews.Add(ar);
                 }
             }
+            */
 
-            /*using(var db = new UserContext())
+            using(var db = new UserContext())
             {
-                accommodationReviews = db.accommodationReview.Include(t => t.Reservation)
-                                                             .Where(t => t.Reservation.Guest.Id == user.Id)
+                accommodationReviews = db.accommodationReview//.Where(t => t.Reservation.Guest.Id == user.Id)
+                                                             .Include(t => t.Reservation)
                                                              .ToList();
-            }*/
+            }
 
             return accommodationReviews;
         }
