@@ -56,12 +56,22 @@ namespace InitialProject.Repository
         {
             List<AccommodationReview> accommodationReviews = new();
 
-            using(var db = new UserContext())
+            using var db = new UserContext();
+
+            foreach(AccommodationReview ar in db.accommodationReview)
+            {
+                if(ar.Reservation != null && ar.Reservation.Guest.Id != user.Id)
+                {
+                    accommodationReviews.Add(ar);
+                }
+            }
+
+            /*using(var db = new UserContext())
             {
                 accommodationReviews = db.accommodationReview.Include(t => t.Reservation)
                                                              .Where(t => t.Reservation.Guest.Id == user.Id)
                                                              .ToList();
-            }
+            }*/
 
             return accommodationReviews;
         }

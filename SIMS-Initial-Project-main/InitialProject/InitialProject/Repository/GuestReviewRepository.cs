@@ -38,16 +38,26 @@ namespace InitialProject.Repository
 
         public List<GuestReview> GetAll(User user)
         {
-            List<GuestReview> guestReviews = new List<GuestReview>();
+            List<GuestReview> guestReviews = new();
 
-            using(var dbContext = new UserContext())
+            using var db = new UserContext();
+
+            foreach(GuestReview g in db.guestReview)
             {
-                guestReviews = dbContext.guestReview.Where(t => t.Reservation.Guest.Id == user.Id)
+                if(g.Reservation != null && g.Reservation.Guest.Id == user.Id)
+                {
+                    guestReviews.Add(g);
+                }
+            }
+
+            /*using(var dbContext = new UserContext())
+            {
+                guestReviews = dbContext.guestReview.Where(t => t.Reservation != null && t.Reservation.Guest.Id == user.Id)
                                                     .Include(t => t.Reservation)
                                                         .ThenInclude(t => t.Accommodation)
                                                             .ThenInclude(t => t.Owner)
                                                     .ToList();
-            }
+            }*/
 
             return guestReviews;
         }
