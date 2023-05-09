@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.ViewModels;
+using InitialProject.Windows;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,6 @@ namespace InitialProject
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }

@@ -99,6 +99,12 @@ public class Tour
         this.Status = TourStatus.Waiting;
     }
 
+    public Tour(String name, string description)
+    {
+        this.Name = name;
+        this.Description = description;
+    }
+
 
     public override string ToString()
     {
