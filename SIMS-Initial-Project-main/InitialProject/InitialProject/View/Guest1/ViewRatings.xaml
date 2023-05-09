@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest1"
         mc:Ignorable="d"
-        Title="ViewRatings" Height="450" Width="800">
+        Title="ViewRatings" Height="560" Width="800">
     <Grid>
         <DataGrid x:Name="ReviewsGrid" ItemsSource="{Binding ReviewsToShow}" Height="Auto" Width="Auto" 
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="172,20,172,388">

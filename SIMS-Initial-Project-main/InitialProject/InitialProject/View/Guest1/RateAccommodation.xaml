@@ -6,16 +6,42 @@
         xmlns:local="clr-namespace:InitialProject.View.Guest1"
         mc:Ignorable="d"
         Title="RateAccommodation" Height="560" Width="800">
-    <Grid>
-        <Label Content="Tidiness: " HorizontalAlignment="Left" Margin="66,96,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="TidinessComboBox" HorizontalAlignment="Left" Margin="183,96,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Owner's correctness: " HorizontalAlignment="Left" Margin="43,144,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CorrectnessComboBox" HorizontalAlignment="Left" Margin="189,146,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Image links: " HorizontalAlignment="Left" Margin="66,314,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="CommentTextBox" HorizontalAlignment="Left" Margin="104,211,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="205" Height="74"/>
-        <TextBox x:Name="ImagesTextBox" HorizontalAlignment="Left" Margin="165,317,0,0" TextWrapping="Wrap" Text="Image links" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="320,317,0,0" VerticalAlignment="Top" Click="AddLink_Click"/>
-        <Button Content="Submit" HorizontalAlignment="Left" Margin="183,380,0,0" VerticalAlignment="Top" Click="Submit_Click"/>
+    <Grid Margin="10,0,0,0">
+        <Grid Margin="0,0,479,10">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="0,117,10,46"/>
+            <Label Content="Tidiness: " HorizontalAlignment="Left" Margin="36,146,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="TidinessComboBox" HorizontalAlignment="Left" Margin="160,146,0,0" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Owner's correctness: " HorizontalAlignment="Left" Margin="14,198,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="CorrectnessComboBox" HorizontalAlignment="Left" Margin="160,200,0,0" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Image links: " HorizontalAlignment="Left" Margin="12,368,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="CommentTextBox" HorizontalAlignment="Center" Margin="0,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="205" Height="74"/>
+            <TextBox x:Name="ImagesTextBox" HorizontalAlignment="Left" Margin="111,372,0,0" TextWrapping="Wrap" Text="Image links" VerticalAlignment="Top" Width="120"/>
+            <Button Content="Add" HorizontalAlignment="Left" Margin="254,370,0,0" VerticalAlignment="Top" Click="AddLink_Click"/>
+            <Button HorizontalAlignment="Center" Margin="0,433,0,0" VerticalAlignment="Top" Click="Submit_Click" Height="23">
+                <Button.ToolTip>
+                    <ToolTip Placement="Bottom" Content="By clicking this, You will be returned to main menu, NOTHING to worry!" />
+                </Button.ToolTip>
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Help" />
+                                <Setter Property="Background" Value="LightBlue" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Resources>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                        <TextBlock Text="Submit" Width="44" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+        </Grid>
+
         <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding ReservationsToShow}" Height="Auto" Width="Auto" Margin="312,0,20,0" VerticalAlignment="Top" 
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
@@ -25,8 +51,54 @@
                 <DataGridTextColumn Header="Number of guests" Binding="{Binding GuestNumber}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="GoBack_Click"/>
-        <Button x:Name="RenovationSuggestionButton" Content="Suggestion for renovation" HorizontalAlignment="Left" Margin="133,452,0,0" VerticalAlignment="Top" Click="SuggestionForReservation_Click"/>
 
+        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Back_Click">
+            <Button.ToolTip>
+                <ToolTip Placement="Bottom" Content="By clicking this, You will complete the rating" />
+            </Button.ToolTip>
+            <Button.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Help" />
+                            <Setter Property="Background" Value="LightBlue" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Resources>
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                    <TextBlock Text="Back" Width="31" Height="19" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+
+        <Button x:Name="RenovationSuggestionButton" HorizontalAlignment="Left" Margin="72,500,0,0" VerticalAlignment="Top" Click="SuggestionForReservation_Click">
+            <Button.ToolTip>
+                <ToolTip Placement="Bottom" Content="By clicking this, a new window will open where You can write your suggestion. Don't worry cos everything else will be saved!" />
+            </Button.ToolTip>
+            <Button.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Help" />
+                            <Setter Property="Background" Value="LightBlue" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Resources>
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                    <TextBlock Text="Suggestion for renovation" Width="141" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+
+        <Button Content="Tmp" HorizontalAlignment="Left" Margin="292,500,0,0" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
+
 </Window>

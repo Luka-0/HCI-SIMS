@@ -130,6 +130,13 @@ namespace InitialProject.View.Guest1
         {
             int daysToStay = int.Parse(ReservatingDaysTB.Text);
             Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
+
+            if(StartingDatePicker.SelectedDate == null || EndingDatePicker.SelectedDate == null)
+            {
+                MessageBox.Show("Please select dates first");
+                return;
+            }
+
             DateTime startDate = StartingDatePicker.SelectedDate.Value;
             DateTime endDate = EndingDatePicker.SelectedDate.Value;
 

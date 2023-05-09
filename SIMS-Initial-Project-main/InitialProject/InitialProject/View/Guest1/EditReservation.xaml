@@ -18,13 +18,38 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="210,203,0,0" VerticalAlignment="Top" Click="Cancel_Click"/>
-        <Button Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Back_Click"/>
-        <Button Content="Postpone" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" Click="Postpone_Click"/>
-        <TextBox x:Name="DaysToPostponeTB" HorizontalAlignment="Left" Margin="220,155,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="58"/>
-        <Label Content="How many days to postpone for:" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top"/>
+        <Grid Margin="10,117,488,326">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,-10"/>
+            <Button Content="Cancel" HorizontalAlignment="Left" Margin="209,60,0,0" VerticalAlignment="Top" Click="Cancel_Click"/>
+            <Button Content="Postpone" HorizontalAlignment="Left" Margin="47,60,0,0" VerticalAlignment="Top" Click="Postpone_Click"/>
+            <TextBox x:Name="DaysToPostponeTB" HorizontalAlignment="Left" Margin="219,12,0,0" TextWrapping="Wrap" Text="0" TextAlignment="Center" VerticalAlignment="Top" Width="58"/>
+            <Label Content="How many days to postpone for:" HorizontalAlignment="Left" Margin="9,8,0,0" VerticalAlignment="Top"/>
+        </Grid>
 
-        <DataGrid x:Name="ReservationsResceduleDG" ItemsSource="{Binding ReschedulingsToShow}" Height="Auto" Width="Auto" Margin="10,272,10,0" VerticalAlignment="Top" 
+        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Back_Click">
+            <Button.ToolTip>
+                <ToolTip Placement="Bottom" Content="By clicking this, You will be returned to main menu, NOTHING to worry!" />
+            </Button.ToolTip>
+            <Button.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Help" />
+                            <Setter Property="Background" Value="LightBlue" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Resources>
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                    <TextBlock Text="Back" Width="31" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+
+        <DataGrid x:Name="ReservationsResceduleDG" ItemsSource="{Binding ReschedulingsToShow}" Height="Auto" Width="Auto" Margin="10,302,10,0" VerticalAlignment="Top" 
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Reservation.Accommodation.Title}"/>
@@ -35,6 +60,8 @@
                 <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBlock HorizontalAlignment="Left" Margin="51,42,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="Select a reservation by clicking on it on the right and press the button bellow to POSTPONE, or CANCEL Your reservation" VerticalAlignment="Top" Width="267"/>
+        <TextBlock HorizontalAlignment="Left" Margin="78,237,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="If done correctly, Your selected reservation will be displayed on the second table bellow" VerticalAlignment="Top" Width="213"/>
 
     </Grid>
 </Window>

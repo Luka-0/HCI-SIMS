@@ -17,9 +17,35 @@
                 <DataGridTextColumn Header="Reservation last date" Binding="{Binding EndingDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="CommentTB" HorizontalAlignment="Center" Margin="0,149,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="242" Height="90"/>
-        <Label Content="How needed are the repairs:" HorizontalAlignment="Left" Margin="156,318,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="RatingCB" HorizontalAlignment="Left" Margin="474,322,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="FinishButton" Content="Finish" HorizontalAlignment="Center" Margin="0,462,0,0" VerticalAlignment="Top" Click="FinishButton_Click"/>
+
+        <Grid Margin="10,23,10,10">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="150,138,169,0"/>
+            <TextBox x:Name="CommentTB" HorizontalAlignment="Center" Margin="0,149,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="242" Height="90"/>
+            <Label Content="How needed are the repairs:" HorizontalAlignment="Left" Margin="156,318,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="RatingCB" HorizontalAlignment="Left" Margin="474,322,0,0" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="FinishButton" HorizontalAlignment="Center" Margin="0,462,0,0" VerticalAlignment="Top" Click="FinishButton_Click">
+                <Button.ToolTip>
+                    <ToolTip Placement="Bottom" Content="By clicking this, Your suggestion will be saved" />
+                </Button.ToolTip>
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Help" />
+                                <Setter Property="Background" Value="LightBlue" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Resources>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                        <TextBlock Text="Finish" Width="34" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Grid>
+
     </Grid>
 </Window>

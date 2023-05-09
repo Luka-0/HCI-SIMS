@@ -147,7 +147,7 @@ namespace InitialProject.View.Guest1
             return accommodationReservation.EndingDate.Day <= DateTime.Now.Day && accommodationReservation.EndingDate.Day + 5 >= DateTime.Now.Day;
         }
 
-        private void GoBack_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             Guest1Menu guest1Menu = new(User);
             guest1Menu.Show();
@@ -167,6 +167,13 @@ namespace InitialProject.View.Guest1
             RenovationRecommendation renovationRecommendation = new(accommodationReservation);
             renovationRecommendation.Show();
 
+            Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RenovationRecommendation renovationRecommendation = new((AccommodationReservation)ReservationsGrid.SelectedItem);
+            renovationRecommendation.Show();
             Close();
         }
     }

@@ -21,39 +21,169 @@
             </DataGrid>
         </ScrollViewer>
 
-        <Grid Margin="0,0,483,272" DataContext="{Binding ElementName=AccommodationsGrid, Path=SelectedItem}">
-            <Border BorderBrush="Black" BorderThickness="1" Height="262" VerticalAlignment="Top" />
-            <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,231,0,0" Click="GoBack_Click"/>
-            <DatePicker x:Name="StartingDatePicker" HorizontalAlignment="Left" Margin="154,11,0,0" VerticalAlignment="Top"/>
-            <DatePicker x:Name="EndingDatePicker" HorizontalAlignment="Left" Margin="154,55,0,0" VerticalAlignment="Top"/>
-            <Button Content="Reservate" HorizontalAlignment="Center" Margin="0,231,0,0" VerticalAlignment="Top" Click="CreateReservation_Click"/>
-            <TextBox x:Name="GuestNumberTB" HorizontalAlignment="Left" Margin="205,210,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" TextAlignment="Center" Width="51" Height="19"/>
-            <Button Content="Generate Dates" HorizontalAlignment="Left" Margin="27,152,0,0" VerticalAlignment="Top" Click="GenerateDates_Click"/>
-            <ComboBox x:Name="OfferedDatesCB" Margin="154,151,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140"/>
-            <Label Content="Select starting date:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <Label Content="Select ending date:" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top"/>
-            <Label Content="Enter guest count:" HorizontalAlignment="Left" Margin="12,203,0,0" VerticalAlignment="Top"/>
-            <Label Content="Days to stay:" HorizontalAlignment="Left" Margin="27,99,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.574,0.618" Width="81" Height="32"/>
-            <TextBox x:Name="ReservatingDaysTB" HorizontalAlignment="Left" Margin="154,107,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" TextAlignment="Center" Width="50"/>
+        <Grid Margin="0,0,483,292" DataContext="{Binding ElementName=AccommodationsGrid, Path=SelectedItem}">
+            <Border BorderBrush="Black" BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <!-- Row 0 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 1 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 2 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 3 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 4 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 5 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 6 -->
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="9,0,0,0" Click="GoBack_Click" Width="57">
+                        <Button.ToolTip>
+                            <ToolTip Placement="Bottom" Content="By clicking this, You will be returned to main menu, NOTHING to worry!" />
+                        </Button.ToolTip>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Help" />
+                                        <Setter Property="Background" Value="LightBlue" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                                <TextBlock Text="Back" Width="31" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <Label Grid.Row="1" Content="Select starting date:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <DatePicker Grid.Row="1" x:Name="StartingDatePicker" HorizontalAlignment="Left" Margin="154,0,0,0" VerticalAlignment="Center"/>
+                    
+                    <Label Grid.Row="2" Content="Select ending date:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="12,0,0,0"/>
+                    <DatePicker Grid.Row="2" x:Name="EndingDatePicker" HorizontalAlignment="Left" Margin="154,0,0,0" VerticalAlignment="Center"/>
+                    <Label Grid.Row="3" Content="Days to stay:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="28,0,0,0"/>
+                    <TextBox Grid.Row="3" x:Name="ReservatingDaysTB" HorizontalAlignment="Left" Margin="154,4,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" TextAlignment="Center" Width="50"/>
+
+                    <Button Grid.Row="4"  HorizontalAlignment="Left" Margin="12,0,0,0" VerticalAlignment="Center" Click="GenerateDates_Click" Width="114">
+                        <Button.ToolTip>
+                            <ToolTip Placement="Bottom" Content="Click here after You've selected starting and ending dates.This will give You date span which You can choose by clicking on the controll which is to the right of this button" />
+                        </Button.ToolTip>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Help" />
+                                        <Setter Property="Background" Value="LightBlue" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="tooltip.png" Width="20" Height="16" Margin="0,0,5,0" />
+                                <TextBlock Text="Generate Dates" Width="86" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                    <ComboBox Grid.Row="4" x:Name="OfferedDatesCB" Margin="154,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140"/>
+                    <Label Grid.Row="5" Content="Enter guest count:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="14,0,0,0"/>
+                    <TextBox Grid.Row="5" x:Name="GuestNumberTB" HorizontalAlignment="Left" Margin="154,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" TextAlignment="Center" Width="52" Height="19"/>
+                    <Button Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CreateReservation_Click">
+                        <Button.ToolTip>
+                            <ToolTip Placement="Bottom" Content="By clicking this, You will create a reservation for the selected accommodation, EASY" />
+                        </Button.ToolTip>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Help" />
+                                        <Setter Property="Background" Value="LightBlue" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                                <TextBlock Text="Reservate" Width="53" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </Border>
         </Grid>
-        
-        <Grid Margin="0,263,483,0" >
-            <Border BorderBrush="Black" BorderThickness="1"/>
-            <ComboBox x:Name="FilterComboBox" HorizontalAlignment="Left" Margin="154,20,0,0" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="154,134,0,0" TextWrapping="Wrap" Text="--Here--" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="ApplyFilterButton" Content="Apply filter" HorizontalAlignment="Center" Margin="0,257,0,0" VerticalAlignment="Top" Click="ApplyFilter_Click"/>
-            <Label Content="Choose what to filter with:" HorizontalAlignment="Left" Margin="4,18,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="AccommodationTypeComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="154,161,0,0"/>
-            <Label Content="Accommodation type:" HorizontalAlignment="Left" Margin="14,157,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="GuestNumberTBFilter" HorizontalAlignment="Center" Margin="0,220,0,0" TextWrapping="Wrap" Text="--Here--" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
-            <Label Content="Enter name here:" HorizontalAlignment="Left" Margin="14,131,0,0" VerticalAlignment="Top"/>
-            <Label HorizontalAlignment="Center" Margin="0,189,0,0" VerticalAlignment="Top" >
-                Enter guest number or days for reservation:
-            </Label>
-            <ComboBox x:Name="CountryComboBox" HorizontalAlignment="Left" MouseLeave="InitializeCityComboBox" Margin="154,66,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
-            <ComboBox x:Name="CityComboBox" HorizontalAlignment="Left" Margin="154,104,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
-            <Label Content="Choose country:" HorizontalAlignment="Left" Margin="14,62,0,0" VerticalAlignment="Top"/>
-            <Label Content="Choose city:" HorizontalAlignment="Left" Margin="14,100,0,0" VerticalAlignment="Top"/>
+
+        <Grid Margin="0,263,483,11" >
+            <Border BorderBrush="Black" BorderThickness="1">
+                <Grid Margin="0,12,0,-1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <!-- Row 0 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 1 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 2 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 3 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 4 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 5 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 6 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 7 -->
+                    </Grid.RowDefinitions>
+
+
+                    <Label Grid.Row="0" Content="Choose what to filter with:" HorizontalAlignment="Left" Margin="4,0,0,0" VerticalAlignment="Center" Height="24"/>
+                    <ComboBox Grid.Row="0" x:Name="FilterComboBox" HorizontalAlignment="Left" Margin="175,4,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Label Grid.Row="1" Content="Choose country:" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Center" Height="29"/>
+                    <ComboBox Grid.Row="1" x:Name="CountryComboBox" HorizontalAlignment="Left" MouseLeave="InitializeCityComboBox" Margin="175,4,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
+                    <Label Grid.Row="2" Content="Choose city:" HorizontalAlignment="Left" Margin="41,1,0,0" VerticalAlignment="Top" Height="28"/>
+                    <ComboBox Grid.Row="2" x:Name="CityComboBox" HorizontalAlignment="Left" Margin="175,4,0,0" VerticalAlignment="Top" MinWidth="120" Width="Auto"/>
+                    <Label Grid.Row="3" Content="Enter name here:" HorizontalAlignment="Left" Margin="23,2,0,0" VerticalAlignment="Top"/>
+                    <TextBox Grid.Row="3" x:Name="NameTextBox" HorizontalAlignment="Left" Margin="175,0,0,0" TextWrapping="Wrap" Text="--Here--" TextAlignment="Center" VerticalAlignment="Center" Width="120"/>
+                    <Label Grid.Row="4" Content="Accommodation type:" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox Grid.Row="4" x:Name="AccommodationTypeComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Margin="175,0,0,0"/>
+                    <Label Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        Enter guest number or days for reservation:
+                    </Label>
+                    <TextBox Grid.Row="6" x:Name="GuestNumberTBFilter" HorizontalAlignment="Center" TextWrapping="Wrap" Text="--Here--" VerticalAlignment="Center" Width="120" TextAlignment="Center"/>
+                    <Button Grid.Row="7" x:Name="ApplyFilterButton" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ApplyFilter_Click">
+                        <Button.ToolTip>
+                            <ToolTip Placement="Bottom" Content="By clicking this, the display on the right will change, so that only accommodations that match Your filter are shown. If You want to make it back to normal, just select --Reset-- on the first Combo Box" />
+                        </Button.ToolTip>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Help" />
+                                        <Setter Property="Background" Value="LightBlue" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                                <TextBlock Text="Apply filter" Width="63" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </Border>
         </Grid>
 
 

@@ -13,6 +13,7 @@
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\view.png" />
+    <None Remove="View\Guest1\tooltip.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +37,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\Guest1\tooltip.png" />
   </ItemGroup>
 
 </Project>

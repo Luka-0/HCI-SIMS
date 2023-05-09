@@ -7,9 +7,12 @@
         mc:Ignorable="d"
         Title="Guest1 Main Window" Height="560" Width="800">
     <Grid>
-        <Button Content="Reservate Accommodation" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="141" Click="AccommodationReservate_Click" Margin="83,38,0,0"/>
-        <Button Content="Rate Accommodation" HorizontalAlignment="Left" Margin="94,147,0,0" VerticalAlignment="Top" Click="RateAccommodation_Click"/>
-        <Button Content="Edit Reservation" HorizontalAlignment="Left" Margin="109,92,0,0" VerticalAlignment="Top" Click="EditReservation_Click"/>
-        <Button Content="View Reviews of me" HorizontalAlignment="Left" Margin="99,206,0,0" VerticalAlignment="Top" Click="ViewReviews_Click"/>
+        <Grid Margin="0,10,547,0">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="10,0,0,10"/>
+            <Button Content="Reservate Accommodation" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="156" Click="AccommodationReservate_Click" Margin="54,24,0,0"/>
+            <Button Content="Rate Accommodation" HorizontalAlignment="Left" Margin="73,134,0,0" VerticalAlignment="Top" Click="RateAccommodation_Click"/>
+            <Button Content="Edit Reservation" HorizontalAlignment="Left" Margin="87,88,0,0" VerticalAlignment="Top" Click="EditReservation_Click"/>
+            <Button Content="View Reviews of me" HorizontalAlignment="Left" Margin="78,190,0,0" VerticalAlignment="Top" Click="ViewReviews_Click"/>
+        </Grid>
     </Grid>
 </Window>
