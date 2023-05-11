@@ -1,4 +1,5 @@
-﻿using InitialProject.ViewModels;
+﻿using InitialProject.Stores;
+using InitialProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,20 +21,15 @@ namespace InitialProject.Windows
     /// </summary>
     public partial class TouristMainWindow : Window
     {
+        private readonly NavigationStore _navigationStore;
         public TouristMainWindow()
         {
             InitializeComponent();
+            _navigationStore = new NavigationStore();
 
-            DataContext = new MainViewModel();
-        }
 
-        private void ShowAndSearchTourView_Initialized(object sender, EventArgs e)
-        {
-            Application.Current.MainWindow = new TouristMainWindow()
-            {
-                DataContext = new MainViewModel()
-            };
-            //Application.Current.MainWindow.Show();
+            _navigationStore.CurrentViewModel = new ShowAndSearchTourViewModel();
+            DataContext = new MainViewModel(_navigationStore);
         }
     }
 }

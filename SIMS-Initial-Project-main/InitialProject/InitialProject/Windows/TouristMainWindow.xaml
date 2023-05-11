@@ -4,9 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.Windows" xmlns:views="clr-namespace:InitialProject.View.Tourist"
+        xmlns:vms="clr-namespace:InitialProject.ViewModels"
         mc:Ignorable="d"
         Title="TouristMainWindow" Height="750" Width="430" ResizeMode="NoResize">
     <Grid>
-        <views:ShowAndSearchTourView DataContext="{Binding CurrentViewModel}" Initialized="ShowAndSearchTourView_Initialized" />
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type vms:ShowAndSearchTourViewModel}">
+                <views:ShowAndSearchTourView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:ShowTourViewModel}">
+                <views:TourShowView/>
+            </DataTemplate>
+        </Grid.Resources>
+
+
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

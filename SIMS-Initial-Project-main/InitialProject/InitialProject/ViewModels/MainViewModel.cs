@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.Stores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,14 @@ namespace InitialProject.ViewModels
 {
     public class MainViewModel:ViewModelBase
     {
-        public ViewModelBase CurrentViewModel { get; }
+        private readonly NavigationStore _navigationStore;
 
-        public MainViewModel() 
+        public MainViewModel(NavigationStore navigationStore)
         {
-            CurrentViewModel = new ShowAndSearchTourViewModel();
-            //CurrentViewModel = new ShowTourViewModel();
+            _navigationStore = navigationStore;
         }
+        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
+
+        
     }
 }

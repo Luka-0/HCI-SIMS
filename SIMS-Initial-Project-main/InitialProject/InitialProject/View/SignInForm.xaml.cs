@@ -1,15 +1,10 @@
-﻿using System;
-using InitialProject.Forms;
-using InitialProject.Model;
-using InitialProject.Repository;
+﻿using InitialProject.Model;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using InitialProject.Enumeration;
 using InitialProject.View;
-using InitialProject.Contexts;
 using InitialProject.Controller;
-using InitialProject.View.Tourist.Windows;
 using InitialProject.Windows;
 
 namespace InitialProject

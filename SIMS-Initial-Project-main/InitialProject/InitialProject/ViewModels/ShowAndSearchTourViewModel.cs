@@ -20,6 +20,7 @@ namespace InitialProject.ViewModels
         public IEnumerable<TourViewModel> Tours => _tours;
 
         public ICommand ShowAllToursCommand { get; }
+        public ICommand NextView { get; }
 
         public ShowAndSearchTourViewModel() 
         { 
