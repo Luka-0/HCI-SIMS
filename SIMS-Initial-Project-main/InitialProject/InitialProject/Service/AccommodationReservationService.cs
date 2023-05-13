@@ -14,15 +14,17 @@ using System.Printing;
 
 namespace InitialProject.Service
 {
-    internal class AccommodationReservationService
+    public class AccommodationReservationService
     {
         private readonly IAccommodationReservationRepository IAccommodationreservationRepository;
         private UserService UserService;
+        private RenovationService RenovationService;
         
         public AccommodationReservationService(IAccommodationReservationRepository iAccommodationreservationRepository)
         {
             this.IAccommodationreservationRepository = iAccommodationreservationRepository;
             this.UserService = new(new UserRepository());
+            this.RenovationService = new(new RenovationRepository());
         }
 
         public List<AccommodationReservation> getAllExpiredlBy(DateTime date, string ownerUsername) {
@@ -90,7 +92,7 @@ namespace InitialProject.Service
             for (int i = 0; i < datesToChose.Count; ++i)
             {
                 StartEndDateDto tmp = datesToChose[i];
-                if (!IsAvailable(accommodation.Id, tmp.StartingDate, tmp.EndingDate))
+                if (!IsAvailable(accommodation, tmp.StartingDate, tmp.EndingDate))
                 { 
                     datesToChose.Remove(tmp);
                     --i;
@@ -116,7 +118,7 @@ namespace InitialProject.Service
                 DateTime newStartDate = endDate.AddDays(i);
                 DateTime newEndDate = newStartDate.AddDays(daysToStay);
 
-                if(IsAvailable(accommodation.Id, newStartDate, newEndDate))
+                if(IsAvailable(accommodation, newStartDate, newEndDate))
                 {
                     StartEndDateDto tmp = new(newStartDate, newEndDate);
                     dates.Add(tmp);
@@ -144,9 +146,10 @@ namespace InitialProject.Service
             return true;
         }
 
-        public bool IsAvailable(int id, DateTime startingDate, DateTime endingDate)
+        public bool IsAvailable(Accommodation accommodation, DateTime startingDate, DateTime endingDate)
         {
-            List<AccommodationReservation> accommodationReservations = IAccommodationreservationRepository.GetByAccommodation(id);
+            List<AccommodationReservation> accommodationReservations = IAccommodationreservationRepository.GetByAccommodation(accommodation.Id);
+            List<Renovation> existingRenovations = new List<Renovation>();
 
             foreach (AccommodationReservation ar in accommodationReservations)
             {
@@ -163,6 +166,12 @@ namespace InitialProject.Service
                     return false;
                 }
             }
+
+            //kt3 - vlasnik
+
+            existingRenovations = this.RenovationService.GetAllBetweenBy(accommodation, startingDate, endingDate);
+
+            if (existingRenovations.Count != 0) { return false; }
 
             return true;
         }

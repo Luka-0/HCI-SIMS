@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Interface
 {
-    interface IAccommodationReservationRepository
+    public interface IAccommodationReservationRepository
     {
         public List<AccommodationReservation> GetAllExpiredBy(int day, int month, int year, User owner);
         public AccommodationReservation GetBy(int id);

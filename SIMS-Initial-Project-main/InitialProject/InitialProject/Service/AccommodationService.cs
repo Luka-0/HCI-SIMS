@@ -190,9 +190,5 @@ namespace InitialProject.Service
             return renovationDatesSuggestions;
         }
 
-        public void UpdateLastRenovatedBy(Accommodation accommodation, DateTime lastRenovation) {
-
-            this.IAccommodationRepository.UpdateLastRenovatedBy(accommodation, lastRenovation);
-        }
     }
 }

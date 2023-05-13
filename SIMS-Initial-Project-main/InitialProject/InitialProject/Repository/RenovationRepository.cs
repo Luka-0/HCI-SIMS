@@ -14,12 +14,15 @@ namespace InitialProject.Repository
     {
         public void Save(Renovation renovation) {
 
-            using UserContext db = new();
+            UpdateLastRenovation(renovation);
 
-            db.ChangeTracker.TrackGraph(renovation, node =>
-            node.Entry.State = !node.Entry.IsKeySet ? EntityState.Added : EntityState.Unchanged);
+            using (UserContext db = new())
+            {
+                db.ChangeTracker.TrackGraph(renovation, node =>
+                node.Entry.State = !node.Entry.IsKeySet ? EntityState.Added : EntityState.Unchanged);
 
-            db.SaveChanges();
+                db.SaveChanges();
+            }
         }
 
         public List<Renovation> GetAllBetweenBy(Accommodation accommodation, DateTime startingDate, DateTime endingDate)
@@ -40,6 +43,22 @@ namespace InitialProject.Repository
                                            .ToList();
             }
             return renovations;
+        }
+        private void UpdateLastRenovation(Renovation renovation) {
+
+            List<Accommodation> accommodations = new();
+
+            using (UserContext db = new())
+            {
+                accommodations = db.accommodation.Where(t => t.Id.Equals(renovation.Accommodation.Id))
+                    .Include(t => t.Location)
+                    .Include(t => t.Owner)
+                    .ToList();
+
+                accommodations.ForEach(t => t.LastRenovation = renovation.End);
+                db.SaveChanges();
+            }
+
         }
     }
 }

@@ -12,19 +12,13 @@ namespace InitialProject.Service
     public class RenovationService
     {
         private readonly IRenovationRepository IRenovationRepository;
-        private UserService UserService;
-        private AccommodationService AccommodationService;
 
         public RenovationService(IRenovationRepository iRenovationRepository)
         {
             this.IRenovationRepository = iRenovationRepository;
-            this.UserService = new(new UserRepository());
-            this.AccommodationService = new(new AccommodationRepository());
         }
 
         public void Save(Renovation renovation) {
-
-            AccommodationService.UpdateLastRenovatedBy(renovation.Accommodation, renovation.End);
 
             this.IRenovationRepository.Save(renovation);
 

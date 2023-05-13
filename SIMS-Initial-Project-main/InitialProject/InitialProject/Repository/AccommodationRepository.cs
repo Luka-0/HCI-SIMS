@@ -45,23 +45,6 @@ namespace InitialProject.Repository
             }
         }
 
-
-        public void UpdateLastRenovatedBy(Accommodation accommodation, DateTime lastRenovation)
-        {
-            List<Accommodation> ownerAccommodation = new();
-
-            using (UserContext db = new())
-            {
-                ownerAccommodation = db.accommodation.Where(t => t.Id.Equals(accommodation.Id))
-                    .Include(t => t.Location)
-                    .Include(t => t.Owner)
-                    .ToList();
-
-                ownerAccommodation.ForEach(t => t.LastRenovation = lastRenovation);
-                db.SaveChanges();
-            }
-        }
-
         public List<Accommodation> GetAllBy(User owner)
         {
             List<Accommodation> accommodations = new();
@@ -162,5 +145,22 @@ namespace InitialProject.Repository
 
             return accommodations;
         }
+
+
+        //public void UpdateLastRenovatedBy(Accommodation accommodation, DateTime lastRenovation)
+        //{
+        //    List<Accommodation> ownerAccommodation = new();
+
+        //    using (UserContext db = new())
+        //    {
+        //        ownerAccommodation = db.accommodation.Where(t => t.Id.Equals(accommodation.Id))
+        //            .Include(t => t.Location)
+        //            .Include(t => t.Owner)
+        //            .ToList();
+
+        //        ownerAccommodation.ForEach(t => t.LastRenovation = lastRenovation);
+        //        db.SaveChanges();
+        //    }
+        //}
     }
 }
