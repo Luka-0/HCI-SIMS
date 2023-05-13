@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.Dto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -37,7 +38,17 @@ namespace InitialProject.Model
                 this.Duration = duration;
 
             }
-            public Renovation()
+
+            public Renovation(RenovationDto renovation)
+            {
+                this.Id = renovation.Id;
+                this.Start = renovation.Start;
+                this.End = renovation.End;
+                this.Description = renovation.Description;
+                this.Duration = renovation.Duration;
+            }
+
+        public Renovation()
             {
 
             }

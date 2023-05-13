@@ -1,6 +1,7 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Interface;
 using InitialProject.Model;
+using InitialProject.View.Owner;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace InitialProject.Repository
     {
         public void Save(Renovation renovation) {
 
-            UpdateLastRenovation(renovation);
+            UpdateLastAccommodationRenovation(renovation);
 
             using (UserContext db = new())
             {
@@ -23,6 +24,37 @@ namespace InitialProject.Repository
 
                 db.SaveChanges();
             }
+        }
+
+        public void Delete(Renovation erasureRenovation)
+        {
+            using (UserContext db = new())
+            {
+                Accommodation accommodationRenovation = GetAccommodationBy(erasureRenovation);
+
+                db.Remove(erasureRenovation);
+
+                db.SaveChanges();
+
+                UpdateLastAccommodationRenovation(GetLastRenovationBy(accommodationRenovation));
+
+                db.SaveChanges();
+            }
+        }
+
+        public List<Renovation> GetAllBy(string ownerUsername)
+        {
+            List<Renovation> renovations = new();
+
+            using (UserContext db = new())
+            {
+                renovations = db.renovation
+                                .Include(t => t.Accommodation)
+                                .ThenInclude(t => t.Owner)
+                                .Where(t => t.Accommodation.Owner.Username.Equals(ownerUsername))
+                                .ToList();
+            }
+            return renovations;
         }
 
         public List<Renovation> GetAllBetweenBy(Accommodation accommodation, DateTime startingDate, DateTime endingDate)
@@ -44,7 +76,7 @@ namespace InitialProject.Repository
             }
             return renovations;
         }
-        private void UpdateLastRenovation(Renovation renovation) {
+        private void UpdateLastAccommodationRenovation(Renovation renovation) {
 
             List<Accommodation> accommodations = new();
 
@@ -58,7 +90,38 @@ namespace InitialProject.Repository
                 accommodations.ForEach(t => t.LastRenovation = renovation.End);
                 db.SaveChanges();
             }
+        }
 
+        private Accommodation GetAccommodationBy(Renovation existingRenovation) {
+
+            Renovation renovation = new Renovation();
+
+            using (UserContext db = new())
+            {
+                renovation = db.renovation
+                                   .Where(t => t.Id.Equals(existingRenovation.Id))
+                                   .Include(t=>t.Accommodation)
+                                   .First();
+            }
+
+
+            return renovation.Accommodation;
+        }
+
+
+        private Renovation GetLastRenovationBy(Accommodation accommodation) {
+
+            Renovation renovation = new Renovation();
+
+            using (UserContext db = new())
+            {
+                renovation = db.renovation
+                                   .Include(t => t.Accommodation)
+                                   .Where(t => t.Accommodation.Id.Equals(accommodation.Id))
+                                   .OrderBy(t => t.End).Last();
+            }
+
+            return renovation;
         }
     }
 }

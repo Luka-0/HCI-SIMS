@@ -11,5 +11,7 @@ namespace InitialProject.Interface
     {
         public void Save(Renovation renovation);
         public List<Renovation> GetAllBetweenBy(Accommodation accommodation, DateTime startingDate, DateTime endingDate);
+        public List<Renovation> GetAllBy(string ownerUsername);
+        public void Delete(Renovation renovation);
     }
 }

@@ -75,5 +75,10 @@ namespace InitialProject.View
         {
               OperationsContainer.Content = new Renovations(Username);
         }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new AllRenovations(Username);
+        }
     }
 }

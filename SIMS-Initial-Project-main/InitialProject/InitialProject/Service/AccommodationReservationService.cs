@@ -167,7 +167,7 @@ namespace InitialProject.Service
                 }
             }
 
-            //kt3 - vlasnik
+            //kt3 - vlasnik - datumi koji spadaju u period renoviranja ne mogu biti preporuceni
 
             existingRenovations = this.RenovationService.GetAllBetweenBy(accommodation, startingDate, endingDate);
 
