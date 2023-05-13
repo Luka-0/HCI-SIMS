@@ -140,7 +140,7 @@ namespace InitialProject.View.Guest1
             //dodatak
             List<StartEndDateDto> availableDates = new List<StartEndDateDto>();
             List<Renovation> existingRenovations = new List<Renovation>();
-            //
+
 
             if (StartingDatePicker.SelectedDate == null || EndingDatePicker.SelectedDate == null)
             {
