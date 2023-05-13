@@ -24,6 +24,7 @@ namespace InitialProject.Interface
         public void Delete(AccommodationReservation accommodationReservation);
         public void LogicalyDelete(AccommodationReservation accommodationReservation);
         public List<AccommodationReservation> GetDuringLastYearBy(User user);
+        public List<AccommodationReservation> GetAllByDateInterval(Accommodation accommodation, DateTime start, DateTime end);
 
         }
 }

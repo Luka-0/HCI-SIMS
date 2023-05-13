@@ -4,6 +4,7 @@ using InitialProject.Enumeration;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.View.Owner;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,9 @@ namespace InitialProject.View.Guest1
         public ObservableCollection<Accommodation> AccommodationsToShow { get; set; }
         private List<StartEndDateDto> DatesToChose { get; set; }
         private User User { get; set; }
+
+        //kt3 - vlasnik - deo funkcionalnosti zakazivanja renoviranja
+        private readonly RenovationController RenovationController = new RenovationController();
         
         public AccommodationReservate(User user)
         {
@@ -105,10 +109,19 @@ namespace InitialProject.View.Guest1
         private void InitializeDatesComboBox()
         {
             OfferedDatesCB.Items.Clear();
+            //dodatak
+            Accommodation selectedAccommodation = (Accommodation)AccommodationsGrid.SelectedItem;
+            List<Renovation> existingRenovations = new List<Renovation>();
 
             foreach (StartEndDateDto t in DatesToChose)
             {
-                OfferedDatesCB.Items.Add(t.StartingDate.Date.ToString() + t.EndingDate.Date.ToString());
+                //KT3 - Vlasnik: dodatno ogranicenje da predlozeni datumi nisu datumi zakazanog renoviranja
+                existingRenovations = RenovationController.GetAllBetweenBy(selectedAccommodation, t.StartingDate, t.EndingDate);
+
+                if (existingRenovations.Count == 0) {
+                    OfferedDatesCB.Items.Add(t.StartingDate.Date.ToString() + t.EndingDate.Date.ToString());
+                }
+                //
             }
 
             OfferedDatesCB.SelectedIndex = 0;

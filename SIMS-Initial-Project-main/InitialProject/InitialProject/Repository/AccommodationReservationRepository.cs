@@ -188,5 +188,26 @@ namespace InitialProject.Repository
 
         }
 
+        public List<AccommodationReservation> GetAllByDateInterval(Accommodation accommodation, DateTime start, DateTime end) { 
+        
+        
+            List<AccommodationReservation> accommodationReservations = new List<AccommodationReservation>();
+
+                using (var dbContext = new UserContext())
+                {
+                    accommodationReservations = dbContext.accommodationReservation
+                                                .Where(ar => ((start >= ar.BegginingDate && start <= ar.EndingDate) || (end >= ar.BegginingDate && end <= ar.EndingDate)) ||
+                                                             (ar.BegginingDate >= start && ar.BegginingDate <= end) || (ar.EndingDate >= start && (ar.EndingDate <= end))
+                                                       )
+                                               .Include(r => r.Accommodation).ThenInclude(a=>a.Location)
+                                               .Include(r => r.Guest)
+                                               .Where(t => t.Accommodation.Equals(accommodation))
+                                               .OrderBy(t=> t.BegginingDate)
+                                               .ToList();
+                }
+                return accommodationReservations;
+        
+        }
+
     }
 }

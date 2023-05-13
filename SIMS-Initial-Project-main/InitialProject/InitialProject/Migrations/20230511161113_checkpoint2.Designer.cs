@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230511161113_checkpoint2")]
+    partial class checkpoint2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -36,13 +38,7 @@ namespace InitialProject.Migrations
                     b.Property<int>("GuestLimit")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("LastRenovation")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("MinimumReservationDays")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("RecentlyRenovated")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
@@ -198,35 +194,6 @@ namespace InitialProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Location");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.Renovation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("End")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Start")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("accommodationId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("accommodationId");
-
-                    b.ToTable("Renovation");
                 });
 
             modelBuilder.Entity("InitialProject.Model.RenovationSuggestion", b =>
@@ -593,17 +560,6 @@ namespace InitialProject.Migrations
                     b.Navigation("Accommodation");
 
                     b.Navigation("Tour");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.Renovation", b =>
-                {
-                    b.HasOne("InitialProject.Model.Accommodation", "Accommodation")
-                        .WithMany()
-                        .HasForeignKey("accommodationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Accommodation");
                 });
 
             modelBuilder.Entity("InitialProject.Model.RenovationSuggestion", b =>

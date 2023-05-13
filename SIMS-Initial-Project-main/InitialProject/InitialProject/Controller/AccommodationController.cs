@@ -1,4 +1,5 @@
-﻿using InitialProject.Dto;
+﻿using InitialProject.AuxiliaryClass;
+using InitialProject.Dto;
 using InitialProject.Enumeration;
 using InitialProject.Interface;
 using InitialProject.Model;
@@ -68,6 +69,18 @@ namespace InitialProject.Controller
         public List<Accommodation> GetByReservationDays(int reservationDays)
         {
             return AccommodationService.GetByReservationDays(reservationDays);
+        }
+
+        public List<Accommodation> GetAllBy(string ownerUsername) {
+
+            return AccommodationService.GetAllBy(ownerUsername);
+        
+        }
+
+        public List<DateSuggestion> GetDateSuggestions(Accommodation accommodation, DateTime desiredStart, DateTime desiredEnd, TimeSpan desiredDuration) {
+
+            return AccommodationService.GetDateSuggestions(accommodation, desiredStart, desiredEnd, desiredDuration);
+        
         }
     }
 }

@@ -45,6 +45,39 @@ namespace InitialProject.Repository
             }
         }
 
+
+        public void UpdateLastRenovatedBy(Accommodation accommodation, DateTime lastRenovation)
+        {
+            List<Accommodation> ownerAccommodation = new();
+
+            using (UserContext db = new())
+            {
+                ownerAccommodation = db.accommodation.Where(t => t.Id.Equals(accommodation.Id))
+                    .Include(t => t.Location)
+                    .Include(t => t.Owner)
+                    .ToList();
+
+                ownerAccommodation.ForEach(t => t.LastRenovation = lastRenovation);
+                db.SaveChanges();
+            }
+        }
+
+        public List<Accommodation> GetAllBy(User owner)
+        {
+            List<Accommodation> accommodations = new();
+
+            using (UserContext db = new())
+            {
+                accommodations = db.accommodation
+                    .Include(t => t.Location)
+                    .Include(t => t.Owner)
+                    .Where(t => t.Owner.Equals(owner))
+                    .ToList();
+            }
+
+            return accommodations;
+        }
+
         public List<Accommodation> GetAll()
         {
             List<Accommodation> accommodations = new();

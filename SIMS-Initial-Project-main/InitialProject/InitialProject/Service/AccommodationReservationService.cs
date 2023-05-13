@@ -266,7 +266,15 @@ namespace InitialProject.Service
 
             return this.IAccommodationreservationRepository.GetAllCancelled(owner);
         }
-        
+
+        public List<AccommodationReservation> GetAllByDateInterval(Accommodation accommodation, DateTime start, DateTime end) {
+
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            reservations = IAccommodationreservationRepository.GetAllByDateInterval(accommodation, start, end);
+
+            return reservations;
+        }
+
 
 
     }

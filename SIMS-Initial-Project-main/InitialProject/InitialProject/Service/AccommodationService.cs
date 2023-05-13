@@ -1,4 +1,5 @@
-﻿using InitialProject.Contexts;
+﻿using InitialProject.AuxiliaryClass;
+using InitialProject.Contexts;
 using InitialProject.Controller;
 using InitialProject.Dto;
 using InitialProject.Enumeration;
@@ -8,8 +9,10 @@ using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Linq;
 
 namespace InitialProject.Service
@@ -20,6 +23,7 @@ namespace InitialProject.Service
         private LocationService LocationService;
         private ImageService ImageService;
         private UserService UserService;
+        private AccommodationReservationService AccommodationReservationService;
 
         public AccommodationService(IAccommodationRepository iAccommodationRepository)
         {
@@ -27,6 +31,7 @@ namespace InitialProject.Service
             this.LocationService = new(new LocationRepository());
             this.ImageService = new(new ImageRepository());
             this.UserService = new(new UserRepository());
+            this.AccommodationReservationService = new(new AccommodationReservationRepository());
 
         }
 
@@ -63,6 +68,13 @@ namespace InitialProject.Service
             }
 
             this.IAccommodationRepository.UpdateClassBy(owner, accommodationClass);
+        }
+
+        public List<Accommodation> GetAllBy(string ownerUsername)
+        {
+            User owner = UserService.GetBy(ownerUsername);
+
+            return IAccommodationRepository.GetAllBy(owner);
         }
 
         // Stajic
@@ -104,6 +116,83 @@ namespace InitialProject.Service
         public List<Accommodation> GetByReservationDays(int reservationDays)
         {
             return IAccommodationRepository.GetByReservationDays(reservationDays);
+        }
+
+        public List<DateSuggestion> GetDateSuggestions(Accommodation accommodation, DateTime desiredStart, DateTime desiredEnd, TimeSpan desiredDuration)
+        {
+
+            List<DateSuggestion> renovationDatesSuggestions = new List<DateSuggestion>();
+            List<AccommodationReservation> preservedRenovations = new List<AccommodationReservation>();
+
+            DateTime startPoint = desiredStart;
+            DateTime limit;
+            DateTime endPoint;
+            TimeSpan day = new System.TimeSpan(1, 0, 0, 0);
+
+            preservedRenovations = AccommodationReservationService.GetAllByDateInterval(accommodation, desiredStart, desiredEnd);
+
+            foreach (var reservation in preservedRenovations)
+            {
+                DateTime checkpoint = startPoint.Add(desiredDuration);
+
+                if (checkpoint <= desiredEnd)
+                {
+                    if (startPoint < reservation.BegginingDate)
+                    {                       
+                         endPoint = startPoint.Add(desiredDuration);
+
+                        if (endPoint < reservation.BegginingDate)
+                        {
+                            limit = reservation.BegginingDate.Subtract(day);
+
+                            while (endPoint <= limit) {
+                                //izvodljivo zbog ogranicenja u bazi da su ove rezervacije sortirane po datumu pocetka ASC
+                                DateSuggestion dateSuggestion = new DateSuggestion(startPoint, endPoint);
+                                renovationDatesSuggestions.Add(dateSuggestion);
+                                
+                                startPoint = startPoint.Add(day);
+                                endPoint = endPoint.Add(day);
+                            }
+
+                            startPoint = reservation.BegginingDate;  //izjednaci se sa pocetkom rezervacije,
+                                                            //da bi se sledecom selekcijom preskocila trenutna rezervacija
+                        }
+                        else
+                        {
+                            startPoint = reservation.BegginingDate; //ukoliko trajanje nije zadovoljeno, dopunimo datum da postane bas pocetak,
+                                                                    //kako bi se rezervacija preskocila
+                        }
+                    }
+
+                    //ukoliko je zakazana rezervacija bas kada je i potencijalni pocetak  renoviranja, preskocimo je
+                    //ali zapamtimo prvi sledeci datum nakon njenog zavrsetka
+                    //sada ce se taj datum ponasati kao pocetna tacka
+                    if (startPoint >= reservation.BegginingDate)
+                    {
+                        startPoint = reservation.EndingDate;
+                        startPoint = startPoint.Add(day);
+                    }
+                }
+            }
+
+            endPoint = startPoint.Add(desiredDuration);
+            //ukoliko su svi intervali izmedju rezervacija provereni, a i dalje postoji 
+            //dovoljno dugacak period do datuma kraja renoviranja i taj period se cuva kao predlog
+            while(endPoint <= desiredEnd) {
+                //podintervali
+                DateSuggestion dateSuggestion = new DateSuggestion(startPoint, endPoint);
+                renovationDatesSuggestions.Add(dateSuggestion);
+
+                startPoint = startPoint.Add(day);
+                endPoint = endPoint.Add(day);
+            }
+
+            return renovationDatesSuggestions;
+        }
+
+        public void UpdateLastRenovatedBy(Accommodation accommodation, DateTime lastRenovation) {
+
+            this.IAccommodationRepository.UpdateLastRenovatedBy(accommodation, lastRenovation);
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest1"
         mc:Ignorable="d"
-        Title="AccommodationReservate" Height="560" Width="800">
+        Title="AccommodationReservate" Height="560" Width="900">
     <Grid Margin="10,0,0,-6">
         <ScrollViewer Margin="0,0,0,11">
             <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding AccommodationsToShow}" Height="Auto" Width="Auto" Margin="307,0,10,0" VerticalAlignment="Top" 
@@ -16,13 +16,14 @@
                     <DataGridTextColumn Header="Guest Limit" Binding="{Binding GuestLimit}"/>
                     <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
                     <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}"/>
-                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
+                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" />
+                    <DataGridTextColumn Header="Recently Renovated" Binding="{Binding RecentlyRenovated}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
 
         <Grid Margin="0,0,483,292" DataContext="{Binding ElementName=AccommodationsGrid, Path=SelectedItem}">
-            <Border BorderBrush="Black" BorderThickness="1">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,103,0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -124,7 +125,7 @@
         </Grid>
 
         <Grid Margin="0,263,483,11" >
-            <Border BorderBrush="Black" BorderThickness="1">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,103,0">
                 <Grid Margin="0,12,0,-1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
