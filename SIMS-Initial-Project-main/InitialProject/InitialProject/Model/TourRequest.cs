@@ -25,6 +25,10 @@ public class TourRequest
     [AllowNull]
     public DateTime SelectedDate { get; set; }
 
+    [ForeignKey("TouristId")]
+    public User? Tourist { get; set; }
+
+
     public TourRequest()
     {
         State = TourRequestState.Pending;
