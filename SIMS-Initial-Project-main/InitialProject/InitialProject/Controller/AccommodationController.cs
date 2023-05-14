@@ -82,5 +82,15 @@ namespace InitialProject.Controller
             return AccommodationService.GetDateSuggestions(accommodation, desiredStart, desiredEnd, desiredDuration);
         
         }
+
+        public List<Statistics> GetAnnualStatisticsBy(Accommodation accommodation) {
+
+             return this.AccommodationService.GetAnnualStatisticsBy(accommodation);
+        }
+
+        public List<Statistics> GetMonthsStatisticsBy(int year, Accommodation accommodation) {
+
+            return this.AccommodationService.GetMonthsStatisticsBy(year, accommodation);
+        }
     }
 }

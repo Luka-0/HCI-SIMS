@@ -70,6 +70,7 @@ namespace InitialProject.View.Owner
             DateSuggestion chosenDate = dateSuggestions.SelectedItem as DateSuggestion;
 
             Accommodation selectedAccommodation = ownersAccommodations.SelectedItem as Accommodation;
+       
 
             TimeSpan duration = new System.TimeSpan(Convert.ToInt32(duration_days.Text), 0, 0, 0);
 
@@ -83,5 +84,7 @@ namespace InitialProject.View.Owner
             }
 
         }
+
+        
     }
 }

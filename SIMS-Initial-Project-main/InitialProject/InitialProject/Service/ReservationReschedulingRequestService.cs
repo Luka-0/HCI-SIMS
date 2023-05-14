@@ -99,6 +99,18 @@ namespace InitialProject.Service
         {
             return IReservationReschedulingRequestRepository.GetAllByUser(id);
         }
+
+
+        public int GetCountBy(int year, Accommodation accommodation) {
+
+            return IReservationReschedulingRequestRepository.GetCountBy(year, accommodation);
+        }
+
+        public int GetCountBy(int year, int month, Accommodation accommodation)
+        {
+
+            return IReservationReschedulingRequestRepository.GetCountBy(year, month, accommodation);
+        }
     }
  }
     

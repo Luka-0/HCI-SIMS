@@ -15,6 +15,14 @@ namespace InitialProject.Interface
         public List<AccommodationReservation> GetAllBetween(DateTime startingDate, DateTime endingDate, User owner);
         public void UpdateScheduledDatesBy(int id, DateTime newBegginingDate, DateTime newEndingDate);
         public List<AccommodationReservation> GetAllCancelled(User owner);
+        public List<AccommodationReservation> GetAllByDateInterval(Accommodation accommodation, DateTime start, DateTime end);
+        public List<int> GetReservationYearsBy(Accommodation accommodation);
+        public int GetCountBy(int year, Accommodation accommodation);
+        public int GetCountBy(int year, int month, Accommodation accommodation);
+        public int GetCancellationCountBy(int year, Accommodation accommodation);
+        public int GetCancellationCountBy(int year, int month, Accommodation accommodation);
+        public double GetOccupancyBy(int year, Accommodation accommodation);
+        public double GetOccupancyBy(int year, int month, Accommodation accommodation);
 
          // Stajic
         public void Save(AccommodationReservation accommodationReservation);
@@ -24,7 +32,6 @@ namespace InitialProject.Interface
         public void Delete(AccommodationReservation accommodationReservation);
         public void LogicalyDelete(AccommodationReservation accommodationReservation);
         public List<AccommodationReservation> GetDuringLastYearBy(User user);
-        public List<AccommodationReservation> GetAllByDateInterval(Accommodation accommodation, DateTime start, DateTime end);
-
+       
         }
 }

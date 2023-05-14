@@ -116,6 +116,6 @@ namespace InitialProject.Model
             this.CancellationDeadline = accommodation.CancellationDeadline;
             this.Available = accommodation.Available;
             this.Class = "B";
-        }   
+        }
     }
 }

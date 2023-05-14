@@ -5,26 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Owner" Height="700" Width="1500" WindowStartupLocation ="CenterScreen">
+        Title="Owner" Height="810" Width="1500" WindowStartupLocation ="CenterScreen">
     <Grid Margin="0,0,0,-49" Background="DimGray">
         <Grid.RowDefinitions>
-            <RowDefinition Height="311*"/>
-            <RowDefinition Height="422*"/>
+            <RowDefinition/>
+            <RowDefinition Height="508.38"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="13*"/>
             <ColumnDefinition Width="112*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Header="DASHBOARD"  Margin="20,0,1156,0" FontSize="36" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Top"  FontWeight="Bold" Foreground="White" Height="620"/>
-        <Button Content="Rate Guests" HorizontalAlignment="Left" Height="44" Margin="36,254,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button_Click_1" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" />
-        <Button Content="Create Accommodation" HorizontalAlignment="Left" Height="50" Margin="36,185,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button_Click" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" />
-        <Frame x:Name="OperationsContainer" Height="723" Margin="213,34,60,0" VerticalAlignment="Top" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.RowSpan="2"/>
-        <Button Content="Main Page" HorizontalAlignment="Left" Height="44" Margin="36,124,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button_Click_2" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" />
-        <Button Content="Reviews" HorizontalAlignment="Left" Height="50" Margin="36,6,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button3_Click" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.Row="1"/>
-        <Button Content="Rescheduling Requests" HorizontalAlignment="Left" Height="50" Margin="36,69,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button4_Click" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.Row="1"/>
-        <Button Content="Log Out" HorizontalAlignment="Left" Height="44" Margin="36,62,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="LogOut" Grid.ColumnSpan="2" Background="SeaGreen" Foreground="White" />
-        <Button Content="New Renovation" HorizontalAlignment="Left" Height="50" Margin="36,130,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button_Click_6" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.Row="1"/>
-        <Button Content="All Renovations" HorizontalAlignment="Left" Height="50" Margin="36,192,0,0" VerticalAlignment="Top" Width="277" FontSize="23" Click="Button_Click_7" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.Row="1"/>
+        <GroupBox Header="DASHBOARD"  Margin="20,0,1131,0" FontSize="36" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Top"  FontWeight="Bold" Foreground="White" Height="713"/>
+        <Button Content="Rate Guests" HorizontalAlignment="Left" Height="44" Margin="37,254,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_1" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" />
+        <Button Content="Create Accommodation" HorizontalAlignment="Left" Height="50" Margin="37,185,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" />
+        <Frame x:Name="OperationsContainer" Height="790" Margin="213,44,60,0" VerticalAlignment="Top" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.RowSpan="2"/>
+        <Button Content="Main Page" HorizontalAlignment="Left" Height="44" Margin="37,124,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_2" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" />
+        <Button Content="Reviews" HorizontalAlignment="Left" Height="50" Margin="37,313,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button3_Click" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.RowSpan="2"/>
+        <Button Content="Rescheduling Requests" HorizontalAlignment="Left" Height="50" Margin="37,63,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button4_Click" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.Row="1"/>
+        <Button Content="Log Out" HorizontalAlignment="Left" Height="44" Margin="37,62,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="LogOut" Grid.ColumnSpan="2" Background="SeaGreen" Foreground="White" />
+        <Button Content="New Renovation" HorizontalAlignment="Left" Height="50" Margin="37,128,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_6" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.Row="1"/>
+        <Button Content="All Renovations" HorizontalAlignment="Left" Height="50" Margin="36,192,0,0" VerticalAlignment="Top" Width="300" FontSize="23" Click="Button_Click_7" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.Row="1"/>
+        <Button x:Name="Statistics" Content="Statistics" HorizontalAlignment="Left" Height="50" Margin="37,255,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_8" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" Grid.Row="1"/>
 
     </Grid>
 </Window>

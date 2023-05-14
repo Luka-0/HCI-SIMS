@@ -5,13 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View.Owner"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="900"
+      d:DesignHeight="700" d:DesignWidth="900"
       Title="Renovations">
 
     <Grid>
-        <DataGrid x:Name="ownersAccommodations" d:ItemsSource="{d:SampleData ItemCount=5}"  FontSize="14"  CanUserAddRows="False" Margin="41,60,472,436"/>
-        <DataGrid x:Name="dateSuggestions" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="41,330,471,142" FontSize="24" MinColumnWidth="230"/>
-        <Label Content="Available dates - suggestions" HorizontalAlignment="Left" Margin="59,293,0,0" VerticalAlignment="Top" Width="379" Height="41" FontSize="18"/>
+        <DataGrid x:Name="ownersAccommodations" d:ItemsSource="{d:SampleData ItemCount=5}"  FontSize="14"  CanUserAddRows="False" Margin="41,60,472,473"/>
+        <DataGrid x:Name="dateSuggestions" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="41,360,471,132" FontSize="24" MinColumnWidth="230"/>
+        <Label Content="Available dates - suggestions" HorizontalAlignment="Left" Margin="62,322,0,0" VerticalAlignment="Top" Width="379" Height="41" FontSize="18"/>
         <Label Content="Select accommodation for renovation :" HorizontalAlignment="Left" Margin="59,10,0,0" VerticalAlignment="Top" Width="739" Height="33" FontSize="18"/>
         <TextBox x:Name="duration_days" HorizontalAlignment="Right" Margin="0,290,20,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="344" Height="28" TextChanged="duration_days_TextChanged" FontSize="20"/>
         <TextBox x:Name="description" HorizontalAlignment="Right" Margin="0,367,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="344" Height="28"  FontSize="20"/>

@@ -13,6 +13,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xml.Linq;
 
 namespace InitialProject.Service
@@ -23,8 +24,10 @@ namespace InitialProject.Service
         private LocationService LocationService;
         private ImageService ImageService;
         private UserService UserService;
-        private AccommodationReservationService AccommodationReservationService;
 
+        private AccommodationReservationService AccommodationReservationService;
+        private ReservationReschedulingRequestService ReservationReschedulingRequestService;
+        private RenovationSuggestionService RenovationSuggestionService;
         public AccommodationService(IAccommodationRepository iAccommodationRepository)
         {
             this.IAccommodationRepository = iAccommodationRepository;
@@ -32,7 +35,8 @@ namespace InitialProject.Service
             this.ImageService = new(new ImageRepository());
             this.UserService = new(new UserRepository());
             this.AccommodationReservationService = new(new AccommodationReservationRepository());
-
+            this.ReservationReschedulingRequestService = new(new ReservationReschedulingRequestRepository());
+            this.RenovationSuggestionService = new(new RenovationSuggestionRepository());
         }
 
         public void Save(Accommodation accommodation, string cityName, List<String> images, string ownerUsername)
@@ -188,6 +192,121 @@ namespace InitialProject.Service
             }
 
             return renovationDatesSuggestions;
+        }
+
+        public List<Statistics> GetAnnualStatisticsBy(Accommodation accommodation) { 
+        
+            List<Statistics> yearStatistics = new List<Statistics>();
+
+            List<int> yearsSample = new List<int>();
+
+            int reservationCount, cancellationCount, reschedulingCount, renovationSuggestionCount;
+            
+            double occupancy;
+
+
+            yearsSample = AccommodationReservationService.GetReservationYearsBy(accommodation);
+
+            yearsSample.Sort();
+
+            foreach (int year in yearsSample) {
+
+                reservationCount = AccommodationReservationService.GetCountBy(year, accommodation);
+
+                cancellationCount = AccommodationReservationService.GetCancellationCountBy(year, accommodation);
+
+                reschedulingCount = ReservationReschedulingRequestService.GetCountBy(year, accommodation);
+
+                renovationSuggestionCount = RenovationSuggestionService.GetCountBy(year, accommodation);
+
+                occupancy = AccommodationReservationService.GetOccupancyBy(year, accommodation);
+
+
+                Statistics statistics = new Statistics(reservationCount, year.ToString(), cancellationCount, reschedulingCount, renovationSuggestionCount, occupancy);
+
+                yearStatistics.Add(statistics);
+            }
+           
+            return yearStatistics;
+        }
+
+
+        public List<Statistics> GetMonthsStatisticsBy(int year, Accommodation accommodation)
+        {
+
+            List<Statistics> yearStatistics = new List<Statistics>();
+
+            int reservationCount, cancellationCount, reschedulingCount, renovationSuggestionCount;
+
+            double occupancy;
+
+            for (int month = 1; month <= 12; month++)
+            {
+                reservationCount = AccommodationReservationService.GetCountBy(year, month,accommodation);
+
+                cancellationCount = AccommodationReservationService.GetCancellationCountBy(year, month, accommodation);
+
+                reschedulingCount = ReservationReschedulingRequestService.GetCountBy(year, month, accommodation);
+
+                renovationSuggestionCount = RenovationSuggestionService.GetCountBy(year, month, accommodation);
+
+                occupancy = AccommodationReservationService.GetOccupancyBy(year, month, accommodation);
+
+                Statistics statistics = new Statistics(reservationCount, ToMonth(month), cancellationCount, reschedulingCount, renovationSuggestionCount, occupancy);
+
+                yearStatistics.Add(statistics);
+
+            }
+
+            return yearStatistics;
+        }
+
+        private string ToMonth(int month) {
+
+            if (month == 1) {
+                return "JAN";
+            }
+            if (month == 2)
+            {
+                return "FEB";
+            }
+            if (month == 3)
+            {
+                return "MAR";
+            }
+            if (month == 4)
+            {
+                return "APR";
+            }
+            if (month == 5)
+            {
+                return "MAY";
+            }
+            if (month == 6)
+            {
+                return "JUN";
+            }
+            if (month == 7)
+            {
+                return "JULY";
+            }
+            if (month == 8)
+            {
+                return "AUG";
+            }
+            if (month == 9)
+            {
+                return "SEP";
+            }
+            if (month == 10)
+            {
+                return "OCT";
+            }
+            if (month == 11)
+            {
+                return "NOV";
+            }
+            return "DEC";
         }
 
     }

@@ -119,5 +119,48 @@ namespace InitialProject.Repository
 
             return reservationReschedulingRequests;
         }
+
+
+        public int GetCountBy(int year, Accommodation accommodation)
+        {
+
+            List<ReservationReschedulingRequest> annualReschedulingReguest = new List<ReservationReschedulingRequest>();
+
+            using (var dbContext = new UserContext())
+            {
+                annualReschedulingReguest = dbContext.reservationReschedulingRequest
+                                            .Include(r => r.Reservation)
+                                            .ThenInclude(r => r.Accommodation)
+                                            .Where(r => r.Reservation.BegginingDate.Year == year)
+                                            .Where(r => r.Reservation.Accommodation.Equals(accommodation))
+                                            .Where(r=>r.State.Equals(RequestState.Approved))
+                                            .ToList();
+                                            
+            }
+
+            return annualReschedulingReguest.Count;
+        }
+
+        public int GetCountBy(int year, int month, Accommodation accommodation)
+        {
+
+            List<ReservationReschedulingRequest> annualReschedulingReguest = new List<ReservationReschedulingRequest>();
+
+            using (var dbContext = new UserContext())
+            {
+                annualReschedulingReguest = dbContext.reservationReschedulingRequest
+                                            .Include(r => r.Reservation)
+                                            .ThenInclude(r => r.Accommodation)
+                                            .Where(r => r.Reservation.BegginingDate.Year == year && r.Reservation.BegginingDate.Month == month)
+                                            .Where(r => r.Reservation.Accommodation.Equals(accommodation))
+                                            .Where(r => r.State.Equals(RequestState.Approved))
+                                            .ToList();
+
+            }
+
+            return annualReschedulingReguest.Count;
+        }
     }
+
+
 }

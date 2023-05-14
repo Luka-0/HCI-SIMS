@@ -284,6 +284,43 @@ namespace InitialProject.Service
             return reservations;
         }
 
+        public List<int> GetReservationYearsBy(Accommodation accommodation) {
+
+            return this.IAccommodationreservationRepository.GetReservationYearsBy(accommodation);
+        
+        }
+
+        public int GetCountBy(int year, Accommodation accommodation) {
+
+            return this.IAccommodationreservationRepository.GetCountBy(year, accommodation);
+        }
+
+        public int GetCountBy(int year, int month, Accommodation accommodation){
+
+            return this.IAccommodationreservationRepository.GetCountBy(year, month, accommodation);
+        }
+
+        public int GetCancellationCountBy(int year, Accommodation accommodation) {
+
+            return this.IAccommodationreservationRepository.GetCancellationCountBy(year, accommodation);
+        }
+
+        public int GetCancellationCountBy(int year, int month, Accommodation accommodation)
+        {
+
+            return this.IAccommodationreservationRepository.GetCancellationCountBy(year, month, accommodation);
+        }
+
+        public double GetOccupancyBy(int year, Accommodation accommodation) {
+
+            return this.IAccommodationreservationRepository.GetOccupancyBy(year, accommodation);
+        }
+
+        public double GetOccupancyBy(int year, int month, Accommodation accommodation)
+        {
+
+            return this.IAccommodationreservationRepository.GetOccupancyBy(year, month, accommodation);
+        }
 
 
     }

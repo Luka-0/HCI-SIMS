@@ -80,5 +80,10 @@ namespace InitialProject.View
         {
             OperationsContainer.Content = new AllRenovations(Username);
         }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new Statistics(Username);
+        }
     }
 }
