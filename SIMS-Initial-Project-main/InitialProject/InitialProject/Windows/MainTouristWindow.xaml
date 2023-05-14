@@ -1,0 +1,18 @@
+﻿<Window x:Class="InitialProject.Windows.MainTouristWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.Windows"
+        mc:Ignorable="d"
+        Title="MainTouristWindow" Height="750" Width="430">
+    <Grid>
+        <StackPanel VerticalAlignment="Center">
+            <Button Content="Create Tour Request" Width="200" Height="50" Margin="10"/>
+            <Button Content="Prva" Width="200" Height="50" Margin="10"/>
+            <Button Content="Prva" Width="200" Height="50" Margin="10"/>
+            <Button Content="Prva" Width="200" Height="50" Margin="10"/>
+            <Button Content="Prva" Width="200" Height="50" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</Window>
