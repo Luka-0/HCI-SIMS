@@ -14,16 +14,17 @@
 
         <Grid Grid.Row="0">
             <StackPanel Orientation="Vertical">
-                <Button Content="Prvo" Height="50"/>
-                <Button Content="Prvo" Height="50"/>
-                <Button Content="Prvo" Height="50"/>
-                <Button Content="Prvo" Height="50"/>
-                <Button Content="Prvo" Height="50"/>
-                <Button Content="Prvo" Height="50"/>
-                <Button Content="Prvo" Height="50"/>
-                <Button Content="Prvo" Height="50"/>
-                <Button Content="Prvo" Height="50"/>
-                <Button Content="Prvo" Height="50"/>
+                <Button Content="Prikaz, pretraga, rezervacija ture" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="showAndSearchTour"/>
+                <Button Content="Pracenje ture" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
+                <Button Content="Ocenjivanje ture" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
+                <Button Content="Kreiraj zahtev za turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="tourRequest"/>
+                <Button Content="Pregled zahteva za turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
+                <Button Content="Statistika o zahtevima za ture" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
+                <Button Content="Kreiraj zahtev za slozenu turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
+                <Button Content="Pregled zahteva za slozenu turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
+                <Button Content="Pregled vaucera" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
+                <Button Content="Statistika o turama" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
+
             </StackPanel>
         </Grid>
 

@@ -10,7 +10,8 @@ namespace InitialProject.ViewModel
 {
     public class MainTouristWindowViewModel : BindableBase
     {
-        public MyICommand<string> NavCommand { get; private set; }
+        public MyICommand<string> NavCommand { get; set; }
+        public string HeaderTitle { get; set; }
 
         private TouristHomeViewModel homeViewModel = new TouristHomeViewModel(); 
         private ShowAndSearchTourViewModel showAndSearchTour = new ShowAndSearchTourViewModel();
@@ -22,8 +23,9 @@ namespace InitialProject.ViewModel
 
         public MainTouristWindowViewModel()
         {
-            NavCommand = new MyICommand<string>(OnNav);
             CurrentViewModel = homeViewModel;
+            NavCommand = new MyICommand<string>(OnNav);
+            HeaderTitle = "NASLOV";
         }
 
         public BindableBase CurrentViewModel
@@ -33,6 +35,11 @@ namespace InitialProject.ViewModel
             {
                 SetProperty(ref currentViewModel, value);
             }
+        }
+
+        public void SetNewViewModel(BindableBase newViewModel)
+        {
+            CurrentViewModel = newViewModel;
         }
 
         private void OnNav(string destination)

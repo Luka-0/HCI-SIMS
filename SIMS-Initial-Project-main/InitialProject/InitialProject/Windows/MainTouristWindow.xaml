@@ -9,9 +9,6 @@
         mc:Ignorable="d"
         Title="MainTouristWindow" Height="750" Width="430">
     
-    <Window.DataContext>
-        <viewModel:MainTouristWindowViewModel/>
-    </Window.DataContext>
     
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:TouristHomeViewModel}">
@@ -30,13 +27,9 @@
             <views:NavigationView/>
         </DataTemplate>
     </Window.Resources>
-    
-    
+
+
     <Grid>
-
-        
         <ContentControl Content="{Binding CurrentViewModel}"/>
-
-
     </Grid>
 </Window>

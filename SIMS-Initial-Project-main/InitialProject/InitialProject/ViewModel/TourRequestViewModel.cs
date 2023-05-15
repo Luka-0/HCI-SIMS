@@ -8,6 +8,10 @@ namespace InitialProject.ViewModel
 {
     public class TourRequestViewModel : BindableBase
     {
-
+        private string headerTitle = "Moj title jebote!";
+        public string HeaderTitle
+        {
+            get { return headerTitle; }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using InitialProject.ViewModel;
+﻿using InitialProject.Commands;
+using InitialProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,9 @@ namespace InitialProject.Windows
         public MainTouristWindow()
         {
             InitializeComponent();
-           // this.DataContext = new MainTouristWindowViewModel();
+            this.DataContext = new MainTouristWindowViewModel();
         }
+
+        
     }
 }

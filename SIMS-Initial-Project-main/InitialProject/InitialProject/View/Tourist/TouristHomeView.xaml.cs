@@ -26,9 +26,10 @@ namespace InitialProject.View.Tourist
         public TouristHomeView()
         {
             InitializeComponent();
-           // this.DataContext = new MainTouristWindowViewModel();
-           public MyICommand<string> NavCommand { get; private set; }
+            this.DataContext = new MainTouristWindowViewModel();
 
-    }
+
+
+        }
     }
 }

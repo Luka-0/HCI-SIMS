@@ -8,12 +8,15 @@ namespace InitialProject.ViewModel
 {
     public class TouristHomeViewModel : BindableBase
     {
-        private string homeViewStartMessage = "Hello!";
+        private string homeViewStartMessage = "HelloOOOOOOOOOOOOOOOOO!";
         public string TouristHomeViewModelStartMessage
         {
             get{ return homeViewStartMessage; }
         }
 
+      
+
+        
 
     }
 }
