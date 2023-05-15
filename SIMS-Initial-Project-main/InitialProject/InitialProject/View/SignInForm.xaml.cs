@@ -9,6 +9,7 @@ using InitialProject.Enumeration;
 using InitialProject.View;
 using InitialProject.Contexts;
 using InitialProject.Controller;
+using InitialProject.Windows;
 
 namespace InitialProject
 {
@@ -78,8 +79,12 @@ namespace InitialProject
                             {
                                 MessageBox.Show("Guest2: " + user.Username + " is  logged in.");
 
-                                Guest2View view = new Guest2View(); 
-                                view.Show();
+                                //Guest2View view = new Guest2View(); 
+                                //view.Show();
+
+                                MainTouristWindow window = new MainTouristWindow(); 
+                                window.Show();
+
                                 this.Close();
                                 break;
                             }

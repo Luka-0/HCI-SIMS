@@ -1,5 +1,4 @@
-﻿using InitialProject.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InitialProject.Windows
+namespace InitialProject.View.Tourist
 {
     /// <summary>
-    /// Interaction logic for MainTouristWindow.xaml
+    /// Interaction logic for NavigationView.xaml
     /// </summary>
-    public partial class MainTouristWindow : Window
+    public partial class NavigationView : UserControl
     {
-        public MainTouristWindow()
+        public NavigationView()
         {
             InitializeComponent();
-           // this.DataContext = new MainTouristWindowViewModel();
         }
     }
 }

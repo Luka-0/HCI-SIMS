@@ -1,6 +1,9 @@
-﻿using InitialProject.ViewModel;
+﻿using InitialProject.Controller;
+using InitialProject.ViewModel;
+using InitialProject.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,19 +14,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InitialProject.Windows
+namespace InitialProject.View.Tourist
 {
     /// <summary>
-    /// Interaction logic for MainTouristWindow.xaml
+    /// Interaction logic for ShowAndSearchTourView.xaml
     /// </summary>
-    public partial class MainTouristWindow : Window
+    public partial class ShowAndSearchTourView : UserControl
     {
-        public MainTouristWindow()
+
+
+        public ShowAndSearchTourView()
         {
             InitializeComponent();
-           // this.DataContext = new MainTouristWindowViewModel();
+            this.DataContext = new ShowAndSearchTourViewModel();
         }
+
+  
+
     }
 }

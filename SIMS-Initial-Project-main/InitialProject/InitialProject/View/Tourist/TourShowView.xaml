@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="InitialProject.View.Tourist.TourShowView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.View.Tourist"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="430">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock Text="Prikaz ture" FontSize="24" Padding="20 20 10 10"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Ime" Grid.Column="0" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+            <TextBlock Text="Lor" Grid.Column="1" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Opis" Grid.Column="0" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+            <TextBlock Text="Lor" Grid.Column="1" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Lokacija" Grid.Column="0" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+            <TextBlock Text="Lorem" Grid.Column="1" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Datum" Grid.Column="0" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+            <TextBlock Text="Lorem" Grid.Column="1" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Jezik" Grid.Column="0" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+            <TextBlock Text="Lorem" Grid.Column="1" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+        </Grid>
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Trajanje" Grid.Column="0" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+            <TextBlock Text="Lorem" Grid.Column="1" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 10 0 0"/>
+        </Grid>
+
+        <Grid Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="&lt;" Width="30" Height="30" Margin="20 0 0 0" Click="Button_Click_1"/> 
+            <Image x:Name="slika" Grid.Column="1" Source="D:\\rozga.jpg" Width="300" Height="250" Margin="0 20 0 0"/>
+            <Button Grid.Column="2" Content="&gt;" Width="30" Height="30" Margin="0 0 20 0" Click="Button_Click"/> 
+        </Grid>
+
+        <Grid Grid.Row="8">
+            <Button Width="200" Height="40" Content="Rezervacija" Margin="0 50 0 0"/>
+        </Grid>
+        
+        <Grid Grid.Row="9">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Width="215" Height="30" Margin="0 40 0 0">Pocetna</Button>
+            <Button Grid.Column="1" Width="215" Margin="0 40 0 0">Nazad</Button>
+        </Grid>
+
+    </Grid>
+</UserControl>
