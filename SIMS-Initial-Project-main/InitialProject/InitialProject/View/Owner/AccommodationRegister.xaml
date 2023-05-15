@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="990"
+      d:DesignHeight="700" d:DesignWidth="990"
       Title="AccommodationRegister">
 
     <Grid>
@@ -34,7 +34,7 @@
         <TextBox x:Name="suspensionDays" HorizontalAlignment="Left" Height="42" Margin="675,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" FontSize="24"/>
         <TextBox x:Name="url" HorizontalAlignment="Left" Height="36" Margin="246,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="374" FontSize="24"/>
         <Label Content="Image URL: " HorizontalAlignment="Left" Height="53" Margin="20,374,0,0" VerticalAlignment="Top" Width="236" FontSize="26"/>
-        <Button x:Name="RegisterAccommodation" Content="create" HorizontalAlignment="Left" Height="44" Margin="246,499,0,0" VerticalAlignment="Top" Width="734" FontSize="25" Click="RegisterAccommodation_Click"/>
+        <Button x:Name="RegisterAccommodation" Content="create" HorizontalAlignment="Left" Height="44" Margin="246,555,0,0" VerticalAlignment="Top" Width="734" FontSize="25" Click="RegisterAccommodation_Click"/>
         <ListBox x:Name="urls" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="813,35,6,260"/>
         <Button x:Name="AddUrl" Content="add to list" HorizontalAlignment="Left" Height="35" Margin="642,381,0,0" VerticalAlignment="Top" Width="132" FontSize="20" Click="AddUrl_Click"/>
         <Label Content="Added URLs: " HorizontalAlignment="Left" Height="39" Margin="809,-2,0,0" VerticalAlignment="Top" Width="171" FontSize="20"/>

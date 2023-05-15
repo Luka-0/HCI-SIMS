@@ -17,6 +17,8 @@ namespace InitialProject.Interface
         public void UpdateWasNotifiedBy(int id, bool wasNotified);
         public ReservationReschedulingRequest GetBy(int id);
         public List<ReservationReschedulingRequest> GetAllByUser(int id);
+        public int GetCountBy(int year, Accommodation accommodation);
+        public int GetCountBy(int year, int month, Accommodation accommodation);
 
     }
 }

@@ -4,6 +4,7 @@ using InitialProject.Enumeration;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.View.Owner;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,9 @@ namespace InitialProject.View.Guest1
         public ObservableCollection<Accommodation> AccommodationsToShow { get; set; }
         private List<StartEndDateDto> DatesToChose { get; set; }
         private User User { get; set; }
+
+        //kt3 - vlasnik - deo funkcionalnosti zakazivanja renoviranja
+        private readonly RenovationController RenovationController = new RenovationController();
         
         public AccommodationReservate(User user)
         {
@@ -44,7 +48,9 @@ namespace InitialProject.View.Guest1
             DataContext = this;
 
             List<Accommodation> allAccommodations = AccommodationController.GetAll();
-            if(allAccommodations.Count == 0)
+            DatesToChose = new List<StartEndDateDto>();
+
+            if (allAccommodations.Count == 0)
             {
                 MessageBox.Show("There are currently no Accommodations to look at :(");
                 this.Close();
@@ -105,10 +111,10 @@ namespace InitialProject.View.Guest1
         private void InitializeDatesComboBox()
         {
             OfferedDatesCB.Items.Clear();
-
+       
             foreach (StartEndDateDto t in DatesToChose)
             {
-                OfferedDatesCB.Items.Add(t.StartingDate.Date.ToString() + t.EndingDate.Date.ToString());
+                OfferedDatesCB.Items.Add(t.StartingDate.Date.ToString() + t.EndingDate.Date.ToString());         
             }
 
             OfferedDatesCB.SelectedIndex = 0;
@@ -131,7 +137,12 @@ namespace InitialProject.View.Guest1
             int daysToStay = int.Parse(ReservatingDaysTB.Text);
             Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
 
-            if(StartingDatePicker.SelectedDate == null || EndingDatePicker.SelectedDate == null)
+            //dodatak
+            List<StartEndDateDto> availableDates = new List<StartEndDateDto>();
+            List<Renovation> existingRenovations = new List<Renovation>();
+
+
+            if (StartingDatePicker.SelectedDate == null || EndingDatePicker.SelectedDate == null)
             {
                 MessageBox.Show("Please select dates first");
                 return;
@@ -142,8 +153,23 @@ namespace InitialProject.View.Guest1
 
             if (IsViolatingAnyUIControl(startDate, endDate, accommodation)) return;
 
-            DatesToChose = AccommodationReservationController.GetAvailableDates(accommodation, startDate, endDate, daysToStay);
-            if (DatesToChose == null)
+            availableDates = AccommodationReservationController.GetAvailableDates(accommodation, startDate, endDate, daysToStay);
+
+            if (availableDates != null) {
+
+                //KT3 - Vlasnik: dodatno ogranicenje da predlozeni datumi nisu datumi zakazanog renoviranja
+                foreach (StartEndDateDto t in availableDates)
+                {
+                    existingRenovations = RenovationController.GetAllBetweenBy(accommodation, t.StartingDate, t.EndingDate);
+
+                    if (existingRenovations.Count == 0)
+                    {
+                        DatesToChose.Add(t);
+                    }
+                }
+            }
+
+            if (DatesToChose == null || DatesToChose.Count == 0)
             {
                 DatesToChose = AccommodationReservationController.FindOtherDates(endDate, accommodation, daysToStay);
             }

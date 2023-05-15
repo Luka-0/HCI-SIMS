@@ -1,5 +1,6 @@
 ﻿using InitialProject.Controller;
 using InitialProject.Model;
+using InitialProject.View.Owner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +20,22 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for OwnerView.xaml
     /// </summary>
-    public partial class Owner : Window
+    public partial class OwnerPage : Window
     {
         private string Username;
 
-        public Owner(string username)
+        public OwnerPage(string username)
         {
             this.Username = username;
 
             InitializeComponent();
 
             OperationsContainer.Content = new Notifications(username);
+
+            //System.DateTime today = System.DateTime.Now;
+            //System.TimeSpan duration = new System.TimeSpan(36, 0, 0, 0);
+            //System.DateTime answer = today.Add(duration);
+            //MessageBox.Show(answer.ToString());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -63,6 +69,21 @@ namespace InitialProject.View
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             this.Close();
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+              OperationsContainer.Content = new Renovations(Username);
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new AllRenovations(Username);
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new Statistics(Username);
         }
     }
 }
