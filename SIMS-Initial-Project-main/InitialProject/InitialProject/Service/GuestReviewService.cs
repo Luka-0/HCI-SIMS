@@ -29,9 +29,9 @@ namespace InitialProject.Service
             IGuestReviewRepository.Save(review);
 
             var db = new UserContext();
-            var record = db.guestReview.Find(review.Id);   
+            var registrationReview = db.guestReview.Find(review.Id);
 
-            record.Reservation = AccommodationReservationService.GetBy(reservationId);
+            registrationReview.Reservation = AccommodationReservationService.GetBy(reservationId);
 
             db.SaveChanges();
         }

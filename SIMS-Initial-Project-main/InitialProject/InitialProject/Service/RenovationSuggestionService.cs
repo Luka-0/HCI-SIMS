@@ -22,5 +22,15 @@ namespace InitialProject.Service
             IRenovationSuggestionRepository.Save(renovationSuggestion);
         }
 
+        public int GetCountBy(int year, Accommodation accommodation) {
+
+            return this.IRenovationSuggestionRepository.GetCountBy(year, accommodation);
+        }
+
+        public int GetCountBy(int year, int month, Accommodation accommodation)
+        {
+
+            return this.IRenovationSuggestionRepository.GetCountBy(year, month, accommodation);
+        }
     }
 }

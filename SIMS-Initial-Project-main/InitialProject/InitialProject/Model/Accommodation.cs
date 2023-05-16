@@ -32,6 +32,38 @@ namespace InitialProject.Model
         public User? Owner { get; set; }
 
         public string Class { get; set; }
+        public bool RecentlyRenovated { get; set; }
+
+        private DateTime _lastRenovation;
+        public DateTime LastRenovation
+        {
+            get { return _lastRenovation; }
+
+            set
+            {
+                _lastRenovation = value;
+
+                if (LastRenovation != default(DateTime)) {                 
+
+                    if (DateTime.UtcNow <= LastRenovation.Add(new TimeSpan(366, 0, 0, 0)))
+                    {
+                        if (LastRenovation <= DateTime.UtcNow)// < == > if(finished)
+                        {
+                            this.RecentlyRenovated = true;
+                        }
+                        else {
+                            this.RecentlyRenovated = false;
+                        }
+                    }
+                    else {
+                        this.RecentlyRenovated = false;
+                    }
+                }
+                else {
+                    this.RecentlyRenovated = false;
+                }
+            }
+        }
 
         public Accommodation()
         {
@@ -85,7 +117,5 @@ namespace InitialProject.Model
             this.Available = accommodation.Available;
             this.Class = "B";
         }
-
-
     }
 }
