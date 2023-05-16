@@ -13,6 +13,7 @@
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\hamburger.png" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="View\Guest1\tooltip.png" />
   </ItemGroup>
@@ -41,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\hamburger.png" />
     <Resource Include="View\Guest1\tooltip.png" />
   </ItemGroup>
 

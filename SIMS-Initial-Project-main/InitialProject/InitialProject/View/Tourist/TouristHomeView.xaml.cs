@@ -1,4 +1,7 @@
-﻿using System;
+﻿using InitialProject.Commands;
+using InitialProject.ViewModel;
+using InitialProject.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +19,17 @@ using System.Windows.Shapes;
 namespace InitialProject.View.Tourist
 {
     /// <summary>
-    /// Interaction logic for VoucherViewPage.xaml
+    /// Interaction logic for TouristHomeView.xaml
     /// </summary>
-    public partial class VoucherViewPage : Page
+    public partial class TouristHomeView : UserControl
     {
-        public VoucherViewPage()
+        public TouristHomeView()
         {
             InitializeComponent();
+            this.DataContext = new MainTouristWindowViewModel();
+
+
+
         }
     }
 }
