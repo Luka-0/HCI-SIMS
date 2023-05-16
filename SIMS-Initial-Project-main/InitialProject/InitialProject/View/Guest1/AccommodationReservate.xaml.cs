@@ -127,7 +127,7 @@ namespace InitialProject.View.Guest1
                 if(User.BonusPoints > 0)
                 {
                     UserController.UpdateBy(User.Id, true, User.BonusPoints - 1);
-                    MessageBox.Show("One bonus point was spent which leaves you with " + User.BonusPoints.ToString());
+                    MessageBox.Show("One bonus point was spent which leaves you with " + (User.BonusPoints - 1).ToString());
                 }
             }
         }
@@ -206,6 +206,7 @@ namespace InitialProject.View.Guest1
 
                 return;
             }
+
             MessageBox.Show("Saving was UNsuccesful");
 
         }

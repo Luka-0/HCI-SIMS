@@ -25,6 +25,7 @@ namespace InitialProject.Model
             Password = "default";
 
             SuperTitle = false;
+            SuperTitleValidTill = DateTime.Now;
             BonusPoints = 0;
         }
 
@@ -34,6 +35,7 @@ namespace InitialProject.Model
             Password = password;
 
             SuperTitle = false;
+            SuperTitleValidTill = DateTime.Now;
             BonusPoints = 0;
         }
 

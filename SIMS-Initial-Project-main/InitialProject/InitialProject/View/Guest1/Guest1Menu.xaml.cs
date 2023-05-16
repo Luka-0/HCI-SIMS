@@ -62,25 +62,25 @@ namespace InitialProject.View
                 List<AccommodationReservation> reservations = AccommodationReservationController.GetDuringLastYearBy(User);
                 if (reservations.Count > 9)
                 {
-                    UserController.UpdateBy(User.Id, true, 5);
-                    MessageBox.Show("You have become a SUEPER GUEST");
+                    UserController.UpdateBy(User.Id, true, 5, DateTime.Now.AddYears(1));
+                    MessageBox.Show("You have become a SUPER GUEST");
                 }
 
                 return;
             }
-            
-            if (User.SuperTitleValidTill < DateTime.Now)
+
+            else if (User.SuperTitleValidTill < DateTime.Now)
             {
                 List<AccommodationReservation> reservations = AccommodationReservationController.GetDuringLastYearBy(User);
 
                 if (reservations.Count > 9)
                 {
-                    UserController.UpdateBy(User.Id, true, 5, User.SuperTitleValidTill.AddYears(1));
-                    MessageBox.Show("You have become a SUEPER GUEST");
+                    UserController.UpdateBy(User.Id, true, 5, DateTime.Now.AddYears(1));
+                    MessageBox.Show("You have become a SUPER GUEST");
                 }
                 else
                 {
-                    UserController.UpdateBy(User.Id, false, 0, User.SuperTitleValidTill.AddYears(1));
+                    UserController.UpdateBy(User.Id, false, 0);
                     MessageBox.Show("You are no longer super guest");
                 }
             }
