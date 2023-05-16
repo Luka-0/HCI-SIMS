@@ -16,6 +16,31 @@
                 <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Generate pdf" HorizontalAlignment="Left" Margin="45,478,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="19,353,0,0" TextWrapping="Wrap" Text="If You want to have a pdf file which will contain average ratings from every owner, by each category, click the button bellow" VerticalAlignment="Top" Width="158"/>
 
+        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Back_Click">
+            <Button.ToolTip>
+                <ToolTip Placement="Bottom" Content="By clicking this, You will complete the rating" />
+            </Button.ToolTip>
+            <Button.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Help" />
+                            <Setter Property="Background" Value="LightBlue" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Resources>
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                    <TextBlock Text="Back" Width="31" Height="19" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        
     </Grid>
 </Window>

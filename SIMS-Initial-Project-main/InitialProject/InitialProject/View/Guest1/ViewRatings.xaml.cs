@@ -43,14 +43,10 @@ namespace InitialProject.View.Guest1
             ReviewsToShow = new ObservableCollection<InitialProject.Model.GuestReview>();
             ReviewsGrid.ItemsSource = ReviewsToShow;
 
-            MessageBox.Show(allGuestReviews.Count.ToString());
-
             foreach (InitialProject.Model.GuestReview g in allGuestReviews)
             {
-                MessageBox.Show(g.Id.ToString());
                 foreach (AccommodationReview a in allAccommodationReviews)
                 {
-                    MessageBox.Show(a.Id.ToString());
                     if (g.Reservation.Id == a.Reservation.Id)
                     {
                         ReviewsToShow.Add(g);
@@ -59,7 +55,15 @@ namespace InitialProject.View.Guest1
                     }
                 }
             }
-            //MessageBox.Show(ReviewsToShow.Count.ToString());
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+
+            Guest1Menu guest1Menu = new(User);
+            guest1Menu.Show();
+
+            Close();
         }
 
     }
