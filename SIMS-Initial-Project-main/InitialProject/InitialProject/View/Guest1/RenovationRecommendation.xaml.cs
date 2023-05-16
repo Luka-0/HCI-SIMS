@@ -71,5 +71,14 @@ namespace InitialProject.View.Guest1
 
             return true;
         }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+
+            Guest1Menu guest1Menu = new(ReservationToShow.First().Guest);
+            guest1Menu.Show();
+
+            Close();
+        }
     }
 }

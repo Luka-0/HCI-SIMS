@@ -45,7 +45,32 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
+            <TextBlock HorizontalAlignment="Left" Margin="626,149,0,0" TextWrapping="Wrap" Text="In this big area to the left is where You write down Your comment/suggestion" VerticalAlignment="Top" Height="51" TextAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Left" Margin="626,317,0,0" TextWrapping="Wrap" Text="And this is where You give a mark from 1 to 5" VerticalAlignment="Top" TextAlignment="Center"/>
         </Grid>
+
+        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Back_Click">
+            <Button.ToolTip>
+                <ToolTip Placement="Bottom" Content="By clicking this, You will complete the rating" />
+            </Button.ToolTip>
+            <Button.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Help" />
+                            <Setter Property="Background" Value="LightBlue" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Resources>
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                    <TextBlock Text="Back" Width="31" Height="19" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
 
     </Grid>
 </Window>
