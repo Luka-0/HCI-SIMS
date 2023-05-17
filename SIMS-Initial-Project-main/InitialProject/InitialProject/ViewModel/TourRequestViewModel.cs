@@ -163,6 +163,7 @@ namespace InitialProject.ViewModel
             request.Tourist = userController.GetBy(1);
 
             tourRequestController.Save(request, userController.GetBy(1));
+            MessageBox.Show("Zahtev uspesno sacuvan!");
         }
 
 
