@@ -18,7 +18,7 @@ namespace InitialProject.ViewModel
         private TourRequestViewModel requestViewModel = new TourRequestViewModel();
         private NavigationViewModel navigationViewModel = new NavigationViewModel();
         private ShowTourRequestViewModel showTourRequestViewModel = new ShowTourRequestViewModel();
-        
+        private StatisticsViewModel statisticsViewModel = new StatisticsViewModel();
 
         private BindableBase currentViewModel;
 
@@ -61,6 +61,9 @@ namespace InitialProject.ViewModel
                     break;
                 case "showTourRequest":
                     CurrentViewModel = showTourRequestViewModel;
+                    break;
+                case "statistics":
+                    CurrentViewModel = statisticsViewModel;
                     break;
             }
         }

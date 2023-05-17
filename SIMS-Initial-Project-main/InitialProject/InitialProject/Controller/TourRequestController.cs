@@ -46,4 +46,9 @@ public class TourRequestController
     {
         tourRequestService.Save(request, user);
     }
+
+    public string[] GetStatistics()
+    {
+        return tourRequestService.GetStatistics();
+    }
 }

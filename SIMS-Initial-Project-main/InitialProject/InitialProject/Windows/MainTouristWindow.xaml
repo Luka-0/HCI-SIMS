@@ -30,6 +30,10 @@
         <DataTemplate DataType="{x:Type viewModel:ShowTourRequestViewModel}">
             <views:ShowTourRequestView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:StatisticsViewModel}">
+            <views:StatisticsView/>
+        </DataTemplate>
     </Window.Resources>
 
 

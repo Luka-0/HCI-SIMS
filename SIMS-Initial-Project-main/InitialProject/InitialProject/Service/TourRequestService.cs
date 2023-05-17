@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.RightsManagement;
 using InitialProject.Dto;
 using InitialProject.Enumeration;
 using InitialProject.Interface;
@@ -102,6 +103,32 @@ public class TourRequestService
     public void Save(TourRequest request, User user)
     {
         _tourRequestRepository.Save(request, user);
+    }
+
+    public string[] GetStatistics()
+    {
+        string[] statistics = new string[3];
+
+        int countRequests = _tourRequestRepository.GetAll().Count;
+        int countAccepted = GetByState(TourRequestState.Accepted).Count();
+        int countUnaccepted = countRequests - countAccepted;
+
+        double acceptedPercentage = Math.Round(((double)countAccepted) / (double)countRequests * 100, 2);
+        double unacceptedPercentage = Math.Round(100 - acceptedPercentage, 2);
+
+        statistics[0] = acceptedPercentage.ToString();
+        statistics[1] = unacceptedPercentage.ToString();
+
+        int acceptedGuests = 0;
+        List<TourRequest> requests = GetByState(TourRequestState.Accepted).ToList();
+        foreach (TourRequest request in requests)
+        {
+            acceptedGuests += request.GuestNumber;
+        }
+
+        statistics[2] = acceptedGuests.ToString();
+
+        return statistics;
     }
 
 }

@@ -30,19 +30,46 @@
         </Grid>
 
         <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="{Binding AcceptedPercentage}" Margin="10 10 10 10"/>
+            <TextBlock Grid.Column="0" Text="{Binding UnacceptedPercentage}" Margin="10 30 10 10"/>
+
+            <ComboBox Grid.Column="1" Width="170" Margin="130 10 0 0" Height="25"/>
+
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="0 100 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="{Binding AcceptedGuestNumber}" Margin="10,40,10,10"/>
+            <ComboBox Grid.Column="1" Width="170" Margin="55,30,19,21"/>
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="0 150 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
             
+            <TextBlock Grid.Column="0" Text="Prikaz broja zahteva spram jezika" Margin="10"/>
+            <Button Grid.Column="1" Content="Prikazi grafik" Width="120" Height="40" Margin="55 0 0 0"/>
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="4" Margin="0 150 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
 
-        </Grid>
-
-        <Grid Grid.Row="3">
-
-        </Grid>
-
-        <Grid Grid.Row="4">
-
+            <TextBlock Grid.Column="0" Text="Prikaz broja zahteva spram lokacije" Margin="10"/>
+            <Button Grid.Column="1" Content="Prikazi grafik" Width="120" Height="40" Margin="55 0 0 0"/>
         </Grid>
 
         <Grid Grid.Row="5" VerticalAlignment="Bottom">
