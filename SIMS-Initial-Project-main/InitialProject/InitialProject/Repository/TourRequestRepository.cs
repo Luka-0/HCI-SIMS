@@ -40,4 +40,36 @@ public class TourRequestRepository: ITourRequestRepository
         using var db = new UserContext();
         return db.tourRequest.Select(tr=>tr.Language).ToList();
     }
+
+    /*
+    public void Save(TourRequest tourRequest)
+    {
+        using var db = new UserContext();
+        
+        db.Add(tourRequest);
+        db.SaveChanges();
+    }*/
+
+    public void Save(TourRequest request, User user)
+    {
+        using var db = new UserContext();
+
+        var existingLocation = db.location.Find(request.Location.Id);
+        var existingUser = db.users.Find(user.Id);
+
+        request.Tourist = existingUser;
+        request.Location = existingLocation;
+
+        db.location.Attach(existingLocation);
+        db.users.Attach(existingUser);
+
+        db.Add(request);
+
+        db.SaveChanges();
+
+    }
+
+
+
+
 }

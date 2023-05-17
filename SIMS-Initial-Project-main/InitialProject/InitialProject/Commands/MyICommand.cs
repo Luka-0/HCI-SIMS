@@ -106,6 +106,11 @@ namespace InitialProject.Commands
             }
         }
 
+        public static implicit operator MyICommand<T>(MyICommand v)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

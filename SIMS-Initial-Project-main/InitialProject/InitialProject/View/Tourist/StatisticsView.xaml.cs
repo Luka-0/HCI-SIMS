@@ -1,5 +1,4 @@
-﻿using InitialProject.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,15 +16,13 @@ using System.Windows.Shapes;
 namespace InitialProject.View.Tourist
 {
     /// <summary>
-    /// Interaction logic for TourRequestView.xaml
+    /// Interaction logic for StatisticsView.xaml
     /// </summary>
-    public partial class TourRequestView : UserControl
+    public partial class StatisticsView : UserControl
     {
-        public TourRequestView()
+        public StatisticsView()
         {
             InitializeComponent();
-            this.DataContext = new TourRequestViewModel();
         }
-
     }
 }

@@ -26,10 +26,7 @@ namespace InitialProject.View.Tourist
         public TouristHomeView()
         {
             InitializeComponent();
-            this.DataContext = new MainTouristWindowViewModel();
-
-
-
+            this.DataContext = new TouristHomeViewModel();
         }
     }
 }

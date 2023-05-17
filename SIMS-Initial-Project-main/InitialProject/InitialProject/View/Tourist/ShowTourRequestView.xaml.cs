@@ -17,15 +17,14 @@ using System.Windows.Shapes;
 namespace InitialProject.View.Tourist
 {
     /// <summary>
-    /// Interaction logic for TourRequestView.xaml
+    /// Interaction logic for ShowTourRequestView.xaml
     /// </summary>
-    public partial class TourRequestView : UserControl
+    public partial class ShowTourRequestView : UserControl
     {
-        public TourRequestView()
+        public ShowTourRequestView()
         {
             InitializeComponent();
-            this.DataContext = new TourRequestViewModel();
+            this.DataContext = new ShowTourRequestViewModel();
         }
-
     }
 }

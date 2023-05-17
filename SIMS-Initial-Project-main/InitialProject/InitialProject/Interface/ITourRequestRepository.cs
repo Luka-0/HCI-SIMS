@@ -11,4 +11,5 @@ public interface ITourRequestRepository
     public List<TourRequest> GetAll();
     public void Accept(int id, DateTime selectedDate);
     public List<string> GetLanguages();
+    public void Save(TourRequest request, User user);
 }
