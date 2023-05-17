@@ -34,6 +34,10 @@
         <DataTemplate DataType="{x:Type viewModel:StatisticsViewModel}">
             <views:StatisticsView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:GraphReqiestViewModel}">
+            <views:GraphRequestView/>
+        </DataTemplate>
     </Window.Resources>
 
 
