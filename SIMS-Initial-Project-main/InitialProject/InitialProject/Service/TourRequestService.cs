@@ -82,4 +82,10 @@ public class TourRequestService
         return GetAll().Where(r => (DateTime.Today - r.SelectedDate) <= new TimeSpan(365, 0, 0, 0)).ToList();
 
     }
+
+    public void Save(TourRequest request, User user)
+    {
+        _tourRequestRepository.Save(request, user);
+    }
+
 }

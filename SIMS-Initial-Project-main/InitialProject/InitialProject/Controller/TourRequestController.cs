@@ -35,4 +35,9 @@ public class TourRequestController
     {
         return tourRequestService.GetHottestLocation();
     }
+
+    public void Save(TourRequest request, User user)
+    {
+        tourRequestService.Save(request, user);
+    }
 }

@@ -28,13 +28,12 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            
-            <Button Grid.Column="0" Height="40" Width="40" Margin="0">
-                <Image Source="/Images/hamburger.png" Width="50" Height="50"/>
-            </Button>
-            
 
-            <TextBlock Grid.Column="1"  Text="Kreiranje zahteva za turu" FontSize="24" Padding="20 20 10 10"/>
+            <Button Grid.Column="0" Height="40" Width="40" Margin="0" Padding="3" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="navigation">
+                <Image Source="/Resources/Images/hamburger.png" Width="40" Height="40"/>
+            </Button>
+
+            <TextBlock Grid.Column="1"  Text="Kreiranje zahteva za ture" FontSize="20" Padding="20 20 10 10"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -47,8 +46,15 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <ComboBox Grid.Column="0" Width="170" Margin="10 0 0 0"/>
-            <ComboBox Grid.Column ="1" Width="170" Margin="55 0 0 0"/>
+            <ComboBox Grid.Column="0" 
+                      ItemsSource="{Binding StateComboBoxItems}"
+                      SelectedItem="{Binding SelectedState, Mode=TwoWay}"
+                      Width="170" Margin="10 0 0 0"/>
+            
+            <ComboBox Grid.Column ="1" 
+                      ItemsSource="{Binding CityComboBoxItems}"
+                      SelectedItem="{Binding SelectedCity, Mode=TwoWay}"
+                      Width="170" Margin="55 0 0 0"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -64,15 +70,21 @@
         </Grid>
 
         <Grid Grid.Row="6">
-            <ComboBox Width="170" HorizontalAlignment="Left" Margin="15 0 0 0"/>
+            <ComboBox ItemsSource="{Binding LanguageComboBoxItems}"
+                      SelectedItem="{Binding SelectedLanguage,Mode=TwoWay}"
+                      Width="170" HorizontalAlignment="Left" Margin="15 0 0 0" />
         </Grid>
 
         <Grid Grid.Row="7">
-            <Label Margin="40 20 0 0">Broj gostiju:</Label>
+            <Label 
+                Content="{Binding SliderLabelText}"
+                Margin="40 20 0 0"/>
         </Grid>
 
         <Grid Grid.Row="8">
-            <Slider x:Name="slider" Width="335" Margin="10" Minimum="0" Maximum="100" TickFrequency="10" IsSnapToTickEnabled="True" />
+            <Slider x:Name="slider"
+                    Value ="{Binding SliderValue}"
+                    Width="335" Margin="10" Minimum="0" Maximum="50" TickFrequency="1" IsSnapToTickEnabled="True" />
         </Grid>
 
         <Grid Grid.Row="9">
@@ -102,12 +114,16 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <DatePicker Grid.Column="0" Margin="45 0 0 0"/>
-            <DatePicker Grid.Column="1" Margin="125 0 0 0"/>
+            <DatePicker SelectedDate="{Binding StartDate, StringFormat='dd-MM-yyyy'}"
+                        Grid.Column="0" Margin="45 0 0 0"/>
+            <DatePicker SelectedDate="{Binding EndDate, StringFormat='dd-MM-yyyy'}" 
+                        Grid.Column="1" Margin="125 0 0 0"/>
         </Grid>
 
         <Grid Grid.Row="12">
-            <Button Content="Kreiraj" Margin="0 0 0 30" Width="200" Height="70" HorizontalAlignment="Center"/>
+            <Button Content="Kreiraj"
+                    Command="{Binding CreateTourCommand}"
+                    Margin="0 0 0 30" Width="200" Height="70" HorizontalAlignment="Center"/>
         </Grid>
 
         <Grid Grid.Row="13" VerticalAlignment="Bottom">
