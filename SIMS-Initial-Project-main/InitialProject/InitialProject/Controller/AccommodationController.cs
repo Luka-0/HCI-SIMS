@@ -77,9 +77,9 @@ namespace InitialProject.Controller
         
         }
 
-        public List<DateSuggestion> GetDateSuggestions(Accommodation accommodation, DateTime desiredStart, DateTime desiredEnd, TimeSpan desiredDuration) {
+        public List<DateSuggestion> GetRenovationDateSuggestions(Accommodation accommodation, DateTime desiredStart, DateTime desiredEnd, TimeSpan desiredDuration) {
 
-            return AccommodationService.GetDateSuggestions(accommodation, desiredStart, desiredEnd, desiredDuration);
+            return AccommodationService.GetRenovationDateSuggestions(accommodation, desiredStart, desiredEnd, desiredDuration);
         
         }
 

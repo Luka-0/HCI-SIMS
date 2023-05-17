@@ -122,7 +122,7 @@ namespace InitialProject.Service
             return IAccommodationRepository.GetByReservationDays(reservationDays);
         }
 
-        public List<DateSuggestion> GetDateSuggestions(Accommodation accommodation, DateTime desiredStart, DateTime desiredEnd, TimeSpan desiredDuration)
+        public List<DateSuggestion> GetRenovationDateSuggestions(Accommodation accommodation, DateTime desiredStart, DateTime desiredEnd, TimeSpan desiredDuration)
         {
 
             List<DateSuggestion> renovationDatesSuggestions = new List<DateSuggestion>();

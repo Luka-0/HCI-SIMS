@@ -55,7 +55,7 @@ namespace InitialProject.View.Owner
 
                     Accommodation selectedAccommodation = ownersAccommodations.SelectedItem as Accommodation;
 
-                    dateSuggestions.ItemsSource = AccommodationController.GetDateSuggestions(selectedAccommodation, desiredStart, desiredEnd, duration);
+                    dateSuggestions.ItemsSource = AccommodationController.GetRenovationDateSuggestions(selectedAccommodation, desiredStart, desiredEnd, duration);
                 }
             }
             else
