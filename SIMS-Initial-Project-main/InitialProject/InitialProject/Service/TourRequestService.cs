@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using InitialProject.Dto;
+using InitialProject.Enumeration;
 using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -28,6 +29,21 @@ public class TourRequestService
     public List<TourRequest> GetAll()
     {
         return _tourRequestRepository.GetAll();
+    }
+
+    public List<TourRequest> GetByState(TourRequestState state)
+    {
+        List<TourRequest> allRequests = _tourRequestRepository.GetAll();
+        List<TourRequest> searchedRequests = new List<TourRequest>();
+
+        foreach (TourRequest request in allRequests)
+        {
+            if(request.State == state)
+            {
+                searchedRequests.Add(request);
+            }
+        }
+        return searchedRequests;
     }
 
     public void Accept(int id, DateTime selectedDate)
