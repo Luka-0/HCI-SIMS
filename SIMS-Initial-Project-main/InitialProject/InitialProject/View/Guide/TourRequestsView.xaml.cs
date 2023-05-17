@@ -315,6 +315,7 @@ namespace InitialProject.View.Guide
             Requests = TourRequestController.GetAllPending();
             FilteredRequests = new ObservableCollection<TourRequest>(Requests);
             DataGridRequests.ItemsSource = FilteredRequests;
+            DatePicker1.SelectedDate = null;
 
             //TODO SLANJE OBAVESTENJA GOSTU2
 
@@ -327,7 +328,7 @@ namespace InitialProject.View.Guide
                     .SelectedItem; // Replace "MyObject" with the type of your object
 
 
-            DatePicker1.BlackoutDates.Clear();
+            
             List<DateTime> occupiedDates = new List<DateTime>();
             if (selected != null)
             {
@@ -337,9 +338,11 @@ namespace InitialProject.View.Guide
 
             if (selected != null)
             {
+                
                 DatePicker1.DisplayDateStart = selected.LowerDateLimit;
                 DatePicker1.DisplayDateEnd = selected.UpperDateLimit;
 
+                DatePicker1.BlackoutDates.Clear();
                 DatePicker1.BlackoutDates.Add(
                     new CalendarDateRange(new DateTime(0001, 1, 1), selected.LowerDateLimit.AddDays(-1)));
                 DatePicker1.BlackoutDates.Add(
