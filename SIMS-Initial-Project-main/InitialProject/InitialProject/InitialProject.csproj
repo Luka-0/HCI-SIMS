@@ -14,6 +14,8 @@
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\hamburger.png" />
+    <None Remove="Resources\Images\house.png" />
+    <None Remove="Resources\Images\questionmark.png" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="View\Guest1\tooltip.png" />
   </ItemGroup>
@@ -44,6 +46,8 @@
 
   <ItemGroup>
     <Resource Include="Resources\Images\hamburger.png" />
+    <Resource Include="Resources\Images\house.png" />
+    <Resource Include="Resources\Images\questionmark.png" />
     <Resource Include="View\Guest1\tooltip.png" />
   </ItemGroup>
 

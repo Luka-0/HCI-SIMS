@@ -7,7 +7,7 @@
         xmlns:viewModel="clr-namespace:InitialProject.ViewModel"
         xmlns:views="clr-namespace:InitialProject.View.Tourist"
         mc:Ignorable="d"
-        Title="MainTouristWindow" Height="750" Width="430">
+        Title="MainTouristWindow" Height="750" Width="430" ResizeMode="NoResize">
     
     
     <Window.Resources>
