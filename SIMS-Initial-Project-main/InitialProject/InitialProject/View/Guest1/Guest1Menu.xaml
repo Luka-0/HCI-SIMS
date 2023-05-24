@@ -5,14 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Guest1 Main Window" Height="560" Width="800">
+        Title="Guest Main Window" Height="560" Width="800">
     <Grid>
         <Grid Margin="0,10,547,0">
-            <Border BorderBrush="Black" BorderThickness="1" Margin="10,0,0,10"/>
-            <Button Content="Reservate Accommodation" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="156" Click="AccommodationReservate_Click" Margin="54,24,0,0"/>
-            <Button Content="Rate Accommodation" HorizontalAlignment="Left" Margin="73,134,0,0" VerticalAlignment="Top" Click="RateAccommodation_Click"/>
-            <Button Content="Edit Reservation" HorizontalAlignment="Left" Margin="87,88,0,0" VerticalAlignment="Top" Click="EditReservation_Click"/>
-            <Button Content="View Reviews of me" HorizontalAlignment="Left" Margin="78,190,0,0" VerticalAlignment="Top" Click="ViewReviews_Click"/>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="10,0,0,10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <!-- Row 0 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 1 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 2 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 3 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 4 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 5 -->
+                        <RowDefinition Height="*" />
+                        <!-- Row 6 -->
+                    </Grid.RowDefinitions>
+
+
+                    <Button Grid.Row="0" Content="Reservate Accommodation" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AccommodationReservate_Click"/>
+                    <Button Grid.Row="1" Content="Rate Accommodation" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RateAccommodation_Click"/>
+                    <Button Grid.Row="2" Content="Edit Reservation" HorizontalAlignment="Center" VerticalAlignment="Center" Click="EditReservation_Click"/>
+                    <Button Grid.Row="3" Content="View Reviews of Me" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ViewReviews_Click"/>
+                    <Button Grid.Row="4" Content="Anywhere-Whenever" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AnywhereWhenever_Click"/>
+                    <Button Grid.Row="5" Content="Create a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Button Grid.Row="6" Content="Make Comment on a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+            </Border>
         </Grid>
+
     </Grid>
 </Window>

@@ -118,5 +118,13 @@ namespace InitialProject.View
 
             Close();
         }
+
+        private void AnywhereWhenever_Click(object sender, RoutedEventArgs e)
+        {
+            AnywhereWhenever anywhereWhenever = new(User);
+            anywhereWhenever.Show();
+
+            Close();
+        }
     }
 }
