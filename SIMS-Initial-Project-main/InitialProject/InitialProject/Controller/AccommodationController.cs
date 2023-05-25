@@ -92,5 +92,11 @@ namespace InitialProject.Controller
 
             return this.AccommodationService.GetMonthsStatisticsBy(year, accommodation);
         }
+
+        public List<Accommodation> GetBy(int reservationDays, int guestNumber)
+        {
+            return AccommodationService.GetBy(reservationDays, guestNumber);
+        }
+
     }
 }

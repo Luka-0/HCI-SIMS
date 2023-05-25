@@ -309,5 +309,10 @@ namespace InitialProject.Service
             return "DEC";
         }
 
+        public List<Accommodation> GetBy(int reservationDays, int guestNumber)
+        {
+            return IAccommodationRepository.GetBy(reservationDays, guestNumber);
+        }
+
     }
 }

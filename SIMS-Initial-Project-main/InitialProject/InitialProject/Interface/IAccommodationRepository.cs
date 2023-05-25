@@ -22,5 +22,7 @@ namespace InitialProject.Interface
         public List<Accommodation> GetByReservationDays(int reservationDays);
         public List<Accommodation> GetAllBy(User owner);
         //public void UpdateLastRenovatedBy(Accommodation accommodation, DateTime lastRenovation);
+
+        public List<Accommodation> GetBy(int reservationDays, int guestNumber);
     }
 }

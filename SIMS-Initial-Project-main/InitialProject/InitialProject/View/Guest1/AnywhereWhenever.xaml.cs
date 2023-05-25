@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,19 +12,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using InitialProject.Controller;
 using InitialProject.Model;
 
 namespace InitialProject.View.Guest1
 {
     public partial class AnywhereWhenever : Window
     {
+        private readonly AccommodationController AccommodationController = new();
 
         private User User { get; set; }
+
+        public ObservableCollection<Accommodation> AccommodationsToShow { get; set; }
 
         public AnywhereWhenever(User user)
         {
             User = user;
+            DataContext = this;
+
             InitializeComponent();
         }
 
@@ -34,5 +40,21 @@ namespace InitialProject.View.Guest1
 
             Close();
         }
+
+        private void StartDemo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GenerateDates_Click(object sender, RoutedEventArgs e)
+        {
+            List<Accommodation> accommodations
+        }
+
+        private void Reservate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

@@ -41,8 +41,29 @@
                 Here You can fill in the requirements bellow, and accommodations matching Your requirements will be shown on the right ->
             </TextBlock>
 
-            <Button Grid.Row="1" Content="Start Demo" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
-            <TextBlock Grid.Row="1" Text="Or press &quot;Start Demo&quot; button to show it's done with an example" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="143,0,0,0" Width="127"/>
+            <Button Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Click="StartDemo_Click" >
+                <Button.ToolTip>
+                    <ToolTip Placement="Bottom" Content="By clicking this, the UI controls bellow will start filling up, You just watch and relax" />
+                </Button.ToolTip>
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Help" />
+                                <Setter Property="Background" Value="LightBlue" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Resources>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                        <TextBlock Text="Start Demo" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <TextBlock Grid.Row="1" Text="Or press &quot;Start Demo&quot; button to show how it's done with an example" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="143,0,0,0" Width="127"/>
         </Grid>
 
         <Grid Margin="10,173,504,10">
@@ -78,10 +99,52 @@
                     <Label Grid.Row="3" Content="Select ending date:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
                     <DatePicker Grid.Row="3" x:Name="EndingDatePicker" HorizontalAlignment="Left" Margin="154,0,0,0" VerticalAlignment="Center"/>
 
-                    <Button Grid.Row="4" Content="Generate dates" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
+                    <Button Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Click="GenerateDates_Click" >
+                        <Button.ToolTip>
+                            <ToolTip Placement="Bottom" Content="By clicking this, just on the right will be shown some dates that You click and choose" />
+                        </Button.ToolTip>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Help" />
+                                        <Setter Property="Background" Value="LightBlue" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                                <TextBlock Text="Generate dates" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
                     <ComboBox Grid.Row="4" x:Name="OfferedDatesCB" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Margin="154,0,0,0"/>
 
-                    <Button Grid.Row="5" Content="Reservate" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Button Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Reservate_Click" >
+                        <Button.ToolTip>
+                            <ToolTip Placement="Bottom" Content="By clicking this, the chosen accommodation will be reservated"/>
+                        </Button.ToolTip>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="ToolTipService.InitialShowDelay" Value="500" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Help" />
+                                        <Setter Property="Background" Value="LightBlue" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
+                                <TextBlock Text="Reservate" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
                 </Grid>
             </Border>
         </Grid>
