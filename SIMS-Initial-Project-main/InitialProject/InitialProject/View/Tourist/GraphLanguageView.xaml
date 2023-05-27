@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="InitialProject.View.Tourist.GraphLanguageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.View.Tourist"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="430">
+    <Grid Background="#F8F8FF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#cc0000" TextElement.Foreground="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" 
+                    Height="50" Width="30" Margin="15 4 0 0" Padding="1" 
+                    BorderThickness="0" Background="Transparent"
+                    Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                    CommandParameter="navigation">
+                <Image Source="/Resources/Images/hamburger.png" Width="20" Height="20" />
+            </Button>
+
+            <TextBlock Grid.Column="1" Text="Opcije" FontSize="20" Padding="20 18 10 10" FontWeight="Bold" Margin="0 0 0 7"/>
+
+            <Grid Grid.Column="2" HorizontalAlignment="Right" Background="Transparent">
+                <Button Grid.Column="2" 
+                    Height="50" Width="30" Margin="15 4 40 0" Padding="1" 
+                    BorderThickness="0" Background="Transparent"
+                    Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                    CommandParameter="navigation">
+                    <Image Source="/Resources/Images/house.png" Width="30" Height="30" />
+                </Button>
+
+
+                <Button Grid.Column="2" 
+                    Height="50" Width="30" Margin="80 4 10 0" Padding="1" 
+                    BorderThickness="0" Background="Transparent"
+                    Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                    CommandParameter="navigation">
+                    <Image Source="/Resources/Images/questionmark.png" Width="30" Height="30" />
+                </Button>
+            </Grid>
+
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <lvc:CartesianChart Height="400" Width="350">
+                <lvc:CartesianChart.Series>
+                    <lvc:ColumnSeries Title="Tour Requests" Values="{Binding DataSeries[0].Values}" />
+                </lvc:CartesianChart.Series>
+
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Languages" Labels="{Binding Languages}" />
+                </lvc:CartesianChart.AxisX>
+
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Number of Tour Requests" />
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            
+        </Grid>
+
+
+        <Grid Grid.Row="3" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Width="215" Height="35" 
+                    Background="#cc0000" 
+                    Foreground="White"
+                    FontWeight="Bold" FontSize="18">Prvo</Button>
+            <Button Grid.Column="1" Width="215" Height="35" 
+                    Background="#cc0000" 
+                    Foreground="White"
+                    FontWeight="Bold" FontSize="18">Drugo</Button>
+        </Grid>
+
+    </Grid>
+</UserControl>

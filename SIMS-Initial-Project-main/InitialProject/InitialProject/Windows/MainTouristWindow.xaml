@@ -35,8 +35,12 @@
             <views:StatisticsView/>
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type viewModel:GraphReqiestViewModel}">
-            <views:GraphRequestView/>
+        <DataTemplate DataType="{x:Type viewModel:GraphLanguageViewModel}">
+            <views:GraphLanguageView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:HelpViewModel}">
+            <views:HelpView/>
         </DataTemplate>
     </Window.Resources>
 

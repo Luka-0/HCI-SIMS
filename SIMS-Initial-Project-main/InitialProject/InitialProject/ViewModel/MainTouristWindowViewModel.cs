@@ -19,7 +19,8 @@ namespace InitialProject.ViewModel
         private NavigationViewModel navigationViewModel = new NavigationViewModel();
         private ShowTourRequestViewModel showTourRequestViewModel = new ShowTourRequestViewModel();
         private StatisticsViewModel statisticsViewModel = new StatisticsViewModel();
-        private GraphReqiestViewModel graphRequestViewModel = new GraphReqiestViewModel();
+        private GraphLanguageViewModel graphLanguageViewModel = new GraphLanguageViewModel();   
+        private HelpViewModel helpViewModel = new HelpViewModel();
 
         private BindableBase currentViewModel;
 
@@ -66,8 +67,11 @@ namespace InitialProject.ViewModel
                 case "statistics":
                     CurrentViewModel = statisticsViewModel;
                     break;
-                case "graphRequest":
-                    CurrentViewModel = graphRequestViewModel;
+                case "graphLanguageRequest":
+                    CurrentViewModel = graphLanguageViewModel;
+                    break;
+                case "helpViewModel":
+                    CurrentViewModel = helpViewModel;
                     break;
             }
         }

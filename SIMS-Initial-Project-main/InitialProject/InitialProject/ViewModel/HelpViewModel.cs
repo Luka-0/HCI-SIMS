@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.ViewModel
 {
-    public class GraphReqiestViewModel:BindableBase
+    public class HelpViewModel:BindableBase
     {
     }
 }

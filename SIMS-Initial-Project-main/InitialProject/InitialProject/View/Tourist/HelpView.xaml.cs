@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,14 @@ using System.Windows.Shapes;
 namespace InitialProject.View.Tourist
 {
     /// <summary>
-    /// Interaction logic for GraphRequestView.xaml
+    /// Interaction logic for HelpView.xaml
     /// </summary>
-    public partial class GraphRequestView : UserControl
+    public partial class HelpView : UserControl
     {
-        public GraphRequestView()
+        public HelpView()
         {
             InitializeComponent();
+            this.DataContext = new HelpViewModel();
         }
     }
 }

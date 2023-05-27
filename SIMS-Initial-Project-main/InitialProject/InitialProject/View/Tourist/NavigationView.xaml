@@ -4,15 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View.Tourist"
+             xmlns:comp ="clr-namespace:InitialProject.Components"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="430">
-    <Grid>
+    <Grid Background="#F8F8FF">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
+            <comp:Header/>
+        </Grid>
+        
+        <Grid Grid.Row="1">
             <StackPanel Orientation="Vertical">
                 <Button Content="Prikaz, pretraga, rezervacija ture" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="showAndSearchTour"/>
                 <Button Content="Pracenje ture" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
@@ -28,16 +34,10 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="1"  VerticalAlignment="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Width="215" Height="30">Prvo</Button>
-            <Button Grid.Column="1" Width="215" Height="30">Drugo</Button>
+        <Grid Grid.Row="2" VerticalAlignment="Bottom">
+            <comp:Footer/>
         </Grid>
-                
+
 
     </Grid>
 </UserControl>
