@@ -21,6 +21,7 @@ namespace InitialProject.ViewModel
         private StatisticsViewModel statisticsViewModel = new StatisticsViewModel();
         private GraphLanguageViewModel graphLanguageViewModel = new GraphLanguageViewModel();   
         private HelpViewModel helpViewModel = new HelpViewModel();
+        private GraphLocationViewModel graphLocationViewModel = new GraphLocationViewModel();
 
         private BindableBase currentViewModel;
 
@@ -39,7 +40,7 @@ namespace InitialProject.ViewModel
                 SetProperty(ref currentViewModel, value);
             }
         }
-
+        
         public void SetNewViewModel(BindableBase newViewModel)
         {
             CurrentViewModel = newViewModel;
@@ -72,6 +73,9 @@ namespace InitialProject.ViewModel
                     break;
                 case "helpViewModel":
                     CurrentViewModel = helpViewModel;
+                    break;
+                case "graphLocationRequest":
+                    CurrentViewModel = graphLocationViewModel;
                     break;
             }
         }

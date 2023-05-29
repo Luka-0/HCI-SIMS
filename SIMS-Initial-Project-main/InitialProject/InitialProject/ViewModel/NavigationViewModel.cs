@@ -9,7 +9,11 @@ namespace InitialProject.ViewModel
 {
     public class NavigationViewModel:BindableBase
     {
-        
+        public NavigationViewModel() 
+        {
+            UpdateFooterParametar("home");
+            UpdateHeaderTitle("Opcije");
+        }
 
     }
 }

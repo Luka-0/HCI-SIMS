@@ -1,4 +1,5 @@
-﻿using InitialProject.Controller;
+﻿using InitialProject.Commands;
+using InitialProject.Controller;
 using InitialProject.Model;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,10 @@ namespace InitialProject.ViewModel
         public TouristHomeViewModel()
         {
             LoadNewTourNotifications();
+            UpdateFooterParametar("home");
         }
+
+        
 
         /*
         public void LoadStates()

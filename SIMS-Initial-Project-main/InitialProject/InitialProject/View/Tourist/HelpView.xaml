@@ -4,9 +4,59 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View.Tourist"
+             xmlns:comp ="clr-namespace:InitialProject.Components"
+             xmlns:comm ="clr-namespace:InitialProject.Commands"
+
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="430">
-    <Grid>
-            
+    <Grid Background="#F8F8FF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <comp:Header/>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="15">
+            <Border BorderBrush="DarkRed" BorderThickness="3" Padding="3">
+                <StackPanel>
+                    <TextBlock Text="Kako da rezervisem turu?" FontSize="18" 
+                               FontWeight="DemiBold"
+                               Foreground="White"
+                               Background="Red"
+                               Padding="10"
+                               comm:CommandBehavior.Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                               comm:CommandBehavior.CommandParameter="{Binding NavCommandParamReserve}"
+                    />
+
+                    <TextBlock Text="Da biste rezervisali turu potrebno je svega par koraka. Za vise detalja kliknite na naslov 'Kako rezervisati turu?' i pogledajte uputstvo."
+                               FontSize="16" Margin="20 30 20 20" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="15">
+            <Border BorderBrush="DarkRed" BorderThickness="3" Padding="3">
+                <StackPanel>
+                    <TextBlock Text="Kako da iskoristim vaucer?" FontSize="18" 
+                               FontWeight="DemiBold"
+                               Foreground="White"
+                               Background="Red"
+                               Padding="10"
+                               
+                               />
+                    <TextBlock Text="Da biste iskoristili vaucer potrebno je svega par koraka. Za vise detalja kliknite na naslov 'Kako rezervisati turu?' i pogledajte uputstvo." 
+                               FontSize="16" Margin="20 30 20 20" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="3" VerticalAlignment="Bottom">
+            <comp:Footer/>
+        </Grid>
     </Grid>
 </UserControl>

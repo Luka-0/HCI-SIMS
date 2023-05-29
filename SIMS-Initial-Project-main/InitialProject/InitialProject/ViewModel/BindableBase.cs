@@ -27,5 +27,15 @@ namespace InitialProject.ViewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public void UpdateFooterParametar(string newParametar)
+        {
+            Mediator.Instance.Publish("ParametarUpdated", newParametar);
+        }
+
+        public void UpdateHeaderTitle(string newTitle)
+        {
+            Mediator.Instance.Publish("TitleUpdated", newTitle);
+        }
     }
 }

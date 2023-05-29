@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace InitialProject.Components
         public Footer()
         {
             InitializeComponent();
+            this.DataContext = new FooterViewModel();
         }
     }
 }

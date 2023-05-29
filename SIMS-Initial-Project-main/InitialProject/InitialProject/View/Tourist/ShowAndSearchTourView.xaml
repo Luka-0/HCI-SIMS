@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View.Tourist"
+             xmlns:comp ="clr-namespace:InitialProject.Components"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="430">
-    <Grid>
+    <Grid Background="#F8F8FF">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -14,20 +15,11 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Height="40" Width="40" Margin="0" Padding="3" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="navigation">
-                <Image Source="/Resources/Images/hamburger.png" Width="40" Height="40"/>
-            </Button>
-
-            <TextBlock Grid.Column="1"  Text="Pretraga tura" FontSize="20" Padding="20 20 10 10"/>
+            <comp:Header/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -41,7 +33,7 @@
 
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Ime">
+                            <GridViewColumn Header="Ime" Width="130">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock HorizontalAlignment="Center" Text="{Binding Name}"/>
@@ -49,7 +41,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="Lokacija">
+                            <GridViewColumn Header="Lokacija" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock HorizontalAlignment="Center" Text="{Binding Location}"/>
@@ -57,10 +49,10 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="Datum">
+                            <GridViewColumn Header="Datum" Width="155">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Date}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding StartDateAndTime}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -82,8 +74,15 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <ComboBox Grid.Row="0" Width="150" Margin="30"/>
-                <ComboBox Grid.Row="1" Width="150"/>
+                <ComboBox Grid.Row="0" Width="150" Margin="30" 
+                          ItemsSource="{Binding StateComboBoxItems}"
+                          SelectedItem="{Binding SelectedState, Mode=TwoWay}"
+                />
+                
+                <ComboBox Grid.Row="1" Width="150"
+                          ItemsSource="{Binding CityComboBoxItems}"
+                          SelectedItem="{Binding SelectedCity, Mode=TwoWay}"
+                />
             </Grid>
 
             <Grid Grid.Column="1">
@@ -91,11 +90,13 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Width="150" Margin="20 60">Dugme</Button>
+                <Button Grid.Row="0" Width="150" Height="27" Margin="20 60" Command="{Binding SearchByLocationCommand}">
+                    <TextBlock Text="Pretraga po lokaciji"/>
+                </Button>
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="3" Margin="0 20 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
@@ -106,19 +107,24 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <ComboBox Grid.Row="0" Width="150" Margin="30 5"/>
+                <ComboBox Grid.Row="0" Width="150" Margin="30 5" 
+                          ItemsSource="{Binding DurationComboBoxItems}"
+                          SelectedItem="{Binding SelectedDuration, Mode=TwoWay}"
+                />
             </Grid>
-
+            
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Width="150" Margin="20 5">Dugme</Button>
+                <Button Grid.Row="0" Width="150" Height="27"  Margin="20 5" Command="{Binding SearchByDurationCommand}">
+                    <TextBlock Text="Pretraga po trajanju"/>
+                </Button>
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="4" Margin="0 20 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
@@ -129,7 +135,10 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <ComboBox Grid.Row="0" Width="150" Margin="30 5"/>
+                <ComboBox Grid.Row="0" Width="150" Margin="30 5" 
+                          ItemsSource="{Binding LanguageComboBoxItems}"
+                          SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                />
             </Grid>
 
             <Grid Grid.Column="1">
@@ -137,11 +146,13 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Width="150" Margin="20 5">Dugme</Button>
+                <Button Grid.Row="0" Width="150" Height="27" Margin="20 5" Command="{Binding SearchByLanguageCommand}">
+                    <TextBlock Text="Pretraga po jeziku"/>
+                </Button>
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="5">
+        <Grid Grid.Row="5" Margin="0 20 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
@@ -152,7 +163,10 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <ComboBox Grid.Row="0" Width="150" Margin="30 5"/>
+                <ComboBox Grid.Row="0" Width="150" Margin="30 5" 
+                          ItemsSource="{Binding GuestLimitComboBoxItems}"
+                          SelectedItem="{Binding SelectedGuestLimit, Mode=TwoWay}"
+                />
             </Grid>
 
             <Grid Grid.Column="1">
@@ -160,18 +174,14 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Width="150" Margin="20 5">Dugme</Button>
+                <Button Grid.Row="0" Width="150" Height="27" Margin="20 5" Command="{Binding SearchByGuestLimitCommand}">
+                    <TextBlock Text="Pretraga po broju ljudi"/>
+                </Button>
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="6">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Width="215" Height="30" Margin="0 158 0 0">Prvo</Button>
-            <Button Grid.Column="1" Command="{Binding NextView}" Width="215" Margin="0 158 0 0">Drugo</Button>
+        <Grid Grid.Row="6" VerticalAlignment="Bottom">
+            <comp:Footer/>
         </Grid>
 
 

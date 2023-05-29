@@ -13,7 +13,7 @@ namespace InitialProject.ViewModel
 
         private string acceptedPercentage = "Prihvaceni zahtevi: ";
         private string unacceptedPercentage = "Odbijeni zahtevi: ";
-        private string acceptedGuestNumber = "Br. ljudi u prihvacenim zahtevima:";
+        private string acceptedGuestNumber = "";
 
         public string AcceptedPercentage
         {
@@ -43,6 +43,7 @@ namespace InitialProject.ViewModel
 
         public StatisticsViewModel()
         {
+            UpdateHeaderTitle("Statistika");
             LoadStatistics();
         }
 
@@ -64,7 +65,7 @@ namespace InitialProject.ViewModel
             string[] statistics = tourRequestController.GetStatistics();
             acceptedPercentage = "Prihvaceni zahtevi:        " + statistics[0] + "%";
             unacceptedPercentage = "Odbijeni zahtevi:        " + statistics[1] + "%";
-            acceptedGuestNumber = "Br. ljudi u prihvacenim zahtevima:       " + statistics[2];
+            acceptedGuestNumber = "" + statistics[2];
         }
     }
 }

@@ -32,6 +32,67 @@ public class TourRequestService
         return _tourRequestRepository.GetAll();
     }
 
+    public List<Location> GetLocations()
+    {
+        List<Location> locations = new List<Location>();
+        List<TourRequest> tourRequests = _tourRequestRepository.GetAll();
+
+        foreach (TourRequest request in tourRequests)
+        {
+            locations.Add(request.Location);
+        }
+        locations = locations.Distinct().ToList();
+
+        return locations;
+    }
+
+    public List<string> GetLanguages()
+    {
+        List<string> languages = new List<string>();
+        List<TourRequest> tourRequests = _tourRequestRepository.GetAll();
+
+        foreach (TourRequest request in tourRequests)
+        {
+            languages.Add(request.Language);
+        }
+
+        languages = languages.Distinct().ToList();
+
+        return languages;
+    }
+
+    public int CountByLanguage(string language)
+    {
+        int count = 0;
+        List<TourRequest> tourRequests = GetAll();
+
+        foreach (TourRequest request in tourRequests)
+        {
+            if(request.Language.Equals(language))
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public int CountByLocation(Location location)
+    {
+        int count = 0;
+        List<TourRequest> tourRequests = GetAll();
+
+        foreach (TourRequest request in tourRequests)
+        {
+            if (request.Location.Id == location.Id)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     public List<TourRequest> GetByState(TourRequestState state)
     {
         List<TourRequest> allRequests = _tourRequestRepository.GetAll();
@@ -129,6 +190,32 @@ public class TourRequestService
         statistics[2] = acceptedGuests.ToString();
 
         return statistics;
+    }
+
+    public Dictionary<string, int> GetRequestCountByLanguage()
+    {
+        Dictionary<string, int> requestData = new Dictionary<string, int>();
+        List<string> languages = GetLanguages();
+
+        foreach(string language in languages)
+        {
+            requestData.Add(language, CountByLanguage(language));
+        }
+
+        return requestData;
+    }
+
+    public Dictionary<string, int> GetRequestCountByLocation()
+    {
+        Dictionary<string, int> requestData = new Dictionary<string, int>();
+        List<Location> locations = GetLocations();
+
+        foreach (Location location in locations)
+        {
+            requestData.Add(location.ToString(), CountByLocation(location));
+        }
+
+        return requestData;
     }
 
 }

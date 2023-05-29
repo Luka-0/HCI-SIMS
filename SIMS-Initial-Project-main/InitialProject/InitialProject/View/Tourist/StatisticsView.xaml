@@ -7,7 +7,7 @@
              xmlns:comp ="clr-namespace:InitialProject.Components"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="430">
-    <Grid Background="#F8F8FF">
+    <Grid Background="#F8F8FF" TextElement.FontSize="18">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -27,46 +27,48 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="{Binding AcceptedPercentage}" Margin="10 10 10 10"/>
-            <TextBlock Grid.Column="0" Text="{Binding UnacceptedPercentage}" Margin="10 30 10 10"/>
+            <TextBlock Grid.Column="0" Text="{Binding AcceptedPercentage}" Margin="10 35 10 10"/>
+            <TextBlock Grid.Column="0" Text="{Binding UnacceptedPercentage}" Margin="10 85 10 10"/>
 
-            <ComboBox Grid.Column="1" Width="170" Margin="130 10 0 0" Height="25"/>
+            <ComboBox Grid.Column="1" Width="140" Height ="30" Margin="0 30 0 0"/>
 
         </Grid>
 
-        <Grid Grid.Row="2" Margin="0 100 0 0">
+        <Grid Grid.Row="2" Margin="0 200 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Br. ljudi u&#x0a;prihvacenim&#x0a;zahtevima" Margin="10,0,10,0"/>
+            <TextBlock Grid.Column="1" Text="{Binding AcceptedGuestNumber}" Margin="50,28,10,0"/>
+            <ComboBox Grid.Column="2" Width="140" Height ="30" Margin="68,20,19,21"/>
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="0 20 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="{Binding AcceptedGuestNumber}" Margin="10,40,10,10"/>
-            <ComboBox Grid.Column="1" Width="170" Margin="55,30,19,21"/>
-        </Grid>
-
-        <Grid Grid.Row="3" Margin="0 150 0 0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            
-            <TextBlock Grid.Column="0" Text="Prikaz broja zahteva spram jezika" Margin="10"/>
+            <TextBlock Grid.Column="0" Text="Prikaz broja zahteva&#x0a; spram jezika" Margin="10"/>
             <Button Grid.Column="1"
                     Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
                     CommandParameter="graphLanguageRequest" 
-                    Content="Prikazi grafik" Width="120" Height="40" Margin="55 0 0 0"/>
+                    Content="Prikazi grafik" Width="120" Height="40" Margin="85 0 0 0"/>
         </Grid>
 
-        <Grid Grid.Row="4" Margin="0 150 0 0">
+        <Grid Grid.Row="4" Margin="0 20 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Prikaz broja zahteva spram lokacije" Margin="10"/>
+            <TextBlock Grid.Column="0" Text="Prikaz broja zahteva&#x0a; spram lokacije" Margin="10"/>
             <Button Grid.Column="1" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                    CommandParameter="graphLanguageRequest" 
-                    Content="Prikazi grafik" Width="120" Height="40" Margin="55 0 0 0"/>
+                    CommandParameter="graphLocationRequest" 
+                    Content="Prikazi grafik" Width="120" Height="40" Margin="85 0 0 0"/>
 
         </Grid>
 

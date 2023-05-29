@@ -28,5 +28,10 @@ namespace InitialProject.View.Tourist
             InitializeComponent();
             this.DataContext = new TouristHomeViewModel();
         }
+
+        private void Footer_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+
+        }
     }
 }

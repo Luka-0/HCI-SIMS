@@ -28,7 +28,7 @@
 
             <Button Grid.Column="1" Width="215" Height="35" 
                     Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                    CommandParameter="home"
+                    CommandParameter="{Binding Parametar}"
                     Content="&lt; Nazad"
                     Background="#cc0000" 
                     Foreground="White"

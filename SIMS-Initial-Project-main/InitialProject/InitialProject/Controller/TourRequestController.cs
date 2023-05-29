@@ -51,4 +51,14 @@ public class TourRequestController
     {
         return tourRequestService.GetStatistics();
     }
+
+    public Dictionary<string, int> GetRequestCountByLanguage()
+    {
+        return tourRequestService.GetRequestCountByLanguage();
+    }
+
+    public Dictionary<string, int> GetRequestCountByLocation()
+    {
+        return tourRequestService.GetRequestCountByLocation();
+    }
 }

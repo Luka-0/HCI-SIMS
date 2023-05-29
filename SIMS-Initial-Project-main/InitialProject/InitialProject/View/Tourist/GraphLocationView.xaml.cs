@@ -14,17 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InitialProject.Components
+namespace InitialProject.View.Tourist
 {
     /// <summary>
-    /// Interaction logic for Header.xaml
+    /// Interaction logic for GraphLocationView.xaml
     /// </summary>
-    public partial class Header : UserControl
+    public partial class GraphLocationView : UserControl
     {
-        public Header()
+        public GraphLocationView()
         {
             InitializeComponent();
-            this.DataContext = new HeaderViewModel();
+            this.DataContext = new GraphLocationViewModel();
         }
     }
 }

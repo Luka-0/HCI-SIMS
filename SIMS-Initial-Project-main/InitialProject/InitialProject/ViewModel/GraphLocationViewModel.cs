@@ -1,4 +1,4 @@
-﻿using LiveCharts.Defaults;
+﻿using InitialProject.Controller;
 using LiveCharts.Wpf;
 using LiveCharts;
 using System;
@@ -6,32 +6,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Controller;
 
 namespace InitialProject.ViewModel
 {
-    public class GraphLanguageViewModel:BindableBase
+    public class GraphLocationViewModel:BindableBase
     {
         TourRequestController _tourRequetController = new TourRequestController();
 
         public SeriesCollection DataSeries { get; set; }
-        public List<string> Languages { get; set; }
+        public List<string> Locations { get; set; }
         public List<string> XAxisLabels { get; set; }
         public List<int> YAxisLabels { get; set; }
 
-        public GraphLanguageViewModel()
+        public GraphLocationViewModel()
         {
-            UpdateHeaderTitle("Broj tura po jeziku");
+            UpdateHeaderTitle("Broj tura po lokaciji");
             UpdateFooterParametar("statistics");
-            var languageData = _tourRequetController.GetRequestCountByLanguage();
+            var locationData = _tourRequetController.GetRequestCountByLocation();
 
-            Languages = new List<string>(languageData.Keys);
+            Locations = new List<string>(locationData.Keys);
 
             // Create a ColumnSeries and add the data points
             ColumnSeries columnSeries = new ColumnSeries
             {
                 Title = "Tour Requests",
-                Values = new ChartValues<int>(languageData.Values)
+                Values = new ChartValues<int>(locationData.Values)
             };
 
             // Create a SeriesCollection and add the ColumnSeries
@@ -40,11 +39,8 @@ namespace InitialProject.ViewModel
                 columnSeries
             };
 
-            XAxisLabels = Languages.ToList();
+            XAxisLabels = Locations.ToList();
 
         }
-
-
-
     }
 }
