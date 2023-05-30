@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230530113149_ComplexTour5")]
+    partial class ComplexTour5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -377,7 +379,7 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ComplexTourRequestId")
+                    b.Property<int>("ComplexTourRequestId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
@@ -681,7 +683,9 @@ namespace InitialProject.Migrations
                 {
                     b.HasOne("InitialProject.Model.ComplexTourRequest", "ComplexTourRequest")
                         .WithMany("Requests")
-                        .HasForeignKey("ComplexTourRequestId");
+                        .HasForeignKey("ComplexTourRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("InitialProject.Model.Location", "Location")
                         .WithMany()
