@@ -69,6 +69,14 @@ public class TourRequestRepository: ITourRequestRepository
 
     }
 
+    public List<TourRequest> GetAllPendingByComplex(int id)
+    {
+        using var db = new UserContext();
+        return db.tourRequest.Where(tr => (tr.State == TourRequestState.Pending) && (tr.ComplexTourRequest.Id == id))
+            .Include(tr => tr.Location)
+            .ToList();
+    }
+
 
 
 

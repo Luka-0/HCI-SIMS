@@ -27,6 +27,9 @@ public class TourRequest
 
     [ForeignKey("TouristId")]
     public User? Tourist { get; set; }
+    
+    [ForeignKey("ComplexTourRequestId"), AllowNull]
+    public ComplexTourRequest? ComplexTourRequest { get; set; }
 
 
     public TourRequest()

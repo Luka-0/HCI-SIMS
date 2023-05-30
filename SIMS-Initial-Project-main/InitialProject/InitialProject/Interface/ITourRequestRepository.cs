@@ -12,4 +12,5 @@ public interface ITourRequestRepository
     public void Accept(int id, DateTime selectedDate);
     public List<string> GetLanguages();
     public void Save(TourRequest request, User user);
+    public List<TourRequest> GetAllPendingByComplex(int id);
 }

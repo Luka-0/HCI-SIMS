@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,27 +11,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230530112005_ComplexTour3")]
+    partial class ComplexTour3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
-
-            modelBuilder.Entity("ComplexTourRequestUser", b =>
-                {
-                    b.Property<int>("ComplexTourRequestsId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("GuidesId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ComplexTourRequestsId", "GuidesId");
-
-                    b.HasIndex("GuidesId");
-
-                    b.ToTable("ComplexTourRequestUser");
-                });
 
             modelBuilder.Entity("InitialProject.Model.Accommodation", b =>
                 {
@@ -143,24 +130,6 @@ namespace InitialProject.Migrations
                     b.HasIndex("AccommodationReservationId");
 
                     b.ToTable("AccommodationReview");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.ComplexTourRequest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("State")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ComplexTourRequest");
                 });
 
             modelBuilder.Entity("InitialProject.Model.GuestReview", b =>
@@ -396,9 +365,6 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ComplexTourRequestId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -429,8 +395,6 @@ namespace InitialProject.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ComplexTourRequestId");
 
                     b.HasIndex("LocationId");
 
@@ -568,21 +532,6 @@ namespace InitialProject.Migrations
                     b.ToTable("Voucher");
                 });
 
-            modelBuilder.Entity("ComplexTourRequestUser", b =>
-                {
-                    b.HasOne("InitialProject.Model.ComplexTourRequest", null)
-                        .WithMany()
-                        .HasForeignKey("ComplexTourRequestsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InitialProject.Model.User", null)
-                        .WithMany()
-                        .HasForeignKey("GuidesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("InitialProject.Model.Accommodation", b =>
                 {
                     b.HasOne("InitialProject.Model.Location", "Location")
@@ -713,10 +662,6 @@ namespace InitialProject.Migrations
 
             modelBuilder.Entity("InitialProject.Model.TourRequest", b =>
                 {
-                    b.HasOne("InitialProject.Model.ComplexTourRequest", "ComplexTourRequest")
-                        .WithMany("Requests")
-                        .HasForeignKey("ComplexTourRequestId");
-
                     b.HasOne("InitialProject.Model.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
@@ -724,8 +669,6 @@ namespace InitialProject.Migrations
                     b.HasOne("InitialProject.Model.User", "Tourist")
                         .WithMany()
                         .HasForeignKey("TouristId");
-
-                    b.Navigation("ComplexTourRequest");
 
                     b.Navigation("Location");
 
@@ -784,11 +727,6 @@ namespace InitialProject.Migrations
             modelBuilder.Entity("InitialProject.Model.Accommodation", b =>
                 {
                     b.Navigation("Images");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.ComplexTourRequest", b =>
-                {
-                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>
