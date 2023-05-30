@@ -1,0 +1,52 @@
+﻿<Window x:Class="InitialProject.View.Guide.ComplexTourRequests"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.Guide"
+        mc:Ignorable="d"
+        Title="ComplexTourRequests" Height="720" Width="1080">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="320"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="27"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Grid.Column="0" x:Name="DataGridRequests" ItemsSource="{Binding Requests}" SelectionMode="Single"  AutoGenerateColumns="False" IsReadOnly="True"  VerticalAlignment="Top" SelectionChanged="DataGridRequests_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ComboBox  Grid.Column="0"  Name="ComboBox1"  ItemsSource="{Binding Path=RequestCities}" Width="200" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" SelectionChanged="ComboBox1_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <DatePicker Grid.Column ="1" x:Name="DatePicker1"  HorizontalContentAlignment="Center" Margin="53,25,73,271" />
+                <Button  Grid.Column="1" Click="AcceptRequest" Content="Accept" HorizontalAlignment="Center" Width="70" Margin="0,283,0,5" />
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</Window>

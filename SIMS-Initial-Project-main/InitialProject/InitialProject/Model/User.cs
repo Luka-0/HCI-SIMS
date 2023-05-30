@@ -1,8 +1,10 @@
 ﻿using InitialProject.Enumeration;
 using InitialProject.Serializer;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using InitialProject.View.Guide;
 
 namespace InitialProject.Model
 {
@@ -19,6 +21,9 @@ namespace InitialProject.Model
         public DateTime SuperTitleValidTill { get; set; }
         public UserType Type { get; set; }
         public int Age { get; set; }
+
+        [InverseProperty("Guides")]
+        public List<ComplexTourRequest>? ComplexTourRequests { get; set; } = new List<ComplexTourRequest>();
         public User()
         {
             Username = "default";

@@ -218,4 +218,8 @@ public class TourRequestService
         return requestData;
     }
 
+    public List<TourRequest> GetAllPendingByComplex(int id)
+    {
+        return _tourRequestRepository.GetAllPendingByComplex(id);
+    }
 }

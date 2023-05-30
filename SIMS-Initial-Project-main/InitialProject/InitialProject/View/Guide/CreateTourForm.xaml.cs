@@ -138,5 +138,12 @@ namespace InitialProject
             tourRequestsView.Show();
             Close();
         }
+
+        private void ShowComplexTourRequests(object sender, RoutedEventArgs e)
+        {
+            ComplexTourRequests complexTourRequests = new ComplexTourRequests(LoggedInGuide);
+
+            complexTourRequests.Show();
+        }
     }
 }
