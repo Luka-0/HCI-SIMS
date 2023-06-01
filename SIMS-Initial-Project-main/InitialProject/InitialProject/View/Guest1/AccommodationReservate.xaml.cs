@@ -114,7 +114,7 @@ namespace InitialProject.View.Guest1
        
             foreach (StartEndDateDto t in DatesToChose)
             {
-                OfferedDatesCB.Items.Add(t.StartingDate.Date.ToString() + t.EndingDate.Date.ToString());         
+                OfferedDatesCB.Items.Add(t.StartingDate.Date.ToString() + t.EndingDate.Date.ToString());
             }
 
             OfferedDatesCB.SelectedIndex = 0;
