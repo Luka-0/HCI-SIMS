@@ -53,7 +53,7 @@ namespace InitialProject.View.Guest1
             if (allAccommodations.Count == 0)
             {
                 MessageBox.Show("There are currently no Accommodations to look at :(");
-                this.Close();
+                Close();
             }
 
             RefreshDataGrid(allAccommodations);
@@ -171,7 +171,7 @@ namespace InitialProject.View.Guest1
 
             if (DatesToChose == null || DatesToChose.Count == 0)
             {
-                DatesToChose = AccommodationReservationController.FindOtherDates(endDate, accommodation, daysToStay);
+                DatesToChose = AccommodationReservationController.FindOtherDates(endDate, accommodation, daysToStay, 0);
             }
 
             InitializeDatesComboBox();

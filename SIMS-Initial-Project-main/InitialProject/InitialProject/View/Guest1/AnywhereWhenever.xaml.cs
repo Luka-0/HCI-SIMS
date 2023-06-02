@@ -22,19 +22,25 @@ namespace InitialProject.View.Guest1
     {
         private readonly AccommodationController AccommodationController = new();
         private readonly AccommodationReservationController AccommodationReservationController = new();
+        private readonly RenovationController RenovationController = new();
 
         private User User { get; set; }
 
         private List<StartEndDateDto> DatesToChoose { get; set; } = new();
 
-        public ObservableCollection<Accommodation> AccommodationsToShow { get; set; } = new();
+        public ObservableCollection<Accommodation> AccommodationsToShow { get; set; }
 
         public AnywhereWhenever(User user)
         {
             User = user;
             DataContext = this;
 
+
+
             InitializeComponent();
+
+            GenerateDatesButton.IsEnabled = false;
+            ReservateButton.IsEnabled = false;
         }
 
         private void StartDemo_Click(object sender, RoutedEventArgs e)
@@ -45,31 +51,63 @@ namespace InitialProject.View.Guest1
         private void GenerateDates_Click(object sender, RoutedEventArgs e)
         {
             if (IsViolatingAnyUIControl()) return;
+            if(AccommodationsGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Please select an accommodations You wish to reservate");
+                return;
+            }
 
-            DateTime startDate = StartingDatePicker.SelectedDate.Value;
-            DateTime endingDate = EndingDatePicker.SelectedDate.Value;
+            Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
             int daysToStay = int.Parse(DaysToStayTB.Text);
 
-            if (StartingDatePicker.SelectedDate == null)
+            if (StartingDatePicker.SelectedDate == null && EndingDatePicker.SelectedDate == null)
             {
-                GenerateDatesWithoutStartEnd(startDate, endingDate, daysToStay);
+                GenerateDatesWithoutStartEnd(accommodation, daysToStay);
             }
             else
             {
-                GenerateDatesWithStartEnd(startDate, endingDate, daysToStay);
+                DateTime startDate = StartingDatePicker.SelectedDate.Value;
+                DateTime endingDate = EndingDatePicker.SelectedDate.Value;
+                GenerateDatesWithStartEnd(accommodation, startDate, endingDate, daysToStay);
             }
+
+            ReservateButton.IsEnabled = true;
         }
 
-        private void GenerateDatesWithoutStartEnd(DateTime startDate, DateTime endingDate, int daysToStay)
+        private void GenerateDatesWithoutStartEnd(Accommodation accommodation, int daysToStay)
         {
-            List<Accommodation> accommodations = AccommodationController.GetBy(int.Parse(DaysToStayTB.Text), int.Parse(GuestNumberTB.Text));
+            DatesToChoose = AccommodationReservationController.FindOtherDates(DateTime.Now.AddDays(1), accommodation, daysToStay, 5);
 
-
+            InitializeDatesComboBox();
         }
 
-        private void GenerateDatesWithStartEnd(DateTime startDate, DateTime endingDate, int daysToStay)
+        private void GenerateDatesWithStartEnd(Accommodation accommodation, DateTime startDate, DateTime endingDate, int daysToStay)
         {
-            List<Accommodation> accommodations = AccommodationController.GetBy(int.Parse(DaysToStayTB.Text), int.Parse(GuestNumberTB.Text));
+            List<StartEndDateDto> availableDates = AccommodationReservationController.GetAvailableDates(accommodation, startDate, endingDate, daysToStay);
+            List<Renovation> existingRenovations = new List<Renovation>();
+
+
+            if (availableDates != null)
+            {
+                foreach (StartEndDateDto t in availableDates)
+                {
+                    existingRenovations = RenovationController.GetAllBetweenBy(accommodation, t.StartingDate, t.EndingDate);
+
+                    if (existingRenovations.Count == 0)
+                    {
+                        DatesToChoose.Add(t);
+                    }
+                }
+            }
+
+            if (DatesToChoose == null || DatesToChoose.Count == 0)
+            {
+                DatesToChoose = AccommodationReservationController.FindOtherDates(endingDate, accommodation, daysToStay, 0);
+            }
+
+            InitializeDatesComboBox();
+
+            /*List<Accommodation> accommodations = AccommodationController.GetBy(int.Parse(DaysToStayTB.Text), int.Parse(GuestNumberTB.Text));
 
             if(accommodations == null || accommodations.Count == 0)
             {
@@ -83,19 +121,30 @@ namespace InitialProject.View.Guest1
             {
                 List<StartEndDateDto> tmp = AccommodationReservationController.GetAvailableDates(accommodations.ElementAt(i), startDate, endingDate, daysToStay);
 
-                for(int j=0; j<DatesToChoose.Count; ++j)
+                for(int j=0; j<tmp.Count; ++j)
                 {
-                    if (!tmp.Contains(DatesToChoose.ElementAt(j)))
+                    int k = 0;
+                    StartEndDateDto tmpJ = tmp.ElementAt(j);
+                    for (; k<DatesToChoose.Count; ++k)
                     {
-                        DatesToChoose.Remove(DatesToChoose.ElementAt(j));
-                        
+                        if (tmpJ.StartingDate.Day == DatesToChoose.ElementAt(k).StartingDate.Day) break;
+                    }
+
+                    if(k == DatesToChoose.Count)
+                    {
+                        foreach (StartEndDateDto s in DatesToChoose)
+                        {
+                            if (s.StartingDate.Day == tmpJ.StartingDate.Day)
+                            {
+                                DatesToChoose.Remove(s);
+                            }
+                        }
                     }
                 }
             }
 
             if (DatesToChoose.Count == 0) MessageBox.Show("Nema");
-
-            InitializeDatesComboBox();
+            */
         }
 
         private void InitializeDatesComboBox()
@@ -112,7 +161,24 @@ namespace InitialProject.View.Guest1
 
         private void Reservate_Click(object sender, RoutedEventArgs e)
         {
+            DateTime startDate = DatesToChoose[OfferedDatesCB.SelectedIndex].StartingDate;
+            DateTime endDate = DatesToChoose[OfferedDatesCB.SelectedIndex].EndingDate;
 
+            if (AccommodationsGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Please selecent an accommodation");
+                return;
+            }
+
+            if (AccommodationReservationController.CreateReservation((Accommodation)AccommodationsGrid.SelectedItem, startDate, endDate, int.Parse(GuestNumberTB.Text), User))
+            {
+                MessageBox.Show("Succesfully saved");
+
+                OfferedDatesCB.Items.Clear();
+                return;
+            }
+
+            MessageBox.Show("Saving was UNsuccesful");
         }
 
         private bool IsViolatingAnyUIControl()
@@ -136,7 +202,16 @@ namespace InitialProject.View.Guest1
             return false;
         }
 
+        private void RefreshDataGrid(List<Accommodation> accommodations)
+        {
+            AccommodationsToShow = new ObservableCollection<Accommodation>();
+            AccommodationsGrid.ItemsSource = AccommodationsToShow;
 
+            foreach (Accommodation a in accommodations)
+            {
+                AccommodationsToShow.Add(a);
+            }
+        }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
@@ -144,6 +219,23 @@ namespace InitialProject.View.Guest1
             guest1Menu.Show();
 
             Close();
+        }
+
+        private void ShowAccommodations_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsViolatingAnyUIControl()) return;
+
+            List<Accommodation> accommodations = AccommodationController.GetBy(int.Parse(DaysToStayTB.Text), int.Parse(GuestNumberTB.Text));
+
+            if (accommodations == null || accommodations.Count == 0)
+            {
+                MessageBox.Show("There are currently no accommodations that match the entered guest number and staying days");
+                return;
+            }
+
+            RefreshDataGrid(accommodations);
+
+            GenerateDatesButton.IsEnabled = true;
         }
     }
 }

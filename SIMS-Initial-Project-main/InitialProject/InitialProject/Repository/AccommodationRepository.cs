@@ -170,7 +170,7 @@ namespace InitialProject.Repository
             using(UserContext db = new())
             {
                 accommodations = db.accommodation.Include(t => t.Location)
-                                                 .Where(t => t.MinimumReservationDays <= reservationDays && t.GuestLimit <= guestNumber)
+                                                 .Where(t => t.MinimumReservationDays <= reservationDays && t.GuestLimit >= guestNumber)
                                                  .ToList();
             }
 

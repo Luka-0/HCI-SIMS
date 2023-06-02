@@ -109,11 +109,11 @@ namespace InitialProject.Service
 
         }
 
-        public List<StartEndDateDto> FindOtherDates(DateTime endDate, Accommodation accommodation, int daysToStay)
+        public List<StartEndDateDto> FindOtherDates(DateTime endDate, Accommodation accommodation, int daysToStay, int datesNeeded)
         {
             List<StartEndDateDto> dates = new();
 
-            for(int i=0; ; ++i)
+            for(int i=0; i<datesNeeded ; ++i)
             {
                 DateTime newStartDate = endDate.AddDays(i);
                 DateTime newEndDate = newStartDate.AddDays(daysToStay);
@@ -122,9 +122,10 @@ namespace InitialProject.Service
                 {
                     StartEndDateDto tmp = new(newStartDate, newEndDate);
                     dates.Add(tmp);
-                    return dates;
                 }
             }
+
+            return dates;
         }
 
 

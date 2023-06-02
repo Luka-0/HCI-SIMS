@@ -25,9 +25,9 @@ namespace InitialProject.Controller
             return AccommodationReservationService.GetAvailableDates(accommodation, startingDate, endingDate, daysToStay);
         }
 
-        public List<StartEndDateDto> FindOtherDates(DateTime endDate, Accommodation accommodation, int daysToStay)
+        public List<StartEndDateDto> FindOtherDates(DateTime endDate, Accommodation accommodation, int daysToStay, int daysNeeded)
         {
-            return AccommodationReservationService.FindOtherDates(endDate, accommodation, daysToStay);
+            return AccommodationReservationService.FindOtherDates(endDate, accommodation, daysToStay, daysNeeded);
         }
 
         public bool CreateReservation(Accommodation accommodation, DateTime startingDate, DateTime endingDate, int guestNumber, User user)
