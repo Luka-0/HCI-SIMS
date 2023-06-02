@@ -17,14 +17,19 @@ using System.Windows.Shapes;
 namespace InitialProject.View.Tourist
 {
     /// <summary>
-    /// Interaction logic for Bane.xaml
+    /// Interaction logic for ShowSingleTour.xaml
     /// </summary>
-    public partial class Bane : UserControl
+    public partial class ShowSingleTour : UserControl
     {
-        public Bane()
+        public ShowSingleTour()
         {
             InitializeComponent();
-            this.DataContext = new BaneViewModel();
+            //this.DataContext = new ShowSingleTourViewModel();
+            BindableBase bindableBase = new BindableBase();
+            bindableBase.UpdateFooterParametar("showAndSearchTour");
+            bindableBase.UpdateHeaderTitle("Prikaz ture");
+
         }
+
     }
 }

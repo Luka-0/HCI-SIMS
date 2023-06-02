@@ -22,6 +22,7 @@ namespace InitialProject.ViewModel
         private GraphLanguageViewModel graphLanguageViewModel = new GraphLanguageViewModel();   
         private HelpViewModel helpViewModel = new HelpViewModel();
         private GraphLocationViewModel graphLocationViewModel = new GraphLocationViewModel();
+        private ShowSingleTourViewModel showSingleTourViewModel = new ShowSingleTourViewModel();
 
         private BindableBase currentViewModel;
 
@@ -76,6 +77,9 @@ namespace InitialProject.ViewModel
                     break;
                 case "graphLocationRequest":
                     CurrentViewModel = graphLocationViewModel;
+                    break;
+                case "showSingleTour":
+                    CurrentViewModel = showSingleTourViewModel;
                     break;
             }
         }

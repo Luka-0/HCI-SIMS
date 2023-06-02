@@ -5,6 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View.Tourist"
              xmlns:comp ="clr-namespace:InitialProject.Components"
+             xmlns:comm ="clr-namespace:InitialProject.Commands"
+             xmlns:ei="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="430">
     <Grid Background="#F8F8FF">
@@ -24,7 +28,16 @@
 
         <Grid Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <ListView Grid.Row="1" Margin="0 25 0 0 " ItemsSource="{Binding Tours}" Height="200">
+                <ListView Grid.Row="1" Margin="0 25 0 0 " ItemsSource="{Binding Tours}" SelectedItem="{Binding SelectedRowData, Mode=TwoWay}" Height="200">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction 
+                                        Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                        CommandParameter="showSingleTour"
+                            />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

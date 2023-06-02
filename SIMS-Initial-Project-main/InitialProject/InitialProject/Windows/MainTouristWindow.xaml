@@ -46,6 +46,10 @@
         <DataTemplate DataType="{x:Type viewModel:GraphLocationViewModel}">
             <views:GraphLocationView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ShowSingleTourViewModel}">
+            <views:ShowSingleTour/>
+        </DataTemplate>
     </Window.Resources>
 
 
