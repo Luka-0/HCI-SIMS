@@ -162,5 +162,20 @@ namespace InitialProject.Repository
         //        db.SaveChanges();
         //    }
         //}
+
+        public List<Accommodation> GetBy(int reservationDays, int guestNumber)
+        {
+            List<Accommodation> accommodations = new();
+
+            using(UserContext db = new())
+            {
+                accommodations = db.accommodation.Include(t => t.Location)
+                                                 .Where(t => t.MinimumReservationDays <= reservationDays && t.GuestLimit >= guestNumber)
+                                                 .ToList();
+            }
+
+            return accommodations;
+        }
+
     }
 }
