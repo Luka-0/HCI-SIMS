@@ -136,7 +136,8 @@ namespace InitialProject.Service
 
         public void CheckTourReviews(List<LanguageAndToursDto> dtos, User guide)
         {
-            List<Tour> goodTours = new List<Tour>();
+            
+            List<string> goodLanguages = new List<string>();
             foreach (LanguageAndToursDto dto in dtos)
             {
                 List<TourReservation> reservations = new List<TourReservation>();
@@ -148,11 +149,11 @@ namespace InitialProject.Service
                 //sve rezervacije za jedan jezik
                 if (tourReviewService.CheckIfEligible(reservations))
                 {
-                    superGuideService.Add(guide, dto.Language);
+                    goodLanguages.Add(dto.Language);
+                    
                 }
-                
             }
-             
+            superGuideService.AddRange(guide, goodLanguages);
         }
     }
 }

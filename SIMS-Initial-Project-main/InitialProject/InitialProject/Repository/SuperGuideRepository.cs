@@ -1,4 +1,8 @@
-﻿using InitialProject.Contexts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using System.Windows.Controls;
+using InitialProject.Contexts;
 using InitialProject.Interface;
 using InitialProject.Model;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +22,13 @@ public class SuperGuideRepository: ISuperGuideRepository
         }
     }
 
+    public bool IsActive(User guide, string language)
+    {
+        using (var db = new UserContext())
+        {
+           return  db.SuperGuide.Any(sg => sg.Guide == guide && sg.Language == language);
+        }
+    }
 
 
 }

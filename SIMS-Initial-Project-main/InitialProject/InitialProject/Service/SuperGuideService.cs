@@ -1,4 +1,5 @@
-﻿using InitialProject.Interface;
+﻿using System.Collections.Generic;
+using InitialProject.Interface;
 using InitialProject.Model;
 
 namespace InitialProject.Service;
@@ -15,7 +16,25 @@ public class SuperGuideService
     
     public void Add(User guide, string language)
     {
-        SuperGuide superGuide = new SuperGuide(language, guide);
-        _ISuperGuideRepository.Add(superGuide);
+        if (!IsActive(guide, language))
+        {
+            SuperGuide superGuide = new SuperGuide(language, guide);
+            _ISuperGuideRepository.Add(superGuide);
+
+        }
+    }
+
+    private bool IsActive(User guide, string language)
+    {
+        return _ISuperGuideRepository.IsActive(guide, language);
+        
+    }
+
+    public void AddRange(User guide, List<string> goodLanguages)
+    {
+        foreach (string language in goodLanguages)
+        {
+            Add(guide, language);
+        }
     }
 }
