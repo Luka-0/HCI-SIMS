@@ -126,5 +126,21 @@ namespace InitialProject.View
 
             Close();
         }
+
+        private void CreateForum_Click(object sender, RoutedEventArgs e)
+        {
+            CreateForum createForum = new(User);
+            createForum.Show();
+
+            Close();
+        }
+
+        private void CommentOnForum_Click(object sender, RoutedEventArgs e)
+        {
+            CommentOnForum commentOnForum = new(User);
+            commentOnForum.Show();
+
+            Close();
+        }
     }
 }
