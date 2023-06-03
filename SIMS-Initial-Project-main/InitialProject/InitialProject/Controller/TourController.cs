@@ -21,8 +21,8 @@ public class TourController
     private TourReservationService reservationService = new TourReservationService(new TourReservationRepository());
 
     private TourService tourService = new TourService(new TourRepository());
-
     private LocationService locationService = new (new LocationRepository());
+    
     //private ImageService imageService = new ImageService();
     //private UserService userService = new UserService();
 
@@ -125,6 +125,11 @@ public class TourController
     public List<DateTime> GetOccupiedDays(int GuideId, DateTime lowerLimit, DateTime upperLimit)
     {
         return tourService.GetOccupiedDays(GuideId, lowerLimit, upperLimit);
+    }
+
+    public void AddIfEligibleForSuper(User guide)
+    {
+        tourService.AddIfEligibleForSuper(guide);
     }
 }
 

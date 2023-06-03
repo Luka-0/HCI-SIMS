@@ -39,6 +39,8 @@ namespace InitialProject.Contexts
         public DbSet<Renovation> renovation { get; set; }
         public DbSet<ComplexTourRequest> ComplexTourRequest { get; set; }
 
+        public DbSet<SuperGuide> SuperGuide { get; set; }
+
         //Pavle:
         public string path = @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";
 
@@ -47,7 +49,7 @@ namespace InitialProject.Contexts
 
         //Stajic:
         //public string path = @"C:\Users\Luka stajic\Documents\Projekat SiMS-HCI\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";
-        public string path = @"C:\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";
+      //  public string path = @"C:\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";
 
         //Pele:
         //public string path = @" E:\JobGitRepos\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";

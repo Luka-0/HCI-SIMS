@@ -8,12 +8,15 @@ using InitialProject.Enumeration;
 using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace InitialProject.Service;
 
 public class TourRequestService
 {
     private readonly ITourRequestRepository _tourRequestRepository;
+    private readonly SuperGuideService _superGuideService = new SuperGuideService(new SuperGuideRepository());
+    private readonly TourReviewService _= new TourReviewService( new TourReviewRepository());
 
     public TourRequestService(ITourRequestRepository repository)
     {

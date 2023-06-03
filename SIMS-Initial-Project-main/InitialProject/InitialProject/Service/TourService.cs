@@ -5,6 +5,7 @@ using InitialProject.Contexts;
 using InitialProject.Dto;
 using InitialProject.Enumeration;
 using InitialProject.Interface;
+using InitialProject.Migrations;
 using InitialProject.Model;
 using InitialProject.Repository;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
@@ -19,6 +20,7 @@ public class TourService
     //private readonly TourKeyPointService tourKeyPointService = new TourKeyPointService(new TourKeyPointRepository());
     private readonly LocationService locationService = new LocationService(new LocationRepository());
     private readonly ImageService imageService = new ImageService(new ImageRepository());
+
     private readonly ITourRepository _tourRepository;
 
     public TourService(ITourRepository repository)
@@ -240,5 +242,97 @@ public class TourService
         }
 
         return datesForBlackingOut;
+    }
+    public void AddIfEligibleForSuper(User guide)
+    {
+        List<Tour> lastYearTours = GetLastYearToursByGuide(guide.Id);
+
+        List<string> languages = GetUniqueLanguages(lastYearTours);
+
+        List<string> availableLanguages =  GetLanguagesWithEnoughTours(lastYearTours, languages);
+
+        Dictionary<string, SuperGuideDto> collection = new Dictionary<string, SuperGuideDto>();
+
+
+        List<LanguageAndToursDto> toursThatPassedLanguageCheck = GetToursThatPassedLanguageCheck(lastYearTours, availableLanguages);
+
+
+        tourReservationService.CheckTourReviews(toursThatPassedLanguageCheck, guide);
+        
+
+    }
+
+    private List<LanguageAndToursDto> GetToursThatPassedLanguageCheck(List<Tour> lastYearTours, List<string> availableLanguages)
+    {
+        List<LanguageAndToursDto> dtos = CreateDtosByLanguages(availableLanguages);
+
+
+        foreach (Tour tour in lastYearTours)
+        {
+            if (availableLanguages.Contains(tour.Language))
+            {
+                foreach (LanguageAndToursDto dto in dtos)
+                {
+                    if (dto.Language == tour.Language)
+                    {
+                        dto.Tours.Add(tour);
+                    }
+                }
+            }
+        }
+        return dtos;
+    }
+
+    private List<LanguageAndToursDto> CreateDtosByLanguages(List<string> availableLanguages)
+    {
+        List<LanguageAndToursDto> dtos = new List<LanguageAndToursDto>();
+        foreach (string language in availableLanguages)
+        {
+            dtos.Add(new LanguageAndToursDto(language));
+        }
+        return dtos;
+    }
+
+    private List<string> GetLanguagesWithEnoughTours(List<Tour> lastYearTours, List<string> languages)
+    {
+        List<string> availableLanguages = new List<string>();
+
+        foreach (string language in languages)
+        {
+            int count = 0;
+            foreach (Tour tour in lastYearTours )
+            {
+                if (tour.Language.Equals(language))
+                {
+                    count++;
+                }
+            }
+
+            if (count >= 5)
+            {
+                availableLanguages.Add(language);
+            }
+        }
+
+        return availableLanguages;
+    }
+
+    private List<string> GetUniqueLanguages(List<Tour> lastYearTours)
+    {
+        List<string> uniqueLanguages = new List<string>();
+        foreach (Tour tour in lastYearTours)
+        {
+            if (!uniqueLanguages.Contains(tour.Language))
+            {
+                uniqueLanguages.Add(tour.Language);
+            }
+        }
+
+        return uniqueLanguages;
+    }
+
+    public List<Tour> GetLastYearToursByGuide(int id)
+    {
+        return _tourRepository.GetLastYearToursByGuide( id);
     }
 }

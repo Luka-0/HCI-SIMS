@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using InitialProject.Controller;
 using InitialProject.Enumeration;
 using InitialProject.Model;
+using Microsoft.VisualBasic.Logging;
 using ScottPlot.MarkerShapes;
 
 namespace InitialProject.View.Guide

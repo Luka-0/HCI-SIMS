@@ -23,11 +23,12 @@ public class ComplexTourRequest
     public TourRequestState State { get; set; }
 
     [InverseProperty("ComplexTourRequests")]
-    public List<User>? Guides { get; set; } = new List<User>();
+    public List<User>? Guides { get; set; }
 
     public ComplexTourRequest()
     {
         State = TourRequestState.Pending;
+        Guides  = new List<User>();
     }
 
 }

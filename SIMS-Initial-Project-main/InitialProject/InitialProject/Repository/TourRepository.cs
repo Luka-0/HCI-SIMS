@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using InitialProject.Enumeration;
 using Microsoft.EntityFrameworkCore;
 using InitialProject.Interface;
+using System.Windows.Documents;
 
 namespace InitialProject.Repository
 {
@@ -163,6 +164,25 @@ namespace InitialProject.Repository
             {
                 return dbContext.tour.Where(t=>t.Guide.Id == id).Select(t=>t.StartDateAndTime.Date).ToList();
             }
+        }
+
+        public List<Tour> GetLastYearToursByGuide(int id)
+        {
+            using (var dbContext = new UserContext())
+            {
+                List<Tour> tours = GetAllByGuide(id);
+                List<Tour> lastYearTours = new List<Tour>();
+                foreach (Tour tour in tours)
+                {
+                    if (DateTime.Compare(DateTime.Now, tour.StartDateAndTime.AddYears(1)) < 0)
+                    {
+                        lastYearTours.Add(tour);;
+                    }
+                }
+
+                return lastYearTours;
+            }
+            
         }
 
 

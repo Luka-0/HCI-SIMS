@@ -21,6 +21,7 @@ namespace InitialProject
 
         private readonly UserController UserController;
         private readonly AccommodationReviewController AccommodationReviewController;
+        private readonly TourController TourController = new TourController();
 
         private string _username;
         public string Username
@@ -90,6 +91,7 @@ namespace InitialProject
                             }
                         case UserType.Guide:
                             {
+                                TourController.AddIfEligibleForSuper(user);
                                 CreateTourForm createTourForm = new CreateTourForm(user);
                                 createTourForm.Show();
                                 Close();

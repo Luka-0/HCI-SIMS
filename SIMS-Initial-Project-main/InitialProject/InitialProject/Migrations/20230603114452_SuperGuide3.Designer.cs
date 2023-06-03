@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230603114452_SuperGuide3")]
+    partial class SuperGuide3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -317,32 +319,6 @@ namespace InitialProject.Migrations
                     b.HasIndex("AccommodationReservationId");
 
                     b.ToTable("ReservationReschedulingRequest");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.SuperGuide", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Language")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("guideID")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("guideID");
-
-                    b.ToTable("SuperGuide");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>
@@ -710,15 +686,6 @@ namespace InitialProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Reservation");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.SuperGuide", b =>
-                {
-                    b.HasOne("InitialProject.Model.User", "Guide")
-                        .WithMany()
-                        .HasForeignKey("guideID");
-
-                    b.Navigation("Guide");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>

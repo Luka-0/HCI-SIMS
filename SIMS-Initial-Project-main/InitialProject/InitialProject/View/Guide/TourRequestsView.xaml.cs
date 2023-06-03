@@ -310,15 +310,14 @@ namespace InitialProject.View.Guide
             DateTime selectedDate = (DateTime)DatePicker1.SelectedDate;
 
             TourRequestController.Accept(selected.Id, selectedDate);
-
+            
 
             Requests = TourRequestController.GetAllPending();
             FilteredRequests = new ObservableCollection<TourRequest>(Requests);
             DataGridRequests.ItemsSource = FilteredRequests;
             DatePicker1.SelectedDate = null;
 
-            //TODO SLANJE OBAVESTENJA GOSTU2
-
+            
         }
 
         private void DataGridRequests_SelectionChanged(object sender, SelectionChangedEventArgs e)

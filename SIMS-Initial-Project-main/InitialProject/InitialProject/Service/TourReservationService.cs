@@ -16,7 +16,8 @@ namespace InitialProject.Service
     public class TourReservationService
     {
         private readonly VoucherService voucherService = new VoucherService(new VoucherRepository());
-
+        private readonly TourReviewService tourReviewService = new TourReviewService(new TourReviewRepository());
+        private readonly SuperGuideService superGuideService = new SuperGuideService(new SuperGuideRepository());
         private readonly ITourReservationRepository _tourReservationRepository;
 
 
@@ -131,6 +132,27 @@ namespace InitialProject.Service
           //  return reservations.Sum(reservation => reservation.GuestNumber);
             return dto;
 
+        }
+
+        public void CheckTourReviews(List<LanguageAndToursDto> dtos, User guide)
+        {
+            List<Tour> goodTours = new List<Tour>();
+            foreach (LanguageAndToursDto dto in dtos)
+            {
+                List<TourReservation> reservations = new List<TourReservation>();
+
+                foreach (Tour tour in dto.Tours)
+                {
+                    reservations.AddRange(tourReservationRepository.GetByTour(tour));
+                }
+                //sve rezervacije za jedan jezik
+                if (tourReviewService.CheckIfEligible(reservations))
+                {
+                    superGuideService.Add(guide, dto.Language);
+                }
+                
+            }
+             
         }
     }
 }
