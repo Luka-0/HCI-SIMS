@@ -314,5 +314,117 @@ namespace InitialProject.Service
             return IAccommodationRepository.GetBy(reservationDays, guestNumber);
         }
 
+
+        public List<Location> GetPopularLocations()
+        {
+
+            List<BriefStatistics> briefAccommodationStatistics = new List<BriefStatistics>();
+
+            foreach (var acc in this.GetAll()) {
+
+                briefAccommodationStatistics.Add(GetBriefStatistics(acc));
+            }
+
+            double averageResCnt = 0;
+            double averageOccupancy = 0;
+
+            foreach (var bs in briefAccommodationStatistics) {
+
+                averageOccupancy += bs.AverageOccupancy;
+                averageResCnt += bs.AverageReservationCount;
+            }
+
+            averageResCnt = averageResCnt / Convert.ToDouble(briefAccommodationStatistics.Count);
+            averageOccupancy = averageOccupancy / Convert.ToDouble(briefAccommodationStatistics.Count);
+
+            List<Location> popularLocations = new List<Location>();
+
+            foreach (var bs in briefAccommodationStatistics) {
+
+                if (bs.AverageReservationCount >= averageResCnt && bs.AverageOccupancy >= averageOccupancy) {
+
+                    popularLocations.Add(bs.Accommodation.Location);
+                }
+            }
+
+                return popularLocations;
+
+        }
+
+
+        public List<Accommodation> GetInferiorlarAccommodations()
+        {
+
+            List<BriefStatistics> briefAccommodationStatistics = new List<BriefStatistics>();
+
+            foreach (var acc in this.GetAll())
+            {
+
+                briefAccommodationStatistics.Add(GetBriefStatistics(acc));
+            }
+
+            double averageResCnt = 0;
+            double averageOccupancy = 0;
+
+            foreach (var bs in briefAccommodationStatistics)
+            {
+
+                averageOccupancy += bs.AverageOccupancy;
+                averageResCnt += bs.AverageReservationCount;
+            }
+
+            averageResCnt = averageResCnt / Convert.ToDouble(briefAccommodationStatistics.Count);
+            averageOccupancy = averageOccupancy / Convert.ToDouble(briefAccommodationStatistics.Count);
+
+            List<Accommodation> inferiorAccommodations = new List<Accommodation>();
+
+            foreach (var bs in briefAccommodationStatistics)
+            {
+
+                if (bs.AverageReservationCount < averageResCnt && bs.AverageOccupancy < averageOccupancy)
+                {
+
+                        inferiorAccommodations.Add(bs.Accommodation);
+                }
+            }
+
+            return inferiorAccommodations;
+
+        }
+
+
+
+        private BriefStatistics GetBriefStatistics(Accommodation accommodation) {
+
+            List<int> yearsSample = new List<int>();
+
+            double avgReservationCount = 0;
+
+            double avgOccupancy = 0;
+
+
+            yearsSample = AccommodationReservationService.GetReservationYearsBy(accommodation);
+
+            yearsSample.Sort();
+
+            foreach (int year in yearsSample)
+            {
+
+                avgReservationCount += AccommodationReservationService.GetCountBy(year, accommodation);
+
+                avgOccupancy += AccommodationReservationService.GetOccupancyBy(year, accommodation);
+
+            }
+
+            if (yearsSample.Count != 0)
+            {
+                avgReservationCount = avgReservationCount / Convert.ToDouble(yearsSample.Count);
+                avgOccupancy = avgOccupancy / Convert.ToDouble(yearsSample.Count);
+            }   
+
+            BriefStatistics briefStatistics = new BriefStatistics(accommodation, avgReservationCount, avgOccupancy);
+
+            return briefStatistics;
+        }
     }
 }

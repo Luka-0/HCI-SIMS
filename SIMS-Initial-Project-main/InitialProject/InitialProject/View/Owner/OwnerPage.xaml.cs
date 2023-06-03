@@ -85,5 +85,10 @@ namespace InitialProject.View
         {
             OperationsContainer.Content = new Statistics(Username);
         }
+
+        private void suggestions_clicccc(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new ManagmentPropositions();
+        }
     }
 }
