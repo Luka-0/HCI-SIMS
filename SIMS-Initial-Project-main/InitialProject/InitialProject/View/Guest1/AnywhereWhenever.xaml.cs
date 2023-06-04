@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using InitialProject.Controller;
 using InitialProject.Dto;
 using InitialProject.Model;
@@ -30,6 +31,8 @@ namespace InitialProject.View.Guest1
 
         public ObservableCollection<Accommodation> AccommodationsToShow { get; set; }
 
+        private int NumOfTicks = 0;
+
         public AnywhereWhenever(User user)
         {
             User = user;
@@ -45,10 +48,105 @@ namespace InitialProject.View.Guest1
 
         private void StartDemo_Click(object sender, RoutedEventArgs e)
         {
+            DispatcherTimer dt = new();
+            dt.Tick += new EventHandler(DtTicker);
+            dt.Interval = new TimeSpan(0, 0, 1);
+            dt.Start();
 
         }
 
-        private void GenerateDates_Click(object sender, RoutedEventArgs e)
+        public void DtTicker(object sender, EventArgs e)
+        {
+            ++NumOfTicks;
+
+            if (NumOfTicks > 30) return;
+
+            switch (NumOfTicks)
+            {
+                case 1:
+                    GuestNumberTB.Focus();
+                    break;
+                case 2:
+                    GuestNumberTB.Text = "2";
+                    break;
+                case 3:
+                    DaysToStayTB.Focus();
+                    break;
+                case 4:
+                    DaysToStayTB.Text = "5";
+                    break;
+                case 6:
+                    StartingDatePicker.Focus();
+                    break;
+                case 7:
+                    StartingDatePicker.IsDropDownOpen = true;
+                    break;
+                case 8:
+                    StartingDatePicker.SelectedDate = new DateTime(2023, 6, 10);
+                    break;
+                case 10:
+                    StartingDatePicker.IsDropDownOpen = false;
+                    break;
+                case 11:
+                    EndingDatePicker.Focus();
+                    break;
+                case 12:
+                    EndingDatePicker.IsDropDownOpen = true;
+                    break;
+                case 13:
+                    EndingDatePicker.SelectedDate = new DateTime(2023, 6, 25);
+                    break;
+                case 15:
+                    EndingDatePicker.IsDropDownOpen = false;
+                    break;
+                case 17:
+                    SAB.BorderBrush = new SolidColorBrush(Colors.Black);
+                    SAB.BorderThickness = new Thickness(2);
+                    break;
+                case 18:
+                    ShowAccommodations_Click(null, null);
+
+                    SAB.ClearValue(Border.BorderThicknessProperty);
+                    SAB.ClearValue(Border.BorderBrushProperty);
+                    break;
+                case 20:
+                    AccommodationsGrid.SelectedIndex = 4;
+                    break;
+                case 22:
+                    GenerateDatesButton.BorderBrush = new SolidColorBrush(Colors.Black);
+                    GenerateDatesButton.BorderThickness = new Thickness(2);
+                    break;
+                case 23:
+                    GenerateDates_Click(null, null);
+
+                    GenerateDatesButton.ClearValue(Border.BorderThicknessProperty);
+                    GenerateDatesButton.ClearValue(Border.BorderBrushProperty);
+                    break;
+                case 25:
+                    OfferedDatesCB.IsDropDownOpen = true;
+                    break;
+                case 26:
+                    OfferedDatesCB.SelectedIndex = 3;
+                    break;
+                case 28:
+                    OfferedDatesCB.IsDropDownOpen = false;
+                    break;
+                case 29:
+                    ReservateButton.BorderBrush = new SolidColorBrush(Colors.Black);
+                    ReservateButton.BorderThickness = new Thickness(2);
+                    break;
+                case 30:
+                    Reservate_Click(null, null);
+
+                    ReservateButton.ClearValue(Border.BorderThicknessProperty);
+                    ReservateButton.ClearValue(Border.BorderBrushProperty);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GenerateDates_Click(object? sender, RoutedEventArgs? e)
         {
             if (IsViolatingAnyUIControl()) return;
             if(AccommodationsGrid.SelectedItem == null)
@@ -159,7 +257,7 @@ namespace InitialProject.View.Guest1
             OfferedDatesCB.SelectedIndex = 0;
         }
 
-        private void Reservate_Click(object sender, RoutedEventArgs e)
+        private void Reservate_Click(object? sender, RoutedEventArgs? e)
         {
             DateTime startDate = DatesToChoose[OfferedDatesCB.SelectedIndex].StartingDate;
             DateTime endDate = DatesToChoose[OfferedDatesCB.SelectedIndex].EndingDate;
@@ -221,7 +319,7 @@ namespace InitialProject.View.Guest1
             Close();
         }
 
-        private void ShowAccommodations_Click(object sender, RoutedEventArgs e)
+        private void ShowAccommodations_Click(object? sender, RoutedEventArgs? e)
         {
             if (IsViolatingAnyUIControl()) return;
 

@@ -9,6 +9,17 @@
     <Grid>
         <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding ReservationsToShow}" Height="Auto" Width="Auto" Margin="331,10,10,0" VerticalAlignment="Top" 
                   AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="LightGray" />
+                            <!-- Set the desired background color here -->
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Accommodation.Title}"/>
                 <DataGridTextColumn Header="City" Binding="{Binding Accommodation.Location.City}"/>
@@ -51,6 +62,17 @@
 
         <DataGrid x:Name="ReservationsResceduleDG" ItemsSource="{Binding ReschedulingsToShow}" Height="Auto" Width="Auto" Margin="10,302,10,0" VerticalAlignment="Top" 
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="LightGray" />
+                            <!-- Set the desired background color here -->
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Reservation.Accommodation.Title}"/>
                 <DataGridTextColumn Header="Guest Number" Binding="{Binding Reservation.GuestNumber}"/>

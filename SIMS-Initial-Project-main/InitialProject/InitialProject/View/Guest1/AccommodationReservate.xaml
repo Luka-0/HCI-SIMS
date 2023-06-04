@@ -11,6 +11,17 @@
         <ScrollViewer Margin="0,0,0,11">
             <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding AccommodationsToShow}" Margin="307,0,10,0" VerticalAlignment="Top" 
                   AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightGray" />
+                                <!-- Set the desired background color here -->
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
                     <DataGridTextColumn Header="Class" Binding="{Binding Class}"/>
