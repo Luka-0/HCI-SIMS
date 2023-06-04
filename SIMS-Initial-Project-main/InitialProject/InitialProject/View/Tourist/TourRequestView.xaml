@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:InitialProject.View.Tourist"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="430">
-    <Grid>
+    <Grid Background="#F8F8FF">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -93,7 +93,6 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="&lt;" Margin="45 0 0 0" HorizontalAlignment="Left" Width="20"/>
             <Button Grid.Column="0" Content="&lt;" Margin="45 0 0 0" HorizontalAlignment="Left" Width="20"/>
             <Button Grid.Column="1" Content="&gt;" Margin="235 0 0 0" HorizontalAlignment="Center" Width="20"/>
         </Grid>

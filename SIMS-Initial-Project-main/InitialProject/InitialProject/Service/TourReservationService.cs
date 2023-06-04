@@ -50,9 +50,9 @@ namespace InitialProject.Service
             return tourReservationRepository.GetById(id);
         }
 
-        public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber)
+        public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber, Voucher voucher)
         {
-            tourReservationRepository.Save(reservation, tour, guest, guestNumber);
+            tourReservationRepository.Save(reservation, tour, guest, guestNumber, voucher);
         }
 
         //TODO ispravi

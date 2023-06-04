@@ -30,7 +30,8 @@ namespace InitialProject.Repository
             using (var dbContext = new UserContext())
             {
                 voucher = (Voucher)dbContext.voucher
-                                .Where(v => v.Id == id);
+                                .Where(v => v.Id == id)
+                                .SingleOrDefault();
             }
             return voucher;
         }

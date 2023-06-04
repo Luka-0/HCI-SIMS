@@ -23,6 +23,8 @@ namespace InitialProject.ViewModel
         private HelpViewModel helpViewModel = new HelpViewModel();
         private GraphLocationViewModel graphLocationViewModel = new GraphLocationViewModel();
         private ShowSingleTourViewModel showSingleTourViewModel = new ShowSingleTourViewModel();
+        private ReserveTourViewModel reserveTourViewModel = new ReserveTourViewModel();
+        private VoucherViewModel voucherViewModel = new VoucherViewModel();
 
         private BindableBase currentViewModel;
 
@@ -80,6 +82,12 @@ namespace InitialProject.ViewModel
                     break;
                 case "showSingleTour":
                     CurrentViewModel = showSingleTourViewModel;
+                    break;
+                case "reserveTour":
+                    CurrentViewModel = reserveTourViewModel;
+                    break;
+                case "vaucherView":
+                    CurrentViewModel = voucherViewModel;
                     break;
             }
         }
