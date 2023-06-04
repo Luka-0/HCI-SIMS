@@ -36,9 +36,9 @@ namespace InitialProject.Controller
             return tourReservationService.GetByTour(tour);
         }
 
-        public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber)
+        public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber, Voucher voucher)
         {
-            tourReservationService.Save(reservation, tour, guest, guestNumber);
+            tourReservationService.Save(reservation, tour, guest, guestNumber, voucher);
         }
 
         public int CountGuestsOnTour(Tour tour)

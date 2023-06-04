@@ -1,0 +1,137 @@
+﻿using InitialProject.Commands;
+using InitialProject.Controller;
+using InitialProject.Model;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace InitialProject.ViewModel
+{
+    public class VoucherViewModel:BindableBase
+    {
+        private VoucherController voucherController = new VoucherController();
+
+        private ObservableCollection<Voucher> _vouchers;
+
+        private Voucher _selectedRowData;
+        private Visibility buttonVisibility = Visibility.Collapsed;
+        private string _selectedTourId;
+        private bool _isButtonEnabled = false;
+        public MyICommand CheckButtonVisibillityCommand { get; set; }
+
+        public VoucherViewModel()
+        {
+            CheckButtonVisibillityCommand = new MyICommand(CheckButtonVisibility);
+            Mediator.Instance.Subscribe("TourIndexUpdated", OnTourIndexUpdated);
+            LoadData();
+
+            UpdateHeaderTitle("Pregled svih vaucera");
+            UpdateFooterParametar("home");
+
+            CheckButtonVisibility();
+        }
+
+        public ObservableCollection<Voucher> Vouchers
+        {
+            get { return _vouchers; }
+            set
+            {
+                if (_vouchers != value)
+                {
+                    _vouchers = value;
+                    OnPropertyChanged(nameof(Vouchers));
+                }
+            }
+        }
+
+        public Voucher SelectedRowData
+        {
+            get { return _selectedRowData; }
+            set
+            {
+                if (_selectedRowData != value)
+                {
+                    _selectedRowData = value;
+                    OnPropertyChanged(nameof(SelectedRowData));
+                    UpdateSelectedVoucherIndex(_selectedRowData.Id.ToString());
+                    CheckButtonVisibility();
+                    CheckButtonEnabled();
+                }
+            }
+        }
+
+        public string SelectedTourId
+        {
+            get { return _selectedTourId; }
+            set
+            {
+                if (_selectedTourId != value)
+                {
+                    _selectedTourId = value;
+                    OnPropertyChanged(nameof(SelectedTourId));
+                }
+            }
+        }
+
+        public Visibility ButtonVisibility
+        {
+            get { return buttonVisibility; }
+            set
+            {
+                buttonVisibility = value;
+                OnPropertyChanged(nameof(ButtonVisibility));
+            }
+        }
+
+        public bool IsButtonEnabled
+        {
+            get { return _isButtonEnabled; }
+            set
+            {
+                _isButtonEnabled = value;
+                OnPropertyChanged(nameof(IsButtonEnabled));
+            }
+        }
+
+        public void LoadData()
+        {
+            ObservableCollection<Voucher> vouchers = new ObservableCollection<Voucher>();
+            List<Voucher> tempVouchers = voucherController.GetAll();
+
+            foreach (Voucher voucher in tempVouchers)
+            {
+                vouchers.Add(voucher);
+            }
+            Vouchers = vouchers;
+        }
+
+        public void CheckButtonVisibility()
+        {
+            if(SelectedTourId != null)
+            {
+                ButtonVisibility = Visibility.Visible;
+            }
+        }
+
+        public void CheckButtonEnabled()
+        {
+            if(_selectedRowData != null)
+            {
+                IsButtonEnabled = true;
+            }
+        }
+
+        private void OnTourIndexUpdated(object newId)
+        {
+            SelectedTourId = newId as string;
+        }
+
+
+
+
+    }
+}

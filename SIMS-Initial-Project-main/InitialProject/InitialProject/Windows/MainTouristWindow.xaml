@@ -46,6 +46,18 @@
         <DataTemplate DataType="{x:Type viewModel:GraphLocationViewModel}">
             <views:GraphLocationView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ShowSingleTourViewModel}">
+            <views:ShowSingleTour/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ReserveTourViewModel}">
+            <views:ReserveTourView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:VoucherViewModel}">
+            <views:VoucherView/>
+        </DataTemplate>
     </Window.Resources>
 
 

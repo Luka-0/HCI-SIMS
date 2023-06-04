@@ -37,5 +37,15 @@ namespace InitialProject.ViewModel
         {
             Mediator.Instance.Publish("TitleUpdated", newTitle);
         }
+
+        public void UpdateSelectedTourIndex(string newIndex)
+        {
+            Mediator.Instance.Publish("TourIndexUpdated", newIndex);
+        }
+
+        public void UpdateSelectedVoucherIndex(string newIndex)
+        {
+            Mediator.Instance.Publish("VoucherIndexUpdated", newIndex);
+        }
     }
 }

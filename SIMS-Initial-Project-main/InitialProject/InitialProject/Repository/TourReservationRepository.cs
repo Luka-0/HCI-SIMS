@@ -67,22 +67,25 @@ namespace InitialProject.Repository
             return reservations;
         }
 
-        public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber)
+        public void Save(TourReservation reservation, Tour tour, User guest, int guestNumber, Voucher voucher)
         {
             var db = new UserContext();
 
             var existingTour = db.tour.Find(tour.Id);
             var existingLocation = db.location.Find(tour.Location.Id);
             var existingGuest = db.users.Find(guest.Id);
+            var existingVoucher = db.voucher.Find(voucher.Id);
 
             reservation.Tour = existingTour;
             reservation.Tour.Location = existingLocation;
             reservation.BookingGuest = existingGuest;
             reservation.GuestNumber = guestNumber;
+            reservation.Voucher = existingVoucher;
 
             db.tour.Attach(existingTour);
             db.location.Attach(existingLocation);
             db.users.Attach(existingGuest);
+            db.voucher.Attach(existingVoucher);
 
             db.Add(reservation);
 

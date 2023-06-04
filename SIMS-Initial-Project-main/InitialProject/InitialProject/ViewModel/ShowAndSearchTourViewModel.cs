@@ -3,12 +3,14 @@ using InitialProject.Controller;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using ScottPlot.Renderable;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace InitialProject.ViewModel
@@ -30,6 +32,11 @@ namespace InitialProject.ViewModel
         private string _selectedLanguage;
         private string _selectedGuestLimit;
 
+        private string _setCommandParametar;
+        private Tour _selectedRowData;
+
+        private string _navCommandParam = "statistics";
+
         public MyICommand SearchByLocationCommand { get; set; }
         public MyICommand SearchByDurationCommand { get; set; }
         public MyICommand SearchByLanguageCommand { get; set; }
@@ -38,6 +45,8 @@ namespace InitialProject.ViewModel
         public ShowAndSearchTourViewModel()
         {
             LoadData();
+
+            SelectedState = "Izaberi drzavu";
 
             UpdateHeaderTitle("Pretraga tura");
             UpdateFooterParametar("home");
@@ -62,6 +71,42 @@ namespace InitialProject.ViewModel
             }
         }
 
+        public Tour SelectedRowData
+        {
+            get { return _selectedRowData; }
+            set
+            {
+                if (_selectedRowData != value)
+                {
+                    _selectedRowData = value;
+                    OnPropertyChanged(nameof(SelectedRowData));
+                    UpdateSelectedTourIndex(_selectedRowData.Id.ToString());
+                }
+            }
+        }
+
+        public string SetCommandParameter
+        {
+            get { return _setCommandParametar; }
+            set
+            {
+                if (_setCommandParametar != value)
+                {
+                    _setCommandParametar = value;
+                    OnPropertyChanged(nameof(SetCommandParameter));
+                }
+            }
+        }
+
+        public string NavCommandParam
+        {
+            get { return _navCommandParam; }
+            set
+            {
+                _navCommandParam = value;
+                OnPropertyChanged(nameof(NavCommandParam));
+            }
+        }
 
         public string SelectedState
         {
@@ -267,5 +312,6 @@ namespace InitialProject.ViewModel
         #endregion
 
 
+        
     }
 }

@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="InitialProject.View.Tourist.ShowSingleTour"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.View.Tourist"
+             xmlns:comp ="clr-namespace:InitialProject.Components"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:viewModel="clr-namespace:InitialProject.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="430">
+    <UserControl.Resources>
+        <viewModel:ShowSingleTourViewModel x:Key="ViewModel" />
+    </UserControl.Resources>
+    
+    <Grid Background="#F8F8FF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <comp:Header/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="50 0 0 0" TextElement.FontSize="16">
+                <TextBlock  Text="Ime:" Margin="0 10 0 0"/>
+                <TextBlock  Text="Opis:" Margin="0 10 0 0"/>
+                <TextBlock  Text="Lokacija:"  Margin="0 10 0 0"/>
+                <TextBlock  Text="Datum:"  Margin="0 10 0 0"/>
+                <TextBlock  Text="Jezik:"  Margin="0 10 0 0"/>
+                <TextBlock  Text="Trajanje:"  Margin="0 10 0 0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" TextElement.FontSize="16">
+                <TextBlock  Text="{Binding Name}" Margin="0 10 0 0"/>
+                <TextBlock  Text="{Binding Description}" Margin="0 10 0 0"/>
+                <TextBlock  Text="{Binding Location}" Margin="0 10 0 0"/>
+                <TextBlock  Text="{Binding StartDateAndTime,  StringFormat={}{0:dd-MM-yyyy}}" Margin="0 -10 0 0"/>
+                <TextBlock  Text="{Binding Language}" Margin="0 10 0 0"/>
+                <TextBlock  Text="{Binding Duration}" Margin="0 10 0 0"/>
+            </StackPanel>
+
+
+        </Grid>
+        
+        
+
+        <Grid Grid.Row="2">
+            
+
+             
+            
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="0 20 0 0">
+            <Button Content="Rezervacija" FontSize="16" Height="35" Width="130"
+                    Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                    CommandParameter="reserveTour"        
+            />
+        </Grid>
+
+        <Grid Grid.Row="4" VerticalAlignment="Bottom">
+            <comp:Footer/>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -182,7 +182,7 @@ namespace InitialProject.View
                 if(!response.IsFull)
                 {
                     TourReservation newTourReservation = new TourReservation();
-                    _reservationController.Save(newTourReservation, tour, UserController.GetBy("Perica"), guestNumber);
+                  //  _reservationController.Save(newTourReservation, tour, UserController.GetBy("Perica"), guestNumber);
                     MessageBox.Show("Uspesno sacuvana rezervacija!");
                     FreeSpacesLabel.Content = "";
                     SelectedGuestNumber.Text = "";
