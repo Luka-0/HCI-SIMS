@@ -18,7 +18,7 @@ public class TourController
 
    // private TourRepository tourRepository = new TourRepository();
     private TourKeyPointService tourKeyPointService = new TourKeyPointService(new TourKeyPointRepository());
-    private TourReservationService reservationService = new TourReservationService(new TourReservationRepository());
+    private TourReservationService tourReservationService = new TourReservationService(new TourReservationRepository());
 
     private TourService tourService = new TourService(new TourRepository());
     private LocationService locationService = new (new LocationRepository());
@@ -64,8 +64,8 @@ public class TourController
 
         foreach (Tour tour in allTours)
         {
-            if (reservationService.IsReserved(tour))
-                if (reservationService.CountGuestsOnTour(tour) == guestNumber)
+            if (tourReservationService.IsReserved(tour))
+                if (tourReservationService.CountGuestsOnTour(tour) == guestNumber)
                     getTourDtos.Add(new GetTourDto(tour.Name, tour.Description, tour.Location, tour.Language, tour.GuestLimit, tour.Duration, tour.StartDateAndTime, tour.TourKeyPoints, tour.images));
         }
         return getTourDtos;
@@ -130,6 +130,11 @@ public class TourController
     public void AddIfEligibleForSuper(User guide)
     {
         tourService.AddIfEligibleForSuper(guide);
+    }
+
+    public void Quit(User loggedInGuide)
+    {
+        tourService.Quit(loggedInGuide);
     }
 }
 

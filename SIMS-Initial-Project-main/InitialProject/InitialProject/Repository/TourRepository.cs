@@ -11,6 +11,7 @@ using InitialProject.Enumeration;
 using Microsoft.EntityFrameworkCore;
 using InitialProject.Interface;
 using System.Windows.Documents;
+using ScottPlot.Drawing.Colormaps;
 
 namespace InitialProject.Repository
 {
@@ -184,6 +185,21 @@ namespace InitialProject.Repository
             }
             
         }
+
+        public void CancelTours(List<Tour> tours)
+        {
+            using (var db = new UserContext())
+            {
+                foreach (Tour tour in tours)
+                {
+                    Tour tourFromDb = db.tour.Find(tour.Id);
+                    tourFromDb.Status = TourStatus.Finished;
+                    db.SaveChanges();
+
+                }
+            }
+        }
+
 
 
     }

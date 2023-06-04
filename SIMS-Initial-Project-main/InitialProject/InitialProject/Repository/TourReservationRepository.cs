@@ -47,6 +47,7 @@ namespace InitialProject.Repository
             {
                 reservations = dbContext.tourReservation
                                  .Include(t => t.Tour)
+                                 .Include(t=>t.BookingGuest)
                                  .Where(t => t.Tour.Id == tour.Id)
                                  .ToList();
             }

@@ -15,5 +15,7 @@ namespace InitialProject.Interface
         public void Delete(Voucher voucher);
         public void SaveMultiple(List<Voucher> vouchers);
         public void Update(Voucher voucher, User user);
+        public bool HasVoucherForGuide(User bookingGuestId,User guide);
+        public void UpdateGuide(Voucher voucher, User guide);
     }
 }

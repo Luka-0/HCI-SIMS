@@ -17,5 +17,6 @@ namespace InitialProject.Interface
         public void UpdateBy(int id, bool superTitle, int bonusPoints);
         public void UpdateBy(int id, bool superTitle, int bonusPoints, DateTime validTill);
 
+        public void Delete(User loggedInGuide);
     }
 }

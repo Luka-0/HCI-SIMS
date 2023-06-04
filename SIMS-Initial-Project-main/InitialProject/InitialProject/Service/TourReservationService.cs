@@ -155,5 +155,16 @@ namespace InitialProject.Service
             }
             superGuideService.AddRange(guide, goodLanguages);
         }
+
+        public void SendVouchers(List<Tour> cancelledTours, User guide)
+        {
+            List<TourReservation> reservations = new List<TourReservation>();
+            foreach (Tour tour in cancelledTours)
+            {
+               reservations.AddRange(_tourReservationRepository.GetByTour(tour));
+            }
+
+            voucherService.SendVouchers(reservations, guide);
+        }
     }
 }

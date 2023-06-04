@@ -20,6 +20,7 @@ public class TourService
     //private readonly TourKeyPointService tourKeyPointService = new TourKeyPointService(new TourKeyPointRepository());
     private readonly LocationService locationService = new LocationService(new LocationRepository());
     private readonly ImageService imageService = new ImageService(new ImageRepository());
+    private readonly UserService userService = new UserService(new UserRepository());
 
     private readonly ITourRepository _tourRepository;
 
@@ -334,5 +335,30 @@ public class TourService
     public List<Tour> GetLastYearToursByGuide(int id)
     {
         return _tourRepository.GetLastYearToursByGuide( id);
+    }
+
+    public void Quit(User loggedInGuide)
+    {
+        List<Tour> guidesTours= _tourRepository.GetAllByGuide(loggedInGuide.Id);
+        List<Tour> activeTours = new List<Tour>();
+
+        foreach (Tour tour in guidesTours)
+        {
+            if (DateTime.Compare(DateTime.Now, tour.StartDateAndTime) < 0 )
+            {
+                if(tour.Status == TourStatus.Waiting)
+                  activeTours.Add(tour);
+            }
+        }
+        tourReservationService.SendVouchers(activeTours, loggedInGuide);
+        //mislim da nema potrebe da se brise, samo otkazi ture
+        //userService.Delete(loggedInGuide);
+        CancelTours(activeTours);
+
+    }
+
+    private void CancelTours(List<Tour> tours)
+    {
+        _tourRepository.CancelTours(tours);
     }
 }

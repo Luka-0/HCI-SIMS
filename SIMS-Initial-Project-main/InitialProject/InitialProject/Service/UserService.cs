@@ -48,4 +48,9 @@ public class UserService
     {
         IUserRepository.UpdateBy(id, superTitle, bonusPoints, validTill);
     }
+
+    public void Delete(User loggedInGuide)
+    {
+        IUserRepository.Delete(loggedInGuide);
+    }
 }

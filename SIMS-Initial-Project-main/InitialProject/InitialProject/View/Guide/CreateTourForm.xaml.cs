@@ -145,5 +145,11 @@ namespace InitialProject
 
             complexTourRequests.Show();
         }
+
+        private void Quit(object sender, RoutedEventArgs e)
+        {
+            TourController.Quit(LoggedInGuide);
+            
+        }
     }
 }

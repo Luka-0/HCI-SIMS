@@ -1,12 +1,14 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Interface;
 using InitialProject.Model;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using User = InitialProject.Model.User;
 
 namespace InitialProject.Repository
 {
@@ -67,8 +69,24 @@ namespace InitialProject.Repository
             var db = new UserContext();
             Voucher tempVoucher = db.voucher.Find(voucher.Id);
             tempVoucher.User = user;
+            tempVoucher.ExpirationDate = DateTime.Now.AddYears(2);
             db.SaveChanges();
 
+        }
+
+        public bool HasVoucherForGuide(User bookingGuest, User guide)
+        {
+            var db= new UserContext();
+            return db.voucher.Any(v => v.Guide == guide && v.User == bookingGuest);
+        }
+
+        public void UpdateGuide(Voucher voucher, User guide)
+        {
+            var db = new UserContext();
+            Voucher tempVoucher = db.voucher.Find(voucher.Id);
+            tempVoucher.Guide = guide;
+            tempVoucher.ExpirationDate = DateTime.Now.AddYears(2);
+            db.SaveChanges();
         }
 
     }

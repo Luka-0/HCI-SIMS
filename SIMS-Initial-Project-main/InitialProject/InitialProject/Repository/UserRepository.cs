@@ -8,6 +8,7 @@ using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using InitialProject.Interface;
 using InitialProject.Enumeration;
+using ScottPlot;
 
 namespace InitialProject.Repository
 {
@@ -104,6 +105,17 @@ namespace InitialProject.Repository
                 db.SaveChanges();
             }
         }
+
+        public void Delete(User loggedInGuide)
+        {
+            using var db = new UserContext();
+            
+            db.users.Remove(loggedInGuide);
+
+
+            db.SaveChanges();
+        }
+
 
     }
 
