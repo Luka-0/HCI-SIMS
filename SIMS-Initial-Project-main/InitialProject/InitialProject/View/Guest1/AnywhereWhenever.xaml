@@ -103,7 +103,7 @@
 
                     <Button Grid.Row="4" x:Name="SAB" IsTabStop="True" IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowAccommodations_Click">
                         <Button.ToolTip>
-                        <ToolTip Placement="Bottom" Content="By clicking this, just on the right will be shown some dates that You click and choose" />
+                        <ToolTip Placement="Bottom" Content="By clicking this, accommodations matching Your requirements will be shown on the right" />
                         </Button.ToolTip>
                         <Button.Resources>
                             <Style TargetType="Button">

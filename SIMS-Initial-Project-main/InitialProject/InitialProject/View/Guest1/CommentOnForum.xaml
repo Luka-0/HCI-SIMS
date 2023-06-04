@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest1"
         mc:Ignorable="d"
-        Title="Comment On A Forum" Height="560" Width="800">
+        Title="Commenting On A Forum" Height="560" Width="800">
     <Grid>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Click="GoBack_Click" Width="57">
             <Button.ToolTip>
@@ -45,7 +45,7 @@
                 <Label Grid.Row="1" Content="Choose city:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" />
                 <ComboBox Grid.Row="1" x:Name="CityCB" MouseLeave="PreShowDG" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Width="140" />
 
-                <TextBox Grid.Row="2" x:Name="CommentTB" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Write comment here" Height="161" Width="271" />
+                <TextBox Grid.Row="2" x:Name="CommentTB" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Write comment here" TextWrapping="Wrap" Height="161" Width="271" />
 
                 <Button Grid.Row="3" MouseLeave="PreShowDG" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddComment_Click" >
                     <Button.ToolTip>
@@ -73,18 +73,31 @@
             </Grid>
         </Border>
 
-        <Grid Margin="370,0,10,0">
-            <Label x:Name="GridL" Content="This is the selected forum with it's replies" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-            <DataGrid x:Name="ForumGrid" ItemsSource="{Binding CommentsToShow}" VerticalAlignment="Top" Margin="0,30,0,0" MinHeight="25" 
-                  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}"/>
-                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" />
-                    <DataGridTextColumn Header="Comment" Binding="{Binding Text}" Width="*"/>
-                </DataGrid.Columns>
-            </DataGrid>
+        <Grid Margin="370,0,0,0">
+            <Label x:Name="GridL" Content="This is the selected forum with its replies" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+            <ScrollViewer Margin="0,0,10,10">
+                <DataGrid x:Name="ForumGrid" ItemsSource="{Binding CommentsToShow}" VerticalAlignment="Top" Margin="0,30" MinHeight="25" 
+                  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" HorizontalAlignment="Center" >
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}"/>
+                        <DataGridTextColumn Header="City" Binding="{Binding Location.City}" />
+                        <DataGridTextColumn Header="Comment" Binding="{Binding Text}" Width="550"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
         </Grid>
-        
-        
+
+
     </Grid>
 </Window>

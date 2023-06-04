@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest1"
         mc:Ignorable="d"
-        Title="RateAccommodation" Height="560" Width="800">
+        Title="Rating Accommodations" Height="560" Width="800">
     <Grid Margin="10,0,0,0">
         <Grid Margin="0,0,479,10">
             <Border BorderBrush="Black" BorderThickness="1" Margin="0,117,10,46"/>
@@ -34,14 +34,14 @@
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
-                        <TextBlock Text="Add" Width="44" />
+                        <TextBlock Text="Add" />
                     </StackPanel>
                 </Button.Content>
             </Button>
 
             <Button HorizontalAlignment="Center" Margin="0,433,0,0" VerticalAlignment="Top" Click="Submit_Click" Height="23">
                 <Button.ToolTip>
-                    <ToolTip Placement="Bottom" Content="By clicking this, You will be returned to main menu, NOTHING to worry!" />
+                    <ToolTip Placement="Bottom" Content="By clicking this, You will complete the rating" />
                 </Button.ToolTip>
                 <Button.Resources>
                     <Style TargetType="Button">
@@ -64,7 +64,8 @@
 
         </Grid>
 
-        <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding ReservationsToShow}" Height="Auto" Width="Auto" Margin="312,0,20,0" VerticalAlignment="Top" 
+        <Label Content="Theese are Your reservations that You can rate" VerticalAlignment="Top" Margin="424,0,94,0"/>
+        <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding ReservationsToShow}" Margin="322,31,10,0" VerticalAlignment="Top" 
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Resources>
                 <Style TargetType="DataGridCell">
@@ -87,7 +88,7 @@
 
         <Button HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Click="Back_Click">
             <Button.ToolTip>
-                <ToolTip Placement="Bottom" Content="By clicking this, You will complete the rating" />
+                <ToolTip Placement="Bottom" Content="By clicking this, You will be returned to main menu, NOTHING to worry!" />
             </Button.ToolTip>
             <Button.Resources>
                 <Style TargetType="Button">
@@ -130,8 +131,6 @@
                 </StackPanel>
             </Button.Content>
         </Button>
-
-        <Button Content="Tmp" HorizontalAlignment="Left" Margin="294,490,0,0" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 
 </Window>
