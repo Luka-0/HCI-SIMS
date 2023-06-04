@@ -31,7 +31,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Button HorizontalAlignment="Left" Margin="45,478,0,0" VerticalAlignment="Top" Click="Back_Click">
+        <Button HorizontalAlignment="Left" Margin="45,478,0,0" VerticalAlignment="Top" Click="GeneratePdf_Click">
             <Button.ToolTip>
                 <ToolTip Placement="Bottom" Content="By clicking this, a pdf file will be downloaded" />
             </Button.ToolTip>

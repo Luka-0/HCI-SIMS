@@ -1,5 +1,6 @@
 ﻿using InitialProject.Controller;
 using InitialProject.Model;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +15,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace InitialProject.View.Guest1
 {
@@ -66,5 +71,26 @@ namespace InitialProject.View.Guest1
             Close();
         }
 
+        private void GeneratePdf_Click(object sender, RoutedEventArgs e)
+        {
+            Document fileToGenerate = new(PageSize.A4.Rotate());
+            string filePath = "C:\\Users\\Luka stajic\\Downloads\\File1.pdf";
+
+            try
+            {
+                PdfWriter writter = PdfWriter.GetInstance(fileToGenerate, new FileStream(filePath, FileMode.Create));
+
+                fileToGenerate.Open();
+
+                fileToGenerate.Add(new iTextSharp.text.Paragraph("De ste bre ljudi!"));
+
+                fileToGenerate.Close();
+
+            }
+            catch(Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
