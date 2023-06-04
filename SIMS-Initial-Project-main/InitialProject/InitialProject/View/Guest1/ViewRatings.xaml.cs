@@ -73,8 +73,8 @@ namespace InitialProject.View.Guest1
 
         private void GeneratePdf_Click(object sender, RoutedEventArgs e)
         {
-            Document fileToGenerate = new(PageSize.A4.Rotate());
-            string filePath = "C:\\Users\\Luka stajic\\Downloads\\File1.pdf";
+            Document fileToGenerate = new(PageSize.A4);
+            string filePath = "C:\\Users\\Luka stajic\\Downloads\\File.pdf";
 
             try
             {
@@ -82,15 +82,31 @@ namespace InitialProject.View.Guest1
 
                 fileToGenerate.Open();
 
-                fileToGenerate.Add(new iTextSharp.text.Paragraph("De ste bre ljudi!"));
+                iTextSharp.text.Paragraph paragraphTitle = new();
+                Font fontTitle = FontFactory.GetFont(FontFactory.HELVETICA, 20, Font.BOLD, BaseColor.BLACK);
+                Phrase phrazeTitle = new("Hello\n\n", fontTitle);
+                paragraphTitle.Alignment = Element.ALIGN_CENTER; // Set alignment to center
+                paragraphTitle.Add(phrazeTitle);
+                fileToGenerate.Add(paragraphTitle);
+
+
+                iTextSharp.text.Paragraph paragraph1 = new();
+                Font fontParagraph1 = FontFactory.GetFont(FontFactory.COURIER, 16);
+                Phrase phrazeParagraph1 = new("My name is Peter and I'm gay. My mom is a lesbian, thank you very much\n", fontParagraph1);
+                paragraph1.Add(phrazeParagraph1);
+                fileToGenerate.Add(paragraph1);
 
                 fileToGenerate.Close();
 
+                //System.Diagnostics.Process.Start(filePath);//   baca exception
             }
             catch(Exception ex)
             {
                 System.Windows.MessageBox.Show(ex.Message);
+                return;
             }
+
+            System.Windows.MessageBox.Show("Successfuly created");
         }
     }
 }
