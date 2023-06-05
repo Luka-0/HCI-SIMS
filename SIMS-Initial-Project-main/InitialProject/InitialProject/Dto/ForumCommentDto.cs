@@ -14,14 +14,17 @@ namespace InitialProject.Dto
         public User? User { get; set; }
         public Forum? Forum { get; set; }
 
+        public char Special { get; set; }
+
         public ForumCommentDto() { }
 
-        public ForumCommentDto(string text, Location? location, User? user, Forum? forum)
+        public ForumCommentDto(string text, Location? location, User? user, Forum? forum, char special)
         {
             Text = text;
             Location = location;
             User = user;
             Forum = forum;
+            Special = special;
         }
     }
 }

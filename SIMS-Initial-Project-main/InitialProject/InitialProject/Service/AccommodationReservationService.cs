@@ -11,6 +11,7 @@ using InitialProject.View;
 using InitialProject.Interface;
 using InitialProject.Dto;
 using System.Printing;
+using InitialProject.Contexts;
 
 namespace InitialProject.Service
 {
@@ -323,6 +324,9 @@ namespace InitialProject.Service
             return this.IAccommodationreservationRepository.GetOccupancyBy(year, month, accommodation);
         }
 
-
+        public List<Location> GetReservationLocationsByUser(int id)
+        {
+            return IAccommodationreservationRepository.GetReservationLocationsByUser(id);
+        }
     }
 }

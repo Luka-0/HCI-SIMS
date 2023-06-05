@@ -92,6 +92,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}"/>
                         <DataGridTextColumn Header="City" Binding="{Binding Location.City}" />
+                        <DataGridTextColumn Header="Important" Binding="{Binding Special}" />
                         <DataGridTextColumn Header="Comment" Binding="{Binding Text}" Width="550"/>
                     </DataGrid.Columns>
                 </DataGrid>

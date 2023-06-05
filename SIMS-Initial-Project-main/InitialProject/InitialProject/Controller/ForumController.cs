@@ -13,6 +13,7 @@ namespace InitialProject.Controller
     public class ForumController
     {
         private readonly ForumService ForumService = new(new ForumRepository());
+        private readonly AccommodationReservationService AccommodationReservationService = new(new AccommodationReservationRepository());
 
         public void Save(Forum forum)
         {
@@ -28,5 +29,23 @@ namespace InitialProject.Controller
         {
             return ForumService.GetByCity(city);
         }
+
+        public bool IsSpecialComment(Forum forum, User user)
+        {
+            List<Location> locations = AccommodationReservationService.GetReservationLocationsByUser(user.Id);
+
+            foreach(Location l in locations)
+            {
+                if (forum.Location.Id == l.Id) return true;
+            }
+
+            return false;
+        }
+
+        public void UpdateNumberOfSpecials(Forum forum)
+        {
+            ForumService.UpdateNumberOfSpecials(forum);
+        }
+
     }
 }

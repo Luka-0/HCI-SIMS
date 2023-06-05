@@ -23,16 +23,19 @@ namespace InitialProject.Model
         [ForeignKey("UserID")]
         public User? User { get; set; }
 
+        public char Special { get; set; } = ' '; // bice '*' ako je osoba posetila lokaciju na cijem forumu je postavila komentar
+
         ForumComment()
         {
             Text = new("");
         }
 
-        public ForumComment(string text, Forum forum, User user)
+        public ForumComment(string text, Forum forum, User user, char special)
         {
             Text = text;
             Forum = forum;
             User = user;
+            Special = special;
         }
     }
 }

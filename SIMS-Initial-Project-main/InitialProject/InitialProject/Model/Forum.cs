@@ -26,7 +26,11 @@ namespace InitialProject.Model
         [NotMapped]
         public List<string> Comments { get; set; } = new();
 
-        public bool isClosed { get; set; } = false;
+        public bool IsClosed { get; set; } = false;
+
+        public char Special { get; set; } = ' ';
+
+        public int NumOfSpecials { get; set; } = 0;
 
         public Forum()
         {

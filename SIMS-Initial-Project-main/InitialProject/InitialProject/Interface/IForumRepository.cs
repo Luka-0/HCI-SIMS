@@ -12,5 +12,6 @@ namespace InitialProject.Interface
         public void Save(Forum forum);
         public Forum GetByUser(int id);
         public Forum GetByCity(string city);
+        public void UpdateNumberOfSpecials(Forum forum);
     }
 }

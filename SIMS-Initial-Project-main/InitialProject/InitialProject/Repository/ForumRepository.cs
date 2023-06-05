@@ -64,5 +64,25 @@ namespace InitialProject.Repository
 
             return retVal;
         }
+
+        public void UpdateNumberOfSpecials(Forum forum)
+        {
+            using (var db = new UserContext())
+            {
+                foreach (Forum f in db.forum)
+                {
+                    if (forum.Id == f.Id)
+                    {
+                        ++f.NumOfSpecials;
+                        if (f.NumOfSpecials > 19) f.Special = '*';
+
+                        db.SaveChanges();
+                        return;
+                    }
+                }
+            }
+
+        }
+
     }
 }

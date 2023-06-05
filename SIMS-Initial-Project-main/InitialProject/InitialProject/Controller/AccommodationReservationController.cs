@@ -70,5 +70,9 @@ namespace InitialProject.Controller
             return AccommodationReservationService.GetDuringLastYearBy(user);
         }
 
+        public List<Location> GetReservationLocationsByUser(int id)
+        {
+            return AccommodationReservationService.GetReservationLocationsByUser(id);
+        }
     }
 }

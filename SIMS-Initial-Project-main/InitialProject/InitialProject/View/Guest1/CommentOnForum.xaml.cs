@@ -74,7 +74,7 @@ namespace InitialProject.View.Guest1
             CommentsToShow = new ObservableCollection<ForumCommentDto>();
             ForumGrid.ItemsSource = CommentsToShow;
 
-            ForumCommentDto newForum = new(forum.InitialComment, forum.Location, forum.User, forum);
+            ForumCommentDto newForum = new(forum.InitialComment, forum.Location, forum.User, forum, forum.Special);
             CommentsToShow.Add(newForum);
 
             foreach (ForumCommentDto a in forumComments)
@@ -95,7 +95,16 @@ namespace InitialProject.View.Guest1
 
         private void AddComment_Click(object sender, RoutedEventArgs e)
         {
-            ForumComment forumComment = new(CommentTB.Text, CommentsToShow.First().Forum, User);
+            if (IsViolatingAnyUIControl()) return;
+
+            Forum forum = CommentsToShow.First().Forum;
+            ForumComment forumComment = new(CommentTB.Text, forum, User, ' ');
+
+            if (ForumController.IsSpecialComment(forum, User))
+            {
+                forumComment.Special = '*';
+                ForumController.UpdateNumberOfSpecials(forum);
+            }
 
             ForumCommentController.Save(forumComment);
             MessageBox.Show("Successfuly saved");
@@ -120,13 +129,27 @@ namespace InitialProject.View.Guest1
             List<ForumCommentDto> forumCommentDtos = new();
             foreach(ForumComment f in forumComments)
             {
-                ForumCommentDto tmp = new(f.Text, null, f.User, f.Forum);
+                ForumCommentDto tmp = new(f.Text, null, f.User, f.Forum, f.Special);
                 forumCommentDtos.Add(tmp);
             }
 
             RefreshDataGrid(forumCommentDtos, forum);
         }
 
+        private bool IsViolatingAnyUIControl()
+        {
+            if(CityCB.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please select a city");
+                return true;
+            }
+            if(CommentsToShow.First().Forum == null)
+            {
+                MessageBox.Show("There is no forum to add Your comment to");
+                return true;
+            }
 
+            return false;
+        }
     }
 }

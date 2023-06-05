@@ -32,5 +32,10 @@ namespace InitialProject.Service
             return _forumRepository.GetByCity(city);
         }
 
+        public void UpdateNumberOfSpecials(Forum forum)
+        {
+            _forumRepository.UpdateNumberOfSpecials(forum);
+        }
+
     }
 }

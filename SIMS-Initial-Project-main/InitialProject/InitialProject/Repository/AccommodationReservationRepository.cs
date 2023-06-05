@@ -341,5 +341,27 @@ namespace InitialProject.Repository
             return Math.Round(Convert.ToDouble(duration.Days) / 366 * 100, 2);
         }
 
+        public List<Location> GetReservationLocationsByUser(int id)
+        {
+            List<Location> retVal = new();
+            List<AccommodationReservation> reservations = new();
+
+            using(var db = new UserContext())
+            {
+                reservations = db.accommodationReservation.Include(t => t.Accommodation)
+                                                              .ThenInclude(t => t.Location)
+                                                          .Where(t => t.Guest.Id == id)
+                                                          .ToList();
+            }
+
+            foreach (AccommodationReservation ar in reservations)
+            {
+                if (ar.Accommodation == null) continue;
+                if (ar.Accommodation.Location == null) continue;
+                retVal.Add(ar.Accommodation.Location);
+            }
+
+            return retVal;
+        }
     }
 }
