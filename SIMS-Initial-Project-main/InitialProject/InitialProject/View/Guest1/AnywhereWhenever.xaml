@@ -101,9 +101,9 @@
                     <Label Grid.Row="3" Content="Select ending date:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
                     <DatePicker Grid.Row="3" x:Name="EndingDatePicker" HorizontalAlignment="Left" Margin="154,0,0,0" VerticalAlignment="Center"/>
 
-                    <Button Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowAccommodations_Click">
+                    <Button Grid.Row="4" x:Name="SAB" IsTabStop="True" IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowAccommodations_Click">
                         <Button.ToolTip>
-                        <ToolTip Placement="Bottom" Content="By clicking this, just on the right will be shown some dates that You click and choose" />
+                        <ToolTip Placement="Bottom" Content="By clicking this, accommodations matching Your requirements will be shown on the right" />
                         </Button.ToolTip>
                         <Button.Resources>
                             <Style TargetType="Button">
@@ -178,7 +178,18 @@
         <Grid Margin="301,0,0,0">
             <Label Content="These are the accommodations You can choose from" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Margin="0,2,0,0"/>
             <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding AccommodationsToShow}" VerticalAlignment="Top" Margin="0,30,0,0" Height="Auto" 
-                      AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                      AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" >
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightGray" />
+                                <!-- Set the desired background color here -->
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
                     <DataGridTextColumn Header="Class" Binding="{Binding Class}"/>

@@ -33,8 +33,8 @@
                     <Button Grid.Row="2" Content="Edit Reservation" HorizontalAlignment="Center" VerticalAlignment="Center" Click="EditReservation_Click"/>
                     <Button Grid.Row="3" Content="View Reviews of Me" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ViewReviews_Click"/>
                     <Button Grid.Row="4" Content="Anywhere-Whenever" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AnywhereWhenever_Click"/>
-                    <Button Grid.Row="5" Content="Create a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Button Grid.Row="6" Content="Make Comment on a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Button Grid.Row="5" Content="Create a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CreateForum_Click" />
+                    <Button Grid.Row="6" Content="Make Comment on a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CommentOnForum_Click" />
                 </Grid>
             </Border>
         </Grid>

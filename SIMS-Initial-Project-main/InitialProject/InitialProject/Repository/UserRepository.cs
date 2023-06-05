@@ -29,7 +29,7 @@ namespace InitialProject.Repository
             return null;
         }
 
-        public void UpdateStatusBy(String username, bool titleFlag) {
+        public void UpdateStatusBy(string username, bool titleFlag) {
 
             using var db = new UserContext();
             foreach (User user in db.users)
@@ -38,11 +38,12 @@ namespace InitialProject.Repository
                 {
                     user.SuperTitle = titleFlag;
                     db.SaveChanges();
+                    return;
                 }
             }
         }
 
-        public  Boolean Add(User user)
+        public bool Add(User user)
         {
             using var db = new UserContext();
             db.Add(user);
@@ -50,7 +51,7 @@ namespace InitialProject.Repository
 
             return true;
         }
-        public  User GetBy(int id)
+        public User GetBy(int id)
         {
             using var db = new UserContext();
             List<User> users = db.users.ToList();

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest1"
         mc:Ignorable="d"
-        Title="RenovationRecommendation" Height="560" Width="800">
+        Title="Making a Reccommendation to Accommodation" Height="560" Width="800">
     <Grid>
         <DataGrid x:Name="ReservationGrid" ItemsSource="{Binding ReservationToShow}" Margin="170,74,170,0" VerticalAlignment="Top" 
                   AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
@@ -21,7 +21,7 @@
         <Grid Margin="10,23,10,10">
             <Label Content="This is the accommodation You chose to give reccommendation for renovation" HorizontalAlignment="Center" Margin="0,10"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="150,138,169,0"/>
-            <TextBox x:Name="CommentTB" HorizontalAlignment="Center" Margin="0,149,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="242" Height="90"/>
+            <TextBox x:Name="CommentTB" HorizontalAlignment="Center" Margin="0,149,0,0" TextWrapping="Wrap" Text="Write a comment here" VerticalAlignment="Top" Width="242" Height="90"/>
             <Label Content="How needed are the repairs:" HorizontalAlignment="Left" Margin="156,318,0,0" VerticalAlignment="Top"/>
             <ComboBox x:Name="RatingCB" HorizontalAlignment="Left" Margin="474,322,0,0" VerticalAlignment="Top" Width="120"/>
             <Button x:Name="FinishButton" HorizontalAlignment="Center" Margin="0,462,0,0" VerticalAlignment="Top" Click="FinishButton_Click">
@@ -52,7 +52,7 @@
 
         <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Back_Click">
             <Button.ToolTip>
-                <ToolTip Placement="Bottom" Content="By clicking this, You will complete the rating" />
+                <ToolTip Placement="Bottom" Content="By clicking this, You will be returned to main menu, NOTHING to worry!" />
             </Button.ToolTip>
             <Button.Resources>
                 <Style TargetType="Button">

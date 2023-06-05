@@ -5,20 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest1"
         mc:Ignorable="d"
-        Title="EditReservation" Height="560" Width="800">
+        Title="Editing Reservations" Height="560" Width="800">
     <Grid>
-        <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding ReservationsToShow}" Height="Auto" Width="Auto" Margin="331,10,10,0" VerticalAlignment="Top" 
-                  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Accommodation.Title}"/>
-                <DataGridTextColumn Header="City" Binding="{Binding Accommodation.Location.City}"/>
-                <DataGridTextColumn Header="Guest Number" Binding="{Binding GuestNumber}"/>
-                <DataGridTextColumn Header="Starting Date" Binding="{Binding BegginingDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                <DataGridTextColumn Header="Ending Date" Binding="{Binding EndingDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Margin="317,0,0,0">
+            <Label Content="Theese are the all the reservations You have" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding ReservationsToShow}" Margin="0,31,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"
+                  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Width="463">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightGray" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
 
-        <Grid Margin="10,117,488,326">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Accommodation.Title}"/>
+                    <DataGridTextColumn Header="City" Binding="{Binding Accommodation.Location.City}"/>
+                    <DataGridTextColumn Header="Guest Number" Binding="{Binding GuestNumber}"/>
+                    <DataGridTextColumn Header="Starting Date" Binding="{Binding BegginingDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                    <DataGridTextColumn Header="Ending Date" Binding="{Binding EndingDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Label Content="Theese are the all requests for editing Your reservations" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,282,0,0" />
+            <DataGrid x:Name="ReservationsResceduleDG" ItemsSource="{Binding ReschedulingsToShow}" VerticalAlignment="Top" 
+            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="10,308,10,0">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightGray" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Reservation.Accommodation.Title}"/>
+                    <DataGridTextColumn Header="Guest Number" Binding="{Binding Reservation.GuestNumber}"/>
+                    <DataGridTextColumn Header="Starting Date" Binding="{Binding NewStartingDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                    <DataGridTextColumn Header="Ending Date" Binding="{Binding NewEndingDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                    <DataGridTextColumn Header="Status" Binding="{Binding State}" />
+                    <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+
+        <Grid Margin="10,154,488,289">
             <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,-10"/>
             <Button Content="Cancel" HorizontalAlignment="Left" Margin="209,60,0,0" VerticalAlignment="Top" Click="Cancel_Click"/>
             <Button Content="Postpone" HorizontalAlignment="Left" Margin="47,60,0,0" VerticalAlignment="Top" Click="Postpone_Click"/>
@@ -49,19 +86,14 @@
             </Button.Content>
         </Button>
 
-        <DataGrid x:Name="ReservationsResceduleDG" ItemsSource="{Binding ReschedulingsToShow}" Height="Auto" Width="Auto" Margin="10,302,10,0" VerticalAlignment="Top" 
-            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Reservation.Accommodation.Title}"/>
-                <DataGridTextColumn Header="Guest Number" Binding="{Binding Reservation.GuestNumber}"/>
-                <DataGridTextColumn Header="Starting Date" Binding="{Binding NewStartingDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                <DataGridTextColumn Header="Ending Date" Binding="{Binding NewEndingDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
-                <DataGridTextColumn Header="Status" Binding="{Binding State}" />
-                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <TextBlock HorizontalAlignment="Left" Margin="51,42,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="Select a reservation by clicking on it on the right and press the button bellow to POSTPONE, or CANCEL Your reservation" VerticalAlignment="Top" Width="267"/>
-        <TextBlock HorizontalAlignment="Left" Margin="78,237,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="If done correctly, Your selected reservation will be displayed on the second table bellow" VerticalAlignment="Top" Width="213"/>
+        <TextBlock HorizontalAlignment="Left" Margin="28,61,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Width="266">
+            Select a reservation by clicking on it on the right and press the button bellow to
+            <LineBreak/>
+            POSTPONE, or CANCEL
+            <LineBreak/>
+            Your reservation
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="54,315,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="If done correctly, Your selected reservation will be displayed on the second table bellow" VerticalAlignment="Top" Width="214"/>
 
     </Grid>
 </Window>

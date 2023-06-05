@@ -5,23 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest1"
         mc:Ignorable="d"
-        Title="AccommodationReservate" Height="560" Width="900">
+        Title="Reservating Accommodation" Height="560" Width="900">
     <Grid Margin="10,0,0,-6">
-        
-        <ScrollViewer Margin="0,0,0,11">
-            <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding AccommodationsToShow}" Margin="307,0,10,0" VerticalAlignment="Top" 
-                  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
-                    <DataGridTextColumn Header="Class" Binding="{Binding Class}"/>
-                    <DataGridTextColumn Header="Guest Limit" Binding="{Binding GuestLimit}"/>
-                    <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
-                    <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}"/>
-                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" />
-                    <DataGridTextColumn Header="Recently Renovated" Binding="{Binding RecentlyRenovated}" Width="*"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </ScrollViewer>
+
+        <Grid Margin="318,0,0,0">
+            <Label Content="Theese are the accommodations You can choose from" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+            <ScrollViewer Margin="0,0,10,11">
+                <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding AccommodationsToShow}" HorizontalAlignment="Center" VerticalAlignment="Top"
+                  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" MinHeight="25" Margin="0,30">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+                        <DataGridTextColumn Header="Class" Binding="{Binding Class}"/>
+                        <DataGridTextColumn Header="Guest Limit" Binding="{Binding GuestLimit}"/>
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                        <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}"/>
+                        <DataGridTextColumn Header="City" Binding="{Binding Location.City}" />
+                        <DataGridTextColumn Header="Recently Renovated" Binding="{Binding RecentlyRenovated}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+        </Grid>
 
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" Click="GoBack_Click" Width="57">
             <Button.ToolTip>
@@ -70,7 +84,7 @@
 
                     <Label Grid.Row="1" Content="Select ending date:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
                     <DatePicker Grid.Row="1" x:Name="EndingDatePicker" HorizontalAlignment="Left" Margin="154,0,0,0" VerticalAlignment="Center"/>
-                    
+
                     <Label Grid.Row="2" Content="Days to stay:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
                     <TextBox Grid.Row="2" x:Name="ReservatingDaysTB" HorizontalAlignment="Left" Margin="154,4,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" TextAlignment="Center" Width="50"/>
 
@@ -98,10 +112,10 @@
                     </Button>
 
                     <ComboBox Grid.Row="3" x:Name="OfferedDatesCB" Margin="154,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140"/>
-                    
+
                     <Label Grid.Row="4" Content="Enter guest count:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
                     <TextBox Grid.Row="4" x:Name="GuestNumberTB" HorizontalAlignment="Left" Margin="154,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" TextAlignment="Center" Width="52" Height="19"/>
-                    
+
                     <Button Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CreateReservation_Click">
                         <Button.ToolTip>
                             <ToolTip Placement="Bottom" Content="By clicking this, You will create a reservation for the selected accommodation, EASY" />

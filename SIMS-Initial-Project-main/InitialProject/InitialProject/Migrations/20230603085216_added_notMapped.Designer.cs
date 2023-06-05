@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230603085216_added_notMapped")]
+    partial class added_notMapped
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -173,16 +175,10 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsClosed")
+                    b.Property<int>("UserID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("NumOfSpecials")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<char>("Special")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("UserID")
+                    b.Property<bool>("isClosed")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("locationID")
@@ -206,24 +202,16 @@ namespace InitialProject.Migrations
                     b.Property<int?>("ForumId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<char>("Special")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UserID")
+                    b.Property<int>("UserID")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ForumId");
-
-                    b.HasIndex("LocationId");
 
                     b.HasIndex("UserID");
 
@@ -384,32 +372,6 @@ namespace InitialProject.Migrations
                     b.HasIndex("AccommodationReservationId");
 
                     b.ToTable("ReservationReschedulingRequest");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.SuperGuide", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Language")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("guideID")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("guideID");
-
-                    b.ToTable("SuperGuide");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>
@@ -645,9 +607,6 @@ namespace InitialProject.Migrations
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("GuideId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("ObtainedReason")
                         .HasColumnType("INTEGER");
 
@@ -658,8 +617,6 @@ namespace InitialProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GuideId");
 
                     b.HasIndex("UserId");
 
@@ -729,11 +686,13 @@ namespace InitialProject.Migrations
             modelBuilder.Entity("InitialProject.Model.Forum", b =>
                 {
                     b.HasOne("InitialProject.Model.User", "User")
-                        .WithMany("Forums")
-                        .HasForeignKey("UserID");
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("InitialProject.Model.Location", "Location")
-                        .WithMany("Forums")
+                        .WithMany()
                         .HasForeignKey("locationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -749,13 +708,11 @@ namespace InitialProject.Migrations
                         .WithMany()
                         .HasForeignKey("ForumId");
 
-                    b.HasOne("InitialProject.Model.Location", null)
-                        .WithMany("ForumComments")
-                        .HasForeignKey("LocationId");
-
                     b.HasOne("InitialProject.Model.User", "User")
-                        .WithMany("ForumComments")
-                        .HasForeignKey("UserID");
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Forum");
 
@@ -818,17 +775,6 @@ namespace InitialProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Reservation");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.SuperGuide", b =>
-                {
-                    b.HasOne("InitialProject.Model.User", "Guide")
-                        .WithMany()
-                        .HasForeignKey("guideID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Guide");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>
@@ -919,15 +865,9 @@ namespace InitialProject.Migrations
 
             modelBuilder.Entity("InitialProject.Model.Voucher", b =>
                 {
-                    b.HasOne("InitialProject.Model.User", "Guide")
-                        .WithMany()
-                        .HasForeignKey("GuideId");
-
                     b.HasOne("InitialProject.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-
-                    b.Navigation("Guide");
 
                     b.Navigation("User");
                 });
@@ -942,25 +882,11 @@ namespace InitialProject.Migrations
                     b.Navigation("Requests");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.Location", b =>
-                {
-                    b.Navigation("ForumComments");
-
-                    b.Navigation("Forums");
-                });
-
             modelBuilder.Entity("InitialProject.Model.Tour", b =>
                 {
                     b.Navigation("TourKeyPoints");
 
                     b.Navigation("images");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.User", b =>
-                {
-                    b.Navigation("ForumComments");
-
-                    b.Navigation("Forums");
                 });
 #pragma warning restore 612, 618
         }

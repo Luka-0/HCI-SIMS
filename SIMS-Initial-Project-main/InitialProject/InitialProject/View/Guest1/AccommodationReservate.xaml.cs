@@ -284,7 +284,7 @@ namespace InitialProject.View.Guest1
                         return;
                     }
 
-                    string city = ExtractCity(CountryComboBox.SelectedItem.ToString());
+                    string city = CountryComboBox.SelectedItem.ToString();
                     ApplyByCity(city);
 
                     break;
@@ -293,11 +293,11 @@ namespace InitialProject.View.Guest1
 
                     break;
                 case 4:
-                    ApplyByGuestNumber(int.Parse(GuestNumberTBFilter.Text.ToString()));         //TODO proveriti da li je ovde potrebno ToString()
+                    ApplyByGuestNumber(int.Parse(GuestNumberTBFilter.Text));
 
                     break;
                 case 5:
-                    ApplyByReservationDays(int.Parse(GuestNumberTBFilter.Text.ToString()));
+                    ApplyByReservationDays(int.Parse(GuestNumberTBFilter.Text));
 
                     break;
                 case 6:

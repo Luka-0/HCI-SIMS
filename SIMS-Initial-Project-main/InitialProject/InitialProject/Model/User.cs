@@ -24,6 +24,10 @@ namespace InitialProject.Model
 
         [InverseProperty("Guides")]
         public List<ComplexTourRequest>? ComplexTourRequests { get; set; } = new List<ComplexTourRequest>();
+
+        public List<Forum> Forums { get; set; }
+        public List<ForumComment> ForumComments { get; set; }
+
         public User()
         {
             Username = "default";

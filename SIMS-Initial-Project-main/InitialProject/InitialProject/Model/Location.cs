@@ -20,6 +20,9 @@ namespace InitialProject.Model
         [Required]
         public string Country { get; set; }
 
+        public List<Forum> Forums { get; set; }
+
+        public List<ForumComment> ForumComments { get; set; }
 
         public Location()
         {
