@@ -4,10 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View.Tourist"
+             xmlns:comp ="clr-namespace:InitialProject.Components"
+             xmlns:viewModel="clr-namespace:InitialProject.ViewModel"
+              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="430">
-    <Grid Background="#F8F8FF">
+    <UserControl.Resources>
+        <viewModel:TourRequestViewModel x:Key="ViewModel" />
+    </UserControl.Resources>
+    
+    <Grid Background="#F8F8FF" TextElement.FontSize="18">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -24,16 +32,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Height="40" Width="40" Margin="0" Padding="3" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="navigation">
-                <Image Source="/Resources/Images/hamburger.png" Width="40" Height="40"/>
-            </Button>
-
-            <TextBlock Grid.Column="1"  Text="Kreiranje zahteva za ture" FontSize="20" Padding="20 20 10 10"/>
+            <comp:Header/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -58,36 +57,40 @@
         </Grid>
 
         <Grid Grid.Row="3">
-            <Label Margin="10 20 0 0">Opis</Label>
+            <Label Margin="10 10 0 0">Opis</Label>
         </Grid>
 
         <Grid Grid.Row="4">
-            <TextBox Width="400" Height="150"/>
+            <TextBox Width="400" Height="75"/>
         </Grid>
 
         <Grid Grid.Row="5">
-            <Label Margin="10 20 0 0">Jezik</Label>
+            <Button Content="Dodaj komentar" Width="220" Height="40" Margin="0 10 0 0"/>
         </Grid>
 
         <Grid Grid.Row="6">
+            <Label Margin="10 10 0 0">Jezik</Label>
+        </Grid>
+
+        <Grid Grid.Row="7">
             <ComboBox ItemsSource="{Binding LanguageComboBoxItems}"
                       SelectedItem="{Binding SelectedLanguage,Mode=TwoWay}"
                       Width="170" HorizontalAlignment="Left" Margin="15 0 0 0" />
         </Grid>
 
-        <Grid Grid.Row="7">
+        <Grid Grid.Row="8">
             <Label 
                 Content="{Binding SliderLabelText}"
                 Margin="40 20 0 0"/>
         </Grid>
 
-        <Grid Grid.Row="8">
+        <Grid Grid.Row="9">
             <Slider x:Name="slider"
                     Value ="{Binding SliderValue}"
                     Width="335" Margin="10" Minimum="0" Maximum="50" TickFrequency="1" IsSnapToTickEnabled="True" />
         </Grid>
 
-        <Grid Grid.Row="9">
+        <Grid Grid.Row="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -97,17 +100,17 @@
             <Button Grid.Column="1" Content="&gt;" Margin="235 0 0 0" HorizontalAlignment="Center" Width="20"/>
         </Grid>
         
-        <Grid Grid.Row="10">
+        <Grid Grid.Row="11">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
             <Label Margin="40 20 0 0" Grid.Column="0">Pocetni datum</Label>
-            <Label Margin="140 20 0 0" Grid.Column="1">Krajnji datum</Label>
+            <Label Margin="75 20 0 0" Grid.Column="1">Krajnji datum</Label>
         </Grid>
 
-        <Grid Grid.Row="11">
+        <Grid Grid.Row="12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
@@ -116,23 +119,17 @@
             <DatePicker SelectedDate="{Binding StartDate, StringFormat='dd-MM-yyyy'}"
                         Grid.Column="0" Margin="45 0 0 0"/>
             <DatePicker SelectedDate="{Binding EndDate, StringFormat='dd-MM-yyyy'}" 
-                        Grid.Column="1" Margin="125 0 0 0"/>
+                        Grid.Column="1" Margin="65 0 0 0"/>
         </Grid>
 
-        <Grid Grid.Row="12">
+        <Grid Grid.Row="13">
             <Button Content="Kreiraj"
                     Command="{Binding CreateTourCommand}"
                     Margin="0 0 0 30" Width="200" Height="70" HorizontalAlignment="Center"/>
         </Grid>
 
         <Grid Grid.Row="13" VerticalAlignment="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Width="215" Height="30">Prvo</Button>
-            <Button Grid.Column="1" Width="215" Height="30">Drugo</Button>
+            <comp:Footer/>
         </Grid>
     </Grid>
 </UserControl>

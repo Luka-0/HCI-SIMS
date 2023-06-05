@@ -58,6 +58,14 @@
         <DataTemplate DataType="{x:Type viewModel:VoucherViewModel}">
             <views:VoucherView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:TourStatisticsViewModel}">
+            <views:TourStatisticsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ShowSingleTourRequestViewModel}">
+            <views:ShowSingleTourRequest/>
+        </DataTemplate>
     </Window.Resources>
 
 

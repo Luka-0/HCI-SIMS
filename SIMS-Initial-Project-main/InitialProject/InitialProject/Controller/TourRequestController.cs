@@ -22,6 +22,11 @@ public class TourRequestController
         return tourRequestService.GetAll();
     }
 
+    public TourRequest GetById(int id)
+    {
+        return tourRequestService.GetById(id);
+    }
+
     public List<TourRequest> GetByState(TourRequestState state)
     {
         return tourRequestService.GetByState(state);

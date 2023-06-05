@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:InitialProject.View.Tourist"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="430">
-    <Grid>
+    <Grid Background="Wheat">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

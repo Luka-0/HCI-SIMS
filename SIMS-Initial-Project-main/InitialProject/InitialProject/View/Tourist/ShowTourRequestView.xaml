@@ -4,9 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View.Tourist"
+             xmlns:comp ="clr-namespace:InitialProject.Components"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:viewModel="clr-namespace:InitialProject.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="430">
-    <Grid>
+    <Grid Background="#F8F8FF">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -14,37 +17,61 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Height="40" Width="40" Margin="0" Padding="3" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="navigation">
-                <Image Source="/Resources/Images/hamburger.png" Width="40" Height="40"/>
-            </Button>
-
-            <TextBlock Grid.Column="1"  Text="Pregled zahteva za turu" FontSize="20" Padding="20 20 10 10"/>
+            <comp:Header/>
         </Grid>
+
 
         <Grid Grid.Row="1">
-            <DataGrid ItemsSource="{Binding TourRequests}" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Lokacija" Binding="{Binding Location}" />
-                    <DataGridTextColumn Header="Datum" Binding="{Binding LowerDateLimit}" />
-                    <DataGridTextColumn Header="Status" Binding="{Binding State}" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <ListView Grid.Row="1" Margin="0 25 0 0 " ItemsSource="{Binding TourRequests}" SelectedItem="{Binding SelectedRowData, Mode=TwoWay}" Height="200">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction 
+                                        Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                        CommandParameter="showSingleTourRequest"
+                            />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
 
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Lokacija" Width="130">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Location}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Datum" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding LowerDateLimit, StringFormat={}{0:dd-MM-yyyy}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Status" Width="155">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding State}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
         </Grid>
-
+        
         <Grid Grid.Row="2" VerticalAlignment="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Width="215" Height="30">Prvo</Button>
-            <Button Grid.Column="1" Width="215" Height="30">Drugo</Button>
+            <comp:Footer/>
         </Grid>
 
 
