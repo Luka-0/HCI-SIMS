@@ -8,7 +8,7 @@
         Title="Viewing Ratings" Height="560" Width="800">
     <Grid>
         <Grid Margin="182,10,182,10">
-            <TextBlock Text="Theese are the ratings You received from owners of accommodations You have been to" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Center"/>
+            <TextBlock Text="Theese are the ratings You received from owners of accommodations You have been to. Only if You rated them as well, will the mark be shown here" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Center"/>
 
             <DataGrid x:Name="ReviewsGrid" ItemsSource="{Binding ReviewsToShow}" VerticalAlignment="Top"
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="0,40,0,0">
@@ -17,7 +17,6 @@
                         <Style.Triggers>
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter Property="Background" Value="LightGray" />
-                                <!-- Set the desired background color here -->
                             </Trigger>
                         </Style.Triggers>
                     </Style>

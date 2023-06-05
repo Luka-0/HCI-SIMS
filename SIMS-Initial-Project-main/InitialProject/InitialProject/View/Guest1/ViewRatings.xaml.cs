@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+using InitialProject.Enumeration;
 
 namespace InitialProject.View.Guest1
 {
@@ -74,7 +75,7 @@ namespace InitialProject.View.Guest1
         private void GeneratePdf_Click(object sender, RoutedEventArgs e)
         {
             Document fileToGenerate = new(PageSize.A4);
-            string filePath = "C:\\Users\\Luka stajic\\Downloads\\File.pdf";
+            string filePath = "C:\\Users\\Luka stajic\\Downloads\\Average ratings.pdf";
 
             try
             {
@@ -82,19 +83,96 @@ namespace InitialProject.View.Guest1
 
                 fileToGenerate.Open();
 
+                // Titled paragraph
                 iTextSharp.text.Paragraph paragraphTitle = new();
                 Font fontTitle = FontFactory.GetFont(FontFactory.HELVETICA, 20, Font.BOLD, BaseColor.BLACK);
-                Phrase phrazeTitle = new("Hello\n\n", fontTitle);
+                Phrase phrazeTitle = new("Hello " + User.Username + "\n\n\n", fontTitle);
                 paragraphTitle.Alignment = Element.ALIGN_CENTER; // Set alignment to center
                 paragraphTitle.Add(phrazeTitle);
                 fileToGenerate.Add(paragraphTitle);
 
-
+                // Intro paragraph
                 iTextSharp.text.Paragraph paragraph1 = new();
-                Font fontParagraph1 = FontFactory.GetFont(FontFactory.COURIER, 16);
-                Phrase phrazeParagraph1 = new("My name is Peter and I'm gay. My mom is a lesbian, thank you very much\n", fontParagraph1);
-                paragraph1.Add(phrazeParagraph1);
+                Font fontParagraph1 = FontFactory.GetFont(FontFactory.HELVETICA, 16);
+                Phrase phraze1Paragraph1 = new("This is a pdf file which was generated when You pressed a button on the \"Viewing Ratings\" window in the HCI-SIMS application\n\n", fontParagraph1);
+                Phrase phraze2Paragraph1 = new("Bellow You will see the average ratings You were given, by accommodation owners across all the categories\n\n\n", fontParagraph1);
+                paragraph1.Add(phraze1Paragraph1);
+                paragraph1.Add(phraze2Paragraph1);
                 fileToGenerate.Add(paragraph1);
+
+                // Average ratings paragraph
+                iTextSharp.text.Paragraph paragraph2 = new();
+                Font fontParagraph2 = FontFactory.GetFont(FontFactory.HELVETICA, 14);
+
+                Phrase phraze1Paragraph2 = new("Marks across all reviews:\n\n", fontParagraph1);
+                paragraph2.Add(phraze1Paragraph2);
+
+
+                double tidiness = GuestReviewController.GetAverageTidinessByUser(User);
+                Phrase phraze2Paragraph2 = new("-Average tidiness: " + tidiness.ToString() + "\n\n", fontParagraph2);
+                paragraph2.Add(phraze2Paragraph2);
+
+                double obedience = GuestReviewController.GetAverageObedienceByUser(User);
+                Phrase phraze3Paragraph2 = new("-Average obedience: " + obedience.ToString() + "\n\n", fontParagraph2);
+                paragraph2.Add(phraze3Paragraph2);
+
+                Phrase phraze4Paragraph2 = new("Marks across types of accommodations:\n\n", fontParagraph1);
+                paragraph2.Add(phraze4Paragraph2);
+
+                
+                double mark = GuestReviewController.GetAverageByAccommodationType(AccommodationType.Apartment, User);
+                Phrase phraze5Paragraph2;
+                if (mark == 0 || mark is double.NaN)
+                {
+                    phraze5Paragraph2 = new("-Average marks for apartments: You have no marks\n\n", fontParagraph2);
+                }
+                else
+                {
+                    mark /= 2;
+                    phraze5Paragraph2 = new("-Average marks for apartments: " + mark.ToString() + "\n\n", fontParagraph2);
+                }
+                paragraph2.Add(phraze5Paragraph2);
+
+                mark = GuestReviewController.GetAverageByAccommodationType(AccommodationType.Accommodation, User);
+                Phrase phraze6Paragraph2;
+                if (mark == 0 || mark is double.NaN)
+                {
+                    phraze6Paragraph2 = new("-Average marks for accommodations: You have no marks\n\n", fontParagraph2);
+                }
+                else
+                {
+                    mark /= 2;
+                    phraze6Paragraph2 = new("-Average marks for accommodations: " + mark.ToString() + "\n\n", fontParagraph2);
+                }
+                paragraph2.Add(phraze6Paragraph2);
+
+                mark = GuestReviewController.GetAverageByAccommodationType(AccommodationType.House, User);
+                Phrase phraze7Paragraph2;
+                if (mark == 0 || mark is double.NaN)
+                {
+                    phraze7Paragraph2 = new("-Average marks for houses: You have no marks\n\n", fontParagraph2);
+                }
+                else
+                {
+                    mark /= 2;
+                    phraze7Paragraph2 = new("-Average marks for houses: " + mark.ToString() + "\n\n", fontParagraph2);
+                }
+                paragraph2.Add(phraze7Paragraph2);
+
+                mark = GuestReviewController.GetAverageByAccommodationType(AccommodationType.Cottage, User);
+                Phrase phraze8Paragraph2;
+                if (mark == 0 || mark is double.NaN)
+                {
+                    phraze8Paragraph2 = new("-Average marks for cottages: You have no marks\n\n", fontParagraph2);
+                }
+                else
+                {
+                    mark /= 2;
+                    phraze8Paragraph2 = new("-Average marks for cottages: " + mark.ToString() + "\n\n", fontParagraph2);
+                }
+                paragraph2.Add(phraze8Paragraph2);
+
+                fileToGenerate.Add(paragraph2);
 
                 fileToGenerate.Close();
 
