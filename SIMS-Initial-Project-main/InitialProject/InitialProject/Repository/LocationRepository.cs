@@ -61,7 +61,8 @@ namespace InitialProject.Repository
             using (var dbContext = new UserContext())
             {
                 location = (Location)dbContext.location
-                                    .Where(l => l.Id == id);
+                                    .Where(l => l.Id == id)
+                                    .FirstOrDefault();
             }
             return location;
         }

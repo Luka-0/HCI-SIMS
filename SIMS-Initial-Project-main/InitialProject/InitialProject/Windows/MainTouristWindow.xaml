@@ -66,6 +66,10 @@
         <DataTemplate DataType="{x:Type viewModel:ShowSingleTourRequestViewModel}">
             <views:ShowSingleTourRequest/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:TourTrackingViewModel}">
+            <views:TourTrackingView/>
+        </DataTemplate>
     </Window.Resources>
 
 

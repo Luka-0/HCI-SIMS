@@ -21,7 +21,7 @@
         <Grid Grid.Row="1">
             <StackPanel Orientation="Vertical">
                 <Button Content="Prikaz, pretraga, rezervacija ture" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="showAndSearchTour"/>
-                <Button Content="Pracenje ture" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
+                <Button Content="Pracenje ture" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="tourTracking"/>
                 <Button Content="Ocenjivanje ture" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
                 <Button Content="Kreiraj zahtev za turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="tourRequest"/>
                 <Button Content="Pregled zahteva za turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="showTourRequest"/>

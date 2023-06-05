@@ -27,6 +27,7 @@ namespace InitialProject.ViewModel
         private VoucherViewModel voucherViewModel = new VoucherViewModel();
         private TourStatisticsViewModel tourStatisticsViewModel = new TourStatisticsViewModel();
         private ShowSingleTourRequestViewModel showSingleTourRequestViewModel = new ShowSingleTourRequestViewModel();
+        private TourTrackingViewModel tourTrackingViewModel = new TourTrackingViewModel();
 
         private BindableBase currentViewModel;
 
@@ -96,6 +97,9 @@ namespace InitialProject.ViewModel
                     break;
                 case "showSingleTourRequest":
                     CurrentViewModel = showSingleTourRequestViewModel;
+                    break;
+                case "tourTracking":
+                    CurrentViewModel = tourTrackingViewModel;
                     break;
             }
         }
