@@ -30,7 +30,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Button HorizontalAlignment="Left" Margin="45,478,0,0" VerticalAlignment="Top" Click="GeneratePdf_Click">
+        <Button HorizontalAlignment="Left" Margin="21,480,0,0" VerticalAlignment="Top" Click="GeneratePdf_Click">
             <Button.ToolTip>
                 <ToolTip Placement="Bottom" Content="By clicking this, a pdf file will be downloaded" />
             </Button.ToolTip>
@@ -48,7 +48,7 @@
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
-                    <TextBlock Text="Generate pdf" Height="19" Width="75" />
+                    <TextBlock Text="Generate and open pdf" Height="19" Width="129" />
                 </StackPanel>
             </Button.Content>
         </Button>

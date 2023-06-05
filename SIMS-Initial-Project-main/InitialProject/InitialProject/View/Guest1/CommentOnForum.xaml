@@ -30,7 +30,9 @@
             </Button.Content>
         </Button>
 
-        <Border BorderBrush="Black" BorderThickness="1" Margin="10,44,0,10" HorizontalAlignment="Left" Width="355">
+        <TextBlock Text="Comments that have a star   *   in the Important column, means that they are from users who have visited that location" TextWrapping="Wrap" TextAlignment="Center" Margin="64,35,430,437"/>
+
+        <Border BorderBrush="Black" BorderThickness="1" Margin="10,92,0,10" HorizontalAlignment="Left" Width="355">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />

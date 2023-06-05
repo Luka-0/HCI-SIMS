@@ -38,8 +38,6 @@ namespace InitialProject.View.Guest1
             User = user;
             DataContext = this;
 
-
-
             InitializeComponent();
 
             GenerateDatesButton.IsEnabled = false;
@@ -48,6 +46,8 @@ namespace InitialProject.View.Guest1
 
         private void StartDemo_Click(object sender, RoutedEventArgs e)
         {
+            NumOfTicks = 0;
+
             DispatcherTimer dt = new();
             dt.Tick += new EventHandler(DtTicker);
             dt.Interval = new TimeSpan(0, 0, 1);
@@ -136,7 +136,7 @@ namespace InitialProject.View.Guest1
                     ReservateButton.BorderThickness = new Thickness(2);
                     break;
                 case 30:
-                    Reservate_Click(null, null);
+                    MessageBox.Show("The demo has ended, all thats left to do is click on Reservate");
 
                     ReservateButton.ClearValue(Border.BorderThicknessProperty);
                     ReservateButton.ClearValue(Border.BorderBrushProperty);
