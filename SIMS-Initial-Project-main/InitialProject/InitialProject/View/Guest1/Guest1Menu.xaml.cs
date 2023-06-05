@@ -160,5 +160,13 @@ namespace InitialProject.View
         {
             MessageBox.Show("Press OK or X to close this");
         }
+
+        private void DeactivateForum_Click(object sender, RoutedEventArgs e)
+        {
+            DeactiveForum deactiveForum = new(User);
+            deactiveForum.Show();
+
+            Close();
+        }
     }
 }

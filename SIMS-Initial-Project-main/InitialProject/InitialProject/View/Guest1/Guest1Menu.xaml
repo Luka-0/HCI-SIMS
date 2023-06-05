@@ -12,19 +12,13 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
-                        <!-- Row 0 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 1 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 2 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 3 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 4 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 5 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 6 -->
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
 
@@ -35,6 +29,8 @@
                     <Button Grid.Row="4" Content="Anywhere-Whenever" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AnywhereWhenever_Click"/>
                     <Button Grid.Row="5" Content="Create a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CreateForum_Click" />
                     <Button Grid.Row="6" Content="Make Comment on a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CommentOnForum_Click" />
+                    <Button Grid.Row="7" Content="Deactivate a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" Click="DeactivateForum_Click" />
+
                 </Grid>
             </Border>
         </Grid>

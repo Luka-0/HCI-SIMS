@@ -7,16 +7,28 @@
         mc:Ignorable="d"
         Title="Rating Accommodations" Height="560" Width="800">
     <Grid Margin="10,0,0,0">
-        <Grid Margin="0,0,479,10">
-            <Border BorderBrush="Black" BorderThickness="1" Margin="0,117,10,46"/>
-            <Label Content="Tidiness: " HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="TidinessComboBox" HorizontalAlignment="Left" Margin="160,146,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Owner's correctness: " HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="CorrectnessComboBox" HorizontalAlignment="Left" Margin="160,200,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Image links: " HorizontalAlignment="Left" Margin="10,368,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="CommentTextBox" HorizontalAlignment="Center" Margin="0,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="205" Height="74"/>
-            <TextBox x:Name="ImagesTextBox" HorizontalAlignment="Center" Margin="0,372,0,0" TextWrapping="Wrap" Text="Image links" VerticalAlignment="Top" Width="120"/>
-            <Button HorizontalAlignment="Left" Margin="223,371,0,0" VerticalAlignment="Top" Click="AddLink_Click" Width="57">
+        <Grid Margin="10,80,477,80">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            
+            <Label Grid.Row="0" Content="Tidiness:" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="10"/>
+            <ComboBox Grid.Row="0" x:Name="TidinessComboBox" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" Width="120"/>
+            
+            <Label Grid.Row="1" Content="Owner's correctness: " HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center"/>
+            <ComboBox Grid.Row="1" x:Name="CorrectnessComboBox" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" Width="120"/>
+
+            <TextBox Grid.Row="2" x:Name="CommentTextBox" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" Text="Write comment here" Width="205" Height="74"/>
+
+            <Label Grid.Row="3" Content="Image links: " HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="3" x:Name="ImagesTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Image links" VerticalAlignment="Center" Width="106"/>
+            <Button Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Click="AddLink_Click" Width="57">
                 <Button.ToolTip>
                     <ToolTip Placement="Bottom" Content="By clicking this, the link You enter on the left will be added, and emptied so that You can add a new one" />
                 </Button.ToolTip>
@@ -34,12 +46,15 @@
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
-                        <TextBlock Text="Add" />
+                        <TextBlock Text="Add"/>
                     </StackPanel>
                 </Button.Content>
             </Button>
 
-            <Button HorizontalAlignment="Center" Margin="0,433,0,0" VerticalAlignment="Top" Click="Submit_Click" Height="23">
+            <Label Grid.Row="4" Content="Or add a picture from Your pc:" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Button Grid.Row="4" Content="Add" HorizontalAlignment="Right" VerticalAlignment="Center"  Height="20" Width="35" Margin="10" Click="AddPicture_Click" />
+
+            <Button Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Submit_Click" Height="23">
                 <Button.ToolTip>
                     <ToolTip Placement="Bottom" Content="By clicking this, You will complete the rating" />
                 </Button.ToolTip>
@@ -61,7 +76,8 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
-
+            
+            <Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="6"/>
         </Grid>
 
         <Label Content="Theese are Your reservations that You can rate" VerticalAlignment="Top" Margin="424,0,94,0"/>
@@ -109,7 +125,7 @@
             </Button.Content>
         </Button>
 
-        <Button x:Name="RenovationSuggestionButton" HorizontalAlignment="Left" Margin="72,490,0,0" VerticalAlignment="Top" Click="SuggestionForReservation_Click">
+        <Button x:Name="RenovationSuggestionButton" HorizontalAlignment="Left" Margin="78,485,0,0" VerticalAlignment="Top" Click="SuggestionForReservation_Click">
             <Button.ToolTip>
                 <ToolTip Placement="Bottom" Content="By clicking this, a new window will open where You can write your suggestion. Don't worry cos everything else will be saved!" />
             </Button.ToolTip>

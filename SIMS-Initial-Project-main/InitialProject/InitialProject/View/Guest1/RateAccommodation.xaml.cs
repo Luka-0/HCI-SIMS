@@ -1,6 +1,7 @@
 ﻿using InitialProject.Controller;
 using InitialProject.Model;
 using InitialProject.View;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace InitialProject.View.Guest1
 {
@@ -107,7 +109,7 @@ namespace InitialProject.View.Guest1
             ReservationsToShow = new ObservableCollection<AccommodationReservation>();
             ReservationsGrid.ItemsSource = ReservationsToShow;
 
-            foreach(AccommodationReservation ar in accommodationReservations)
+            foreach (AccommodationReservation ar in accommodationReservations)
             {
                 ReservationsToShow.Add(ar);
             }
@@ -170,11 +172,21 @@ namespace InitialProject.View.Guest1
             Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddPicture_Click(object sender, RoutedEventArgs e)
         {
-            RenovationRecommendation renovationRecommendation = new((AccommodationReservation)ReservationsGrid.SelectedItem);
-            renovationRecommendation.Show();
-            Close();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string selectedImagePath = openFileDialog.FileName;
+
+                string destinationFolderPath = @"C:\\Users\\Luka stajic\\Documents\\Projekat SiMS-HCI\\HCI-SIMS\\SIMS-Initial-Project-main\\InitialProject\\InitialProject\\Resources\\Images\\Guest1";
+                string destinationFilePath = System.IO.Path.Combine(destinationFolderPath, System.IO.Path.GetFileName(selectedImagePath));
+
+                File.Copy(selectedImagePath, destinationFilePath, true);
+
+                MessageBox.Show("Picture added successfully!");
+            }
         }
     }
 }

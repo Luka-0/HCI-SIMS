@@ -55,4 +55,8 @@
     <Resource Include="View\Guest1\tooltip.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\Images\Guest1\" />
+  </ItemGroup>
+
 </Project>

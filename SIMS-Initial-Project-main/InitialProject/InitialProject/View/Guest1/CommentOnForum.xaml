@@ -49,7 +49,7 @@
 
                 <TextBox Grid.Row="2" x:Name="CommentTB" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Write comment here" TextWrapping="Wrap" Height="161" Width="271" />
 
-                <Button Grid.Row="3" MouseLeave="PreShowDG" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddComment_Click" >
+                <Button Grid.Row="3" x:Name="PostB" MouseLeave="PreShowDG" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddComment_Click" >
                     <Button.ToolTip>
                         <ToolTip Placement="Bottom" Content="By clicking this, You will create a post with selected location" />
                     </Button.ToolTip>

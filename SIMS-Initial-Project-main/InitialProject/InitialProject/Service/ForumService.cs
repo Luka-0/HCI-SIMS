@@ -22,7 +22,7 @@ namespace InitialProject.Service
             _forumRepository.Save(forum);
         }
 
-        public Forum GetByUser(int id)
+        public List<Forum> GetByUser(int id)
         {
             return _forumRepository.GetByUser(id);
         }
@@ -37,5 +37,9 @@ namespace InitialProject.Service
             _forumRepository.UpdateNumberOfSpecials(forum);
         }
 
+        public void UpdateActivity(Forum forum)
+        {
+            _forumRepository.UpdateActivity(forum);
+        }
     }
 }

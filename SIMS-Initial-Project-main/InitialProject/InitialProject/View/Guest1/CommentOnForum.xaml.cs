@@ -18,9 +18,6 @@ using System.Collections.ObjectModel;
 
 namespace InitialProject.View.Guest1
 {
-    /// <summary>
-    /// Interaction logic for CommentOnForum.xaml
-    /// </summary>
     public partial class CommentOnForum : Window
     {
         private readonly ForumController ForumController = new();
@@ -95,7 +92,7 @@ namespace InitialProject.View.Guest1
 
         private void AddComment_Click(object sender, RoutedEventArgs e)
         {
-            if (IsViolatingAnyUIControl()) return;
+            if (IsViolatingAnyUIControl()) return; //TODO proveriti dal je forum aktivan
 
             Forum forum = CommentsToShow.First().Forum;
             ForumComment forumComment = new(CommentTB.Text, forum, User, ' ');
@@ -123,6 +120,9 @@ namespace InitialProject.View.Guest1
 
             Forum forum = ForumController.GetByCity(CityCB.SelectedItem.ToString());
             if (forum == null) return;
+
+            if (forum.IsClosed) PostB.IsEnabled = false;
+            else PostB.IsEnabled = true;
 
             List<ForumComment> forumComments = ForumCommentController.GetByForum(forum.Id);
 

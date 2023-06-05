@@ -32,14 +32,13 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
-        public Forum GetByUser(int id)
+        public List<Forum> GetByUser(int id)
         {
-            Forum retVal = new();
+            List<Forum> retVal = new();
 
-
-            using (UserContext db = new())
+            using (var db = new UserContext())
             {
-                retVal = db.forum.Include(t => t.User).Include(t => t.Location).Where(t => t.User.Id == id).First();
+                retVal = db.forum.Include(t => t.User).Include(t => t.Location).Where(t => t.User.Id == id).ToList();
             }
 
             return retVal;
@@ -82,6 +81,16 @@ namespace InitialProject.Repository
                 }
             }
 
+        }
+
+        public void UpdateActivity(Forum forum)
+        {
+            using (var db = new UserContext())
+            {
+                Forum f = db.forum.Find(forum.Id);
+                f.IsClosed = true;
+                db.SaveChanges();
+            }
         }
 
     }
