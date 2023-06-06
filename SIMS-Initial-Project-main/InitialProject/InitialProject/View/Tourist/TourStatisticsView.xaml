@@ -14,6 +14,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -28,24 +29,36 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="Izvestaj o svim prisustvima na turama u odredjenom vremenskom periodu" FontSize="18" Margin="30 30 0 0" TextWrapping="Wrap" Width="230"/>
-            <Button Grid.Column="1" FontSize="18" Width="110" Height="60" Margin="10 37 0 0">
+            <Button Grid.Column="1" FontSize="18" Width="110" Height="60" Margin="10 37 0 0" Command="{Binding ExportPDFCommand}">
                 <TextBlock Text="Genersi izvestaj" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button>
         </Grid>
 
         <Grid Grid.Row="2" Margin="0 60 0 0">
+            <Button HorizontalAlignment="Right" Margin="0 0 15 0"
+                    Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                    CommandParameter="showReport" 
+                    FontSize="18" Width="110" Height="60">
+                <TextBlock Text="Prikazi izvestaj" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="0 60 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Prikaz broja tura rezervisanih po mesecu" FontSize="18" Margin="30 30 0 0" TextWrapping="Wrap" Width="150"/>
-            <Button Grid.Column="1" FontSize="18" Width="110" Height="60" Margin="85 35 0 0">
+            <TextBlock Grid.Column="0" FontSize="18" Margin="30 40 0 0" TextWrapping="Wrap" Width="150"><Run Text="Broj zahteva za ture na odredjenoj lokaciji"/><LineBreak/><Run/></TextBlock>
+            <Button Grid.Column="1"
+                    Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                    CommandParameter="graphLanguageRequest" 
+                    FontSize="18" Width="110" Height="60" Margin="85 10 0 0">
                 <TextBlock Text="Genersi grafik" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button>
         </Grid>
 
-        <Grid Grid.Row="3" VerticalAlignment="Bottom">
+        <Grid Grid.Row="4" VerticalAlignment="Bottom">
             <comp:Footer/>
         </Grid>
 
