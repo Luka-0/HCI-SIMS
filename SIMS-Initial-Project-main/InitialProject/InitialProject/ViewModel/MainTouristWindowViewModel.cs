@@ -30,6 +30,9 @@ namespace InitialProject.ViewModel
         private TourTrackingViewModel tourTrackingViewModel = new TourTrackingViewModel();
         private GradeTourViewModel gradeTourViewModel = new GradeTourViewModel();
         private AddPictureAndCommentViewModel addPictureAndCommentViewModel = new AddPictureAndCommentViewModel();
+        private HelpVoucherTutorialViewModel helpVoucherTutorialViewModel = new HelpVoucherTutorialViewModel();
+        private ComplexTourRequestViewModel complexTourRequestViewModel = new ComplexTourRequestViewModel();
+        private ComplexTourPreviewViewModel complexTourPreviewViewModel = new ComplexTourPreviewViewModel();
 
         private BindableBase currentViewModel;
 
@@ -108,6 +111,15 @@ namespace InitialProject.ViewModel
                     break;
                 case "addPictureOrComment":
                     CurrentViewModel = addPictureAndCommentViewModel;
+                    break;
+                case "helpVoucherTutorial":
+                    CurrentViewModel = helpVoucherTutorialViewModel;
+                    break;
+                case "complexTourRequest":
+                    CurrentViewModel = complexTourRequestViewModel;
+                    break;
+                case "complexTourPreview":
+                    CurrentViewModel = complexTourPreviewViewModel;
                     break;
             }
         }

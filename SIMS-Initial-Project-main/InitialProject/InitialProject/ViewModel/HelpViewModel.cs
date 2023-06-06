@@ -14,7 +14,7 @@ namespace InitialProject.ViewModel
             UpdateFooterParametar("home");
         }
 
-        private string _navCommandParamReserve = "statistics";
+        private string _navCommandParamReserve = "helpVoucherTutorial";
         public string NavCommandParamReserve
         {
             get { return _navCommandParamReserve; }

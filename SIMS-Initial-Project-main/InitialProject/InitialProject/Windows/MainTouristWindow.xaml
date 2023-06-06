@@ -78,6 +78,18 @@
         <DataTemplate DataType="{x:Type viewModel:AddPictureAndCommentViewModel}">
             <views:AddPictureAndCommentView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:HelpVoucherTutorialViewModel}">
+            <views:HelpVoucherTutorialView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ComplexTourRequestViewModel}">
+            <views:ComplexTourRequestView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ComplexTourPreviewViewModel}">
+            <views:ComplexTourPreviewView/>
+        </DataTemplate>
     </Window.Resources>
 
 

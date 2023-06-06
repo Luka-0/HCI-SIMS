@@ -26,8 +26,8 @@
                 <Button Content="Kreiraj zahtev za turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="tourRequest"/>
                 <Button Content="Pregled zahteva za turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="showTourRequest"/>
                 <Button Content="Statistika o zahtevima za ture" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="statistics"/>
-                <Button Content="Kreiraj zahtev za slozenu turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
-                <Button Content="Pregled zahteva za slozenu turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter=""/>
+                <Button Content="Kreiraj zahtev za slozenu turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="complexTourRequest"/>
+                <Button Content="Pregled zahteva za slozenu turu" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="complexTourPreview"/>
                 <Button Content="Pregled vaucera" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="vaucherView"/>
                 <Button Content="Statistika o turama" Height="50" Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="tourStatistics"/>
 
