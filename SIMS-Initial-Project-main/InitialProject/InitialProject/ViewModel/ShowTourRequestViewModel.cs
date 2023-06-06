@@ -13,6 +13,7 @@ namespace InitialProject.ViewModel
     {
         private ObservableCollection<TourRequest> _tourRequests;
         private TourRequestController tourRequestController = new TourRequestController();
+        private TourRequest _selectedRowData;
 
         public ObservableCollection<TourRequest> TourRequests
         {
@@ -23,6 +24,20 @@ namespace InitialProject.ViewModel
         public ShowTourRequestViewModel()
         {
             LoadRequests();
+
+            UpdateFooterParametar("home");
+            UpdateHeaderTitle("Pregled zahteva za turu");
+        }
+
+        public TourRequest SelectedRowData
+        {
+            get { return _selectedRowData; }
+            set
+            {
+                _selectedRowData = value;
+                OnPropertyChanged(nameof(SelectedRowData));
+                UpdateSelectedTourRequestIndex(_selectedRowData.Id.ToString());
+            }
         }
 
         public void LoadRequests()

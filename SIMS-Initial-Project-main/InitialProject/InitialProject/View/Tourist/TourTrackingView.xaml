@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="InitialProject.View.Tourist.ShowTourRequestView"
+﻿<UserControl x:Class="InitialProject.View.Tourist.TourTrackingView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,6 +13,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -20,19 +23,13 @@
             <comp:Header/>
         </Grid>
 
-
         <Grid Grid.Row="1">
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <ListView Grid.Row="1" Margin="0 25 0 0 " ItemsSource="{Binding TourRequests}" SelectedItem="{Binding SelectedRowData, Mode=TwoWay}" Height="200">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction 
-                                        Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                                        CommandParameter="showSingleTourRequest"
-                            />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+            <TextBlock Text="Tura" FontSize="18" Margin="10 10 10 0"/>
+        </Grid>
 
+        <Grid Grid.Row="2">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <ListView Grid.Row="1" Margin="0 5 0 0 " ItemsSource="{Binding Tours}" SelectedItem="{Binding SelectedRowData, Mode=TwoWay}" Height="200">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -41,7 +38,15 @@
 
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Lokacija" Width="130">
+                            <GridViewColumn Header="Ime" Width="130">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Lokacija" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock HorizontalAlignment="Center" Text="{Binding Location}"/>
@@ -49,18 +54,10 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="Datum" Width="100">
+                            <GridViewColumn Header="Datum" Width="155">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding LowerDateLimit, StringFormat={}{0:dd-MM-yyyy}}"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <GridViewColumn Header="Status" Width="155">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding State}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding StartDateAndTime}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -69,11 +66,34 @@
                 </ListView>
             </ScrollViewer>
         </Grid>
-        
-        <Grid Grid.Row="2" VerticalAlignment="Bottom">
-            <comp:Footer/>
+
+        <Grid Grid.Row="3">
+            <TextBlock Text="Dostignuta kljucna tacka" FontSize="18" Margin="30 10 20 0"/>
         </Grid>
 
+        <Grid Grid.Row="4" Margin="0 20 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Margin="70 0 0 0" TextElement.FontSize="16">
+                <TextBlock Text="Ime:" Margin="0 0 0 15" />
+                <TextBlock Text="Dostignuta?" Margin="0 0 0 15"/>
+                <TextBlock Text="Tip:" Margin="0 0 0 15"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" TextElement.FontSize="16">
+                <TextBlock Text="{Binding Name}" Margin="0 0 0 15"/>
+                <TextBlock Text="{Binding Reached}" Margin="0 0 0 15"/>
+                <TextBlock Text="{Binding Type}" Margin="0 0 0 15"/>
+            </StackPanel>
+
+        </Grid>
+
+        <Grid Grid.Row="5" VerticalAlignment="Bottom">
+            <comp:Footer/>
+        </Grid>
 
 
     </Grid>

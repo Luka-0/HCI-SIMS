@@ -30,6 +30,11 @@ public class TourRequestService
 
     }
 
+    public TourRequest GetById(int id)
+    {
+        return _tourRequestRepository.GetById(id);
+    }
+
     public List<TourRequest> GetAll()
     {
         return _tourRequestRepository.GetAll();

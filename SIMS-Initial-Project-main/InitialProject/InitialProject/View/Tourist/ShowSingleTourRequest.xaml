@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="InitialProject.View.Tourist.ShowSingleTourRequest"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.View.Tourist"
+             xmlns:comp ="clr-namespace:InitialProject.Components"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:viewModel="clr-namespace:InitialProject.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="430">
+    <UserControl.Resources>
+        <viewModel:ShowSingleTourRequestViewModel x:Key="ViewModel" />
+    </UserControl.Resources>
+    
+    <Grid Background="#F8F8FF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <comp:Header/>
+        </Grid>
+
+        <Grid Grid.Row="1" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                
+            </StackPanel>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock FontSize="16" Text="Opis:" Margin="70 10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="Lokacija:" Margin="70 10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="Jezik:" Margin="70 10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="Broj gostiju:" Margin="70 10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="Pocetni datum:" Margin="70 10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="Krajnji datum:" Margin="70 10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="Status" Margin="70 10 0 0" Padding="5"/>
+            </StackPanel>
+          
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                <TextBlock FontSize="16" Text="{Binding Description}" Margin="30 10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="{Binding Location}" Margin="30 10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="{Binding Language}" Margin="30 -10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="{Binding GuestNumber}" Margin="30 10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="{Binding LowerDateLimit, StringFormat={}{0:dd-MM-yyyy}}" Margin="30 10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="{Binding UpperDateLimit, StringFormat={}{0:dd-MM-yyyy}}" Margin="30 10 0 0" Padding="5"/>
+                <TextBlock FontSize="16" Text="{Binding State}" Margin="30 10 0 0" Padding="5"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2" VerticalAlignment="Bottom">
+            <comp:Footer/>
+        </Grid>
+
+    </Grid>
+</UserControl>

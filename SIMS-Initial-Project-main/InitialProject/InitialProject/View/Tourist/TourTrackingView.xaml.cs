@@ -17,17 +17,14 @@ using System.Windows.Shapes;
 namespace InitialProject.View.Tourist
 {
     /// <summary>
-    /// Interaction logic for TourRequestView.xaml
+    /// Interaction logic for TourTrackingView.xaml
     /// </summary>
-    public partial class TourRequestView : UserControl
+    public partial class TourTrackingView : UserControl
     {
-        public TourRequestView()
+        public TourTrackingView()
         {
             InitializeComponent();
-            BindableBase bindableBase = new BindableBase();
-            bindableBase.UpdateHeaderTitle("Kreiraj zahtev za turu");
-            bindableBase.UpdateFooterParametar("home");
+            this.DataContext = new TourTrackingViewModel();
         }
-
     }
 }

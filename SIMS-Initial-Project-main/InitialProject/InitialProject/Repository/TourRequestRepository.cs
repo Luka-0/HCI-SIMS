@@ -41,6 +41,22 @@ public class TourRequestRepository: ITourRequestRepository
         return db.tourRequest.Select(tr=>tr.Language).ToList();
     }
 
+    public TourRequest GetById(int id)
+    {
+        TourRequest tourRequest = new TourRequest();
+
+        using (var dbContext = new UserContext())
+        {
+            tourRequest = (TourRequest)dbContext.tourRequest
+                            .Include(t => t.Location)
+                            .Include(t => t.Tourist)
+                            .Where(t => t.Id == id)
+                            .SingleOrDefault();
+
+        }
+        return tourRequest;
+    }
+
     /*
     public void Save(TourRequest tourRequest)
     {

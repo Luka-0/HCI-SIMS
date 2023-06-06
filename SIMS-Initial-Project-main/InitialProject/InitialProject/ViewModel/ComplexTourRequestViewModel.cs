@@ -12,40 +12,41 @@ using System.Windows.Controls;
 
 namespace InitialProject.ViewModel
 {
-    public class TourRequestViewModel : BindableBase
+    public class ComplexTourRequestViewModel:BindableBase
     {
         private LocationController locationControler = new LocationController();
         private TourController tourController = new TourController();
-        private UserController userController = new UserController();   
+        private UserController userController = new UserController();
         private TourRequestController tourRequestController = new TourRequestController();
         public ObservableCollection<string> StateComboBoxItems { get; set; }
         public ObservableCollection<string> CityComboBoxItems { get; set; }
         public ObservableCollection<string> LanguageComboBoxItems { get; set; }
-        public MyICommand CreateTourCommand { get; set; }
+        public MyICommand AddNewTour { get; set; }
+        public MyICommand AddRequest { get; set; }
 
-        private string _selectedState;
-        private string _selectedCity;
+        private string _selectedState = "";
+        private string _selectedCity = "";
         private double _sliderValue = 0;
         private string _sliderLabelText = "Broj gostiju: 0";
-        private DateTime _startDate;
-        private DateTime _endDate;
-        private string _selectedLanguage;
+        private DateTime _startDate = DateTime.Now;
+        private DateTime _endDate = DateTime.Now;
+        private string _selectedLanguage = "";
+        private string _description = "";
 
         public List<string> _commentsComboBox;
         private string _selectedItem = "";
         private bool _isRequestEnabled = false;
         private Visibility _labelVisibility = Visibility.Visible;
-
-        public TourRequestViewModel()
+        public ComplexTourRequestViewModel()
         {
             LoadStates();
             LoadLanguages();
-            CreateTourCommand = new MyICommand(CreateTour);
-
             LoadComments();
-            ChechValidation();
+            AddNewTour = new MyICommand(OnAddNewTour);
+            AddRequest = new MyICommand(OnAddRequest);
         }
 
+        #region Properties
         public Visibility LabelVisibility
         {
             get { return _labelVisibility; }
@@ -87,6 +88,16 @@ namespace InitialProject.ViewModel
                 OnPropertyChanged(nameof(CommentsComboBox));
             }
         }
+
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                OnPropertyChanged(nameof(Description));
+            }
+        }
         public string SelectedLanguage
         {
             get { return _selectedLanguage; }
@@ -103,7 +114,7 @@ namespace InitialProject.ViewModel
             set
             {
                 _startDate = value;
-               // MessageBox.Show(value.ToString());
+                // MessageBox.Show(value.ToString());
                 OnPropertyChanged(nameof(StartDate));
             }
         }
@@ -114,7 +125,7 @@ namespace InitialProject.ViewModel
             set
             {
                 _endDate = value.Date;
-             //   MessageBox.Show(value.ToString("dd-MM-yyyy"));
+               // MessageBox.Show(value.ToString("dd-MM-yyyy"));
                 OnPropertyChanged(nameof(EndDate));
             }
         }
@@ -128,7 +139,7 @@ namespace InitialProject.ViewModel
                 _sliderLabelText = "Broj gostiju: " + _sliderValue.ToString();
                 OnPropertyChanged(nameof(SliderValue));
                 OnPropertyChanged(nameof(SliderLabelText));
-                ChechValidation();
+                OnAddRequest();
             }
         }
 
@@ -164,6 +175,8 @@ namespace InitialProject.ViewModel
             }
         }
 
+        #endregion
+
         public void LoadStates()
         {
             List<Location> locations = locationControler.GetAll();
@@ -191,13 +204,26 @@ namespace InitialProject.ViewModel
         {
             List<Tour> tours = tourController.GetAll();
             ObservableCollection<string> languages = new ObservableCollection<string>();
-            foreach(Tour tour in tours)
+            foreach (Tour tour in tours)
             {
                 languages.Add(tour.Language);
             }
             languages = new ObservableCollection<string>(languages.Distinct());
             LanguageComboBoxItems = languages;
         }
+
+        public void OnAddNewTour()
+        {
+            SelectedCity = "";
+            SelectedLanguage = "";
+            SelectedState = "";
+            SliderValue = 0;
+            SliderLabelText = "Broj gostiju: 0";
+            Description = "";
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now;
+            SelectedItem = "";
+         }
 
         public void LoadComments()
         {
@@ -210,21 +236,9 @@ namespace InitialProject.ViewModel
             CommentsComboBox.Add("Nije lose");
         }
 
-        public void CreateTour()
+        public void OnAddRequest()
         {
-            TourRequest request = new TourRequest();
-            Location reqLocation = locationControler.GetBy(SelectedState, SelectedCity);
-
-            request.Location = reqLocation;
-            request.LowerDateLimit = StartDate;
-            request.UpperDateLimit = EndDate;
-            request.Description = "Desc";
-            request.GuestNumber = (int)SliderValue;
-            request.Language = SelectedLanguage;
-            request.Tourist = userController.GetBy(1);
-
-            tourRequestController.Save(request, userController.GetBy(1));
-            MessageBox.Show("Zahtev uspesno sacuvan!");
+            ChechValidation();
         }
 
         public void ChechValidation()
@@ -239,7 +253,8 @@ namespace InitialProject.ViewModel
                 IsRequestEnabled = false;
                 LabelVisibility = Visibility.Visible;
             }
-            else { 
+            else
+            {
                 IsRequestEnabled = true;
                 LabelVisibility = Visibility.Hidden;
             }

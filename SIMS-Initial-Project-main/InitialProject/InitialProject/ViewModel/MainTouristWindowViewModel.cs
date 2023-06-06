@@ -25,6 +25,14 @@ namespace InitialProject.ViewModel
         private ShowSingleTourViewModel showSingleTourViewModel = new ShowSingleTourViewModel();
         private ReserveTourViewModel reserveTourViewModel = new ReserveTourViewModel();
         private VoucherViewModel voucherViewModel = new VoucherViewModel();
+        private TourStatisticsViewModel tourStatisticsViewModel = new TourStatisticsViewModel();
+        private ShowSingleTourRequestViewModel showSingleTourRequestViewModel = new ShowSingleTourRequestViewModel();
+        private TourTrackingViewModel tourTrackingViewModel = new TourTrackingViewModel();
+        private GradeTourViewModel gradeTourViewModel = new GradeTourViewModel();
+        private AddPictureAndCommentViewModel addPictureAndCommentViewModel = new AddPictureAndCommentViewModel();
+        private HelpVoucherTutorialViewModel helpVoucherTutorialViewModel = new HelpVoucherTutorialViewModel();
+        private ComplexTourRequestViewModel complexTourRequestViewModel = new ComplexTourRequestViewModel();
+        private ComplexTourPreviewViewModel complexTourPreviewViewModel = new ComplexTourPreviewViewModel();
 
         private BindableBase currentViewModel;
 
@@ -88,6 +96,30 @@ namespace InitialProject.ViewModel
                     break;
                 case "vaucherView":
                     CurrentViewModel = voucherViewModel;
+                    break;
+                case "tourStatistics":
+                    CurrentViewModel = tourStatisticsViewModel;
+                    break;
+                case "showSingleTourRequest":
+                    CurrentViewModel = showSingleTourRequestViewModel;
+                    break;
+                case "tourTracking":
+                    CurrentViewModel = tourTrackingViewModel;
+                    break;
+                case "gradeTour":
+                    CurrentViewModel = gradeTourViewModel;
+                    break;
+                case "addPictureOrComment":
+                    CurrentViewModel = addPictureAndCommentViewModel;
+                    break;
+                case "helpVoucherTutorial":
+                    CurrentViewModel = helpVoucherTutorialViewModel;
+                    break;
+                case "complexTourRequest":
+                    CurrentViewModel = complexTourRequestViewModel;
+                    break;
+                case "complexTourPreview":
+                    CurrentViewModel = complexTourPreviewViewModel;
                     break;
             }
         }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace InitialProject.ViewModel
 {
@@ -20,19 +21,43 @@ namespace InitialProject.ViewModel
         private DateTime startDateAndTime;
         private TimeSpan duration;
         private string location;
+        private string imageSource = "D:\\rozga1.jpg";
 
         private string _selectedTourId = "5";
 
+        public MyICommand PreviousImageCommand { get; set; }
+        public MyICommand NextImageCommand { get; set; }
 
         public ShowSingleTourViewModel()
         {
             Mediator.Instance.Subscribe("TourIndexUpdated", OnTourIndexUpdated);
+            PreviousImageCommand = new MyICommand(OnPreviousImage);
+            NextImageCommand = new MyICommand(OnNextImage);
+
+        }
+
+        private void OnNextImage()
+        {
+            ImageSource = "D:\\rozga.jpg";
+        }
+
+        private void OnPreviousImage()
+        {
+            ImageSource = "D:\\rozga1.jpg";
         }
 
 
         #region Properties
 
-
+        public string ImageSource
+        {
+            get { return imageSource; }
+            set
+            {
+                imageSource = value;
+                OnPropertyChanged(nameof(ImageSource));
+            }
+        }
         public string SelectedTourId
         {
             get { return _selectedTourId; }

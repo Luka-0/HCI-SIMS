@@ -99,6 +99,17 @@ public class Tour
         this.Status = TourStatus.Waiting;
     }
 
+    public Tour(string name, string description, string language, int guestLimit, DateTime date, TimeSpan time, Location location)
+    {
+        this.Name = name;
+        this.Description = description;
+        this.Language = language;
+        this.GuestLimit = guestLimit;
+        this.StartDateAndTime = date;
+        this.Duration = time;
+        this.Location = location;
+    }
+
 
     public override string ToString()
     {

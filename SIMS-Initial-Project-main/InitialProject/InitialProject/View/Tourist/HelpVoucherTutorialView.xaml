@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="InitialProject.View.Tourist.HelpVoucherTutorialView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.View.Tourist"
+             xmlns:comp ="clr-namespace:InitialProject.Components"
+             xmlns:comm ="clr-namespace:InitialProject.Commands"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="430">
+    <Grid Background="#F8F8FF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <comp:Header/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBlock Text="Uputstvo:" FontSize="18" HorizontalAlignment="Left" Margin="10 10 0 0"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Image x:Name="slika" Grid.Column="1" Source="/Resources/Images/helpSlika.png" Width="400" Height="350" Margin="0 20 0 0"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <TextBlock Text="Na vrhu pocetne stranice, u gornjem levom uglu, se nalazi dugme za padajuci meni. Klikom na to dugnme ce Vam se prikazati meni sa opcijama. Pri dnu stranice imate opciju Pregled vaucera. Klikom na tu opciju cete dobiti prozor sa svim Vasim vaucerima " 
+                       FontSize="16" TextWrapping="Wrap" Width="400" Margin="10 30 10 0"/>
+        </Grid>
+
+        <Grid Grid.Row="4" VerticalAlignment="Bottom">
+            <comp:Footer/>
+        </Grid>
+    </Grid>
+</UserControl>

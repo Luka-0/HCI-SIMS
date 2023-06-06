@@ -58,6 +58,38 @@
         <DataTemplate DataType="{x:Type viewModel:VoucherViewModel}">
             <views:VoucherView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:TourStatisticsViewModel}">
+            <views:TourStatisticsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ShowSingleTourRequestViewModel}">
+            <views:ShowSingleTourRequest/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:TourTrackingViewModel}">
+            <views:TourTrackingView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:GradeTourViewModel}">
+            <views:GradeTourView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:AddPictureAndCommentViewModel}">
+            <views:AddPictureAndCommentView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:HelpVoucherTutorialViewModel}">
+            <views:HelpVoucherTutorialView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ComplexTourRequestViewModel}">
+            <views:ComplexTourRequestView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ComplexTourPreviewViewModel}">
+            <views:ComplexTourPreviewView/>
+        </DataTemplate>
     </Window.Resources>
 
 

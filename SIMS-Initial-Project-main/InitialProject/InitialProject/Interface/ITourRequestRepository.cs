@@ -13,5 +13,6 @@ public interface ITourRequestRepository
     public List<string> GetLanguages();
     public void Save(TourRequest request, User user);
     public List<TourRequest> GetAllPendingByComplex(int id);
+    public TourRequest GetById(int id);
 
 }
