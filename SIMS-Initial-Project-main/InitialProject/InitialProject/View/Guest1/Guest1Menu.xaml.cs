@@ -31,7 +31,7 @@ namespace InitialProject.View
             InitializeComponent();
             User = user;
 
-            UserNameL.Content = user.Username;
+            UserNameL.Content = "Hello " + user.Username;
 
             CheckNotifications();
             CheckSuperTitleRequirements();

@@ -45,7 +45,7 @@
                 <Label Grid.Row="1" Content="Choose city:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" />
                 <ComboBox Grid.Row="1" x:Name="CityCB" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Width="140" />
 
-                <TextBox Grid.Row="2" x:Name="CommentTB" HorizontalAlignment="Center" VerticalAlignment="Center" Text="--Initial post--" Height="161" Width="271" />
+                <TextBox Grid.Row="2" x:Name="CommentTB" HorizontalAlignment="Center" VerticalAlignment="Center" Text="--Initial post--" TextAlignment="Center" Height="161" Width="271" />
 
                 <Button Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CreatePost_Click" >
                     <Button.ToolTip>

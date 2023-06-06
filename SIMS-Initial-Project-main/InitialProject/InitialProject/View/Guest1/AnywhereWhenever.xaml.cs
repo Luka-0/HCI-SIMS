@@ -31,6 +31,8 @@ namespace InitialProject.View.Guest1
 
         public ObservableCollection<Accommodation> AccommodationsToShow { get; set; }
 
+        private DispatcherTimer Dt;
+
         private int NumOfTicks = 0;
 
         public AnywhereWhenever(User user)
@@ -40,6 +42,7 @@ namespace InitialProject.View.Guest1
 
             InitializeComponent();
 
+            StopDemoB.IsEnabled = false;
             GenerateDatesButton.IsEnabled = false;
             ReservateButton.IsEnabled = false;
         }
@@ -50,10 +53,13 @@ namespace InitialProject.View.Guest1
 
             NumOfTicks = 0;
 
-            DispatcherTimer dt = new();
-            dt.Tick += new EventHandler(DtTicker);
-            dt.Interval = new TimeSpan(0, 0, 1);
-            dt.Start();
+            Dt = new();
+            Dt.Tick += new EventHandler(DtTicker);
+            Dt.Interval = new TimeSpan(0, 0, 1);
+            Dt.Start();
+
+            StopDemoB.IsEnabled = true;
+            StartDemoB.IsEnabled = false;
 
         }
 
@@ -61,7 +67,13 @@ namespace InitialProject.View.Guest1
         {
             ++NumOfTicks;
 
-            if (NumOfTicks > 30) return;
+            if (NumOfTicks > 30)
+            {
+                Dt.Stop();
+                NumOfTicks = 0;
+                StartDemoB.IsEnabled = true;
+                StopDemoB.IsEnabled = false;
+            }
 
             switch (NumOfTicks)
             {
@@ -295,32 +307,42 @@ namespace InitialProject.View.Guest1
                 if (int.Parse(GuestNumberTB.Text) < 1)
                 {
                     MessageBox.Show("Please enter a proper guest number");
-
                     MakeControlRed(GuestNumberTB);
-
-                    return true;
-                }
-                if (int.Parse(DaysToStayTB.Text) < 1)
-                {
-                    MessageBox.Show("Please enter a proper number for staying days");
-
-                    MakeControlRed(DaysToStayTB);
-
-                    return true;
-                }
-                if (StartingDatePicker.SelectedDate != null && EndingDatePicker.SelectedDate != null && StartingDatePicker.SelectedDate.Value > EndingDatePicker.SelectedDate.Value)
-                {
-                    MessageBox.Show("The selected starting date is after ending date, please choose the correct dates");
-
-                    MakeControlRed(StartingDatePicker);
-
                     return true;
                 }
             }
             catch (FormatException)
             {
+                MessageBox.Show("Please enter a proper guest number");
+                MakeControlRed(GuestNumberTB);
                 return true;
             }
+
+            try
+            {
+                if (int.Parse(DaysToStayTB.Text) < 1)
+                {
+                    MessageBox.Show("Please enter a proper number for staying days");
+                    MakeControlRed(DaysToStayTB);
+                    return true;
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Please enter a proper number for staying days");
+                MakeControlRed(DaysToStayTB);
+                return true;
+            }
+
+            if (StartingDatePicker.SelectedDate != null && EndingDatePicker.SelectedDate != null && StartingDatePicker.SelectedDate.Value > EndingDatePicker.SelectedDate.Value)
+            {
+                MessageBox.Show("The selected starting date is after ending date, please choose the correct dates");
+
+                MakeControlRed(StartingDatePicker);
+
+                return true;
+            }
+
 
             RemoveRedFromControls();
             return false;
@@ -361,6 +383,14 @@ namespace InitialProject.View.Guest1
 
             GenerateDatesButton.IsEnabled = true;
             RemoveRedFromControls();
+        }
+
+        private void StopDemo_Click(object sender, RoutedEventArgs e)
+        {
+            Dt.Stop();
+            NumOfTicks = 0;
+            StartDemoB.IsEnabled = true;
+            StopDemoB.IsEnabled = false;
         }
     }
 }

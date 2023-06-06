@@ -35,7 +35,8 @@
             </Border>
         </Grid>
 
-        <Label x:Name="UserNameL" Content=""  Margin="661,29,27,456" FontSize="18"/>
+        <Label x:Name="UserNameL" Content=""  Margin="651,29,37,456" FontSize="18"/>
+        <Label Content="Help" Margin="506,197,233,284" />
 
         <Grid Margin="268,231,10,10">
             <Grid.RowDefinitions>

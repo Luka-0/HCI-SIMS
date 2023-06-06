@@ -451,7 +451,7 @@ namespace InitialProject.View.Guest1
                         return;
                     }
 
-                    string city = CountryComboBox.SelectedItem.ToString();
+                    string city = CityComboBox.SelectedItem.ToString();
                     ApplyByCity(city);
 
                     break;
