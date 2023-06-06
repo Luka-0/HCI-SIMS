@@ -70,6 +70,14 @@
         <DataTemplate DataType="{x:Type viewModel:TourTrackingViewModel}">
             <views:TourTrackingView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:GradeTourViewModel}">
+            <views:GradeTourView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:AddPictureAndCommentViewModel}">
+            <views:AddPictureAndCommentView/>
+        </DataTemplate>
     </Window.Resources>
 
 

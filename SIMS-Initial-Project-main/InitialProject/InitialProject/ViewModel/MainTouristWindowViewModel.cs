@@ -28,6 +28,8 @@ namespace InitialProject.ViewModel
         private TourStatisticsViewModel tourStatisticsViewModel = new TourStatisticsViewModel();
         private ShowSingleTourRequestViewModel showSingleTourRequestViewModel = new ShowSingleTourRequestViewModel();
         private TourTrackingViewModel tourTrackingViewModel = new TourTrackingViewModel();
+        private GradeTourViewModel gradeTourViewModel = new GradeTourViewModel();
+        private AddPictureAndCommentViewModel addPictureAndCommentViewModel = new AddPictureAndCommentViewModel();
 
         private BindableBase currentViewModel;
 
@@ -100,6 +102,12 @@ namespace InitialProject.ViewModel
                     break;
                 case "tourTracking":
                     CurrentViewModel = tourTrackingViewModel;
+                    break;
+                case "gradeTour":
+                    CurrentViewModel = gradeTourViewModel;
+                    break;
+                case "addPictureOrComment":
+                    CurrentViewModel = addPictureAndCommentViewModel;
                     break;
             }
         }
