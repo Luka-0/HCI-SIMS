@@ -68,6 +68,31 @@ namespace InitialProject.View.Guest1
             CorrectnessComboBox.SelectedIndex = 0;
         }
 
+        private void RemoveRedFromControls()
+        {
+            ReservationsGrid.ClearValue(Border.BorderThicknessProperty);
+            ReservationsGrid.ClearValue(Border.BorderBrushProperty);
+
+            TidinessComboBox.ClearValue(Border.BorderThicknessProperty);
+            TidinessComboBox.ClearValue(Border.BorderBrushProperty);
+
+            CorrectnessComboBox.ClearValue(Border.BorderThicknessProperty);
+            CorrectnessComboBox.ClearValue(Border.BorderBrushProperty);
+
+            ImagesTextBox.ClearValue(Border.BorderThicknessProperty);
+            ImagesTextBox.ClearValue(Border.BorderBrushProperty);
+
+            CommentTextBox.ClearValue(Border.BorderThicknessProperty);
+            CommentTextBox.ClearValue(Border.BorderBrushProperty);
+        }
+
+        public void MakeControlRed<T>(T control) where T : Control
+        {
+            control.Focus();
+            control.BorderBrush = new SolidColorBrush(Colors.Red);
+            control.BorderThickness = new Thickness(2);
+        }
+
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             AccommodationReservation accommodationReservation = (AccommodationReservation)ReservationsGrid.SelectedItem;
@@ -87,6 +112,8 @@ namespace InitialProject.View.Guest1
 
             RenovationSuggestionButton.IsEnabled = true;
             ReservationsGrid.IsEnabled = false;
+
+            RemoveRedFromControls();
         }
 
         private void AddLink_Click(object sender, RoutedEventArgs e)
@@ -94,6 +121,9 @@ namespace InitialProject.View.Guest1
             if (ImagesTextBox.Text.Equals(""))
             {
                 MessageBox.Show("Please enter an image link before clicking the buttom");
+
+                MakeControlRed(ImagesTextBox);
+
                 return;
             }
 
@@ -102,6 +132,8 @@ namespace InitialProject.View.Guest1
 
             ImagesTextBox.Clear();
             MessageBox.Show("Succesfully added");
+
+            RemoveRedFromControls();
         }
 
         private void RefreshDataGrid(List<AccommodationReservation> accommodationReservations)
@@ -120,18 +152,27 @@ namespace InitialProject.View.Guest1
             if (TidinessComboBox.SelectedIndex == 0)
             {
                 MessageBox.Show("Please select a proper mark for tidiness");
+
+                MakeControlRed(TidinessComboBox);
+
                 return true;
             }
 
             if (CorrectnessComboBox.SelectedIndex == 0)
             {
                 MessageBox.Show("Please select a proper mark for owner's correctness");
+
+                MakeControlRed(CorrectnessComboBox);
+
                 return true;
             }
 
             if (accommodationReservation == null)
             {
                 MessageBox.Show("Please select a reservation you want to rate");
+
+                MakeControlRed(ReservationsGrid);
+
                 return true;
             }
 
@@ -141,6 +182,7 @@ namespace InitialProject.View.Guest1
                 return true;
             }
 
+            RemoveRedFromControls();
             return false;
         }
 
@@ -163,6 +205,9 @@ namespace InitialProject.View.Guest1
             if (accommodationReservation == null)
             {
                 MessageBox.Show("Please select an accomodation first");
+
+                MakeControlRed(ReservationsGrid);
+
                 return;
             }
 

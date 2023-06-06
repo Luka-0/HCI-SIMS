@@ -45,7 +45,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBox Grid.Row="0" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" Text="Write here!"/>
+            <TextBox Grid.Row="0" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" Text="Write here!" TextAlignment="Center"/>
             <TextBlock Grid.Row="0" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Width="304" Margin="188,0,0,0" Height="35">
                     This is a place for You to write, usually it's for some numbers, but it can also be used for words
             </TextBlock>

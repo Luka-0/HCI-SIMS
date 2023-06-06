@@ -52,7 +52,7 @@
             </Button.Content>
         </Button>
 
-        <Button HorizontalAlignment="Left" VerticalAlignment="Center" Margin="38,0,0,0" Click="Deactivate_Click" Width="100">
+        <Button HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0" Click="Deactivate_Click" Width="84">
             <Button.ToolTip>
                 <ToolTip Placement="Bottom" Content="By clicking this, the selected forum will be deactivated!" />
             </Button.ToolTip>
@@ -68,9 +68,9 @@
                 </Style>
             </Button.Resources>
             <Button.Content>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Width="81">
                     <Image Source="tooltip.png" Width="18" Height="16" Margin="0,0,5,0" />
-                    <TextBlock Text="Close forum" Width="65" />
+                    <TextBlock Text="Deactivate" Width="65" />
                 </StackPanel>
             </Button.Content>
         </Button>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -46,9 +47,25 @@ namespace InitialProject.View.Guest1
             RatingCB.SelectedIndex = 0;
         }
 
+        private void RemoveRedFromControls()
+        {
+            RatingCB.ClearValue(Border.BorderThicknessProperty);
+            RatingCB.ClearValue(Border.BorderBrushProperty);
+
+            CommentTB.ClearValue(Border.BorderThicknessProperty);
+            CommentTB.ClearValue(Border.BorderBrushProperty);
+        }
+
+        public void MakeControlRed<T>(T control) where T : Control
+        {
+            control.Focus();
+            control.BorderBrush = new SolidColorBrush(Colors.Red);
+            control.BorderThickness = new Thickness(2);
+        }
+
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!IsViolatingAnyUIControl()) return;
+            if (IsViolatingAnyUIControl()) return;
 
             RenovationSuggestion renovationSuggestion = new (int.Parse(RatingCB.SelectedItem.ToString()), CommentTB.Text, ReservationToShow.First());
             RenovationSuggestionController.Save(renovationSuggestion);
@@ -66,10 +83,22 @@ namespace InitialProject.View.Guest1
             if(RatingCB.SelectedIndex == 0)
             {
                 MessageBox.Show("Please select a proper rating");
-                return false;
+
+                MakeControlRed(RatingCB);
+
+                return true;
+            }
+            if (CommentTB.Text.Equals(""))
+            {
+                MessageBox.Show("Please enter something in the comment section");
+
+                MakeControlRed(CommentTB);
+
+                return true;
             }
 
-            return true;
+            RemoveRedFromControls();
+            return false;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

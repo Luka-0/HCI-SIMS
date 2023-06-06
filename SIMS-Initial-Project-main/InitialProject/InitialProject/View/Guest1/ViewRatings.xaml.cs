@@ -116,7 +116,7 @@ namespace InitialProject.View.Guest1
                 Phrase phraze3Paragraph2 = new("-Average obedience: " + obedience.ToString() + "\n\n", fontParagraph2);
                 paragraph2.Add(phraze3Paragraph2);
 
-                Phrase phraze4Paragraph2 = new("Marks across types of accommodations:\n\n", fontParagraph1);
+                Phrase phraze4Paragraph2 = new("Marks across all types of accommodations:\n\n", fontParagraph1);
                 paragraph2.Add(phraze4Paragraph2);
 
                 
@@ -176,7 +176,7 @@ namespace InitialProject.View.Guest1
 
                 fileToGenerate.Close();
 
-                //System.Diagnostics.Process.Start(filePath);//   baca exception
+                System.Diagnostics.Process.Start(filePath);//   baca exception
             }
             catch(Exception ex)
             {

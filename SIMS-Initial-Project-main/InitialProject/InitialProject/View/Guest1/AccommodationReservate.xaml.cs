@@ -21,10 +21,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace InitialProject.View.Guest1
 {
-    public partial class AccommodationReservate : Window
+    public partial class AccommodationReservate : System.Windows.Window
     {
         private readonly AccommodationReservationController AccommodationReservationController = new();
         private readonly AccommodationController AccommodationController = new();
@@ -57,6 +58,12 @@ namespace InitialProject.View.Guest1
             }
 
             RefreshDataGrid(allAccommodations);
+
+            NameTextBox.IsEnabled = false;
+            CountryComboBox.IsEnabled = false;
+            CityComboBox.IsEnabled = false;
+            AccommodationTypeComboBox.IsEnabled = false;
+            GuestNumberTBFilter.IsEnabled = false;
         }
 
         private void InitializeFilterComboBox()
@@ -132,9 +139,47 @@ namespace InitialProject.View.Guest1
             }
         }
 
+        private void RemoveRedFromControls()
+        {
+            StartingDatePicker.ClearValue(Border.BorderThicknessProperty);
+            StartingDatePicker.ClearValue(Border.BorderBrushProperty);
+
+            EndingDatePicker.ClearValue(Border.BorderThicknessProperty);
+            EndingDatePicker.ClearValue(Border.BorderBrushProperty);
+
+            ReservatingDaysTB.ClearValue(Border.BorderThicknessProperty);
+            ReservatingDaysTB.ClearValue(Border.BorderBrushProperty);
+
+            GuestNumberTB.ClearValue(Border.BorderThicknessProperty);
+            GuestNumberTB.ClearValue(Border.BorderBrushProperty);
+
+            CityComboBox.ClearValue(Border.BorderThicknessProperty);
+            CityComboBox.ClearValue(Border.BorderBrushProperty);
+        }
+
+        public void MakeControlRed<T>(T control) where T : Control
+        {
+            control.Focus();
+            control.BorderBrush = new SolidColorBrush(Colors.Red);
+            control.BorderThickness = new Thickness(2);
+        }
+
         private void GenerateDates_Click(object sender, RoutedEventArgs e)
         {
-            int daysToStay = int.Parse(ReservatingDaysTB.Text);
+            int daysToStay;
+            try
+            {
+                daysToStay = int.Parse(ReservatingDaysTB.Text);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Please enter a number");
+
+                MakeControlRed(ReservatingDaysTB);
+
+                return;
+            }
+
             Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
 
             //dodatak
@@ -142,9 +187,20 @@ namespace InitialProject.View.Guest1
             List<Renovation> existingRenovations = new List<Renovation>();
 
 
-            if (StartingDatePicker.SelectedDate == null || EndingDatePicker.SelectedDate == null)
+            if (StartingDatePicker.SelectedDate == null)
             {
-                MessageBox.Show("Please select dates first");
+                MessageBox.Show("Please select starting date first");
+
+                MakeControlRed(StartingDatePicker);
+
+                return;
+            }
+            if (EndingDatePicker.SelectedDate == null)
+            {
+                MessageBox.Show("Please select ending date first");
+
+                MakeControlRed(EndingDatePicker);
+
                 return;
             }
 
@@ -155,6 +211,7 @@ namespace InitialProject.View.Guest1
 
             availableDates = AccommodationReservationController.GetAvailableDates(accommodation, startDate, endDate, daysToStay);
 
+            DatesToChose.Clear();
             if (availableDates != null) {
 
                 //KT3 - Vlasnik: dodatno ogranicenje da predlozeni datumi nisu datumi zakazanog renoviranja
@@ -175,15 +232,44 @@ namespace InitialProject.View.Guest1
             }
 
             InitializeDatesComboBox();
+            RemoveRedFromControls();
         }
 
         private void CreateReservation_Click(object sender, RoutedEventArgs e)
         {
-            int guestNumber = int.Parse(GuestNumberTB.Text);
-            int daysToStay = int.Parse(ReservatingDaysTB.Text);
-            Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
-
             if (OfferedDatesCB.Items.Count == 0) return;
+
+            int guestNumber, daysToStay;
+
+            try
+            {
+                guestNumber = int.Parse(GuestNumberTB.Text);
+                
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Please enter a number");
+
+                MakeControlRed(GuestNumberTB);
+
+                return;
+            }
+
+            try
+            {
+                daysToStay = int.Parse(ReservatingDaysTB.Text);
+
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Please enter a number");
+
+                MakeControlRed(ReservatingDaysTB);
+
+                return;
+            }
+
+            Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
 
             DateTime startDate = DatesToChose[OfferedDatesCB.SelectedIndex].StartingDate;
             DateTime endDate = DatesToChose[OfferedDatesCB.SelectedIndex].EndingDate;
@@ -193,6 +279,9 @@ namespace InitialProject.View.Guest1
             if (daysToStay < accommodation.MinimumReservationDays)
             {
                 MessageBox.Show("Entered days to stay are bellow the threshold for selected accommodation");
+
+                MakeControlRed(ReservatingDaysTB);
+
                 return;
             }
 
@@ -203,6 +292,8 @@ namespace InitialProject.View.Guest1
                 CheckSuperTitle();
 
                 OfferedDatesCB.Items.Clear();
+
+                RemoveRedFromControls();
 
                 return;
             }
@@ -216,12 +307,18 @@ namespace InitialProject.View.Guest1
             if (StartingDatePicker.Text.ToString().Equals(""))
             {
                 MessageBox.Show("Please select a starting date");
+
+                MakeControlRed(StartingDatePicker);
+
                 return false;
             }
 
             if (EndingDatePicker.Text.ToString().Equals(""))
             {
                 MessageBox.Show("Please select an ending date");
+
+                MakeControlRed(EndingDatePicker);
+
                 return false;
             }
 
@@ -238,22 +335,32 @@ namespace InitialProject.View.Guest1
             if (startDate > endDate)
             {
                 MessageBox.Show("Selected starting date is after ending date, please select valid dates");
+
+                MakeControlRed(StartingDatePicker);
+
                 return true;
             }
 
             if (accommodation == null)
             {
                 MessageBox.Show("Please select an accommodation");
+
+                MakeControlRed(AccommodationsGrid);
+
                 return true;
             }
 
             if (guestNumber <= 0)
             {
                 MessageBox.Show("Please enter a proper guest number");
+
+                MakeControlRed(GuestNumberTB);
+
                 return true;
 
             }
 
+            RemoveRedFromControls();
             return false;
         }
 
@@ -270,6 +377,63 @@ namespace InitialProject.View.Guest1
             }
         }
 
+        private void DisableNotSelected(object sender, MouseEventArgs e)
+        {
+            switch (FilterComboBox.SelectedIndex)
+            {
+                case 1:
+                    NameTextBox.IsEnabled = true;
+                    CountryComboBox.IsEnabled = false;
+                    CityComboBox.IsEnabled = false;
+                    AccommodationTypeComboBox.IsEnabled = false;
+                    GuestNumberTBFilter.IsEnabled = false;
+
+                    break;
+                case 2:
+                    NameTextBox.IsEnabled = false;
+                    CountryComboBox.IsEnabled = true;
+                    CityComboBox.IsEnabled = true;
+                    AccommodationTypeComboBox.IsEnabled = false;
+                    GuestNumberTBFilter.IsEnabled = false;
+
+                    break;
+                case 3:
+                    NameTextBox.IsEnabled = false;
+                    CountryComboBox.IsEnabled = false;
+                    CityComboBox.IsEnabled = false;
+                    AccommodationTypeComboBox.IsEnabled = true;
+                    GuestNumberTBFilter.IsEnabled = false;
+
+                    break;
+                case 4:
+                    NameTextBox.IsEnabled = false;
+                    CountryComboBox.IsEnabled = false;
+                    CityComboBox.IsEnabled = false;
+                    AccommodationTypeComboBox.IsEnabled = false;
+                    GuestNumberTBFilter.IsEnabled = true;
+
+                    break;
+                case 5:
+                    NameTextBox.IsEnabled = false;
+                    CountryComboBox.IsEnabled = false;
+                    CityComboBox.IsEnabled = false;
+                    AccommodationTypeComboBox.IsEnabled = false;
+                    GuestNumberTBFilter.IsEnabled = true;
+
+                    break;
+                case 6:
+                    {
+                        NameTextBox.IsEnabled = false;
+                        CountryComboBox.IsEnabled = false;
+                        CityComboBox.IsEnabled = false;
+                        AccommodationTypeComboBox.IsEnabled = false;
+                        GuestNumberTBFilter.IsEnabled = false;
+
+                        break;
+                    }
+            }
+        }
+
         private void ApplyFilter_Click(object sender, RoutedEventArgs e)
         {
             switch (FilterComboBox.SelectedIndex)
@@ -281,6 +445,9 @@ namespace InitialProject.View.Guest1
                     if(CountryComboBox.SelectedIndex == 0)
                     {
                         MessageBox.Show("Please select a proper location");
+
+                        MakeControlRed(CityComboBox);
+
                         return;
                     }
 
@@ -293,11 +460,33 @@ namespace InitialProject.View.Guest1
 
                     break;
                 case 4:
-                    ApplyByGuestNumber(int.Parse(GuestNumberTBFilter.Text));
+                    try
+                    {
+                        ApplyByGuestNumber(int.Parse(GuestNumberTBFilter.Text));
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Please enter a number");
+
+                        MakeControlRed(GuestNumberTBFilter);
+
+                        break;
+                    }
 
                     break;
                 case 5:
-                    ApplyByReservationDays(int.Parse(GuestNumberTBFilter.Text));
+                    try
+                    {
+                        ApplyByReservationDays(int.Parse(GuestNumberTBFilter.Text));
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Please enter a number");
+
+                        MakeControlRed(GuestNumberTBFilter);
+
+                        break;
+                    }
 
                     break;
                 case 6:
@@ -305,20 +494,15 @@ namespace InitialProject.View.Guest1
                     List<Accommodation> accommodations = AccommodationController.GetAll();
                     RefreshDataGrid(accommodations);
 
-                    break;
+                        break;
                 }
                 default:
                     MessageBox.Show("Please select a proper filter type");
                     break;
             }
 
-
-        }
-
-        private static string ExtractCity(string location)
-        {
-            string[] separeted = location.Split('-');
-            return separeted[1];
+            CityComboBox.ClearValue(Border.BorderThicknessProperty);
+            CityComboBox.ClearValue(Border.BorderBrushProperty);
         }
 
         private void ApplyByName(string name)

@@ -60,6 +60,11 @@ namespace InitialProject.View.Guest1
             if(forumToDeactivate == null)
             {
                 MessageBox.Show("Please select a forum do deactivate");
+
+                ForumsGrid.Focus();
+                ForumsGrid.BorderBrush = new SolidColorBrush(Colors.Red);
+                ForumsGrid.BorderThickness = new Thickness(2);
+
                 return;
             }
             if(forumToDeactivate.IsClosed == true)
@@ -67,6 +72,9 @@ namespace InitialProject.View.Guest1
                 MessageBox.Show("That forum is already closed");
                 return;
             }
+
+            ForumsGrid.ClearValue(Border.BorderThicknessProperty);
+            ForumsGrid.ClearValue(Border.BorderBrushProperty);
 
             ForumController.UpdateActivity(forumToDeactivate);
         }

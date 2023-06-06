@@ -24,10 +24,10 @@
             <Label Grid.Row="1" Content="Owner's correctness: " HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center"/>
             <ComboBox Grid.Row="1" x:Name="CorrectnessComboBox" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" Width="120"/>
 
-            <TextBox Grid.Row="2" x:Name="CommentTextBox" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" Text="Write comment here" Width="205" Height="74"/>
+            <TextBox Grid.Row="2" x:Name="CommentTextBox" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" Text="--Write comment here--" TextAlignment="Center" Width="205" Height="74"/>
 
             <Label Grid.Row="3" Content="Image links: " HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="3" x:Name="ImagesTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Image links" VerticalAlignment="Center" Width="106"/>
+            <TextBox Grid.Row="3" x:Name="ImagesTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Image links" TextAlignment="Center" VerticalAlignment="Center" Width="106"/>
             <Button Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Click="AddLink_Click" Width="57">
                 <Button.ToolTip>
                     <ToolTip Placement="Bottom" Content="By clicking this, the link You enter on the left will be added, and emptied so that You can add a new one" />
@@ -80,7 +80,9 @@
             <Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="6"/>
         </Grid>
 
-        <Label Content="Theese are Your reservations that You can rate" VerticalAlignment="Top" Margin="424,0,94,0"/>
+        <TextBlock Text="Select a reservation and begin the rating" Margin="46,56,512,435" />
+
+        <Label Content="Theese are all Your reservations" VerticalAlignment="Top" Margin="424,0,94,0"/>
         <DataGrid x:Name="ReservationsGrid" ItemsSource="{Binding ReservationsToShow}" Margin="322,31,10,0" VerticalAlignment="Top" 
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Resources>
@@ -88,7 +90,6 @@
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="LightGray" />
-                            <!-- Set the desired background color here -->
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -125,6 +126,7 @@
             </Button.Content>
         </Button>
 
+        <TextBlock Text="You first have to submit a review in order to make a suggestion" Margin="62,449,526,39" TextWrapping="Wrap" TextAlignment="Center"/>
         <Button x:Name="RenovationSuggestionButton" HorizontalAlignment="Left" Margin="78,485,0,0" VerticalAlignment="Top" Click="SuggestionForReservation_Click">
             <Button.ToolTip>
                 <ToolTip Placement="Bottom" Content="By clicking this, a new window will open where You can write your suggestion. Don't worry cos everything else will be saved!" />

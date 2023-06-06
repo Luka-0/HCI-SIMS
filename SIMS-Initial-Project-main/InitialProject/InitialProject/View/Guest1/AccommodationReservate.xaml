@@ -166,7 +166,7 @@
 
 
                     <Label Grid.Row="0" Content="Choose what to filter with:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="24"/>
-                    <ComboBox Grid.Row="0" x:Name="FilterComboBox" HorizontalAlignment="Left" Margin="175,4,0,0" VerticalAlignment="Center" Width="120"/>
+                    <ComboBox Grid.Row="0" x:Name="FilterComboBox" MouseLeave="DisableNotSelected" HorizontalAlignment="Left" Margin="175,4,0,0" VerticalAlignment="Center" Width="120"/>
                     <Label Grid.Row="1" Content="Choose country:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="29"/>
                     <ComboBox Grid.Row="1" x:Name="CountryComboBox" HorizontalAlignment="Left" MouseLeave="InitializeCityComboBox" Margin="175,0,0,0" VerticalAlignment="Center" MinWidth="120" Width="Auto"/>
                     <Label Grid.Row="2" Content="Choose city:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="28"/>

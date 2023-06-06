@@ -46,6 +46,8 @@ namespace InitialProject.View.Guest1
 
         private void StartDemo_Click(object sender, RoutedEventArgs e)
         {
+            RemoveRedFromControls();
+
             NumOfTicks = 0;
 
             DispatcherTimer dt = new();
@@ -100,7 +102,7 @@ namespace InitialProject.View.Guest1
                     EndingDatePicker.IsDropDownOpen = false;
                     break;
                 case 17:
-                    SAB.BorderBrush = new SolidColorBrush(Colors.Black);
+                    SAB.BorderBrush = new SolidColorBrush(Colors.Blue);
                     SAB.BorderThickness = new Thickness(2);
                     break;
                 case 18:
@@ -113,7 +115,7 @@ namespace InitialProject.View.Guest1
                     AccommodationsGrid.SelectedIndex = 4;
                     break;
                 case 22:
-                    GenerateDatesButton.BorderBrush = new SolidColorBrush(Colors.Black);
+                    GenerateDatesButton.BorderBrush = new SolidColorBrush(Colors.Blue);
                     GenerateDatesButton.BorderThickness = new Thickness(2);
                     break;
                 case 23:
@@ -132,7 +134,7 @@ namespace InitialProject.View.Guest1
                     OfferedDatesCB.IsDropDownOpen = false;
                     break;
                 case 29:
-                    ReservateButton.BorderBrush = new SolidColorBrush(Colors.Black);
+                    ReservateButton.BorderBrush = new SolidColorBrush(Colors.Blue);
                     ReservateButton.BorderThickness = new Thickness(2);
                     break;
                 case 30:
@@ -146,19 +148,58 @@ namespace InitialProject.View.Guest1
             }
         }
 
+        private void RemoveRedFromControls()
+        {
+            AccommodationsGrid.ClearValue(Border.BorderThicknessProperty);
+            AccommodationsGrid.ClearValue(Border.BorderBrushProperty);
+
+            GuestNumberTB.ClearValue(Border.BorderThicknessProperty);
+            GuestNumberTB.ClearValue(Border.BorderBrushProperty);
+
+            DaysToStayTB.ClearValue(Border.BorderThicknessProperty);
+            DaysToStayTB.ClearValue(Border.BorderBrushProperty);
+
+            StartingDatePicker.ClearValue(Border.BorderThicknessProperty);
+            StartingDatePicker.ClearValue(Border.BorderBrushProperty);
+
+            EndingDatePicker.ClearValue(Border.BorderThicknessProperty);
+            EndingDatePicker.ClearValue(Border.BorderBrushProperty);
+        }
+
+        private void MakeControlRed<T>(T control) where T : Control
+        {
+            control.Focus();
+            control.BorderBrush = new SolidColorBrush(Colors.Red);
+            control.BorderThickness = new Thickness(2);
+        }
+
         private void GenerateDates_Click(object? sender, RoutedEventArgs? e)
         {
             if (IsViolatingAnyUIControl()) return;
             if(AccommodationsGrid.SelectedItem == null)
             {
                 MessageBox.Show("Please select an accommodations You wish to reservate");
+
+                MakeControlRed(AccommodationsGrid);
+
                 return;
             }
 
             Accommodation accommodation = (Accommodation)AccommodationsGrid.SelectedItem;
-            int daysToStay = int.Parse(DaysToStayTB.Text);
 
-            if (StartingDatePicker.SelectedDate == null && EndingDatePicker.SelectedDate == null)
+            int daysToStay;
+            try
+            {
+                daysToStay = int.Parse(DaysToStayTB.Text);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Please enter a number");
+                MakeControlRed(DaysToStayTB);
+                return;
+            }
+
+            if (StartingDatePicker.SelectedDate == null || EndingDatePicker.SelectedDate == null)
             {
                 GenerateDatesWithoutStartEnd(accommodation, daysToStay);
             }
@@ -170,6 +211,7 @@ namespace InitialProject.View.Guest1
             }
 
             ReservateButton.IsEnabled = true;
+            RemoveRedFromControls();
         }
 
         private void GenerateDatesWithoutStartEnd(Accommodation accommodation, int daysToStay)
@@ -182,9 +224,9 @@ namespace InitialProject.View.Guest1
         private void GenerateDatesWithStartEnd(Accommodation accommodation, DateTime startDate, DateTime endingDate, int daysToStay)
         {
             List<StartEndDateDto> availableDates = AccommodationReservationController.GetAvailableDates(accommodation, startDate, endingDate, daysToStay);
-            List<Renovation> existingRenovations = new List<Renovation>();
+            List<Renovation> existingRenovations = new();
 
-
+            DatesToChoose.Clear();
             if (availableDates != null)
             {
                 foreach (StartEndDateDto t in availableDates)
@@ -204,45 +246,6 @@ namespace InitialProject.View.Guest1
             }
 
             InitializeDatesComboBox();
-
-            /*List<Accommodation> accommodations = AccommodationController.GetBy(int.Parse(DaysToStayTB.Text), int.Parse(GuestNumberTB.Text));
-
-            if(accommodations == null || accommodations.Count == 0)
-            {
-                MessageBox.Show("There are currently no accommodations that match the entered guest number and staying days");
-                return;
-            }
-
-            DatesToChoose =  AccommodationReservationController.GetAvailableDates(accommodations.ElementAt(0), startDate, endingDate, daysToStay);
-
-            for (int i=1; i<accommodations.Count; ++i)
-            {
-                List<StartEndDateDto> tmp = AccommodationReservationController.GetAvailableDates(accommodations.ElementAt(i), startDate, endingDate, daysToStay);
-
-                for(int j=0; j<tmp.Count; ++j)
-                {
-                    int k = 0;
-                    StartEndDateDto tmpJ = tmp.ElementAt(j);
-                    for (; k<DatesToChoose.Count; ++k)
-                    {
-                        if (tmpJ.StartingDate.Day == DatesToChoose.ElementAt(k).StartingDate.Day) break;
-                    }
-
-                    if(k == DatesToChoose.Count)
-                    {
-                        foreach (StartEndDateDto s in DatesToChoose)
-                        {
-                            if (s.StartingDate.Day == tmpJ.StartingDate.Day)
-                            {
-                                DatesToChoose.Remove(s);
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (DatesToChoose.Count == 0) MessageBox.Show("Nema");
-            */
         }
 
         private void InitializeDatesComboBox()
@@ -265,6 +268,9 @@ namespace InitialProject.View.Guest1
             if (AccommodationsGrid.SelectedItem == null)
             {
                 MessageBox.Show("Please selecent an accommodation");
+
+                MakeControlRed(AccommodationsGrid);
+
                 return;
             }
 
@@ -273,30 +279,50 @@ namespace InitialProject.View.Guest1
                 MessageBox.Show("Succesfully saved");
 
                 OfferedDatesCB.Items.Clear();
+                RemoveRedFromControls();
+
                 return;
             }
 
             MessageBox.Show("Saving was UNsuccesful");
+            RemoveRedFromControls();
         }
 
         private bool IsViolatingAnyUIControl()
         {
-            if (int.Parse(GuestNumberTB.Text) < 1)
+            try
             {
-                MessageBox.Show("Please enter a proper guest number");
-                return true;
+                if (int.Parse(GuestNumberTB.Text) < 1)
+                {
+                    MessageBox.Show("Please enter a proper guest number");
+
+                    MakeControlRed(GuestNumberTB);
+
+                    return true;
+                }
+                if (int.Parse(DaysToStayTB.Text) < 1)
+                {
+                    MessageBox.Show("Please enter a proper number for staying days");
+
+                    MakeControlRed(DaysToStayTB);
+
+                    return true;
+                }
+                if (StartingDatePicker.SelectedDate != null && EndingDatePicker.SelectedDate != null && StartingDatePicker.SelectedDate.Value > EndingDatePicker.SelectedDate.Value)
+                {
+                    MessageBox.Show("The selected starting date is after ending date, please choose the correct dates");
+
+                    MakeControlRed(StartingDatePicker);
+
+                    return true;
+                }
             }
-            if(int.Parse(DaysToStayTB.Text) < 1)
+            catch (FormatException)
             {
-                MessageBox.Show("Please enter a proper number for staying days");
-                return true;
-            }
-            if(StartingDatePicker.SelectedDate != null && EndingDatePicker.SelectedDate != null && StartingDatePicker.SelectedDate.Value > EndingDatePicker.SelectedDate.Value )
-            {
-                MessageBox.Show("The selected starting date is after ending date, please choose the correct dates");
                 return true;
             }
 
+            RemoveRedFromControls();
             return false;
         }
 
@@ -334,6 +360,7 @@ namespace InitialProject.View.Guest1
             RefreshDataGrid(accommodations);
 
             GenerateDatesButton.IsEnabled = true;
+            RemoveRedFromControls();
         }
     }
 }
