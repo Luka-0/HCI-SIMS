@@ -21,6 +21,7 @@ namespace InitialProject.Repository
                 reservations = dbContext.tourReservation
                                         .Include(t => t.Tour)
                                         .ThenInclude(l => l.Location)
+                                        .Include(t =>t.BookingGuest)
                                         .ToList();
             }
             return reservations;
