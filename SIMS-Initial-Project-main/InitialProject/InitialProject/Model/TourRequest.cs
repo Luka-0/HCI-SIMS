@@ -23,7 +23,7 @@ public class TourRequest
     public DateTime UpperDateLimit { get; set; }
     public TourRequestState State { get; set; }
     [AllowNull]
-    public DateTime SelectedDate { get; set; }
+    public DateTime? SelectedDate { get; set; }
 
     [ForeignKey("TouristId")]
     public User? Tourist { get; set; }

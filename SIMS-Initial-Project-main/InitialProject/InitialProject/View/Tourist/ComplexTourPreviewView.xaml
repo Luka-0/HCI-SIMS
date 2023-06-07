@@ -30,6 +30,32 @@
             <comp:Header/>
         </Grid>
 
+        <Grid Grid.Row="1">
+            <DataGrid ItemsSource="{Binding ComplexTourRequests}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Complex tour id" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Complex tour state" Binding="{Binding State}" />
+                    <DataGridTemplateColumn Header="Requests">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DataGrid ItemsSource="{Binding Requests}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                                        <DataGridTextColumn Header="State" Binding="{Binding State}" />
+                                        <DataGridTextColumn Header="Selected date" Binding="{Binding SelectedDate}" />
+                                        <DataGridTextColumn Header="Language" Binding="{Binding Language}" />
+                                        <!-- Add more columns for other Request properties -->
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!-- Add more columns for other ComplexTourRequest properties -->
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+
 
         <Grid Grid.Row="13" VerticalAlignment="Bottom">
             <comp:Footer/>

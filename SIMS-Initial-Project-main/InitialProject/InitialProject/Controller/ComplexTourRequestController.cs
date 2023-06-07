@@ -31,4 +31,9 @@ public class ComplexTourRequestController
         return complexTourRequestService.GetById(id);
     }
 
+    public List<ComplexTourRequest> GetAll()
+    {
+        return complexTourRequestService.GetAll();
+    }
+
 }

@@ -22,6 +22,17 @@ public class ComplexTourRequestRepository: IComplexTourRequestRepository
         }
     }
 
+    public List<ComplexTourRequest> GetAll()
+    {
+        using (var db = new UserContext())
+        {
+            return db.ComplexTourRequest
+                .Include(tr => tr.Requests)
+                .Include(tr => tr.Guides)
+                .ToList();
+        }
+    }
+
     public void SetGuide(int id, Model.User Guide)
     {
         using (var db = new UserContext())

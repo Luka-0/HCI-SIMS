@@ -249,6 +249,7 @@ namespace InitialProject.ViewModel
             request.GuestNumber = (int)SliderValue;
             request.Language = SelectedLanguage;
             request.Tourist = userController.GetBy(1);
+            request.SelectedDate = null;
 
             tourRequests.Add(request);
 

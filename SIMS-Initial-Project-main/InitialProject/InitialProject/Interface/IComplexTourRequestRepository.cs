@@ -10,6 +10,7 @@ public interface IComplexTourRequestRepository
     public void SetGuide(int id, User loggedInGuide);
     public ComplexTourRequest Save(ComplexTourRequest complexTour);
     public ComplexTourRequest GetById(int id);
+    public List<ComplexTourRequest> GetAll();
 
 
 }
