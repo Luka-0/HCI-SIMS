@@ -180,7 +180,7 @@ namespace InitialProject.View.Guest1
             }
             catch(Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message);
+                System.Windows.MessageBox.Show("Opening the file was unsuccessfull, You can open it manualy in C:\\Users\\Luka stajic\\Downloads\\Average ratings.pdf\n\n\n" + ex.Message);
                 return;
             }
 
