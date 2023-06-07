@@ -41,8 +41,7 @@ namespace InitialProject.Contexts
 
         public DbSet<SuperGuide> SuperGuide{ get; set; }
 
-        public DbSet<ForumOwnerVs> ForumOwnerVs { get; set; }
-        public DbSet<CommentOwnerVs> CommentOwnerVs { get; set; }
+
 
 
         //Pavle:
