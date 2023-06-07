@@ -23,6 +23,7 @@ namespace InitialProject.Repository
         {
             using var db = new UserContext();
             image.Tour = tour;
+            db.Attach(image);
             db.Update(image);
             db.SaveChanges();
         }

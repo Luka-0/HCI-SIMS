@@ -240,4 +240,16 @@ public class TourRequestService
     {
         return _tourRequestRepository.GetAllPendingByComplex(id);
     }
+
+    public  List<DateTime> GetOccupiedDatesForComplexTour(ComplexTourRequest request)
+    {
+        List<TourRequest> requests= _tourRequestRepository.GetOccupiedDatesForComplexTour(request);
+        List<DateTime> dates = new List<DateTime>();
+            
+        foreach (TourRequest r in requests)
+        {
+            dates.Add((DateTime)r.SelectedDate);
+        }
+        return dates;
+    }
 }

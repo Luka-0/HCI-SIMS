@@ -127,6 +127,12 @@ public class TourRequestRepository: ITourRequestRepository
     }
 
 
+    public List<TourRequest> GetOccupiedDatesForComplexTour(ComplexTourRequest request)
+    {
+        using var db = new UserContext();
+        return db.tourRequest
+            .Where(tr => tr.ComplexTourRequest.Id == request.Id && tr.State == TourRequestState.Accepted).ToList();
+    }
 
 
 }

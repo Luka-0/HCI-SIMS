@@ -17,4 +17,5 @@ public interface ITourRequestRepository
     public void Save(TourRequest request, User user, ComplexTourRequest complexTourRequest);
     public void UpdateComplexTourRequest(TourRequest request, ComplexTourRequest complexTourRequest);
 
+    public List<TourRequest> GetOccupiedDatesForComplexTour(ComplexTourRequest request);
 }

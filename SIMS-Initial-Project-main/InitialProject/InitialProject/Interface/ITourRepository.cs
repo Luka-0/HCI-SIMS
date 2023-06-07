@@ -24,5 +24,6 @@ namespace InitialProject.Interface
         public List<DateTime> GetDatesByGuide(int guideId);
         public List<Tour> GetLastYearToursByGuide(int id);
         public void CancelTours(List<Tour> tours);
+        public void UpdateTour(Tour tour);
     }
 }

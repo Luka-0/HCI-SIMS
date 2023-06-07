@@ -55,6 +55,21 @@ namespace InitialProject.Service
         {
             return ILocationRepository.GetBy(country, city);
         }
+        public Location CreateLocation(string country, String city)
+        {
+            Location location = GetBy(country, city);
+            if (location != null)
+            {
+                return location;
+            }
+            else
+            {
+                Location newLocation = new Location(city, country);
 
+                ILocationRepository.Save(newLocation);
+
+                return GetBy(country, city);
+            }
+        }
     }
 }

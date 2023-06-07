@@ -200,7 +200,22 @@ namespace InitialProject.Repository
             }
         }
 
+        public void UpdateTour(Tour tour)
+        {
+            using (var db = new UserContext())
+            {
+                var tourFromDb = db.tour.Find(tour.Id);
 
+                db.Attach(tour.Guide);
+
+                db.Entry(tourFromDb).State = EntityState.Modified;
+
+                tourFromDb.Guide = tour.Guide;
+                tourFromDb.Location = tour.Location;
+                db.Update(tourFromDb);
+                db.SaveChanges();
+            }
+        }
 
     }
 }

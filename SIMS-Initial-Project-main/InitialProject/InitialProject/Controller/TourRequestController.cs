@@ -75,4 +75,9 @@ public class TourRequestController
     {
         return tourRequestService.GetRequestCountByLocation();
     }
+
+    public List<DateTime> GetOccupiedDatesForComplexTour(ComplexTourRequest request)
+    {
+        return tourRequestService.GetOccupiedDatesForComplexTour(request);
+    }
 }

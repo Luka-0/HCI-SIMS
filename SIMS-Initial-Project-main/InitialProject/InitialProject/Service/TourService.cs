@@ -172,9 +172,11 @@ public class TourService
     public void UpdateTourProperties(Tour tour, TourToControllerDto dto, List<TourKeyPoint> keyPoints)
     {
         tour.Guide = dto.Guide;
-        tour.Location = locationService.GetBy(dto.Country, dto.City);
-        List<Image> images = imageService.Save(dto.ImageURLs);
+        tour.Location = locationService.CreateLocation(dto.Country, dto.City);
+        List<InitialProject.Model.Image> images = imageService.Save(dto.ImageURLs);
         imageService.SetTourId(images, tour);
+        _tourRepository.UpdateTour(tour);
+
 
     }
 

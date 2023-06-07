@@ -60,8 +60,11 @@ namespace InitialProject.View.Guide
         private bool AvailabilityCheck(ComplexTourRequest complexTour)
         {
             List<int> guidesIds = getGuidesIds(complexTour);
-            if (guidesIds.Contains(LoggedInGuide.Id))
+            if(guidesIds.Contains(LoggedInGuide.Id))
+            {
                 return true;
+
+            }
             return false;
 
         }
@@ -103,6 +106,8 @@ namespace InitialProject.View.Guide
             if (request != null)
             {
                 occupiedDates = TourController.GetOccupiedDays(LoggedInGuide.Id, request.LowerDateLimit, request.UpperDateLimit);
+                occupiedDates.AddRange(TourRequestController.GetOccupiedDatesForComplexTour(_SelectedComplexTourRequest));
+                
                 DatePicker1.DisplayDateStart = request.LowerDateLimit;
                 DatePicker1.DisplayDateEnd = request.UpperDateLimit;
 
@@ -133,7 +138,14 @@ namespace InitialProject.View.Guide
 
             TourRequestController.Accept(request.Id, selectedDate);
             _SelectedComplexTourRequest.Guides.Add(LoggedInGuide);
+            //  ComplexTourRequestController.SetGuide(_SelectedComplexTourRequest.Id, LoggedInGuide);
+
             ComplexTourRequestController.SetGuide(_SelectedComplexTourRequest.Id, LoggedInGuide);
+
+            CreateTourForm createTourForm = new CreateTourForm(LoggedInGuide, request, selectedDate);
+            this.Close();
+            createTourForm.Show();
+            
 
         }
     }

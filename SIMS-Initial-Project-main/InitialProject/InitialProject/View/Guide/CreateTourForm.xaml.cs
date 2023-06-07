@@ -56,6 +56,15 @@ namespace InitialProject
             Country.Text = location.Country;
             City.Text = location.City;
         }
+        public CreateTourForm(User user, TourRequest request, DateTime date) : this(user)
+        {
+            Language.Text = request.Language;
+            Country.Text = request.Location.Country;
+            City.Text = request.Location.City;
+            StartDate.Text = date.Date.ToShortDateString();
+            Description.Text = request.Description;
+            GuestLimit.Text = request.GuestNumber.ToString();
+        }
 
         private List<String> Separate(String names)
         {
@@ -143,7 +152,9 @@ namespace InitialProject
         {
             ComplexTourRequests complexTourRequests = new ComplexTourRequests(LoggedInGuide);
 
+            
             complexTourRequests.Show();
+            Close();
         }
 
         private void Quit(object sender, RoutedEventArgs e)
