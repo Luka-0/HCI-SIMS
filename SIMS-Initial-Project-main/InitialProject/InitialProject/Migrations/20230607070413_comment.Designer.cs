@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230607070413_comment")]
+    partial class comment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -159,6 +161,10 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("VeryUseful")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int?>("forumId")
                         .HasColumnType("INTEGER");
 
@@ -194,9 +200,6 @@ namespace InitialProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("GuestId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("VeyUseful")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("locationID")

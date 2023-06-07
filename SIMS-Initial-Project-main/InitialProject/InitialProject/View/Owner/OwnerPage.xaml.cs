@@ -90,5 +90,15 @@ namespace InitialProject.View
         {
             OperationsContainer.Content = new ManagmentPropositions();
         }
+
+        private void forums(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Forums_Click(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new Forums();
+        }
     }
 }

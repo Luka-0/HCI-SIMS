@@ -1,0 +1,18 @@
+﻿<Page x:Class="InitialProject.View.Owner.Forums"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View.Owner"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Forums">
+
+    <Grid>
+        <TextBox x:Name="commentt" HorizontalAlignment="Left" Margin="149,63,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="comment" HorizontalAlignment="Left" Margin="159,113,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
+        <DataGrid x:Name="forums" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="352,0,0,369"/>
+        <DataGrid x:Name="comments" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="352,162,0,195"/>
+
+    </Grid>
+</Page>

@@ -41,8 +41,12 @@ namespace InitialProject.Contexts
 
         public DbSet<SuperGuide> SuperGuide{ get; set; }
 
+        public DbSet<ForumOwnerVs> ForumOwnerVs { get; set; }
+        public DbSet<CommentOwnerVs> CommentOwnerVs { get; set; }
+
+
         //Pavle:
-       // public string path = @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";
+        // public string path = @"C:\Users\Pavle\Desktop\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";
 
         //Aleksandra:
         public string path = @" F:\SIMS - PROJEKAT\HCI-SIMS\SIMS-Initial-Project-main\InitialProject\InitialProject\Database4.db";

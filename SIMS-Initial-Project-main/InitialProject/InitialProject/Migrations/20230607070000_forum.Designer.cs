@@ -3,6 +3,7 @@ using System;
 using InitialProject.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230607070000_forum")]
+    partial class forum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -145,30 +147,6 @@ namespace InitialProject.Migrations
                     b.ToTable("AccommodationReview");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.CommentOwnerVs", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ByOwner")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("forumId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("forumId");
-
-                    b.ToTable("CommentOwnerVs");
-                });
-
             modelBuilder.Entity("InitialProject.Model.ComplexTourRequest", b =>
                 {
                     b.Property<int>("Id")
@@ -194,9 +172,6 @@ namespace InitialProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("GuestId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("VeyUseful")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("locationID")
@@ -700,15 +675,6 @@ namespace InitialProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Reservation");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.CommentOwnerVs", b =>
-                {
-                    b.HasOne("InitialProject.Model.ForumOwnerVs", "Forum")
-                        .WithMany()
-                        .HasForeignKey("forumId");
-
-                    b.Navigation("Forum");
                 });
 
             modelBuilder.Entity("InitialProject.Model.ForumOwnerVs", b =>

@@ -8,7 +8,7 @@
         Title="Owner" Height="810" Width="1500" WindowStartupLocation ="CenterScreen">
     <Grid Margin="0,0,0,0" Background="DimGray">
 
-        <GroupBox Header="DASHBOARD"  Margin="20,0,1131,0" FontSize="36" VerticalAlignment="Top"  FontWeight="Bold" Foreground="White" Height="726"/>
+        <GroupBox Header="DASHBOARD"  Margin="20,0,1131,0" FontSize="36" VerticalAlignment="Top"  FontWeight="Bold" Foreground="White" Height="771"/>
         <Button Content="Rate Guests" HorizontalAlignment="Left" Height="44" Margin="37,254,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_1" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" />
         <Button Content="Create Accommodation" HorizontalAlignment="Left" Height="50" Margin="37,185,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click" Grid.ColumnSpan="2" Background="darkseagreen" Foreground="White" />
         <Frame x:Name="OperationsContainer" Height="727" Margin="398,44,60,0" VerticalAlignment="Top" NavigationUIVisibility="Hidden"/>
@@ -20,6 +20,7 @@
         <Button Content="All Renovations" HorizontalAlignment="Left" Height="50" Margin="37,574,0,0" VerticalAlignment="Top" Width="300" FontSize="23" Click="Button_Click_7" Background="darkseagreen" Foreground="White"/>
         <Button x:Name="Statistics" Content="Statistics" HorizontalAlignment="Left" Height="50" Margin="37,444,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_8" Background="darkseagreen" Foreground="White"/>
         <Button x:Name="ManagmentProp" Content="Suggestions" HorizontalAlignment="Left" Height="50" Margin="37,637,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="suggestions_clicccc" Background="darkseagreen" Foreground="White"/>
+        <Button x:Name="Forums" Content="Forums" HorizontalAlignment="Left" Height="50" Margin="37,698,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Forums_Click" Background="darkseagreen" Foreground="White"/>
 
     </Grid>
 </Window>

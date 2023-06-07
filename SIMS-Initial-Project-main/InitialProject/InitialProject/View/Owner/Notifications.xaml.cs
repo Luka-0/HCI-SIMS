@@ -1,6 +1,7 @@
 ﻿using InitialProject.Controller;
 using InitialProject.Dto;
 using InitialProject.Model;
+using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace InitialProject.View
     {
         GuestReviewController GuestReviewController = new GuestReviewController();
         AccommodationReservationController AccommodationReservationController = new AccommodationReservationController();
+        ForumOwnerRepository ForumOwnerRepository = new ForumOwnerRepository();
 
         public string OwnerUsername;
 
@@ -39,8 +41,21 @@ namespace InitialProject.View
         public void LoadNotifications() {
 
             LoadExpiredReservationsNotifications();
-            LoadCancelledReservationNotifications();
+            //LoadCancelledReservationNotifications();
+            NewForumNotifications();
+        }
 
+        public void NewForumNotifications() {
+
+            List<string> newForumsNotifications = new List<string>();
+
+            foreach (var city in ForumOwnerRepository.GetOpenForumNotification())
+            {
+
+                newForumsNotifications.Add("New forum opened for Location: " + city);
+            }
+
+            cancellationNotification.ItemsSource = newForumsNotifications;
         }
 
         public void LoadExpiredReservationsNotifications() {
