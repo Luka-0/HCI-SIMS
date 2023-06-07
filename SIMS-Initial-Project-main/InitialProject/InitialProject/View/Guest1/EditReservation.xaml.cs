@@ -47,6 +47,22 @@ namespace InitialProject.View.Guest1
             RefreshReschedulingDataGrid();
         }
 
+        private void RemoveRedFromControls()
+        {
+            ReservationsGrid.ClearValue(Border.BorderThicknessProperty);
+            ReservationsGrid.ClearValue(Border.BorderBrushProperty);
+
+            DaysToPostponeTB.ClearValue(Border.BorderThicknessProperty);
+            DaysToPostponeTB.ClearValue(Border.BorderBrushProperty);
+        }
+
+        public void MakeControlRed<T>(T control) where T : Control
+        {
+            control.Focus();
+            control.BorderBrush = new SolidColorBrush(Colors.Red);
+            control.BorderThickness = new Thickness(2);
+        }
+
         private void RefreshReservationDataGrid(List<AccommodationReservation> accommodationReservations)
         {
             ReservationsToShow = new ObservableCollection<AccommodationReservation>();
@@ -83,6 +99,7 @@ namespace InitialProject.View.Guest1
                 return;
             }
 
+            RemoveRedFromControls();
             MessageBox.Show("Successful");
         }
 
@@ -91,6 +108,9 @@ namespace InitialProject.View.Guest1
             if(accommodationReservation == null)
             {
                 MessageBox.Show("Please select a reservation you want to cancel");
+
+                MakeControlRed(ReservationsGrid);
+
                 return true;
             }
 
@@ -99,10 +119,14 @@ namespace InitialProject.View.Guest1
                 if(int.Parse(DaysToPostponeTB.Text) <= 0)
                 {
                     MessageBox.Show("Please enter a proper number of days to postpone by");
+
+                    MakeControlRed(DaysToPostponeTB);
+
                     return true;
                 }
             }
 
+            RemoveRedFromControls();
             return false;
         }
 
@@ -130,6 +154,7 @@ namespace InitialProject.View.Guest1
             ReservationReschedulingRequestController.Save(reservationReschedulingRequest);
             MessageBox.Show("Successful");
 
+            RemoveRedFromControls();
             RefreshReschedulingDataGrid();
         }
     }

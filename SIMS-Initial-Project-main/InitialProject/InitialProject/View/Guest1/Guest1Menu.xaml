@@ -12,19 +12,13 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
-                        <!-- Row 0 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 1 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 2 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 3 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 4 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 5 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 6 -->
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
 
@@ -35,8 +29,45 @@
                     <Button Grid.Row="4" Content="Anywhere-Whenever" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AnywhereWhenever_Click"/>
                     <Button Grid.Row="5" Content="Create a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CreateForum_Click" />
                     <Button Grid.Row="6" Content="Make Comment on a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CommentOnForum_Click" />
+                    <Button Grid.Row="7" Content="Deactivate a Forum" HorizontalAlignment="Center" VerticalAlignment="Center" Click="DeactivateForum_Click" />
+
                 </Grid>
             </Border>
+        </Grid>
+
+        <Label x:Name="UserNameL" Content=""  Margin="651,29,37,456" FontSize="18"/>
+        <Label Content="Help" Margin="506,197,233,284" />
+
+        <Grid Margin="268,231,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBox Grid.Row="0" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" Text="Write here!" TextAlignment="Center"/>
+            <TextBlock Grid.Row="0" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Width="304" Margin="188,0,0,0" Height="35">
+                    This is a place for You to write, usually it's for some numbers, but it can also be used for words
+            </TextBlock>
+
+            <ComboBox Grid.Row="1" x:Name="ToyCB" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Margin="40,0,0,0"/>
+            <TextBlock Grid.Row="1" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Width="304" Margin="188,0,0,0" Height="50">
+                    This is where You can choose one out of multiple options, usually it's where You choose the exact dates of beggining and ending of reservation
+            </TextBlock>
+
+            <DatePicker Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0"/>
+            <TextBlock Grid.Row="2" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Width="304" Margin="188,0,0,0" Height="50">
+                    This is where You can choose date, usually for reservating an accommodation. You do it by clicking on the callendar thingy, and then clicking on a day
+            </TextBlock>
+
+            <TextBlock Grid.Row="3" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Width="304" Margin="188,0,0,0" Height="55">
+                    This is a button, You can click on it and a message will appear in front of You, click Ok or X to make it dissapear.
+                    Buttons are used for completing some actions
+            </TextBlock>
+            <Button Grid.Row="3" Content="Click me!" Width="60" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" Click="Button_Click"/>
+
+            <Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="4" />
         </Grid>
 
     </Grid>

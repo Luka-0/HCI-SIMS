@@ -18,9 +18,6 @@ using System.Collections.ObjectModel;
 
 namespace InitialProject.View.Guest1
 {
-    /// <summary>
-    /// Interaction logic for CommentOnForum.xaml
-    /// </summary>
     public partial class CommentOnForum : Window
     {
         private readonly ForumController ForumController = new();
@@ -69,6 +66,22 @@ namespace InitialProject.View.Guest1
             }
         }
 
+        private void RemoveRedFromControls()
+        {
+            CityCB.ClearValue(Border.BorderThicknessProperty);
+            CityCB.ClearValue(Border.BorderBrushProperty);
+
+            CommentTB.ClearValue(Border.BorderThicknessProperty);
+            CommentTB.ClearValue(Border.BorderBrushProperty);
+        }
+
+        public void MakeControlRed<T>(T control) where T : Control
+        {
+            control.Focus();
+            control.BorderBrush = new SolidColorBrush(Colors.Red);
+            control.BorderThickness = new Thickness(2);
+        }
+
         private void RefreshDataGrid(List<ForumCommentDto> forumComments, Forum forum)
         {
             CommentsToShow = new ObservableCollection<ForumCommentDto>();
@@ -95,7 +108,7 @@ namespace InitialProject.View.Guest1
 
         private void AddComment_Click(object sender, RoutedEventArgs e)
         {
-            if (IsViolatingAnyUIControl()) return;
+            if (IsViolatingAnyUIControl()) return; //TODO proveriti dal je forum aktivan
 
             Forum forum = CommentsToShow.First().Forum;
             ForumComment forumComment = new(CommentTB.Text, forum, User, ' ');
@@ -109,6 +122,7 @@ namespace InitialProject.View.Guest1
             ForumCommentController.Save(forumComment);
             MessageBox.Show("Successfuly saved");
 
+            RemoveRedFromControls();
             ShowDG();
         }
 
@@ -123,6 +137,9 @@ namespace InitialProject.View.Guest1
 
             Forum forum = ForumController.GetByCity(CityCB.SelectedItem.ToString());
             if (forum == null) return;
+
+            if (forum.IsClosed) PostB.IsEnabled = false;
+            else PostB.IsEnabled = true;
 
             List<ForumComment> forumComments = ForumCommentController.GetByForum(forum.Id);
 
@@ -141,14 +158,27 @@ namespace InitialProject.View.Guest1
             if(CityCB.SelectedIndex < 0)
             {
                 MessageBox.Show("Please select a city");
+
+                MakeControlRed(CityCB);
+
                 return true;
             }
             if(CommentsToShow.First().Forum == null)
             {
                 MessageBox.Show("There is no forum to add Your comment to");
+
+                return true;
+            }
+            if (CommentTB.Text.Equals(""))
+            {
+                MessageBox.Show("Please write something in the comment section");
+
+                MakeControlRed(CommentTB);
+
                 return true;
             }
 
+            RemoveRedFromControls();
             return false;
         }
     }

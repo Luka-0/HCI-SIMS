@@ -13,7 +13,7 @@
 
             <ScrollViewer Margin="0,0,10,11">
                 <DataGrid x:Name="AccommodationsGrid" ItemsSource="{Binding AccommodationsToShow}" HorizontalAlignment="Center" VerticalAlignment="Top"
-                  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" MinHeight="25" Margin="0,30">
+                  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" MinHeight="25" Margin="0,30" >
                     <DataGrid.Resources>
                         <Style TargetType="DataGridCell">
                             <Style.Triggers>
@@ -31,7 +31,7 @@
                         <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
                         <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}"/>
                         <DataGridTextColumn Header="City" Binding="{Binding Location.City}" />
-                        <DataGridTextColumn Header="Recently Renovated" Binding="{Binding RecentlyRenovated}" Width="*"/>
+                        <DataGridTextColumn Header="Recently Renovated" Binding="{Binding RecentlyRenovated}" Width="250"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </ScrollViewer>
@@ -60,22 +60,18 @@
             </Button.Content>
         </Button>
 
+        <TextBlock Text="Choosing a reservation" Margin="97,25,655,460" />
+
         <Grid Margin="0,0,483,292" DataContext="{Binding ElementName=AccommodationsGrid, Path=SelectedItem}">
-            <Border BorderBrush="Black" BorderThickness="1" Margin="0,35,91,0">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="0,48,91,0">
                 <Grid Margin="0,-1,-1,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
-                        <!-- Row 0 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 1 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 2 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 3 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 4 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 5 -->
                     </Grid.RowDefinitions>
 
 
@@ -142,31 +138,25 @@
             </Border>
         </Grid>
 
-        <Grid Margin="0,263,483,11" >
+        <TextBlock Text="Choosing a filter" Margin="116,264,672,209" />
+
+        <Grid Margin="0,289,483,11" >
             <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,91,0">
-                <Grid Margin="0,12,-1,-1">
+                <Grid Margin="0,-1,-1,-1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
-                        <!-- Row 0 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 1 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 2 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 3 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 4 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 5 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 6 -->
                         <RowDefinition Height="*" />
-                        <!-- Row 7 -->
                     </Grid.RowDefinitions>
 
 
                     <Label Grid.Row="0" Content="Choose what to filter with:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="24"/>
-                    <ComboBox Grid.Row="0" x:Name="FilterComboBox" HorizontalAlignment="Left" Margin="175,4,0,0" VerticalAlignment="Center" Width="120"/>
+                    <ComboBox Grid.Row="0" x:Name="FilterComboBox" MouseLeave="DisableNotSelected" HorizontalAlignment="Left" Margin="175,4,0,0" VerticalAlignment="Center" Width="120"/>
                     <Label Grid.Row="1" Content="Choose country:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="29"/>
                     <ComboBox Grid.Row="1" x:Name="CountryComboBox" HorizontalAlignment="Left" MouseLeave="InitializeCityComboBox" Margin="175,0,0,0" VerticalAlignment="Center" MinWidth="120" Width="Auto"/>
                     <Label Grid.Row="2" Content="Choose city:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="28"/>

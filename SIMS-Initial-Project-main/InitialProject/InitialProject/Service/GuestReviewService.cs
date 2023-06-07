@@ -1,5 +1,6 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Dto;
+using InitialProject.Enumeration;
 using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InitialProject.Service
 {
@@ -79,5 +81,87 @@ namespace InitialProject.Service
             return IGuestReviewRepository.GetAll(user);
         }
 
+        public double GetAverageTidinessByUser(User user)
+        {
+            List<GuestReview> reviews = IGuestReviewRepository.GetByUser(user);
+
+            double average = 0;
+            foreach(GuestReview gr in reviews)
+            {
+                average += gr.Tidiness;
+            }
+
+            return average /= reviews.Count;
+        }
+
+        public double GetAverageObedienceByUser(User user)
+        {
+            List<GuestReview> reviews = IGuestReviewRepository.GetByUser(user);
+
+            double average = 0;
+            foreach (GuestReview gr in reviews)
+            {
+                average += gr.Obedience;
+            }
+
+            return average /= reviews.Count;
+        }
+
+        public double GetAverageByAccommodationType(AccommodationType type, User user)
+        {
+            List<GuestReview> reviews = IGuestReviewRepository.GetByUser(user);
+            double average = 0;
+            int count = 0;
+
+            switch (type)
+            {
+                case AccommodationType.Apartment:
+                    foreach (GuestReview gr in reviews)
+                    {
+                        if (gr.Reservation.Accommodation.Type == AccommodationType.Apartment)
+                        {
+                            average += gr.Obedience + gr.Tidiness;
+                            ++count;
+                        }
+                    }
+
+                    return average /= count;
+                case AccommodationType.Accommodation:
+                    foreach (GuestReview gr in reviews)
+                    {
+                        if (gr.Reservation.Accommodation.Type == AccommodationType.Accommodation)
+                        {
+                            average += gr.Obedience + gr.Tidiness;
+                            ++count;
+                        }
+                    }
+
+                    return average /= count;
+                case AccommodationType.House:
+                    foreach (GuestReview gr in reviews)
+                    {
+                        if (gr.Reservation.Accommodation.Type == AccommodationType.House)
+                        {
+                            average += gr.Obedience + gr.Tidiness;
+                            ++count;
+                        }
+                    }
+
+                    return average /= count;
+                case AccommodationType.Cottage:
+                    foreach (GuestReview gr in reviews)
+                    {
+                        if (gr.Reservation.Accommodation.Type == AccommodationType.Cottage)
+                        {
+                            average += gr.Obedience + gr.Tidiness;
+                            ++count;
+                        }
+                    }
+
+                    return average /= count;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
     }
 }

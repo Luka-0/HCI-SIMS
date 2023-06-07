@@ -30,7 +30,9 @@
             </Button.Content>
         </Button>
 
-        <Border BorderBrush="Black" BorderThickness="1" Margin="10,44,0,10" HorizontalAlignment="Left" Width="355">
+        <TextBlock Text="Comments that have a star   *   in the Important column, means that they are from users who have visited that location" TextWrapping="Wrap" TextAlignment="Center" Margin="64,35,430,437"/>
+
+        <Border BorderBrush="Black" BorderThickness="1" Margin="10,92,0,10" HorizontalAlignment="Left" Width="355">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -45,9 +47,9 @@
                 <Label Grid.Row="1" Content="Choose city:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" />
                 <ComboBox Grid.Row="1" x:Name="CityCB" MouseLeave="PreShowDG" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Width="140" />
 
-                <TextBox Grid.Row="2" x:Name="CommentTB" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Write comment here" TextWrapping="Wrap" Height="161" Width="271" />
+                <TextBox Grid.Row="2" x:Name="CommentTB" HorizontalAlignment="Center" VerticalAlignment="Center" Text="--Write comment here--" TextAlignment="Center" TextWrapping="Wrap" Height="161" Width="271" />
 
-                <Button Grid.Row="3" MouseLeave="PreShowDG" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddComment_Click" >
+                <Button Grid.Row="3" x:Name="PostB" MouseLeave="PreShowDG" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddComment_Click" >
                     <Button.ToolTip>
                         <ToolTip Placement="Bottom" Content="By clicking this, You will create a post with selected location" />
                     </Button.ToolTip>

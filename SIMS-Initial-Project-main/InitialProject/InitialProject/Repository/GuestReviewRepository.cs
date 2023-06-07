@@ -61,5 +61,19 @@ namespace InitialProject.Repository
 
             return guestReviews;
         }
+
+        public List<GuestReview> GetByUser(User user)
+        {
+            List<GuestReview> tidinessMarks = new();
+
+            using(var db = new UserContext())
+            {
+                tidinessMarks = db.guestReview.Include(t => t.Reservation)
+                                                  .ThenInclude(t => t.Accommodation)
+                                              .Where(t => t.Reservation.Guest.Id == user.Id).ToList();
+            }
+
+            return tidinessMarks;
+        }
     }
 }

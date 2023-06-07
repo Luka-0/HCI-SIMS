@@ -31,8 +31,21 @@ namespace InitialProject.View
             InitializeComponent();
             User = user;
 
+            UserNameL.Content = "Hello " + user.Username;
+
             CheckNotifications();
             CheckSuperTitleRequirements();
+            InitializeComboBox();
+        }
+
+        private void InitializeComboBox()
+        {
+            ToyCB.Items.Add("Click me!");
+            ToyCB.Items.Add("Hello!");
+            ToyCB.Items.Add("How are You!");
+            ToyCB.Items.Add("Are You ok?");
+
+            ToyCB.SelectedIndex = 0;
         }
 
         private void CheckNotifications()
@@ -139,6 +152,19 @@ namespace InitialProject.View
         {
             CommentOnForum commentOnForum = new(User);
             commentOnForum.Show();
+
+            Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Press OK or X to close this");
+        }
+
+        private void DeactivateForum_Click(object sender, RoutedEventArgs e)
+        {
+            DeactiveForum deactiveForum = new(User);
+            deactiveForum.Show();
 
             Close();
         }

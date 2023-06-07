@@ -20,7 +20,7 @@ namespace InitialProject.Controller
             ForumService.Save(forum);
         }
 
-        public Forum GetByUser(int id)
+        public List<Forum> GetByUser(int id)
         {
             return ForumService.GetByUser(id);
         }
@@ -47,5 +47,9 @@ namespace InitialProject.Controller
             ForumService.UpdateNumberOfSpecials(forum);
         }
 
+        public void UpdateActivity(Forum forum)
+        {
+            ForumService.UpdateActivity(forum);
+        }
     }
 }

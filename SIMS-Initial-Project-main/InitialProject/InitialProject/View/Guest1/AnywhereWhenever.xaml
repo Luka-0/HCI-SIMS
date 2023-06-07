@@ -41,7 +41,7 @@
                 Here You can fill in the requirements bellow, and accommodations matching Your requirements will be shown on the right ->
             </TextBlock>
 
-            <Button Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Click="StartDemo_Click" >
+            <Button Grid.Row="1" x:Name="StartDemoB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,8,0,0" Click="StartDemo_Click" >
                 <Button.ToolTip>
                     <ToolTip Placement="Bottom" Content="By clicking this, the UI controls bellow will start filling up, You just watch and relax" />
                 </Button.ToolTip>
@@ -63,6 +63,8 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
+            <Button Grid.Row="1" x:Name="StopDemoB" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Stop Demo" Margin="22,0,0,-10" Click="StopDemo_Click" />
+
             <TextBlock Grid.Row="1" Text="Or press &quot;Start Demo&quot; button to show how it's done with an example" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="143,0,0,0" Width="127"/>
         </Grid>
 
@@ -103,7 +105,7 @@
 
                     <Button Grid.Row="4" x:Name="SAB" IsTabStop="True" IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowAccommodations_Click">
                         <Button.ToolTip>
-                        <ToolTip Placement="Bottom" Content="By clicking this, accommodations matching Your requirements will be shown on the right" />
+                            <ToolTip Placement="Bottom" Content="By clicking this, accommodations matching Your requirements will be shown on the right" />
                         </Button.ToolTip>
                         <Button.Resources>
                             <Style TargetType="Button">

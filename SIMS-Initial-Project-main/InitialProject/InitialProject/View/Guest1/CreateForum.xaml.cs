@@ -60,6 +60,25 @@ namespace InitialProject.View.Guest1
             }
         }
 
+        private void RemoveRedFromControls()
+        {
+            CommentTB.ClearValue(Border.BorderThicknessProperty);
+            CommentTB.ClearValue(Border.BorderBrushProperty);
+
+            CountryCB.ClearValue(Border.BorderThicknessProperty);
+            CountryCB.ClearValue(Border.BorderBrushProperty);
+
+            CityCB.ClearValue(Border.BorderThicknessProperty);
+            CityCB.ClearValue(Border.BorderBrushProperty);
+        }
+
+        public void MakeControlRed<T>(T control) where T : Control
+        {
+            control.Focus();
+            control.BorderBrush = new SolidColorBrush(Colors.Red);
+            control.BorderThickness = new Thickness(2);
+        }
+
         private void CreatePost_Click(object sender, RoutedEventArgs e)
         {
             if (IsViolatingAnyUIControl()) return;
@@ -67,6 +86,7 @@ namespace InitialProject.View.Guest1
             Forum forumToSave = new(LocationController.GetByCity(CityCB.SelectedItem.ToString()), CommentTB.Text, User);
             ForumController.Save(forumToSave);
 
+            RemoveRedFromControls();
             MessageBox.Show("Successfull");
         }
 
@@ -75,19 +95,29 @@ namespace InitialProject.View.Guest1
             if(CountryCB.SelectedIndex < 0)
             {
                 MessageBox.Show("Please select a country");
+
+                MakeControlRed(CountryCB);
+
                 return true;
             }
             if(CityCB.SelectedIndex < 0)
             {
                 MessageBox.Show("Please select a city");
+
+                MakeControlRed(CityCB);
+
                 return true;
             }
             if (CommentTB.Text.Equals(""))
             {
                 MessageBox.Show("Please write something in the comment section");
+
+                MakeControlRed(CommentTB);
+
                 return true;
             }
 
+            RemoveRedFromControls();
             return false;
         }
 

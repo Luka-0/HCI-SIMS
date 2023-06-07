@@ -9,6 +9,16 @@
     <Grid>
         <DataGrid x:Name="ReservationGrid" ItemsSource="{Binding ReservationToShow}" Margin="170,74,170,0" VerticalAlignment="Top" 
                   AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridCell">
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="LightGray" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            </DataGrid.Resources>
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Accommodation.Title}"/>
                 <DataGridTextColumn Header="Class" Binding="{Binding Accommodation.Class}"/>
@@ -19,9 +29,9 @@
         </DataGrid>
 
         <Grid Margin="10,23,10,10">
-            <Label Content="This is the accommodation You chose to give reccommendation for renovation" HorizontalAlignment="Center" Margin="0,10"/>
+            <Label Content="This is the accommodation You chose to give reccommendation for renovation" HorizontalAlignment="Center" Margin="0,10,0,470"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="150,138,169,0"/>
-            <TextBox x:Name="CommentTB" HorizontalAlignment="Center" Margin="0,149,0,0" TextWrapping="Wrap" Text="Write a comment here" VerticalAlignment="Top" Width="242" Height="90"/>
+            <TextBox x:Name="CommentTB" HorizontalAlignment="Center" Margin="0,149,0,0" TextWrapping="Wrap" Text="--Write a comment here--" VerticalAlignment="Top" TextAlignment="Center" Width="242" Height="90"/>
             <Label Content="How needed are the repairs:" HorizontalAlignment="Left" Margin="156,318,0,0" VerticalAlignment="Top"/>
             <ComboBox x:Name="RatingCB" HorizontalAlignment="Left" Margin="474,322,0,0" VerticalAlignment="Top" Width="120"/>
             <Button x:Name="FinishButton" HorizontalAlignment="Center" Margin="0,462,0,0" VerticalAlignment="Top" Click="FinishButton_Click">
@@ -46,8 +56,8 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
-            <TextBlock HorizontalAlignment="Left" Margin="626,149,0,0" TextWrapping="Wrap" Text="In this big area to the left is where You write down Your comment/suggestion" VerticalAlignment="Top" Height="51" TextAlignment="Center"/>
-            <TextBlock HorizontalAlignment="Left" Margin="626,317,0,0" TextWrapping="Wrap" Text="And this is where You give a mark from 1 to 5" VerticalAlignment="Top" TextAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,149,0,0" TextWrapping="Wrap" Text="In this big area to the right is where You write down Your comment/suggestion" VerticalAlignment="Top" Height="69" TextAlignment="Center" Width="135"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,317,0,0" TextWrapping="Wrap" Text="And this is where You give a mark from 1 to 5" VerticalAlignment="Top" TextAlignment="Center" Width="125" Height="35"/>
         </Grid>
 
         <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Back_Click">

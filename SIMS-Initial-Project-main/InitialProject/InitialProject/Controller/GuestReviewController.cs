@@ -1,4 +1,5 @@
 ﻿using InitialProject.Dto;
+using InitialProject.Enumeration;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -45,5 +46,19 @@ namespace InitialProject.Controller
             return guestReviewService.GetAll(user);
         }
 
+        public double GetAverageTidinessByUser(User user)
+        {
+            return guestReviewService.GetAverageTidinessByUser(user);
+        }
+
+        public double GetAverageObedienceByUser(User user)
+        {
+            return guestReviewService.GetAverageObedienceByUser(user);
+        }
+
+        public double GetAverageByAccommodationType(AccommodationType type, User user)
+        {
+            return guestReviewService.GetAverageByAccommodationType(type, user);
+        }
     }
 }
