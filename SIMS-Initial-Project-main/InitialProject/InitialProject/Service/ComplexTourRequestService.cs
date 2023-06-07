@@ -30,4 +30,15 @@ public class ComplexTourRequestService
     {
         _complexTourRequestRepository.SetGuide(id, loggedInGuide);
     }
+
+    public ComplexTourRequest Save(ComplexTourRequest complexTour)
+    {
+        return _complexTourRequestRepository.Save(complexTour);
+    }
+
+    public ComplexTourRequest GetById(int id)
+    {
+        return _complexTourRequestRepository.GetById(id);
+    }
+
 }

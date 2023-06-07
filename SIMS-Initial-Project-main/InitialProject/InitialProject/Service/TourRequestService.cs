@@ -30,6 +30,11 @@ public class TourRequestService
 
     }
 
+    public void UpdateComplexTourRequest(TourRequest request, ComplexTourRequest complexTourRequest)
+    {
+        _tourRequestRepository.UpdateComplexTourRequest(request, complexTourRequest);
+    }
+
     public TourRequest GetById(int id)
     {
         return _tourRequestRepository.GetById(id);
@@ -172,6 +177,11 @@ public class TourRequestService
     public void Save(TourRequest request, User user)
     {
         _tourRequestRepository.Save(request, user);
+    }
+
+    public void Save(TourRequest request, User user, ComplexTourRequest complexTourRequest)
+    {
+        _tourRequestRepository.Save(request, user, complexTourRequest);
     }
 
     public string[] GetStatistics()

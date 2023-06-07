@@ -85,6 +85,39 @@ public class TourRequestRepository: ITourRequestRepository
 
     }
 
+    public void Save(TourRequest request, User user, ComplexTourRequest complexTourRequest)
+    {
+        using var db = new UserContext();
+
+        var existingLocation = db.location.Find(request.Location.Id);
+        var existingUser = db.users.Find(user.Id);
+        var existingComplex = db.ComplexTourRequest.Find(request.ComplexTourRequest.Id);
+
+        request.Tourist = existingUser;
+        request.Location = existingLocation;
+        request.ComplexTourRequest = complexTourRequest;
+
+        db.location.Attach(existingLocation);
+        db.users.Attach(existingUser);
+        db.ComplexTourRequest.Attach(existingComplex);
+
+        db.Add(request);
+
+        db.SaveChanges();
+
+    }
+
+    public void UpdateComplexTourRequest(TourRequest request, ComplexTourRequest complexTourRequest)
+    {
+        using var db = new UserContext();
+
+        TourRequest existingReq = db.tourRequest.Find(request.Id);
+        existingReq.ComplexTourRequest = complexTourRequest;
+
+        db.SaveChanges();
+
+    }
+
     public List<TourRequest> GetAllPendingByComplex(int id)
     {
         using var db = new UserContext();

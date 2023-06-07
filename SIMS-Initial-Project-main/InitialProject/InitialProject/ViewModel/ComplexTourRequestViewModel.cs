@@ -1,5 +1,6 @@
 ﻿using InitialProject.Commands;
 using InitialProject.Controller;
+using InitialProject.Migrations;
 using InitialProject.Model;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace InitialProject.ViewModel
 {
     public class ComplexTourRequestViewModel:BindableBase
     {
+        ComplexTourRequestController complexTourRequestController = new ComplexTourRequestController();
         private LocationController locationControler = new LocationController();
         private TourController tourController = new TourController();
         private UserController userController = new UserController();
@@ -21,8 +23,9 @@ namespace InitialProject.ViewModel
         public ObservableCollection<string> StateComboBoxItems { get; set; }
         public ObservableCollection<string> CityComboBoxItems { get; set; }
         public ObservableCollection<string> LanguageComboBoxItems { get; set; }
-        public MyICommand AddNewTour { get; set; }
-        public MyICommand AddRequest { get; set; }
+
+        public List<TourRequest> tourRequests;
+
 
         private string _selectedState = "";
         private string _selectedCity = "";
@@ -37,6 +40,13 @@ namespace InitialProject.ViewModel
         private string _selectedItem = "";
         private bool _isRequestEnabled = false;
         private Visibility _labelVisibility = Visibility.Visible;
+
+        public MyICommand AddNewTour { get; set; }
+        public MyICommand AddRequest { get; set; }
+
+        public MyICommand EndTourEnter { get; set; }
+
+
         public ComplexTourRequestViewModel()
         {
             LoadStates();
@@ -44,6 +54,8 @@ namespace InitialProject.ViewModel
             LoadComments();
             AddNewTour = new MyICommand(OnAddNewTour);
             AddRequest = new MyICommand(OnAddRequest);
+            EndTourEnter = new MyICommand(OnEndTourEnter);
+            tourRequests = new List<TourRequest>();
         }
 
         #region Properties
@@ -139,7 +151,7 @@ namespace InitialProject.ViewModel
                 _sliderLabelText = "Broj gostiju: " + _sliderValue.ToString();
                 OnPropertyChanged(nameof(SliderValue));
                 OnPropertyChanged(nameof(SliderLabelText));
-                OnAddRequest();
+                ChechValidation();
             }
         }
 
@@ -212,7 +224,7 @@ namespace InitialProject.ViewModel
             LanguageComboBoxItems = languages;
         }
 
-        public void OnAddNewTour()
+        public void ResetFields()
         {
             SelectedCity = "";
             SelectedLanguage = "";
@@ -223,7 +235,25 @@ namespace InitialProject.ViewModel
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;
             SelectedItem = "";
-         }
+        }
+
+        public void OnAddNewTour()
+        {
+            TourRequest request = new TourRequest();
+            Location reqLocation = locationControler.GetBy(SelectedState, SelectedCity);
+
+            request.Location = reqLocation;
+            request.LowerDateLimit = StartDate;
+            request.UpperDateLimit = EndDate;
+            request.Description = SelectedItem;
+            request.GuestNumber = (int)SliderValue;
+            request.Language = SelectedLanguage;
+            request.Tourist = userController.GetBy(1);
+
+            tourRequests.Add(request);
+
+            ResetFields();
+        }
 
         public void LoadComments()
         {
@@ -239,6 +269,34 @@ namespace InitialProject.ViewModel
         public void OnAddRequest()
         {
             ChechValidation();
+
+            User user = userController.GetBy(1);
+
+            ComplexTourRequest complexRequest = new ComplexTourRequest();
+            complexRequest.Name = "ComplexTour";
+
+            ComplexTourRequest complexTourRequest = complexTourRequestController.Save(complexRequest);
+
+
+            foreach(TourRequest request in tourRequests)
+            {
+                tourRequestController.Save(request, user);
+            }
+
+            foreach (TourRequest request in tourRequests)
+            {
+                tourRequestController.UpdateComplexTourRequest(request, complexTourRequest);
+            }
+
+
+
+            MessageBox.Show("Uspesno sacuvan zahtev za complexTour");
+        }
+
+        public void OnEndTourEnter()
+        {
+            IsRequestEnabled = true;
+            LabelVisibility = Visibility.Hidden;
         }
 
         public void ChechValidation()

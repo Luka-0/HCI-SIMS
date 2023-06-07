@@ -5,6 +5,7 @@ using InitialProject.Enumeration;
 using InitialProject.Interface;
 using InitialProject.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace InitialProject.Repository;
 
@@ -21,7 +22,7 @@ public class ComplexTourRequestRepository: IComplexTourRequestRepository
         }
     }
 
-    public void SetGuide(int id, User Guide)
+    public void SetGuide(int id, Model.User Guide)
     {
         using (var db = new UserContext())
         {
@@ -34,4 +35,31 @@ public class ComplexTourRequestRepository: IComplexTourRequestRepository
         }
     }
 
+    public ComplexTourRequest Save(ComplexTourRequest complexTour)
+    {
+        using var db = new UserContext();
+
+        // Add the new entity to the DbContext
+        db.Add(complexTour);
+        db.SaveChanges();
+
+        return complexTour;
+
+    }
+
+    public ComplexTourRequest GetById(int id)
+    {
+        ComplexTourRequest tourRequest = new ComplexTourRequest();
+
+        using (var dbContext = new UserContext())
+        {
+            tourRequest = (ComplexTourRequest)dbContext.ComplexTourRequest
+                            .Include(tr => tr.Requests)
+                            .Include(tr => tr.Guides)
+                            .Where(t => t.Id == id)
+                            .SingleOrDefault();
+
+        }
+        return tourRequest;
+    }
 }

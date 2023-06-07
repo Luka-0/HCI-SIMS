@@ -17,6 +17,15 @@ public class TourRequestController
         return tourRequestService.GetAllPending();
     }
 
+    public void Save(TourRequest request, User user, ComplexTourRequest complexTourRequest)
+    {
+        tourRequestService.Save(request, user, complexTourRequest);
+    }
+    public void UpdateComplexTourRequest(TourRequest request, ComplexTourRequest complexTourRequest)
+    {
+        tourRequestService.UpdateComplexTourRequest(request, complexTourRequest);
+    }
+
     public List<TourRequest> GetAll()
     {
         return tourRequestService.GetAll();

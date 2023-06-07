@@ -14,5 +14,7 @@ public interface ITourRequestRepository
     public void Save(TourRequest request, User user);
     public List<TourRequest> GetAllPendingByComplex(int id);
     public TourRequest GetById(int id);
+    public void Save(TourRequest request, User user, ComplexTourRequest complexTourRequest);
+    public void UpdateComplexTourRequest(TourRequest request, ComplexTourRequest complexTourRequest);
 
 }
