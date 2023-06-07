@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Contexts;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using System;
@@ -31,6 +32,11 @@ namespace InitialProject.Controller
         public void Delete(Voucher voucher)
         {
             voucherService.Delete(voucher);
+        }
+
+        public void Save(Voucher voucher, User user)
+        {
+            voucherService.Save(voucher, user);
         }
     }
 }

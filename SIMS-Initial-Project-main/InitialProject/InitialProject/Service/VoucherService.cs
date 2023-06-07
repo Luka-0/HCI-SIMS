@@ -1,4 +1,5 @@
-﻿using InitialProject.Interface;
+﻿using InitialProject.Contexts;
+using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
 using System;
@@ -64,6 +65,10 @@ namespace InitialProject.Service
             return vouchers;
         }
 
+        public void Save(Voucher voucher, User user)
+        {
+            _voucherRepository.Save(voucher, user);
+        }
 
         public void GiveOut(List<User?> users)
         {

@@ -14,6 +14,8 @@ namespace InitialProject.ViewModel
     public class VoucherViewModel:BindableBase
     {
         private VoucherController voucherController = new VoucherController();
+        private TourReservationController tourReservationController = new TourReservationController();
+        private UserController userController = new UserController();
 
         private ObservableCollection<Voucher> _vouchers;
 
@@ -28,6 +30,7 @@ namespace InitialProject.ViewModel
             CheckButtonVisibillityCommand = new MyICommand(CheckButtonVisibility);
             Mediator.Instance.Subscribe("TourIndexUpdated", OnTourIndexUpdated);
             LoadData();
+            CheckForExtraVoucher();
 
             UpdateHeaderTitle("Pregled svih vaucera");
             UpdateFooterParametar("home");
@@ -130,7 +133,55 @@ namespace InitialProject.ViewModel
             SelectedTourId = newId as string;
         }
 
+        public void CheckForExtraVoucher()
+        {
+            List<TourReservation> tourReservations = tourReservationController.GetAll();
+            List<TourReservation> myReservations = new List<TourReservation>();
+            User user = userController.GetBy(1);
 
+            foreach(TourReservation tr in tourReservations)
+            {
+                if(tr.BookingGuest.Id ==  user.Id)
+                {
+                    myReservations.Add(tr);
+                }
+            }
+
+            DateTime minDate = myReservations[0].Tour.StartDateAndTime;
+            
+            foreach(TourReservation tr in myReservations)
+            {
+                if(tr.Tour.StartDateAndTime < minDate)
+                    minDate = tr.Tour.StartDateAndTime;
+            }
+
+            DateTime maxDate = minDate.AddYears(1);
+          //  MessageBox.Show(maxDate.ToString());
+
+            int countTours = 0;
+
+            foreach (TourReservation tr in myReservations)
+            {
+                if (tr.Tour.StartDateAndTime >= minDate && tr.Tour.StartDateAndTime <= maxDate)
+                    countTours++;
+            }
+
+          //  MessageBox.Show(countTours.ToString());
+
+            if(countTours == 5)
+            {
+                Voucher voucher = new Voucher();
+                voucher.User = user;
+                voucher.ReceivedDate = DateTime.Now;
+                voucher.ObtainedReason = Enumeration.VoucherObtainedReason.Earned;
+                voucher.ExpirationDate = DateTime.Now.AddMonths(6);
+
+                voucherController.Save(voucher, user);
+                LoadData();
+                // MessageBox.Show("Dodat");
+            }
+
+        }
 
 
     }

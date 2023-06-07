@@ -45,6 +45,20 @@ namespace InitialProject.Repository
             db.SaveChanges();
         }
 
+        public void Save(Voucher voucher, User user)
+        {
+            var db = new UserContext();
+
+            var existingUser = db.users.Find(user.Id);
+
+            voucher.User = existingUser;
+
+            db.users.Attach(existingUser);
+
+            db.Add(voucher);
+            db.SaveChanges();
+        }
+
         public void Delete(Voucher voucher) 
         {
             var db = new UserContext();
