@@ -98,5 +98,17 @@ namespace InitialProject.Controller
             return AccommodationService.GetBy(reservationDays, guestNumber);
         }
 
+        public List<Location> GetPopularLocations()
+        {
+
+            return AccommodationService.GetPopularLocations();
+        }
+
+        public List<Accommodation> GetInferiorlarAccommodations()
+        {
+
+            return AccommodationService.GetInferiorlarAccommodations();
+        }
+
     }
 }

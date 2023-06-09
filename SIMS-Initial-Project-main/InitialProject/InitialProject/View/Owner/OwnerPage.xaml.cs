@@ -85,5 +85,10 @@ namespace InitialProject.View
         {
             OperationsContainer.Content = new Statistics(Username);
         }
+
+        private void acc_prop(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new AccommodationProposition();
+        }
     }
 }

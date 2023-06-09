@@ -1,0 +1,18 @@
+﻿<Page x:Class="InitialProject.View.Owner.AccommodationProposition"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View.Owner"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="900"
+      Title="Notifications">
+
+    <Grid>
+        <ListBox x:Name="registrationSuggestionsListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,91,30,444" FontSize="22" BorderThickness="5" Background="#FFB8CEA7" Foreground="#FF1D5A15"/>
+        <ListBox x:Name="closingSuggestionsListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,409,30,135" FontSize="22" BorderThickness="5" Background="#FFB8CEA7" Foreground="#FFCE5D0D"/>
+        <TextBlock Text="Suggestions for new accommodation registration:" Margin="106,45,105,621" FontSize="22"></TextBlock>
+        <TextBlock Text="Suggestions to close some of the  existing accommodations:" Margin="120,364,162,302" FontSize="22"></TextBlock>
+    </Grid>
+</Page>
+
