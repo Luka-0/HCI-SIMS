@@ -1,6 +1,7 @@
 ﻿using InitialProject.Contexts;
 using InitialProject.Enumeration;
 using InitialProject.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,5 +25,7 @@ namespace InitialProject.Interface
         //public void UpdateLastRenovatedBy(Accommodation accommodation, DateTime lastRenovation);
 
         public List<Accommodation> GetBy(int reservationDays, int guestNumber);
+        public List<Location> GetOwnerAccommodationLocations(string owner);
+
     }
 }

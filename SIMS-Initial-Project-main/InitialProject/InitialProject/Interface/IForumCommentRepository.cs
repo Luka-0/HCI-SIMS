@@ -11,5 +11,7 @@ namespace InitialProject.Interface
     {
         public void Save(ForumComment forumComment);
         public List<ForumComment> GetByForum(int id);
+        public List<ForumComment> GetAll();
+        public void SaveComment(ForumComment comment);
     }
 }

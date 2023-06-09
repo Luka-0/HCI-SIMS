@@ -177,5 +177,27 @@ namespace InitialProject.Repository
             return accommodations;
         }
 
+        public List<Location> GetOwnerAccommodationLocations(string owner)
+        {
+            List<Accommodation> accommodations = new();
+            List<Location> locations = new();
+
+            using (UserContext db = new())
+            {
+                accommodations = db.accommodation
+                    .Include(t => t.Location)
+                    .Include(t => t.Owner)
+                    .Where(t => t.Owner.Username.Equals(owner))
+                    .ToList();
+            }
+
+            foreach (var acc in accommodations)
+            {
+                if (!locations.Contains(acc.Location))
+                { locations.Add(acc.Location); }
+            }
+
+            return locations;
+        }
     }
 }

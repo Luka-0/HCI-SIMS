@@ -90,5 +90,10 @@ namespace InitialProject.View
         {
             OperationsContainer.Content = new AccommodationProposition();
         }
+
+        private void my_forums_Click(object sender, RoutedEventArgs e)
+        {
+            OperationsContainer.Content = new InitialProject.View.Owner.Forum();
+        }
     }
 }

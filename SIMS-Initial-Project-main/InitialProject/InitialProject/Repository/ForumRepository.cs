@@ -93,5 +93,21 @@ namespace InitialProject.Repository
             }
         }
 
+        public List<Forum> GetAll()
+        {
+            List<Forum> forums = new List<Forum>();
+
+            using (UserContext db = new())
+            {
+                forums = db.forum
+                    .Include(t => t.Location)
+                    .ToList();
+            }
+
+            return forums;
+        }
+
+
+
     }
 }

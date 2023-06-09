@@ -25,7 +25,7 @@ namespace InitialProject.Model
 
         public char Special { get; set; } = ' '; // bice '*' ako je osoba posetila lokaciju na cijem forumu je postavila komentar
 
-        ForumComment()
+        ForumComment(string text)
         {
             Text = new("");
         }
@@ -36,6 +36,13 @@ namespace InitialProject.Model
             Forum = forum;
             User = user;
             Special = special;
+        }
+
+        public ForumComment(string text, Forum forum)
+        {
+            Text = text;
+            Forum = forum;
+            Special = '*';
         }
     }
 }

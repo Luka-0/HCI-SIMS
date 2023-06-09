@@ -25,7 +25,7 @@ namespace InitialProject.View
     {
         GuestReviewController GuestReviewController = new GuestReviewController();
         AccommodationReservationController AccommodationReservationController = new AccommodationReservationController();
-
+        ForumController ForumController = new ForumController();
         public string OwnerUsername;
 
         public Notifications(string ownerUsername)
@@ -40,7 +40,22 @@ namespace InitialProject.View
 
             LoadExpiredReservationsNotifications();
             LoadCancelledReservationNotifications();
+            NewForumNotifications();
 
+        }
+
+        public void NewForumNotifications()
+        {
+
+            List<string> newForumsNotifications = new List<string>();
+
+            foreach (var city in ForumController.GetOpenForumNotification())
+            {
+
+                newForumsNotifications.Add("New forum opened for Location: " + city);
+            }
+
+            forumNotifications.ItemsSource = newForumsNotifications;
         }
 
         public void LoadExpiredReservationsNotifications() {

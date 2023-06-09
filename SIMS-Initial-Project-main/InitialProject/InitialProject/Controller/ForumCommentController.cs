@@ -23,6 +23,20 @@ namespace InitialProject.Controller
         {
             return ForumCommentService.GetByForum(id);
         }
+        public List<Forum> GetOpenForums()
+        {
 
+            return ForumCommentService.GetOpenForums();
+        }
+
+        public List<ForumComment> GetAll()
+        {
+            return ForumCommentService.GetAll();
+        }
+
+        public void SaveComment(ForumComment comment)
+        {
+            this.ForumCommentService.SaveComment(comment);
+        }
     }
 }

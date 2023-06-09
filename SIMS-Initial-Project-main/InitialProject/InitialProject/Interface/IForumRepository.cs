@@ -14,5 +14,6 @@ namespace InitialProject.Interface
         public Forum GetByCity(string city);
         public void UpdateNumberOfSpecials(Forum forum);
         public void UpdateActivity(Forum forum);
+        public List<Forum> GetAll();
     }
 }

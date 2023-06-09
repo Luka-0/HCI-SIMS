@@ -1,0 +1,45 @@
+﻿using InitialProject.Controller;
+using InitialProject.Forms;
+using InitialProject.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace InitialProject.View.Owner
+{
+    /// <summary>
+    /// Interaction logic for Forum.xaml
+    /// </summary>
+    public partial class Forum : Page
+    {
+        ForumCommentController ForumCommentController = new ForumCommentController();
+        public Forum()
+        {
+            InitializeComponent();
+            forumList.ItemsSource = ForumCommentController.GetOpenForums();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            InitialProject.Model.Forum  selectedForum = new InitialProject.Model.Forum();
+            selectedForum = forumList.SelectedItem as InitialProject.Model.Forum;
+
+            ForumComment ownerComment = new ForumComment(comment.Text, selectedForum);
+
+            this.ForumCommentController.SaveComment(ownerComment);
+
+            commentList.ItemsSource = ForumCommentController.GetAll();
+        }
+    }
+}

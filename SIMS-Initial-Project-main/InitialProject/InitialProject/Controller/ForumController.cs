@@ -34,7 +34,7 @@ namespace InitialProject.Controller
         {
             List<Location> locations = AccommodationReservationService.GetReservationLocationsByUser(user.Id);
 
-            foreach(Location l in locations)
+            foreach (Location l in locations)
             {
                 if (forum.Location.Id == l.Id) return true;
             }
@@ -50,6 +50,11 @@ namespace InitialProject.Controller
         public void UpdateActivity(Forum forum)
         {
             ForumService.UpdateActivity(forum);
+        }
+
+        public List<string> GetOpenForumNotification() {
+
+            return ForumService.GetOpenForumNotification();
         }
     }
 }

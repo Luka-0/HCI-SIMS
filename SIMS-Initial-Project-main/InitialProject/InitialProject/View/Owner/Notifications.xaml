@@ -9,9 +9,13 @@
       Title="Notifications">
 
     <Grid>
-        <Label Content="Notifications :" HorizontalAlignment="Left" Height="56" Margin="31,16,0,0" VerticalAlignment="Top" Width="309" FontSize="40"/>
-        <ListBox x:Name="notifications" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,91,30,444" FontSize="26" BorderThickness="5"/>
-        <ListBox x:Name="cancellationNotification" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,409,30,135" FontSize="26" BorderThickness="5"/>
+        <Label Content="Notifications :" HorizontalAlignment="Left" Height="56" Margin="31,6,0,0" VerticalAlignment="Top" Width="309" FontSize="40"/>
+        <ListBox x:Name="notifications" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,119,30,492" FontSize="26" BorderThickness="5"/>
+        <ListBox x:Name="cancellationNotification" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,308,30,314" FontSize="26" BorderThickness="5"/>
+        <ListBox x:Name="forumNotifications" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="30,483,30,139" FontSize="26" BorderThickness="5"/>
+        <TextBlock HorizontalAlignment="Left" Margin="56,79,0,0" TextWrapping="Wrap" Text="Reservations that ended: " VerticalAlignment="Top" FontSize="22"/>
+        <TextBlock HorizontalAlignment="Left" Margin="56,268,0,0" TextWrapping="Wrap" Text="Cancelled reservations: " VerticalAlignment="Top" FontSize="22"/>
+        <TextBlock HorizontalAlignment="Left" Margin="56,438,0,0" TextWrapping="Wrap" Text="New forums: " VerticalAlignment="Top" FontSize="22"/>
 
     </Grid>
 </Page>

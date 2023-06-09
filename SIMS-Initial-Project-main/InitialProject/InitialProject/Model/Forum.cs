@@ -32,6 +32,8 @@ namespace InitialProject.Model
 
         public int NumOfSpecials { get; set; } = 0;
 
+        public bool Useful { get; set; }
+
         public Forum()
         {
             Location = new();

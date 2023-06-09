@@ -13,18 +13,19 @@
         <Grid.ColumnDefinitions>
 
         </Grid.ColumnDefinitions>
-        <GroupBox Header="DASHBOARD"  Margin="20,0,1131,0" FontSize="36" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Top"  FontWeight="Bold" Foreground="White" Height="713"/>
-        <Button Content="Rate Guests" HorizontalAlignment="Left" Height="44" Margin="37,306,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_1" Background="darkseagreen" Foreground="White" />
-        <Button Content="Create Accommodation" HorizontalAlignment="Left" Height="50" Margin="37,240,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click" Background="darkseagreen" Foreground="White" />
-        <Frame x:Name="OperationsContainer" Height="802" Margin="405,32,60,0" VerticalAlignment="Top" NavigationUIVisibility="Hidden"/>
-        <Button Content="Main Page" HorizontalAlignment="Left" Height="44" Margin="37,179,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_2" Background="darkseagreen" Foreground="White" />
-        <Button Content="Reviews" HorizontalAlignment="Left" Height="50" Margin="37,556,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button3_Click" Background="darkseagreen" Foreground="White"/>
-        <Button Content="Rescheduling Requests" HorizontalAlignment="Left" Height="50" Margin="37,117,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button4_Click" Background="darkseagreen" Foreground="White"/>
-        <Button Content="Log Out" HorizontalAlignment="Left" Height="44" Margin="37,62,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="LogOut" Grid.ColumnSpan="2" Background="SeaGreen" Foreground="White" />
-        <Button Content="New Renovation" HorizontalAlignment="Left" Height="50" Margin="37,363,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_6" Background="darkseagreen" Foreground="White"/>
-        <Button Content="All Renovations" HorizontalAlignment="Left" Height="50" Margin="36,428,0,0" VerticalAlignment="Top" Width="300" FontSize="23" Click="Button_Click_7" Background="darkseagreen" Foreground="White"/>
-        <Button x:Name="Statistics" Content="Statistics" HorizontalAlignment="Left" Height="50" Margin="37,492,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_8" Background="darkseagreen" Foreground="White"/>
-        <Button Content="Accommodation Propositions" HorizontalAlignment="Left" Height="50" Margin="37,622,0,0" VerticalAlignment="Top" Width="299" FontSize="20" Click="acc_prop" Background="darkseagreen" Foreground="White"/>
+        <GroupBox Header="DASHBOARD"  Margin="20,0,1127,0" FontSize="36" VerticalAlignment="Top"  FontWeight="Bold" Foreground="White" Height="772"/>
+        <Button Content="Rate Guests" HorizontalAlignment="Left" Height="44" Margin="44,306,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_1" Background="darkseagreen" Foreground="White" />
+        <Button Content="Create Accommodation" HorizontalAlignment="Left" Height="50" Margin="43,240,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click" Background="darkseagreen" Foreground="White" />
+        <Frame x:Name="OperationsContainer" Height="740" Margin="418,32,60,0" VerticalAlignment="Top" NavigationUIVisibility="Hidden"/>
+        <Button Content="Main Page" HorizontalAlignment="Left" Height="44" Margin="43,179,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_2" Background="darkseagreen" Foreground="White" />
+        <Button Content="Reviews" HorizontalAlignment="Left" Height="50" Margin="41,556,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button3_Click" Background="darkseagreen" Foreground="White"/>
+        <Button Content="Rescheduling Requests" HorizontalAlignment="Left" Height="50" Margin="43,117,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button4_Click" Background="darkseagreen" Foreground="White"/>
+        <Button Content="Log Out" HorizontalAlignment="Left" Height="44" Margin="43,62,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="LogOut" Background="SeaGreen" Foreground="White" />
+        <Button Content="New Renovation" HorizontalAlignment="Left" Height="50" Margin="43,363,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_6" Background="darkseagreen" Foreground="White"/>
+        <Button Content="All Renovations" HorizontalAlignment="Left" Height="50" Margin="42,428,0,0" VerticalAlignment="Top" Width="300" FontSize="23" Click="Button_Click_7" Background="darkseagreen" Foreground="White"/>
+        <Button x:Name="Statistics" Content="Statistics" HorizontalAlignment="Left" Height="50" Margin="43,492,0,0" VerticalAlignment="Top" Width="299" FontSize="23" Click="Button_Click_8" Background="darkseagreen" Foreground="White"/>
+        <Button Content="Accommodation Propositions" HorizontalAlignment="Left" Height="50" Margin="41,622,0,0" VerticalAlignment="Top" Width="299" FontSize="20" Click="acc_prop" Background="darkseagreen" Foreground="White"/>
+        <Button x:Name="my_forums" Content="My forums" HorizontalAlignment="Left" Height="50" Margin="42,688,0,0" VerticalAlignment="Top" Width="299" FontSize="26" Click="my_forums_Click" Background="darkseagreen" Foreground="White"/>
 
     </Grid>
 </Window>

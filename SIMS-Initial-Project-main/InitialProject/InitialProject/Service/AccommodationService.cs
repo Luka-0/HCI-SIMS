@@ -6,6 +6,7 @@ using InitialProject.Enumeration;
 using InitialProject.Interface;
 using InitialProject.Model;
 using InitialProject.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -431,5 +432,11 @@ namespace InitialProject.Service
 
             return briefStatistics;
         }
+
+        public List<Location> GetOwnerAccommodationLocations(string owner)
+        {
+            return this.IAccommodationRepository.GetOwnerAccommodationLocations(owner);
+        }
+
     }
 }
